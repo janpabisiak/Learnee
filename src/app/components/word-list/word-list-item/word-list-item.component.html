@@ -1,5 +1,7 @@
 <li>
     {{word?.name | sentencecase}} - {{word?.definition | sentencecase}}
+    <button (click)="readWord()">Read word</button>
+    <button (click)="readWordDefinition()">Read definition</button>
     <button (click)="editWord()">Edit word</button>
     <button (click)="toggleLearning()">{{`${word?.isLearning ? "Not learning anymore" : "Learn this one"}`}}</button>
     <button (click)="deleteWord()">Delete word</button>

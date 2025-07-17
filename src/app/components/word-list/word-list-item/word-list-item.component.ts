@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { SentenceCasePipe } from "../../../pipes/sentence-case.pipe";
 import { IWord } from "../../../types/word.interface";
+import { WebSpeechService } from "../../../services/web-speech.service";
 
 @Component({
 	selector: "app-word-list-item",
@@ -14,6 +15,17 @@ export class WordListItemComponent {
 	@Output() wordDeleted = new EventEmitter<number>();
 	@Output() wordEdited = new EventEmitter<number>();
 	@Output() isLearningChanged = new EventEmitter<number>();
+
+	constructor(private webSpeechService: WebSpeechService) {}
+
+	readWord() {
+		if (this.word?.name) this.webSpeechService.readText(this.word.name);
+	}
+
+	readWordDefinition() {
+		if (this.word?.definition)
+			this.webSpeechService.readText(this.word.definition);
+	}
 
 	editWord() {
 		this.wordEdited.emit(this.word?.id);
