@@ -17,7 +17,10 @@ export class AddWordFormComponent {
 	addWord(e: SubmitEvent) {
 		e.preventDefault();
 
-		const word = this.word.replaceAll(/[^a-zA-Z\s]+/g, "").trim();
+		const word = this.word
+			.replaceAll(/[^a-zA-Z\s]+/g, "")
+			.trim()
+			.toLowerCase();
 		this.word = "";
 
 		this.wordsService.addWord(word);

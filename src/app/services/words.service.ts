@@ -34,6 +34,7 @@ export class WordsService {
 	addWord(word: string) {
 		const wordList = this.wordList$.value;
 		if (wordList.every((w) => w.name !== word)) {
+			// TODO: write business for not existing word
 			this.getResponseFromWordAPI(word).subscribe((response: any) => {
 				const wordDefinition =
 					response.entries?.[0]?.lexemes?.[0]?.senses?.[0]

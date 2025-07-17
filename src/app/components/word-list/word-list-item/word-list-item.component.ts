@@ -1,10 +1,12 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { SentenceCasePipe } from "../../../pipes/sentence-case.pipe";
 import { IWord } from "../../../types/word.interface";
 
 @Component({
 	selector: "app-word-list-item",
 	templateUrl: "./word-list-item.component.html",
 	styleUrls: ["./word-list-item.component.scss"],
+	imports: [SentenceCasePipe],
 	standalone: true,
 })
 export class WordListItemComponent {
