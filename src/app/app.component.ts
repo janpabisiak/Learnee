@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Subscription } from "rxjs";
 import { AddWordFormComponent } from "./components/add-word-form/add-word-form.component";
 import { WordListComponent } from "./components/word-list/word-list.component";
-import { Observable, Subscription } from "rxjs";
 import { WordsService } from "./services/words.service";
 import { IWord } from "./types/word.interface";
 
@@ -9,7 +9,7 @@ import { IWord } from "./types/word.interface";
 	selector: "app-root",
 	imports: [AddWordFormComponent, WordListComponent],
 	templateUrl: "./app.component.html",
-	styleUrl: "./app.component.scss",
+	styleUrls: ["./app.component.scss"],
 	standalone: true,
 })
 export class AppComponent implements OnInit, OnDestroy {
@@ -18,7 +18,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
 	constructor(private wordsService: WordsService) {}
 
-	ngOnInit(): void {
+	ngOnInit() {
 		this.wordListSubscription = this.wordsService.wordList$.subscribe(
 			(wordList) => {
 				this.wordList = wordList;

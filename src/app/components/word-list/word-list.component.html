@@ -1,1 +1,5 @@
-<p>word-list works!</p>
+<ul>
+    @for(word of wordList; track word.id) {
+    <app-word-list-item [word]="word" (wordEdited)="editWord($event)" (isLearningChanged)="toggleIsLearning($event)" (wordDeleted)="deleteWord($event)"></app-word-list-item>
+    }
+</ul>

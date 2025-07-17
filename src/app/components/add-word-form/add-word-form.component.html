@@ -1,1 +1,4 @@
-<p>add-word-form works!</p>
+<form (submit)="addWord($event)">
+    <input type="text" name="word" [(ngModel)]="word">
+    <button type="submit">Add</button>
+</form>

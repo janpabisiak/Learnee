@@ -46,31 +46,31 @@ export class WordsService {
 					isLearning: true,
 				};
 
-				this.wordList$.next([...wordList, newWord]);
+				const newWordList = [...wordList, newWord];
+				this.wordList$.next(newWordList);
+				this.saveData(newWordList);
 			});
 		}
 	}
 
 	removeWord(wordId: number) {
-		this.wordList$.next(
-			this.wordList$.value.filter((w) => w.id !== wordId)
-		);
+		const newWordList = this.wordList$.value.filter((w) => w.id !== wordId);
+
+		this.wordList$.next(newWordList);
+		this.saveData(newWordList);
 	}
 
 	editWordDefinition(wordId: number, wordDefinition: string) {
-		const wordList = [...this.wordList$.value].map((w) => {
-			if (w.id !== wordId) return w;
-			return {
-				...w,
-				definition: wordDefinition,
-			};
-		});
+		const newWordList = [...this.wordList$.value].map((w) =>
+			w.id === wordId ? { ...w, definition: wordDefinition } : w
+		);
 
-		this.wordList$.next(wordList);
+		this.wordList$.next(newWordList);
+		this.saveData(newWordList);
 	}
 
 	toggleIsLearning(wordId: number) {
-		const wordList = [...this.wordList$.value].map((w) => {
+		const newWordList = [...this.wordList$.value].map((w) => {
 			if (w.id !== wordId) return w;
 			return {
 				...w,
@@ -78,10 +78,11 @@ export class WordsService {
 			};
 		});
 
-		this.wordList$.next(wordList);
+		this.wordList$.next(newWordList);
+		this.saveData(newWordList);
 	}
 
-	saveWordList() {
-		this.localStorageService.saveData("word-list", this.wordList$.value);
+	saveData(wordList: IWord[]) {
+		this.localStorageService.saveData("word-list", wordList);
 	}
 }
