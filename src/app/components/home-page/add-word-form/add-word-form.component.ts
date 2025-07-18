@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { WordsService } from "../../services/words.service";
+import { WordsService } from "../../../services/words.service";
 
 @Component({
 	selector: "app-add-word-form",

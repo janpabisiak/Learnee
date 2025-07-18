@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { WordsService } from "../../services/words.service";
-import { IWord } from "../../types/word.interface";
+import { WordsService } from "../../../services/words.service";
+import { IWord } from "../../../types/word.interface";
 import { Subscription } from "rxjs";
 import { WordListItemComponent } from "./word-list-item/word-list-item.component";
 

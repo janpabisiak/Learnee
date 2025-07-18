@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { SentenceCasePipe } from "../../../pipes/sentence-case.pipe";
-import { IWord } from "../../../types/word.interface";
-import { WebSpeechService } from "../../../services/web-speech.service";
+import { SentenceCasePipe } from "../../../../pipes/sentence-case.pipe";
+import { IWord } from "../../../../types/word.interface";
+import { WebSpeechService } from "../../../../services/web-speech.service";
 
 @Component({
 	selector: "app-word-list-item",

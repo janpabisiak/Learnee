@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "../../environment/environment";
 import { IWord } from "../types/word.interface";
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, from } from "rxjs";
 import { LocalStorageService } from "./local-storage.service";
 
 @Injectable({
@@ -14,10 +14,7 @@ export class WordsService {
 	private apiKey = environment.apiKey;
 	wordList$ = new BehaviorSubject<IWord[]>([]);
 
-	constructor(
-		private http: HttpClient,
-		private localStorageService: LocalStorageService
-	) {
+	constructor(private http: HttpClient, private localStorageService: LocalStorageService) {
 		const wordList = this.localStorageService.loadData("word-list");
 		if (wordList) this.wordList$.next(wordList);
 	}
@@ -36,9 +33,7 @@ export class WordsService {
 		if (wordList.every((w) => w.name !== word)) {
 			// TODO: write business for not existing word
 			this.getResponseFromWordAPI(word).subscribe((response: any) => {
-				const wordDefinition =
-					response.entries?.[0]?.lexemes?.[0]?.senses?.[0]
-						?.definition;
+				const wordDefinition = response.entries?.[0]?.lexemes?.[0]?.senses?.[0]?.definition;
 
 				const newWord: IWord = {
 					id: wordList.length,
@@ -52,6 +47,11 @@ export class WordsService {
 				this.saveData(newWordList);
 			});
 		}
+	}
+
+	getRandomWord(minIndex: number = 0, maxIndex: number = this.wordList$.value.length) {
+		const randomIndex = Math.floor(Math.random() * (maxIndex - minIndex) + minIndex);
+		return this.wordList$.value[randomIndex];
 	}
 
 	removeWord(wordId: number) {
