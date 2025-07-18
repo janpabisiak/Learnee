@@ -20,6 +20,8 @@ export class QuestionListItemComponent {
 
 	readDefinition(id: number) {
 		if (this.possibleAnswers)
-			this.webSpeechService.readText(this.possibleAnswers[id].content ?? "");
+			this.webSpeechService.readText(
+				this.possibleAnswers.find((w) => w.id === id)?.content ?? ""
+			);
 	}
 }
