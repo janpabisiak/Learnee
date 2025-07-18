@@ -1,5 +1,6 @@
 import { Component, Input } from "@angular/core";
 import { IAnswer } from "../../../../types/answer.interface";
+import { WebSpeechService } from "../../../../services/web-speech.service";
 
 @Component({
 	selector: "app-question-list-item",
@@ -10,4 +11,15 @@ import { IAnswer } from "../../../../types/answer.interface";
 export class QuestionListItemComponent {
 	@Input({ required: true }) content?: string;
 	@Input({ required: true }) possibleAnswers?: IAnswer[];
+
+	constructor(private webSpeechService: WebSpeechService) {}
+
+	readWord() {
+		this.webSpeechService.readText(this.content ?? "");
+	}
+
+	readDefinition(id: number) {
+		if (this.possibleAnswers)
+			this.webSpeechService.readText(this.possibleAnswers[id].content ?? "");
+	}
 }

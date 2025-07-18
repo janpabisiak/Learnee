@@ -1,6 +1,14 @@
 <li>
-    {{content}}<br>
+    {{content}}
+    <button (click)="readWord()">Read word</button>
+    <br>
     @for (answer of possibleAnswers; track answer.id) {
-    <p>{{answer.content}}</p>
+    @if(answer.isCorrect) {
+    <span [style.color]="'green'">{{answer.content}}</span>
+    }
+    @else {
+    <span [style.color]="'red'">{{answer.content}}</span>
+    }
+    <button (click)="readDefinition(answer.id)">Read definition</button><br>
     }
 </li>
