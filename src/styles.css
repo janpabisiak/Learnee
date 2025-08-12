@@ -1,0 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Signika:wght@300..700&display=swap");
+@import "tailwindcss";
+
+@theme {
+	--font-signika: "Signika", sans-serif;
+
+	--animate-pulse: pulse 1.5s infinite alternate;
+
+	@keyframes pulse {
+		from {
+			transform: scale(0.2);
+		}
+		to {
+			tranform: scale(1);
+		}
+	}
+}
+
+@layer utilities {
+	.ionicon-thick {
+		--ionicon-stroke-width: 2.5rem;
+	}
+}
