@@ -1,16 +1,14 @@
-import { Component } from "@angular/core";
-import { WordListComponent } from "./word-list/word-list.component";
-import { AddWordFormComponent } from "./add-word-form/add-word-form.component";
-import { IWord } from "../../types/word.interface";
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { Subscription } from "rxjs";
 import { WordsService } from "../../services/words.service";
+import { IWord } from "../../types/word.interface";
+import { WordListComponent } from "./word-list/word-list.component";
 
 @Component({
 	selector: "app-home-page",
 	standalone: true,
 	templateUrl: "./home-page.component.html",
-	styleUrls: ["./home-page.component.scss"],
-	imports: [WordListComponent, AddWordFormComponent],
+	imports: [WordListComponent],
 })
 export class HomePageComponent {
 	wordListSubscription = new Subscription();
@@ -19,11 +17,9 @@ export class HomePageComponent {
 	constructor(private wordsService: WordsService) {}
 
 	ngOnInit() {
-		this.wordListSubscription = this.wordsService.wordList$.subscribe(
-			(wordList) => {
-				this.wordList = wordList;
-			}
-		);
+		this.wordListSubscription = this.wordsService.wordList$.subscribe((wordList) => {
+			this.wordList = wordList;
+		});
 	}
 
 	ngOnDestroy() {
