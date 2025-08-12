@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "../../environment/environment";
 import { IWord } from "../types/word.interface";
-import { BehaviorSubject, from } from "rxjs";
+import { BehaviorSubject } from "rxjs";
 import { LocalStorageService } from "./local-storage.service";
 
 @Injectable({
@@ -12,11 +12,12 @@ export class WordsService {
 	private apiUrl = environment.apiUrl;
 	private apiHost = environment.apiHost;
 	private apiKey = environment.apiKey;
-	wordList$ = new BehaviorSubject<IWord[]>([]);
+	private wordList = new BehaviorSubject<IWord[]>([]);
+	wordList$ = this.wordList.asObservable();
 
 	constructor(private http: HttpClient, private localStorageService: LocalStorageService) {
 		const wordList = this.localStorageService.loadData("word-list");
-		if (wordList) this.wordList$.next(wordList);
+		if (wordList) this.wordList.next(wordList);
 	}
 
 	getResponseFromWordAPI(word: string) {
@@ -29,7 +30,7 @@ export class WordsService {
 	}
 
 	addWord(word: string) {
-		const wordList = this.wordList$.value;
+		const wordList = this.wordList.value;
 		if (wordList.every((w) => w.name !== word)) {
 			// TODO: write business for not existing word
 			this.getResponseFromWordAPI(word).subscribe((response: any) => {
@@ -43,35 +44,35 @@ export class WordsService {
 				};
 
 				const newWordList = [...wordList, newWord];
-				this.wordList$.next(newWordList);
+				this.wordList.next(newWordList);
 				this.saveData(newWordList);
 			});
 		}
 	}
 
-	getRandomWord(minIndex: number = 0, maxIndex: number = this.wordList$.value.length) {
+	getRandomWord(minIndex: number = 0, maxIndex: number = this.wordList.value.length) {
 		const randomIndex = Math.floor(Math.random() * (maxIndex - minIndex) + minIndex);
-		return this.wordList$.value[randomIndex];
+		return this.wordList.value[randomIndex];
 	}
 
 	removeWord(wordId: number) {
-		const newWordList = this.wordList$.value.filter((w) => w.id !== wordId);
+		const newWordList = this.wordList.value.filter((w) => w.id !== wordId);
 
-		this.wordList$.next(newWordList);
+		this.wordList.next(newWordList);
 		this.saveData(newWordList);
 	}
 
 	editWordDefinition(wordId: number, wordDefinition: string) {
-		const newWordList = [...this.wordList$.value].map((w) =>
+		const newWordList = [...this.wordList.value].map((w) =>
 			w.id === wordId ? { ...w, definition: wordDefinition } : w
 		);
 
-		this.wordList$.next(newWordList);
+		this.wordList.next(newWordList);
 		this.saveData(newWordList);
 	}
 
 	toggleIsLearning(wordId: number) {
-		const newWordList = [...this.wordList$.value].map((w) => {
+		const newWordList = [...this.wordList.value].map((w) => {
 			if (w.id !== wordId) return w;
 			return {
 				...w,
@@ -79,11 +80,11 @@ export class WordsService {
 			};
 		});
 
-		this.wordList$.next(newWordList);
+		this.wordList.next(newWordList);
 		this.saveData(newWordList);
 	}
 
-	saveData(wordList: IWord[]) {
+	private saveData(wordList: IWord[]) {
 		this.localStorageService.saveData("word-list", wordList);
 	}
 }
