@@ -9,7 +9,6 @@ import { QuestionListItemComponent } from "./question-list-item/question-list-it
 	selector: "app-questions-list",
 	imports: [QuestionListItemComponent],
 	templateUrl: "./questions-list.component.html",
-	styleUrl: "./questions-list.component.scss",
 	standalone: true,
 })
 export class QuestionsListComponent {
