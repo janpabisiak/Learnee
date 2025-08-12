@@ -1,4 +1,5 @@
 <a [routerLink]="['/']" routerLinkActive="router-link-active">Home page</a><br>
-<a [routerLink]="['/quiz']" routerLinkActive="router-link-active">Quiz page</a><br><br>
+<a [routerLink]="['/quiz']" routerLinkActive="router-link-active">Quiz page</a><br>
+<p>{{expPoints$ | async}}xp - {{level$ | async}}</p>
 
 <router-outlet></router-outlet>

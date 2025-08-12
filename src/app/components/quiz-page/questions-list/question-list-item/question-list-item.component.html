@@ -3,12 +3,7 @@
     <button (click)="readWord()">Read word</button>
     <br>
     @for (answer of possibleAnswers; track answer.id) {
-    @if(answer.isCorrect) {
-    <span [style.color]="'green'">{{answer.content}}</span>
-    }
-    @else {
-    <span [style.color]="'red'">{{answer.content}}</span>
-    }
-    <button (click)="readDefinition(answer.id)">Read definition</button><br>
+    <button [class.correct-answer]="isAnswered && answer.isCorrect" [class.wrong-answer]="isAnswered && !answer.isCorrect" (click)="revealAnswer(answer.id)">{{answer.content}}</button>
+    <br>
     }
 </li>
