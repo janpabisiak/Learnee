@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, CUSTOM_ELEMENTS_SCHEMA, OnDestroy, OnInit } from "@angular/core";
 import { WordsService } from "../../../services/words.service";
 import { IWord } from "../../../types/word.interface";
 import { Subscription } from "rxjs";
@@ -8,8 +8,8 @@ import { WordListItemComponent } from "./word-list-item/word-list-item.component
 	selector: "app-word-list",
 	imports: [WordListItemComponent],
 	templateUrl: "./word-list.component.html",
-	styleUrls: ["./word-list.component.scss"],
 	standalone: true,
+	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class WordListComponent implements OnInit, OnDestroy {
 	wordListSubscription = new Subscription();
@@ -18,11 +18,9 @@ export class WordListComponent implements OnInit, OnDestroy {
 	constructor(private wordsService: WordsService) {}
 
 	ngOnInit() {
-		this.wordListSubscription = this.wordsService.wordList$.subscribe(
-			(wordList) => {
-				this.wordList = wordList;
-			}
-		);
+		this.wordListSubscription = this.wordsService.wordList$.subscribe((wordList) => {
+			this.wordList = wordList;
+		});
 	}
 
 	// TODO: handle word definition edit business logic

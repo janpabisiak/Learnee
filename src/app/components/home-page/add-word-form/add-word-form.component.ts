@@ -6,7 +6,6 @@ import { WordsService } from "../../../services/words.service";
 	selector: "app-add-word-form",
 	imports: [FormsModule],
 	templateUrl: "./add-word-form.component.html",
-	styleUrl: "./add-word-form.component.scss",
 	standalone: true,
 })
 export class AddWordFormComponent {

@@ -1,8 +1,29 @@
-<li>
-    {{word?.name | sentencecase}} - {{word?.definition | sentencecase}}
-    <button (click)="readWord()">Read word</button>
-    <button (click)="readWordDefinition()">Read definition</button>
-    <button (click)="editWord()">Edit word</button>
-    <button (click)="toggleLearning()">{{`${word?.isLearning ? "Not learning anymore" : "Learn this one"}`}}</button>
-    <button (click)="deleteWord()">Delete word</button>
+<li class="flex justify-between gap-6 p-6 border-2 rounded-xl border-gray-200 shadow-2xs shadow-gray-50">
+    <div class="flex items-center gap-6">
+        <div class="bg-gray-200 flex flex-col gap-2 items-center pt-2 px-2 rounded-md min-w-[40px] text-gray-500 text-xl">
+            <div>
+                <ion-icon class="text-gray-900 ionicon-thick" name="add-outline"></ion-icon>
+            </div>
+            <div>
+                <span class="font-bold text-gray-800">1</span>
+            </div>
+            <div>
+                <ion-icon class="text-gray-900 ionicon-thick" name="remove-outline"></ion-icon>
+            </div>
+        </div>
+        <div>
+            <h4 class="text-2xl font-bold">{{word?.name | sentencecase}}</h4>
+            <p class="text-gray-500">{{word?.definition}}</p>
+        </div>
+    </div>
+    <div class="relative">
+        <ion-icon class="text-2xl text-gray-900 ionicon-thick cursor-pointer" name="settings-outline" (click)="toggleDropdownMenu()"></ion-icon>
+        @if (isDropdownOpen) {
+        <div class="flex flex-col gap-2 min-w-[200px] p-5 absolute top-0 left-8 bg-gray-50 border-2 border-gray-200 rounded-md">
+            <p class="cursor-pointer">Znajdź w słowniku</p>
+            <p class="cursor-pointer" (click)="editWord()">Edytuj słowo</p>
+            <p class="cursor-pointer" (click)="deleteWord()">Usuń słowo</p>
+        </div>
+        }
+    </div>
 </li>

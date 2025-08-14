@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, CUSTOM_ELEMENTS_SCHEMA, EventEmitter, Input, Output } from "@angular/core";
 import { SentenceCasePipe } from "../../../../pipes/sentence-case.pipe";
 import { IWord } from "../../../../types/word.interface";
 import { WebSpeechService } from "../../../../services/web-speech.service";
@@ -6,15 +6,16 @@ import { WebSpeechService } from "../../../../services/web-speech.service";
 @Component({
 	selector: "app-word-list-item",
 	templateUrl: "./word-list-item.component.html",
-	styleUrls: ["./word-list-item.component.scss"],
 	imports: [SentenceCasePipe],
 	standalone: true,
+	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class WordListItemComponent {
 	@Input({ required: true }) word?: IWord;
 	@Output() wordDeleted = new EventEmitter<number>();
 	@Output() wordEdited = new EventEmitter<number>();
 	@Output() isLearningChanged = new EventEmitter<number>();
+	isDropdownOpen = false;
 
 	constructor(private webSpeechService: WebSpeechService) {}
 
@@ -23,8 +24,7 @@ export class WordListItemComponent {
 	}
 
 	readWordDefinition() {
-		if (this.word?.definition)
-			this.webSpeechService.readText(this.word.definition);
+		if (this.word?.definition) this.webSpeechService.readText(this.word.definition);
 	}
 
 	editWord() {
@@ -33,6 +33,10 @@ export class WordListItemComponent {
 
 	toggleLearning() {
 		this.isLearningChanged.emit(this.word?.id);
+	}
+
+	toggleDropdownMenu() {
+		this.isDropdownOpen = !this.isDropdownOpen;
 	}
 
 	deleteWord() {

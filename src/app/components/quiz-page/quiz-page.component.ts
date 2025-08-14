@@ -5,7 +5,6 @@ import { QuestionsListComponent } from "./questions-list/questions-list.componen
 	selector: "app-quiz-page",
 	imports: [QuestionsListComponent],
 	templateUrl: "./quiz-page.component.html",
-	styleUrl: "./quiz-page.component.scss",
 	standalone: true,
 })
 export class QuizPageComponent {}

@@ -1,11 +1,8 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-error-page',
-  imports: [],
-  templateUrl: './error-page.component.html',
-  styleUrl: './error-page.component.scss'
+	selector: "app-error-page",
+	imports: [],
+	templateUrl: "./error-page.component.html",
 })
-export class ErrorPageComponent {
-
-}
+export class ErrorPageComponent {}
