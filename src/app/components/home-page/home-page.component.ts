@@ -5,12 +5,13 @@ import { IWord } from "../../types/word.interface";
 import { WordListComponent } from "./word-list/word-list.component";
 import { ModalService } from "@services/modal.service";
 import { AddWordModalComponent } from "@components/add-word-modal/add-word-modal.component";
+import { ButtonComponent } from "@components/utils/button/button.component";
 
 @Component({
 	selector: "app-home-page",
 	standalone: true,
 	templateUrl: "./home-page.component.html",
-	imports: [WordListComponent],
+	imports: [WordListComponent, ButtonComponent],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HomePageComponent implements OnInit, OnDestroy {
