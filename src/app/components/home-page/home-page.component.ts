@@ -1,28 +1,38 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, OnDestroy, OnInit } from "@angular/core";
 import { Subscription } from "rxjs";
 import { WordsService } from "../../services/words.service";
 import { IWord } from "../../types/word.interface";
 import { WordListComponent } from "./word-list/word-list.component";
+import { ModalService } from "@services/modal.service";
+import { AddWordModalComponent } from "@components/add-word-modal/add-word-modal.component";
 
 @Component({
 	selector: "app-home-page",
 	standalone: true,
 	templateUrl: "./home-page.component.html",
 	imports: [WordListComponent],
+	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class HomePageComponent {
-	wordListSubscription = new Subscription();
+export class HomePageComponent implements OnInit, OnDestroy {
+	subscriptions = new Subscription();
+	modalService = inject(ModalService);
 	wordList: IWord[] = [];
 
 	constructor(private wordsService: WordsService) {}
 
 	ngOnInit() {
-		this.wordListSubscription = this.wordsService.wordList$.subscribe((wordList) => {
-			this.wordList = wordList;
-		});
+		this.subscriptions.add(
+			this.wordsService.wordList$.subscribe((wordList) => {
+				this.wordList = wordList;
+			})
+		);
+	}
+
+	toggleIsAddWordModalOpen(state: boolean) {
+		this.modalService.toggleIsWordAddingModalOpen(state);
 	}
 
 	ngOnDestroy() {
-		this.wordListSubscription.unsubscribe();
+		this.subscriptions.unsubscribe();
 	}
 }

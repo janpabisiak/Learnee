@@ -1,0 +1,26 @@
+<div class="fixed h-full w-full z-20 bg-[rgba(0,0,0,0.4)] overflow-auto">
+    <div class="flex flex-col relative bg-gray-50 top-1/2 left-1/2 -translate-1/2 w-[500px] min-h-[400px] border-1 border-gray-200 rounded-md p-6">
+        <div class="flex items-center justify-between border-b-1 border-gray-200 pb-5">
+            <div class="flex flex-col">
+                <h3 class="text-2xl font-semibold">Add new word</h3>
+            </div>
+            <ion-icon class="bg-gray-200 p-1 rounded-full text-2xl text-gray-600 ionicon-thick cursor-pointer" name="close-outline" (click)="toggleIsAddWordModalOpen(false)"></ion-icon>
+        </div>
+        <div class="flex-1 py-4">
+            <form class="flex flex-col gap-4">
+                <div class="flex flex-col gap-1">
+                    <label class="text-gray-500 text-sm" for="word">Word</label>
+                    <input class="p-3 bg-gray-100 rounded-md border-1 border-gray-200 placeholder-gray-500" type="text" name="word" placeholder="Enter word">
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label class="text-gray-500 text-sm" for="definition">Definition</label>
+                    <textarea class="p-2 bg-gray-100 rounded-md border-1 border-gray-200" name="definition"></textarea>
+                </div>
+            </form>
+        </div>
+        <div class="flex gap-2 justify-end">
+            <button class="bg-gray-200 text-gray-900 px-6 py-3 rounded-md font-semibold cursor-pointer" (click)="toggleIsAddWordModalOpen(false)">Cancel</button>
+            <button class="bg-emerald-700 text-gray-100 px-8 py-3 rounded-md font-semibold cursor-pointer">Add</button>
+        </div>
+    </div>
+</div>
