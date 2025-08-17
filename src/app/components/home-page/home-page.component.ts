@@ -4,7 +4,6 @@ import { WordsService } from "../../services/words.service";
 import { IWord } from "../../types/word.interface";
 import { WordListComponent } from "./word-list/word-list.component";
 import { ModalService } from "@services/modal.service";
-import { AddWordModalComponent } from "@components/add-word-modal/add-word-modal.component";
 import { ButtonComponent } from "@components/utils/button/button.component";
 
 @Component({
@@ -30,7 +29,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
 	}
 
 	toggleIsAddWordModalOpen(state: boolean) {
-		this.modalService.toggleIsWordAddingModalOpen(state);
+		this.modalService.toggleShowWordAddingModal(state);
 	}
 
 	ngOnDestroy() {

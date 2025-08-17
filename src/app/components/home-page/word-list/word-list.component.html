@@ -1,5 +1,5 @@
 <ul class="flex flex-col gap-3">
     @for (word of wordList; track word.id) {
-    <app-word-list-item [word]="word" (wordEdited)="editWord($event)" (isLearningChanged)="toggleIsLearning($event)" (wordDeleted)="deleteWord($event)"></app-word-list-item>
+    <app-word-list-item [word]="word"></app-word-list-item>
     }
 </ul>

@@ -1,4 +1,4 @@
-<app-modal [title]="'Add new word'" (closeButtonClicked)="toggleIsAddWordModalOpen(false)" [primaryButtonText]="'Add word'" [secondaryButtonText]="'Cancel'" [primaryButtonDisabled]="isSubmitDisabled" (primaryButtonClicked)="submitForm()" (secondaryButtonClicked)="toggleIsAddWordModalOpen(false)">
+<app-modal [title]="isEditing ? 'Edit word' : 'Add new word'" (closeButtonClicked)="toggleIsAddWordModalOpen(false)" [primaryButtonText]="isEditing ? 'Save' : 'Add word'" [secondaryButtonText]="'Cancel'" [primaryButtonDisabled]="isSubmitDisabled" (primaryButtonClicked)="submitForm()" (secondaryButtonClicked)="toggleIsAddWordModalOpen(false)">
     <form class="flex flex-col gap-4" [formGroup]="form">
         <div class="flex flex-col gap-1">
             <label class="text-gray-500" for="word">Word <span class="text-red-700">*</span></label>

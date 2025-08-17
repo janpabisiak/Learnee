@@ -1,7 +1,10 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, EventEmitter, Input, Output } from "@angular/core";
+import { Component, CUSTOM_ELEMENTS_SCHEMA, Input } from "@angular/core";
 import { SentenceCasePipe } from "../../../../pipes/sentence-case.pipe";
-import { IWord } from "../../../../types/word.interface";
 import { WebSpeechService } from "../../../../services/web-speech.service";
+import { IWord } from "../../../../types/word.interface";
+import { AddWordFormService } from "@services/add-edit-word-form.service";
+import { WordsService } from "@services/words.service";
+import { ModalService } from "@services/modal.service";
 
 @Component({
 	selector: "app-word-list-item",
@@ -11,28 +14,33 @@ import { WebSpeechService } from "../../../../services/web-speech.service";
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class WordListItemComponent {
-	@Input({ required: true }) word?: IWord;
-	@Output() wordDeleted = new EventEmitter<number>();
-	@Output() wordEdited = new EventEmitter<number>();
-	@Output() isLearningChanged = new EventEmitter<number>();
+	@Input({ required: true }) word!: IWord;
 	isDropdownOpen = false;
 
-	constructor(private webSpeechService: WebSpeechService) {}
+	constructor(
+		private addWordFormService: AddWordFormService,
+		private webSpeechService: WebSpeechService,
+		private wordsService: WordsService,
+		private modalService: ModalService
+	) {}
 
 	readWord() {
-		if (this.word?.name) this.webSpeechService.readText(this.word.name);
+		if (this.word.name) this.webSpeechService.readText(this.word.name);
 	}
 
 	readWordDefinition() {
-		if (this.word?.definition) this.webSpeechService.readText(this.word.definition);
+		if (this.word.definition) this.webSpeechService.readText(this.word.definition);
 	}
 
 	editWord() {
-		this.wordEdited.emit(this.word?.id);
+		this.modalService.toggleShowWordAddingModal(true);
+		this.addWordFormService.setupForEditing(this.word);
+		this.toggleDropdownMenu();
 	}
 
 	toggleLearning() {
-		this.isLearningChanged.emit(this.word?.id);
+		this.wordsService.toggleIsLearning(this.word.id);
+		this.toggleDropdownMenu();
 	}
 
 	toggleDropdownMenu() {
@@ -40,6 +48,7 @@ export class WordListItemComponent {
 	}
 
 	deleteWord() {
-		this.wordDeleted.emit(this.word?.id);
+		this.wordsService.removeWord(this.word.id);
+		this.toggleDropdownMenu();
 	}
 }
