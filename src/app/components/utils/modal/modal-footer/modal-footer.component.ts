@@ -10,6 +10,8 @@ import { ButtonComponent } from "@components/utils/button/button.component";
 export class ModalFooterComponent {
 	@Input() primaryButtonText!: string;
 	@Input() secondaryButtonText!: string;
+	@Input() primaryButtonDisabled: boolean = false;
+	@Input() secondaryButtonDisabled: boolean = false;
 	@Output() primaryButtonClicked = new EventEmitter();
 	@Output() secondaryButtonClicked = new EventEmitter();
 
