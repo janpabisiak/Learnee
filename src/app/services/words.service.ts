@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "../../environment/environment";
 import { IWord } from "../types/word.interface";
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, map, Observable, take } from "rxjs";
 import { LocalStorageService } from "./local-storage.service";
 
 @Injectable({
@@ -29,25 +29,30 @@ export class WordsService {
 		});
 	}
 
-	addWord(word: string) {
+	fetchWordDefinition(word: string): Observable<string> {
+		return this.getResponseFromWordAPI(word).pipe(
+			take(1),
+			map(
+				(response: any) =>
+					response.entries?.[0]?.lexemes?.[0]?.senses?.[0]?.definition ?? ""
+			)
+		);
+	}
+
+	addWord(word: string, definition: string) {
 		const wordList = this.wordList.value;
-		if (wordList.every((w) => w.name !== word)) {
-			// TODO: write business for not existing word
-			this.getResponseFromWordAPI(word).subscribe((response: any) => {
-				const wordDefinition = response.entries?.[0]?.lexemes?.[0]?.senses?.[0]?.definition;
+		if (wordList.some((w) => w.name === word)) return;
 
-				const newWord: IWord = {
-					id: wordList.length,
-					name: word,
-					definition: wordDefinition,
-					isLearning: true,
-				};
+		const newWord: IWord = {
+			id: wordList.length,
+			name: word,
+			definition,
+			isLearning: true,
+		};
 
-				const newWordList = [...wordList, newWord];
-				this.wordList.next(newWordList);
-				this.saveData(newWordList);
-			});
-		}
+		const updatedWordList = [...wordList, newWord];
+		this.wordList.next(updatedWordList);
+		this.saveData(updatedWordList);
 	}
 
 	getRandomWord(minIndex: number = 0, maxIndex: number = this.wordList.value.length) {
