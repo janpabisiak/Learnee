@@ -2,5 +2,9 @@
 <app-add-edit-word-modal></app-add-edit-word-modal>
 }
 
+@if (isWordDeletingModalOpen) {
+<app-confirm-word-deletion-modal></app-confirm-word-deletion-modal>
+}
+
 <app-header></app-header>
 <router-outlet></router-outlet>
