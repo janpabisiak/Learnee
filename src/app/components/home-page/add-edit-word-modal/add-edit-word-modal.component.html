@@ -1,0 +1,16 @@
+<app-modal [title]="isEditing ? 'Edit word' : 'Add new word'" (closeButtonClicked)="toggleIsAddWordModalOpen(false)" [primaryButtonText]="isEditing ? 'Save' : 'Add word'" [secondaryButtonText]="'Cancel'" [primaryButtonDisabled]="isSubmitDisabled" (primaryButtonClicked)="submitForm()" (secondaryButtonClicked)="toggleIsAddWordModalOpen(false)">
+    <form class="flex flex-col gap-4" [formGroup]="form">
+        <div class="flex flex-col gap-1">
+            <label class="text-gray-500" for="word">Word <span class="text-red-700">*</span></label>
+            <input class="p-3 bg-gray-100 rounded-md border-1 border-gray-200 placeholder-gray-500" type="text" name="word" placeholder="Enter word" formControlName="word" [ngClass]="{'show-validation': isSubmitAttempted}">
+            <span class="text-sm text-red-700" *ngIf="isSubmitAttempted && word?.invalid && word?.hasError('required')">Word is required.</span>
+            <span class="text-sm text-red-700" *ngIf="isSubmitAttempted && word?.invalid && word?.hasError('maxlength')">Too many chars.</span>
+        </div>
+        <div class="flex flex-col gap-1">
+            <label class="text-gray-500" for="definition">Definition <span class="text-red-700">*</span></label>
+            <textarea class="p-2 bg-gray-100 rounded-md border-1 border-gray-200" name="definition" formControlName="definition" [ngClass]="{'show-validation': isSubmitAttempted}"></textarea>
+            <span class="text-sm text-red-700" *ngIf="isSubmitAttempted && definition?.touched && definition?.invalid && definition?.hasError('required')">Word is required.</span>
+            <span class="text-sm text-red-700" *ngIf="isSubmitAttempted && definition?.touched && definition?.invalid && definition?.hasError('maxlength')">Too many chars.</span>
+        </div>
+    </form>
+</app-modal>

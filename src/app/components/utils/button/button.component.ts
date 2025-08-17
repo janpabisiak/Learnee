@@ -10,6 +10,7 @@ import { Component, CUSTOM_ELEMENTS_SCHEMA, EventEmitter, Input, Output } from "
 export class ButtonComponent {
 	@Input({ required: true }) type!: string;
 	@Input() icon!: string;
+	@Input() disabled: boolean = false;
 	@Output() buttonClicked = new EventEmitter();
 	EButtonTypes = EButtonTypes;
 

@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "../../environment/environment";
 import { IWord } from "../types/word.interface";
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, map, Observable, take } from "rxjs";
 import { LocalStorageService } from "./local-storage.service";
 
 @Injectable({
@@ -20,7 +20,7 @@ export class WordsService {
 		if (wordList) this.wordList.next(wordList);
 	}
 
-	getResponseFromWordAPI(word: string) {
+	private getResponseFromWordAPI(word: string) {
 		return this.http.get(this.apiUrl + word, {
 			headers: {
 				"x-rapidapi-host": this.apiHost,
@@ -29,25 +29,38 @@ export class WordsService {
 		});
 	}
 
-	addWord(word: string) {
+	private saveData(wordList: IWord[]) {
+		this.localStorageService.saveData("word-list", wordList);
+	}
+
+	private updateWordList(updatedWordList: IWord[]) {
+		this.wordList.next(updatedWordList);
+		this.saveData(updatedWordList);
+	}
+
+	fetchWordDefinition(word: string): Observable<string> {
+		return this.getResponseFromWordAPI(word).pipe(
+			take(1),
+			map(
+				(response: any) =>
+					response.entries?.[0]?.lexemes?.[0]?.senses?.[0]?.definition ?? ""
+			)
+		);
+	}
+
+	addWord(word: string, definition: string) {
 		const wordList = this.wordList.value;
-		if (wordList.every((w) => w.name !== word)) {
-			// TODO: write business for not existing word
-			this.getResponseFromWordAPI(word).subscribe((response: any) => {
-				const wordDefinition = response.entries?.[0]?.lexemes?.[0]?.senses?.[0]?.definition;
+		if (wordList.some((w) => w.name === word)) return;
 
-				const newWord: IWord = {
-					id: wordList.length,
-					name: word,
-					definition: wordDefinition,
-					isLearning: true,
-				};
+		const newWord: IWord = {
+			id: wordList.length,
+			name: word,
+			definition,
+			isLearning: true,
+		};
 
-				const newWordList = [...wordList, newWord];
-				this.wordList.next(newWordList);
-				this.saveData(newWordList);
-			});
-		}
+		const updatedWordList = [...wordList, newWord];
+		this.updateWordList(updatedWordList);
 	}
 
 	getRandomWord(minIndex: number = 0, maxIndex: number = this.wordList.value.length) {
@@ -56,23 +69,20 @@ export class WordsService {
 	}
 
 	removeWord(wordId: number) {
-		const newWordList = this.wordList.value.filter((w) => w.id !== wordId);
-
-		this.wordList.next(newWordList);
-		this.saveData(newWordList);
+		const updatedWordList = this.wordList.value.filter((w) => w.id !== wordId);
+		this.updateWordList(updatedWordList);
 	}
 
-	editWordDefinition(wordId: number, wordDefinition: string) {
-		const newWordList = [...this.wordList.value].map((w) =>
-			w.id === wordId ? { ...w, definition: wordDefinition } : w
+	editWord(wordId: number, word: string, definition: string) {
+		const updatedWordList = [...this.wordList.value].map((w) =>
+			w.id === wordId ? { ...w, name: word, definition } : w
 		);
 
-		this.wordList.next(newWordList);
-		this.saveData(newWordList);
+		this.updateWordList(updatedWordList);
 	}
 
 	toggleIsLearning(wordId: number) {
-		const newWordList = [...this.wordList.value].map((w) => {
+		const updatedWordList = [...this.wordList.value].map((w) => {
 			if (w.id !== wordId) return w;
 			return {
 				...w,
@@ -80,11 +90,6 @@ export class WordsService {
 			};
 		});
 
-		this.wordList.next(newWordList);
-		this.saveData(newWordList);
-	}
-
-	private saveData(wordList: IWord[]) {
-		this.localStorageService.saveData("word-list", wordList);
+		this.updateWordList(updatedWordList);
 	}
 }

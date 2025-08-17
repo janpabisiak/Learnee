@@ -1,13 +1,13 @@
 import { Component, inject, OnDestroy, OnInit } from "@angular/core";
 import { RouterModule } from "@angular/router";
-import { AddWordModalComponent } from "@components/add-word-modal/add-word-modal.component";
+import { AddEditWordModalComponent } from "@components/home-page/add-edit-word-modal/add-edit-word-modal.component";
 import { HeaderComponent } from "@components/header/header.component";
 import { ModalService } from "@services/modal.service";
 import { Subscription } from "rxjs";
 
 @Component({
 	selector: "app-root",
-	imports: [RouterModule, HeaderComponent, AddWordModalComponent],
+	imports: [RouterModule, HeaderComponent, AddEditWordModalComponent],
 	templateUrl: "./app.component.html",
 	standalone: true,
 })

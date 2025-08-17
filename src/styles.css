@@ -20,4 +20,14 @@
 	.ionicon-thick {
 		--ionicon-stroke-width: 2.5rem;
 	}
+
+	input.show-validation.ng-touched.ng-valid,
+	textarea.show-validation.ng-touched.ng-valid {
+		border: 2px solid var(--color-emerald-600);
+	}
+
+	input.show-validation.ng-touched.ng-invalid,
+	textarea.show-validation.ng-touched.ng-invalid {
+		border: 2px solid var(--color-red-600);
+	}
 }

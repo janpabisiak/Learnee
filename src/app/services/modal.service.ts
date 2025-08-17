@@ -8,7 +8,7 @@ export class ModalService {
 	private isWordAddingModalOpen = new BehaviorSubject<boolean>(false);
 	isWordAddingModalOpen$ = this.isWordAddingModalOpen.asObservable();
 
-	toggleIsWordAddingModalOpen(state: boolean) {
+	toggleShowWordAddingModal(state: boolean) {
 		this.isWordAddingModalOpen.next(state);
 	}
 }
