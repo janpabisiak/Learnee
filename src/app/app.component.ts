@@ -4,10 +4,16 @@ import { AddEditWordModalComponent } from "@components/home-page/add-edit-word-m
 import { HeaderComponent } from "@components/header/header.component";
 import { ModalService } from "@services/modal.service";
 import { Subscription } from "rxjs";
+import { ConfirmWordDeletionModalComponent } from "@components/home-page/confirm-word-deletion-modal/confirm-word-deletion-modal.component";
 
 @Component({
 	selector: "app-root",
-	imports: [RouterModule, HeaderComponent, AddEditWordModalComponent],
+	imports: [
+		RouterModule,
+		HeaderComponent,
+		AddEditWordModalComponent,
+		ConfirmWordDeletionModalComponent,
+	],
 	templateUrl: "./app.component.html",
 	standalone: true,
 })
@@ -15,11 +21,18 @@ export class AppComponent implements OnInit, OnDestroy {
 	modalService = inject(ModalService);
 	subscriptions = new Subscription();
 	isWordAddingModalOpen = false;
+	isWordDeletingModalOpen = false;
 
 	ngOnInit() {
 		this.subscriptions.add(
-			this.modalService.isWordAddingModalOpen$.subscribe((isWordAddingModalOpen) => {
-				this.isWordAddingModalOpen = isWordAddingModalOpen;
+			this.modalService.isWordAddingModalOpen$.subscribe((isOpen) => {
+				this.isWordAddingModalOpen = isOpen;
+			})
+		);
+
+		this.subscriptions.add(
+			this.modalService.isWordDeletionModalOpen$.subscribe((isOpen) => {
+				this.isWordDeletingModalOpen = isOpen;
 			})
 		);
 	}
