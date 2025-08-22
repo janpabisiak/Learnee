@@ -5,6 +5,7 @@ import { HeaderComponent } from "@components/header/header.component";
 import { ModalService } from "@services/modal.service";
 import { Subscription } from "rxjs";
 import { ConfirmWordDeletionModalComponent } from "@components/home-page/confirm-word-deletion-modal/confirm-word-deletion-modal.component";
+import { ToasterComponent } from "@components/utils/toaster/toaster.component";
 
 @Component({
 	selector: "app-root",
@@ -13,6 +14,7 @@ import { ConfirmWordDeletionModalComponent } from "@components/home-page/confirm
 		HeaderComponent,
 		AddEditWordModalComponent,
 		ConfirmWordDeletionModalComponent,
+		ToasterComponent,
 	],
 	templateUrl: "./app.component.html",
 	standalone: true,
