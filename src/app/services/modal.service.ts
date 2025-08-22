@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { IWord } from "../types/word.interface";
 import { BehaviorSubject } from "rxjs";
 
 @Injectable({

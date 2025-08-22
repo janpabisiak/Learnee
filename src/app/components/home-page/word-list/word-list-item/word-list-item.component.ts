@@ -5,6 +5,7 @@ import { IWord } from "../../../../types/word.interface";
 import { AddWordFormService } from "@services/add-edit-word-form.service";
 import { WordsService } from "@services/words.service";
 import { ModalService } from "@services/modal.service";
+import { ConfirmWordDeletionService } from "@services/confirm-word-deletion.service";
 
 @Component({
 	selector: "app-word-list-item",
@@ -21,7 +22,8 @@ export class WordListItemComponent {
 		private addWordFormService: AddWordFormService,
 		private webSpeechService: WebSpeechService,
 		private wordsService: WordsService,
-		private modalService: ModalService
+		private modalService: ModalService,
+		private confirmWordDeletionService: ConfirmWordDeletionService
 	) {}
 
 	readWord() {
@@ -48,7 +50,8 @@ export class WordListItemComponent {
 	}
 
 	deleteWord() {
-		this.wordsService.removeWord(this.word.id);
+		this.modalService.toggleShowWordDeletionModal(true);
+		this.confirmWordDeletionService.word = this.word;
 		this.toggleDropdownMenu();
 	}
 }

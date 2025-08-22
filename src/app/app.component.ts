@@ -32,7 +32,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
 		this.subscriptions.add(
 			this.modalService.isWordDeletionModalOpen$.subscribe((isOpen) => {
-				this.isWordAddingModalOpen = isOpen;
+				this.isWordDeletingModalOpen = isOpen;
 			})
 		);
 	}
