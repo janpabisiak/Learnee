@@ -19,6 +19,7 @@ export class ModalComponent {
 	@Input({ required: true }) title!: string;
 	@Input() primaryButtonText!: string;
 	@Input() secondaryButtonText!: string;
+	@Input() showCloseIcon: boolean = true;
 	@Input() primaryButtonDisabled: boolean = false;
 	@Input() secondaryButtonDisabled: boolean = false;
 	@Input() closeOnClickOutside: boolean = false;
