@@ -51,7 +51,6 @@ export class AppComponent implements OnInit, OnDestroy {
 		this.subscriptions.add(
 			this.toasterService.toasters$.subscribe((toasters) => {
 				this.toasters = toasters;
-				console.log(toasters);
 			})
 		);
 	}
