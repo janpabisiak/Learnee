@@ -17,6 +17,7 @@ import { ModalFooterComponent } from "./modal-footer/modal-footer.component";
 })
 export class ModalComponent {
 	@Input({ required: true }) title!: string;
+	@Input() isDanger = false;
 	@Input() primaryButtonText!: string;
 	@Input() secondaryButtonText!: string;
 	@Input() showCloseIcon: boolean = true;

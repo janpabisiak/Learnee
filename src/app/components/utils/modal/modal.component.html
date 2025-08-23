@@ -5,7 +5,7 @@
             <ng-content></ng-content>
         </div>
         @if (primaryButtonText || secondaryButtonText) {
-        <app-modal-footer [primaryButtonText]="primaryButtonText" [secondaryButtonText]="secondaryButtonText" [primaryButtonDisabled]="primaryButtonDisabled" [secondaryButtonDisabled]="secondaryButtonDisabled" (primaryButtonClicked)="onPrimaryButtonClicked()" (secondaryButtonClicked)="onSecondaryButtonClicked()"></app-modal-footer>
+        <app-modal-footer [isDanger]="isDanger" [primaryButtonText]="primaryButtonText" [secondaryButtonText]="secondaryButtonText" [primaryButtonDisabled]="primaryButtonDisabled" [secondaryButtonDisabled]="secondaryButtonDisabled" (primaryButtonClicked)="onPrimaryButtonClicked()" (secondaryButtonClicked)="onSecondaryButtonClicked()"></app-modal-footer>
         }
     </div>
 </div>
