@@ -6,7 +6,8 @@
 
 	--animate-pulse: pulse 1.5s infinite alternate;
 	--animate-elapsing: elapsing var(--elapsing-duration, 5s) forwards;
-	--animate-toaster: fadeIn 1s forwards, fadeOut 1s var(--elapsing-duration, 5s) forwards;
+	--animate-slideIn: slideIn 0.5s forwards;
+	--animate-toaster: slideIn 1s forwards, slideOut 1s var(--elapsing-duration, 5s) forwards;
 
 	@keyframes pulse {
 		from {
@@ -26,7 +27,7 @@
 		}
 	}
 
-	@keyframes fadeIn {
+	@keyframes slideIn {
 		from {
 			opacity: 0;
 			transform: translateY(50px);
@@ -37,7 +38,7 @@
 		}
 	}
 
-	@keyframes fadeOut {
+	@keyframes slideOut {
 		from {
 			opacity: 1;
 			transform: translate(0);
