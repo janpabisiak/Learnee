@@ -1,3 +1,3 @@
-<app-modal [title]="'Confirm deletion'" [showCloseIcon]="false" (closeButtonClicked)="closeModal()" [primaryButtonText]="'Confirm'" [secondaryButtonText]="'Cancel'" (primaryButtonClicked)="confirmDeletion()" (secondaryButtonClicked)="closeModal()">
-    <p>Are you sure that you want to remove <b>{{word?.name}}</b> from your wordlist?</p>
+<app-modal [title]="'Confirm deletion'" [isDanger]="true" [showCloseIcon]="false" (closeButtonClicked)="closeModal()" [primaryButtonText]="'Confirm'" [secondaryButtonText]="'Cancel'" (primaryButtonClicked)="confirmDeletion()" (secondaryButtonClicked)="closeModal()">
+    <p>Are you sure that you want to delete <b>{{purgeWords ? 'everything' : word?.name}}</b> from your wordlist?</p>
 </app-modal>

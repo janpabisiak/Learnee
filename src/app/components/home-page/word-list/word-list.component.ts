@@ -3,27 +3,38 @@ import { Subscription } from "rxjs";
 import { WordsService } from "../../../services/words.service";
 import { IWord } from "../../../types/word.interface";
 import { WordListItemComponent } from "./word-list-item/word-list-item.component";
+import { WordListOptionsComponent } from "./word-list-options/word-list-options.component";
+import { CommonModule } from "@angular/common";
 
 @Component({
 	selector: "app-word-list",
-	imports: [WordListItemComponent],
+	imports: [CommonModule, WordListItemComponent, WordListOptionsComponent],
 	templateUrl: "./word-list.component.html",
 	standalone: true,
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class WordListComponent implements OnInit, OnDestroy {
-	wordListSubscription = new Subscription();
-	wordList: IWord[] = [];
+	private subscriptions = new Subscription();
+	sortedWordList: IWord[] = [];
+	filteredWordList: IWord[] = [];
 
 	constructor(private wordsService: WordsService) {}
 
 	ngOnInit() {
-		this.wordListSubscription = this.wordsService.wordList$.subscribe((wordList) => {
-			this.wordList = wordList;
-		});
+		this.subscriptions.add(
+			this.wordsService.sortedWordList$.subscribe((wordList) => {
+				this.sortedWordList = wordList;
+			})
+		);
+
+		this.subscriptions.add(
+			this.wordsService.filteredWordList$.subscribe((wordList) => {
+				this.filteredWordList = wordList;
+			})
+		);
 	}
 
 	ngOnDestroy() {
-		this.wordListSubscription.unsubscribe();
+		this.subscriptions.unsubscribe();
 	}
 }

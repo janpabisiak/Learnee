@@ -14,6 +14,7 @@ export class ModalFooterComponent {
 	@Input() secondaryButtonDisabled: boolean = false;
 	@Output() primaryButtonClicked = new EventEmitter();
 	@Output() secondaryButtonClicked = new EventEmitter();
+	@Input() isDanger = false;
 
 	onPrimaryButtonClicked() {
 		this.primaryButtonClicked.emit();

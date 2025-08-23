@@ -1,4 +1,4 @@
 <div class="flex gap-2 justify-end pt-4">
     <app-button *ngIf="secondaryButtonText" [type]="'secondary'" [disabled]="secondaryButtonDisabled" (click)="onSecondaryButtonClicked()">{{secondaryButtonText}}</app-button>
-    <app-button *ngIf="primaryButtonText" [type]="'primary'" [disabled]="primaryButtonDisabled" (click)="onPrimaryButtonClicked()">{{primaryButtonText}}</app-button>
+    <app-button *ngIf="primaryButtonText" [type]="isDanger ? 'danger' : 'primary'" [disabled]="primaryButtonDisabled" (click)="onPrimaryButtonClicked()">{{primaryButtonText}}</app-button>
 </div>

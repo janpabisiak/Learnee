@@ -15,7 +15,13 @@ export class WordsService {
 	private apiHost = environment.apiHost;
 	private apiKey = environment.apiKey;
 	private wordList = new BehaviorSubject<IWord[]>([]);
+	private sortedWordList = new BehaviorSubject<IWord[]>([]);
+	private filteredWordList = new BehaviorSubject<IWord[]>([]);
+	private searchQuery = "";
+
 	wordList$ = this.wordList.asObservable();
+	sortedWordList$ = this.sortedWordList.asObservable();
+	filteredWordList$ = this.filteredWordList.asObservable();
 
 	constructor(
 		private http: HttpClient,
@@ -23,7 +29,12 @@ export class WordsService {
 		private toasterService: ToasterService
 	) {
 		const wordList = this.localStorageService.loadData("word-list");
-		if (wordList) this.wordList.next(wordList);
+		if (wordList) {
+			this.wordList.next(wordList);
+			this.sortWordList();
+
+			this.filteredWordList.next(wordList);
+		}
 	}
 
 	private getResponseFromWordAPI(word: string) {
@@ -42,6 +53,56 @@ export class WordsService {
 	private updateWordList(updatedWordList: IWord[]) {
 		this.wordList.next(updatedWordList);
 		this.saveData(updatedWordList);
+
+		this.sortedWordList.next(updatedWordList);
+
+		this.filteredWordList.next(updatedWordList);
+		this.filterWordList(this.searchQuery);
+	}
+
+	sortWordList(sortType: ESortTypes = ESortTypes.NameASC) {
+		switch (sortType) {
+			case ESortTypes.NameDESC: {
+				const sortedWordList = this.wordList.value.sort((a, b) =>
+					b.name.localeCompare(a.name)
+				);
+				this.sortedWordList.next(sortedWordList);
+				break;
+			}
+			case ESortTypes.DefinitionASC: {
+				const sortedWordList = this.wordList.value.sort((a, b) =>
+					a.definition.localeCompare(b.definition)
+				);
+				this.sortedWordList.next(sortedWordList);
+				break;
+			}
+			case ESortTypes.DefinitionDESC: {
+				const sortedWordList = this.wordList.value.sort((a, b) =>
+					b.definition.localeCompare(a.definition)
+				);
+				this.sortedWordList.next(sortedWordList);
+				break;
+			}
+			default: {
+				const sortedWordList = this.wordList.value.sort((a, b) =>
+					a.name.localeCompare(b.name)
+				);
+				this.sortedWordList.next(sortedWordList);
+				break;
+			}
+		}
+	}
+
+	filterWordList(query: string) {
+		this.searchQuery = query;
+
+		const sortedWordList = this.sortedWordList.value;
+		const filteredWordList = sortedWordList.filter(
+			(w) =>
+				w.name.toLowerCase().includes(query) || w.definition.toLowerCase().includes(query)
+		);
+
+		this.filteredWordList.next(filteredWordList);
 	}
 
 	fetchWordDefinition(word: string): Observable<string> {
@@ -99,6 +160,16 @@ export class WordsService {
 		});
 	}
 
+	purgeWordList() {
+		this.updateWordList([]);
+
+		this.toasterService.addToaster({
+			type: EToasterTypes.Success,
+			content: "Words successfully deleted",
+			duration: 5,
+		});
+	}
+
 	editWord(wordId: number, word: string, definition: string) {
 		const updatedWordList = [...this.wordList.value].map((w) =>
 			w.id === wordId ? { ...w, name: word, definition } : w
@@ -124,4 +195,11 @@ export class WordsService {
 
 		this.updateWordList(updatedWordList);
 	}
+}
+
+export enum ESortTypes {
+	NameASC = "nameASC",
+	NameDESC = "nameDESC",
+	DefinitionASC = "definitionASC",
+	DefinitionDESC = "definitionDESC",
 }
