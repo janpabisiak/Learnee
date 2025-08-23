@@ -12,6 +12,7 @@ import { WordsService } from "@services/words.service";
 })
 export class ConfirmWordDeletionModalComponent {
 	word: IWord | null = null;
+	purgeWords = false;
 
 	constructor(
 		private modalService: ModalService,
@@ -19,6 +20,7 @@ export class ConfirmWordDeletionModalComponent {
 		private confirmWordDeletionService: ConfirmWordDeletionService
 	) {
 		this.word = this.confirmWordDeletionService.word;
+		this.purgeWords = this.confirmWordDeletionService.purgeWords;
 	}
 
 	closeModal() {
@@ -26,9 +28,9 @@ export class ConfirmWordDeletionModalComponent {
 	}
 
 	confirmDeletion() {
-		if (this.word) {
-			this.wordsService.removeWord(this.word.id);
-			this.closeModal();
-		}
+		if (this.word) this.wordsService.removeWord(this.word.id);
+		if (this.purgeWords) this.wordsService.purgeWordList();
+
+		this.closeModal();
 	}
 }

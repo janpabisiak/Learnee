@@ -99,6 +99,16 @@ export class WordsService {
 		});
 	}
 
+	purgeWordList() {
+		this.updateWordList([]);
+
+		this.toasterService.addToaster({
+			type: EToasterTypes.Success,
+			content: "Words successfully deleted",
+			duration: 5,
+		});
+	}
+
 	editWord(wordId: number, word: string, definition: string) {
 		const updatedWordList = [...this.wordList.value].map((w) =>
 			w.id === wordId ? { ...w, name: word, definition } : w
