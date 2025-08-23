@@ -5,6 +5,9 @@
 	--font-signika: "Signika", sans-serif;
 
 	--animate-pulse: pulse 1.5s infinite alternate;
+	--animate-elapsing: elapsing var(--elapsing-duration, 5s) forwards;
+	--animate-slideIn: slideIn 0.5s forwards;
+	--animate-toaster: slideIn 1s forwards, slideOut 1s var(--elapsing-duration, 5s) forwards;
 
 	@keyframes pulse {
 		from {
@@ -12,6 +15,37 @@
 		}
 		to {
 			tranform: scale(1);
+		}
+	}
+
+	@keyframes elapsing {
+		from {
+			width: 100%;
+		}
+		to {
+			width: 0;
+		}
+	}
+
+	@keyframes slideIn {
+		from {
+			opacity: 0;
+			transform: translateY(50px);
+		}
+		to {
+			opacity: 1;
+			transform: translate(0);
+		}
+	}
+
+	@keyframes slideOut {
+		from {
+			opacity: 1;
+			transform: translate(0);
+		}
+		to {
+			opacity: 0;
+			transform: translateY(50px);
 		}
 	}
 }

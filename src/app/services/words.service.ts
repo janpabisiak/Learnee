@@ -4,6 +4,8 @@ import { environment } from "../../environment/environment";
 import { IWord } from "../types/word.interface";
 import { BehaviorSubject, map, Observable, take } from "rxjs";
 import { LocalStorageService } from "./local-storage.service";
+import { ToasterService } from "./toaster.service";
+import { EToasterTypes } from "@components/utils/toaster-container/toaster/toaster.component";
 
 @Injectable({
 	providedIn: "root",
@@ -15,7 +17,11 @@ export class WordsService {
 	private wordList = new BehaviorSubject<IWord[]>([]);
 	wordList$ = this.wordList.asObservable();
 
-	constructor(private http: HttpClient, private localStorageService: LocalStorageService) {
+	constructor(
+		private http: HttpClient,
+		private localStorageService: LocalStorageService,
+		private toasterService: ToasterService
+	) {
 		const wordList = this.localStorageService.loadData("word-list");
 		if (wordList) this.wordList.next(wordList);
 	}
@@ -50,7 +56,15 @@ export class WordsService {
 
 	addWord(word: string, definition: string) {
 		const wordList = this.wordList.value;
-		if (wordList.some((w) => w.name === word)) return;
+		if (wordList.some((w) => w.name === word && w.definition === definition)) {
+			this.toasterService.addToaster({
+				type: EToasterTypes.Error,
+				content: "This word is already on your wordlist",
+				duration: 5,
+			});
+
+			return;
+		}
 
 		const newWord: IWord = {
 			id: wordList.length,
@@ -61,6 +75,12 @@ export class WordsService {
 
 		const updatedWordList = [...wordList, newWord];
 		this.updateWordList(updatedWordList);
+
+		this.toasterService.addToaster({
+			type: EToasterTypes.Success,
+			content: "Word successfully added",
+			duration: 5,
+		});
 	}
 
 	getRandomWord(minIndex: number = 0, maxIndex: number = this.wordList.value.length) {
@@ -71,6 +91,12 @@ export class WordsService {
 	removeWord(wordId: number) {
 		const updatedWordList = this.wordList.value.filter((w) => w.id !== wordId);
 		this.updateWordList(updatedWordList);
+
+		this.toasterService.addToaster({
+			type: EToasterTypes.Success,
+			content: "Word successfully deleted",
+			duration: 5,
+		});
 	}
 
 	editWord(wordId: number, word: string, definition: string) {
@@ -79,6 +105,12 @@ export class WordsService {
 		);
 
 		this.updateWordList(updatedWordList);
+
+		this.toasterService.addToaster({
+			type: EToasterTypes.Success,
+			content: "Word successfully edited",
+			duration: 5,
+		});
 	}
 
 	toggleIsLearning(wordId: number) {

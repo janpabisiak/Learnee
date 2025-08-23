@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, CUSTOM_ELEMENTS_SCHEMA, OnDestroy, OnInit } from "@angular/core";
 import { Subscription } from "rxjs";
 import { WordsService } from "../../../services/words.service";
 import { IWord } from "../../../types/word.interface";
@@ -9,6 +9,7 @@ import { WordListItemComponent } from "./word-list-item/word-list-item.component
 	imports: [WordListItemComponent],
 	templateUrl: "./word-list.component.html",
 	standalone: true,
+	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class WordListComponent implements OnInit, OnDestroy {
 	wordListSubscription = new Subscription();
