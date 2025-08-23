@@ -1,0 +1,10 @@
+<div class="fixed h-full p-3 flex gap-3 pointer-events-none" [ngClass]="{
+    'left-0': position === toasterPositions.TopLeft || position === toasterPositions.BottomLeft,
+    'right-0': position === toasterPositions.TopRight || position === toasterPositions.BottomRight,
+    'flex-col': position === toasterPositions.TopLeft || position === toasterPositions.TopRight,
+    'flex-col-reverse': position === toasterPositions.BottomLeft || position === toasterPositions.BottomRight
+}">
+    @for (toaster of toasters; track toaster.id) {
+    <app-toaster [content]="toaster.content" [type]="toaster.type" [duration]="toaster.duration"></app-toaster>
+    }
+</div>
