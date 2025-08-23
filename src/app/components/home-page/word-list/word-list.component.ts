@@ -3,10 +3,11 @@ import { Subscription } from "rxjs";
 import { WordsService } from "../../../services/words.service";
 import { IWord } from "../../../types/word.interface";
 import { WordListItemComponent } from "./word-list-item/word-list-item.component";
+import { WordListOptionsComponent } from "./word-list-options/word-list-options.component";
 
 @Component({
 	selector: "app-word-list",
-	imports: [WordListItemComponent],
+	imports: [WordListItemComponent, WordListOptionsComponent],
 	templateUrl: "./word-list.component.html",
 	standalone: true,
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
