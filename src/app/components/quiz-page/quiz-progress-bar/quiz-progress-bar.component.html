@@ -1,0 +1,9 @@
+<ul class="flex gap-3">
+    @for (question of questions; track question.id) {
+    <li class="flex-1 h-3 rounded-sm" [ngClass]="{
+        'bg-gray-200': !question.answered,
+        'bg-green-400 animate-fadeIn': question.answered && question.answeredCorrect,
+        'bg-red-400 animate-fadeIn': question.answered && !question.answeredCorrect,
+    }"></li>
+    }
+</ul>

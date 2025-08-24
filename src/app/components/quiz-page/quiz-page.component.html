@@ -1,1 +1,6 @@
-<app-questions-list></app-questions-list>
+<main class="py-8 flex-1">
+    <section class="flex flex-col gap-10 max-w-4xl mx-auto">
+        <app-quiz-progress-bar [questions]="questions"></app-quiz-progress-bar>
+        <app-quiz-question></app-quiz-question>
+    </section>
+</main>
