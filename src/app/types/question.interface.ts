@@ -4,4 +4,6 @@ export interface IQuestion {
 	id: number;
 	content: string;
 	possibleAnswers: IAnswer[];
+	answered: boolean;
+	answeredCorrect: boolean;
 }

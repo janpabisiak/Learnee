@@ -1,9 +1,0 @@
-<li>
-    {{content}}
-    <button (click)="readWord()">Read word</button>
-    <br>
-    @for (answer of possibleAnswers; track answer.id) {
-    <button [class.correct-answer]="isAnswered && answer.isCorrect" [class.wrong-answer]="isAnswered && !answer.isCorrect" (click)="revealAnswer(answer.id)">{{answer.content}}</button>
-    <br>
-    }
-</li>

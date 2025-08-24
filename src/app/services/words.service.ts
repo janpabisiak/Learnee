@@ -105,7 +105,7 @@ export class WordsService {
 		this.filteredWordList.next(filteredWordList);
 	}
 
-	fetchWordDefinition(word: string): Observable<string> {
+	fetchWordDefinition$(word: string): Observable<string> {
 		return this.getResponseFromWordAPI(word).pipe(
 			take(1),
 			map(
