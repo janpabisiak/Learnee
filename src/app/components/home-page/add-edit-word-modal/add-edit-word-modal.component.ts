@@ -1,10 +1,11 @@
 import { CommonModule } from "@angular/common";
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { ReactiveFormsModule } from "@angular/forms";
 import { ModalComponent } from "@components/utils/modal/modal.component";
 import { AddWordFormService } from "@services/add-edit-word-form.service";
 import { ModalService } from "@services/modal.service";
-import { Subscription } from "rxjs";
+import { WordsService } from "@services/words.service";
+import { Subscription, take } from "rxjs";
 
 @Component({
 	selector: "app-add-edit-word-modal",
@@ -13,13 +14,17 @@ import { Subscription } from "rxjs";
 	imports: [ModalComponent, ReactiveFormsModule, CommonModule],
 })
 export class AddEditWordModalComponent implements OnInit, OnDestroy {
+	@ViewChild("wordDefinition") wordDefinitionEl!: HTMLTextAreaElement;
+
 	private subscriptions = new Subscription();
 	isSubmitAttempted = false;
 	isSubmitDisabled = false;
+	isDefinitionFetched = false;
 
 	constructor(
 		private modalService: ModalService,
-		private addEditWordFormService: AddWordFormService
+		private addEditWordFormService: AddWordFormService,
+		private wordsService: WordsService
 	) {}
 
 	ngOnInit() {
@@ -33,6 +38,10 @@ export class AddEditWordModalComponent implements OnInit, OnDestroy {
 			this.addEditWordFormService.isSubmitDisabled$.subscribe((isDisabled) => {
 				this.isSubmitDisabled = isDisabled;
 			})
+		);
+
+		this.subscriptions.add(
+			this.word.valueChanges.subscribe(() => (this.isDefinitionFetched = false))
 		);
 	}
 
@@ -49,6 +58,19 @@ export class AddEditWordModalComponent implements OnInit, OnDestroy {
 		} else {
 			this.form.markAllAsTouched();
 		}
+	}
+
+	fetchWordDefinition() {
+		if (this.isDefinitionFetched) return;
+
+		this.wordDefinitionEl.placeholder = "Fetching definition...";
+		this.wordsService
+			.fetchWordDefinition$(this.word.value)
+			.pipe(take(1))
+			.subscribe((definition) => {
+				this.definition.setValue(definition);
+			});
+		this.isDefinitionFetched = true;
 	}
 
 	get isEditing() {
