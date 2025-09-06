@@ -1,6 +1,15 @@
 <main class="py-8 flex-1">
     <section class="flex flex-col gap-10 max-w-4xl mx-auto">
-        <app-matching-game></app-matching-game>
-        <!-- <app-quiz-game></app-quiz-game> -->
+        <app-study-progress-bar></app-study-progress-bar>
+
+        @let currentStage = getCurrentStage();
+        @switch (currentStage.type) {
+        @case (EAvailableGames.Quiz) {
+        <app-quiz-game animate.enter="enter-animation"></app-quiz-game>
+        }
+        @case (EAvailableGames.MatchingGame) {
+        <app-matching-game animate.enter="enter-animation"></app-matching-game>
+        }
+        }
     </section>
 </main>

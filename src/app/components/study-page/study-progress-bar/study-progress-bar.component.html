@@ -1,0 +1,10 @@
+<ul class="flex gap-3">
+    @for (stage of stages; track stage.id) {
+    <li class="flex-1 h-3 rounded-sm" [ngClass]="{
+        'bg-gray-200': !stage.answered,
+        'border-2 border-gray-300': stage.id === currentId && !stage.answered,
+        'bg-green-400 animate-fadeIn': stage.answered && stage.answeredCorrect,
+        'bg-red-400 animate-fadeIn': stage.answered && !stage.answeredCorrect,
+    }"></li>
+    }
+</ul>
