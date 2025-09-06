@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { IQuestion } from "../../../types/question.interface";
+import { IQuestion } from "../../../../types/question.interface";
 import { QuestionAnswerComponent } from "./question-answer/question-answer.component";
 import { QuizService } from "@services/quiz.service";
 import { combineLatest, Subscription } from "rxjs";

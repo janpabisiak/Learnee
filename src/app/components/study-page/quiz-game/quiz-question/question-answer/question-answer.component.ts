@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { IAnswer } from "../../../../types/answer.interface";
+import { IAnswer } from "../../../../../types/answer.interface";
 import { QuizService } from "@services/quiz.service";
 import { CommonModule } from "@angular/common";
 
