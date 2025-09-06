@@ -83,6 +83,20 @@ export class WordsService {
 				this.sortedWordList.next(sortedWordList);
 				break;
 			}
+			case ESortTypes.IsLearningASC: {
+				const sortedWordList = this.wordList.value.sort(
+					(a, b) => +a.isLearning - +b.isLearning
+				);
+				this.sortedWordList.next(sortedWordList);
+				break;
+			}
+			case ESortTypes.IsLearningDESC: {
+				const sortedWordList = this.wordList.value.sort(
+					(a, b) => +b.isLearning - +a.isLearning
+				);
+				this.sortedWordList.next(sortedWordList);
+				break;
+			}
 			default: {
 				const sortedWordList = this.wordList.value.sort((a, b) =>
 					a.name.localeCompare(b.name)
@@ -144,9 +158,11 @@ export class WordsService {
 		});
 	}
 
-	getRandomWord(minIndex: number = 0, maxIndex: number = this.wordList.value.length) {
-		const randomIndex = Math.floor(Math.random() * (maxIndex - minIndex) + minIndex);
-		return this.wordList.value[randomIndex];
+	getRandomLearningWord() {
+		const learningWords = this.wordList.value.filter((w) => w.isLearning);
+
+		const randomIndex = Math.floor(Math.random() * learningWords.length);
+		return learningWords[randomIndex];
 	}
 
 	removeWord(wordId: number) {
@@ -202,4 +218,6 @@ export enum ESortTypes {
 	NameDESC = "nameDESC",
 	DefinitionASC = "definitionASC",
 	DefinitionDESC = "definitionDESC",
+	IsLearningASC = "isLearningASC",
+	IsLearningDESC = "isLearningDESC",
 }

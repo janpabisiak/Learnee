@@ -6,11 +6,12 @@ import { AddWordFormService } from "@services/add-edit-word-form.service";
 import { WordsService } from "@services/words.service";
 import { ModalService } from "@services/modal.service";
 import { ConfirmWordDeletionService } from "@services/confirm-word-deletion.service";
+import { NgClass } from "@angular/common";
 
 @Component({
 	selector: "app-word-list-item",
 	templateUrl: "./word-list-item.component.html",
-	imports: [SentenceCasePipe],
+	imports: [SentenceCasePipe, NgClass],
 	standalone: true,
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
@@ -40,9 +41,8 @@ export class WordListItemComponent {
 		this.toggleDropdownMenu();
 	}
 
-	toggleLearning() {
+	toggleIsLearning() {
 		this.wordsService.toggleIsLearning(this.word.id);
-		this.toggleDropdownMenu();
 	}
 
 	toggleDropdownMenu() {

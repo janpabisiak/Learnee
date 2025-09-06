@@ -19,8 +19,8 @@
 
 <ng-container *ngIf="filteredWordList.length">
     <ul class="flex flex-col gap-3">
-        @for (word of filteredWordList; track word.id) {
-        <app-word-list-item [word]="word"></app-word-list-item>
+        @for (word of filteredWordList; track word.id; let i = $index) {
+        <app-word-list-item [word]="word" [ngClass]="isWordListLoaded ? 'animate-slideIn' : ''"></app-word-list-item>
         }
     </ul>
 </ng-container>

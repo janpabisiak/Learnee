@@ -17,6 +17,7 @@ export class WordListComponent implements OnInit, OnDestroy {
 	private subscriptions = new Subscription();
 	sortedWordList: IWord[] = [];
 	filteredWordList: IWord[] = [];
+	isWordListLoaded = false;
 
 	constructor(private wordsService: WordsService) {}
 
@@ -30,6 +31,7 @@ export class WordListComponent implements OnInit, OnDestroy {
 		this.subscriptions.add(
 			this.wordsService.filteredWordList$.subscribe((wordList) => {
 				this.filteredWordList = wordList;
+				this.isWordListLoaded = true;
 			})
 		);
 	}
