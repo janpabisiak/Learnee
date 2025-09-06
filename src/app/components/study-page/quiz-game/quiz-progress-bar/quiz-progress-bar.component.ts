@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { IQuestion } from "../../../types/question.interface";
+import { IQuestion } from "../../../../types/question.interface";
 import { CommonModule } from "@angular/common";
 
 @Component({

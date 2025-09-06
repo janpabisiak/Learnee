@@ -1,17 +1,17 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { IQuestion } from "../../types/question.interface";
+import { IQuestion } from "../../../types/question.interface";
 import { Subscription } from "rxjs";
 import { QuizProgressBarComponent } from "./quiz-progress-bar/quiz-progress-bar.component";
 import { QuizQuestionComponent } from "./quiz-question/quiz-question.component";
 import { QuizService } from "@services/quiz.service";
 
 @Component({
-	selector: "app-quiz-page",
+	selector: "app-quiz-game",
 	imports: [QuizProgressBarComponent, QuizQuestionComponent],
-	templateUrl: "./quiz-page.component.html",
+	templateUrl: "./quiz-game.component.html",
 	standalone: true,
 })
-export class QuizPageComponent implements OnInit, OnDestroy {
+export class QuizGameComponent implements OnInit, OnDestroy {
 	private subscriptions = new Subscription();
 	questions: IQuestion[] = [];
 

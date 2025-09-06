@@ -16,15 +16,21 @@ export class HeaderNavbarComponent {
 		},
 		{
 			id: 1,
-			url: "/quiz",
+			url: "/study",
 			text: "Dictionary",
 			icon: "book-outline",
 		},
 		{
 			id: 2,
-			url: "/quiz",
+			url: "/folders",
+			text: "Folders",
+			icon: "folder-outline",
+		},
+		{
+			id: 3,
+			url: "/study",
 			text: "Study",
-			icon: "play-outline",
+			icon: "school-outline",
 		},
 	];
 }

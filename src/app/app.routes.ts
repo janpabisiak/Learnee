@@ -1,7 +1,7 @@
 import { Routes } from "@angular/router";
 import { HomePageComponent } from "./components/home-page/home-page.component";
-import { QuizPageComponent } from "./components/quiz-page/quiz-page.component";
 import { ErrorPageComponent } from "./components/error-page/error-page.component";
+import { StudyPageComponent } from "@components/study-page/study-page.component";
 
 export const routes: Routes = [
 	{
@@ -10,9 +10,9 @@ export const routes: Routes = [
 		component: HomePageComponent,
 	},
 	{
-		path: "quiz",
-		title: "Quiz page",
-		component: QuizPageComponent,
+		path: "study",
+		title: "Study page",
+		component: StudyPageComponent,
 	},
 	{
 		path: "**",
