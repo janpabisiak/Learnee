@@ -16,18 +16,12 @@ export class HeaderNavbarComponent {
 		},
 		{
 			id: 1,
-			url: "/study",
-			text: "Dictionary",
-			icon: "book-outline",
-		},
-		{
-			id: 2,
 			url: "/folders",
 			text: "Folders",
 			icon: "folder-outline",
 		},
 		{
-			id: 3,
+			id: 2,
 			url: "/study",
 			text: "Study",
 			icon: "school-outline",

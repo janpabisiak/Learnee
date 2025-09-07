@@ -55,7 +55,6 @@ export class WordsService {
 		this.saveData(updatedWordList);
 
 		this.sortedWordList.next(updatedWordList);
-
 		this.filteredWordList.next(updatedWordList);
 		this.filterWordList(this.searchQuery);
 	}
@@ -67,6 +66,7 @@ export class WordsService {
 					b.name.localeCompare(a.name)
 				);
 				this.sortedWordList.next(sortedWordList);
+				this.filterWordList(this.searchQuery);
 				break;
 			}
 			case ESortTypes.DefinitionASC: {
@@ -74,6 +74,7 @@ export class WordsService {
 					a.definition.localeCompare(b.definition)
 				);
 				this.sortedWordList.next(sortedWordList);
+				this.filterWordList(this.searchQuery);
 				break;
 			}
 			case ESortTypes.DefinitionDESC: {
@@ -81,6 +82,7 @@ export class WordsService {
 					b.definition.localeCompare(a.definition)
 				);
 				this.sortedWordList.next(sortedWordList);
+				this.filterWordList(this.searchQuery);
 				break;
 			}
 			case ESortTypes.IsLearningASC: {
@@ -88,6 +90,7 @@ export class WordsService {
 					(a, b) => +a.isLearning - +b.isLearning
 				);
 				this.sortedWordList.next(sortedWordList);
+				this.filterWordList(this.searchQuery);
 				break;
 			}
 			case ESortTypes.IsLearningDESC: {
@@ -95,6 +98,7 @@ export class WordsService {
 					(a, b) => +b.isLearning - +a.isLearning
 				);
 				this.sortedWordList.next(sortedWordList);
+				this.filterWordList(this.searchQuery);
 				break;
 			}
 			default: {
@@ -102,6 +106,7 @@ export class WordsService {
 					a.name.localeCompare(b.name)
 				);
 				this.sortedWordList.next(sortedWordList);
+				this.filterWordList(this.searchQuery);
 				break;
 			}
 		}

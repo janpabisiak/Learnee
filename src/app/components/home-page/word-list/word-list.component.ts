@@ -1,5 +1,5 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, OnDestroy, OnInit } from "@angular/core";
-import { Subscription } from "rxjs";
+import { combineLatest, Subject, Subscription, takeUntil } from "rxjs";
 import { WordsService } from "../../../services/words.service";
 import { IWord } from "../../../types/word.interface";
 import { WordListItemComponent } from "./word-list-item/word-list-item.component";
@@ -14,7 +14,7 @@ import { CommonModule } from "@angular/common";
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class WordListComponent implements OnInit, OnDestroy {
-	private subscriptions = new Subscription();
+	private destroy$ = new Subject<void>();
 	sortedWordList: IWord[] = [];
 	filteredWordList: IWord[] = [];
 	isWordListLoaded = false;
@@ -22,21 +22,17 @@ export class WordListComponent implements OnInit, OnDestroy {
 	constructor(private wordsService: WordsService) {}
 
 	ngOnInit() {
-		this.subscriptions.add(
-			this.wordsService.sortedWordList$.subscribe((wordList) => {
-				this.sortedWordList = wordList;
-			})
-		);
-
-		this.subscriptions.add(
-			this.wordsService.filteredWordList$.subscribe((wordList) => {
-				this.filteredWordList = wordList;
+		combineLatest([this.wordsService.sortedWordList$, this.wordsService.filteredWordList$])
+			.pipe(takeUntil(this.destroy$))
+			.subscribe(([sortedWordList, filteredWordList]) => {
+				this.sortedWordList = sortedWordList;
+				this.filteredWordList = filteredWordList;
 				this.isWordListLoaded = true;
-			})
-		);
+			});
 	}
 
 	ngOnDestroy() {
-		this.subscriptions.unsubscribe();
+		this.destroy$.next();
+		this.destroy$.complete();
 	}
 }
