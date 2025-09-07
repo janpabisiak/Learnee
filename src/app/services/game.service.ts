@@ -33,15 +33,7 @@ export class GameService {
 
 		const stages = randomGames.map((gameIndex, i) => {
 			switch (selectedGames[gameIndex]) {
-				case EAvailableGames.Quiz:
-					return {
-						id: i,
-						type: EAvailableGames.Quiz,
-						data: this.quizService.generateQuestion(),
-						answered: false,
-						answeredCorrect: false,
-					};
-				case EAvailableGames.MatchingGame:
+				case EAvailableGames.MatchingGame: {
 					return {
 						id: i,
 						type: EAvailableGames.MatchingGame,
@@ -49,6 +41,16 @@ export class GameService {
 						answered: false,
 						answeredCorrect: false,
 					};
+				}
+				default: {
+					return {
+						id: i,
+						type: EAvailableGames.Quiz,
+						data: this.quizService.generateQuestion(),
+						answered: false,
+						answeredCorrect: false,
+					};
+				}
 			}
 		});
 
@@ -130,5 +132,48 @@ export interface IStage {
 
 export enum EAvailableGames {
 	Quiz = "Quiz",
-	MatchingGame = "MatchingGame",
+	MatchingGame = "Matching",
+	TrueOrFalse = "True or false",
+	FillGaps = "Fill gaps",
+	Listening = "Listening",
 }
+
+export interface IGame {
+	id: number;
+	title: EAvailableGames;
+	description: string;
+	icon: string;
+}
+
+export const availableGames: IGame[] = [
+	{
+		id: 0,
+		title: EAvailableGames.Quiz,
+		description: "Select correct definition for given word",
+		icon: "library-outline",
+	},
+	{
+		id: 1,
+		title: EAvailableGames.MatchingGame,
+		description: "Match word with its definition",
+		icon: "shuffle-outline",
+	},
+	{
+		id: 2,
+		title: EAvailableGames.TrueOrFalse,
+		description: "Check whether word has correct definition",
+		icon: "help-outline",
+	},
+	{
+		id: 3,
+		title: EAvailableGames.FillGaps,
+		description: "Check whether word has correct definition",
+		icon: "text-outline",
+	},
+	{
+		id: 4,
+		title: EAvailableGames.Listening,
+		description: "Select correct word from read definition",
+		icon: "volume-medium-outline",
+	},
+];
