@@ -1,35 +1,10 @@
-<div class="grid grid-cols-2 gap-15">
-    <div class="flex flex-col gap-2" cdkDropList (cdkDropListDropped)="reorder(terms, $event)">
-        @for (term of terms; track term; let i = $index) {
-        <div class="flex justify-between items-center border-1 p-5 rounded-md cursor-grab select-none" [ngClass]="{
-            'bg-gray-100 border-gray-300': !results.length,
-            'bg-emerald-300 border-emerald-400': results.length && results[i],
-            'bg-red-400 border-red-400': results.length && !results[i],
-            'pointer-events-none animate-fadeIn': results.length,
-        }" cdkDrag>
-            <p>{{term}}</p>
-            <ion-icon class="text-xl text-gray-400 ionicon-thick" [ngClass]="{
-                'text-gray-400': !results.length,
-                'text-gray-800': results.length,
-            }" name="reorder-four-outline"></ion-icon>
-        </div>
-        }
+<div [ngClass]="isVisible ? 'animate-slideIn' : ''">
+    <h2 class="text-4xl font-semibold mb-5"><span class="font-bold">{{currentStageId + 1}}.</span> Match word with its definition</h2>
+    <div class="grid grid-cols-2 gap-8 mb-5">
+        <app-draggable-items-list [items]="terms" [answered]="answered" [results]="results" (reordered)="reorder($event)"></app-draggable-items-list>
+        <app-draggable-items-list [items]="definitions" [answered]="answered" [results]="results" (reordered)="reorder($event)"></app-draggable-items-list>
     </div>
-    <div class="flex flex-col gap-2" cdkDropList (cdkDropListDropped)="reorder(definitions, $event)">
-        @for (definition of definitions; track definition; let i = $index) {
-        <div class="flex justify-between items-center border-1 p-5 rounded-md cursor-grab select-none" [ngClass]="{
-            'bg-gray-100 border-gray-300': !results.length,
-            'bg-emerald-300 border-emerald-400': results.length && results[i],
-            'bg-red-400 border-red-400': results.length && !results[i],
-            'pointer-events-none animate-fadeIn': results.length,
-        }" cdkDrag>
-            <p>{{definition}}</p>
-            <ion-icon class="text-xl text-gray-400 ionicon-thick" [ngClass]="{
-                'text-gray-400': !results.length,
-                'text-gray-800': results.length,
-            }" name="reorder-four-outline"></ion-icon>
-        </div>
-        }
+    <div class="flex justify-end">
+        <app-button class="[&>button]:w-48 [&>button]:justify-center" [type]="'primary'" [disabled]="answered" (click)="checkAnswers()">Check answers</app-button>
     </div>
 </div>
-<app-button [type]="'primary'" (click)="checkAnswers()">Check answers</app-button>

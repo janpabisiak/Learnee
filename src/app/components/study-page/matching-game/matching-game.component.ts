@@ -1,37 +1,65 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from "@angular/core";
-import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from "@angular/cdk/drag-drop";
-import { MatchingGameService } from "@services/matching-game.service";
+import { Component, CUSTOM_ELEMENTS_SCHEMA, OnDestroy, OnInit } from "@angular/core";
+import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
+import { IMatch } from "@services/matching-game.service";
 import { ButtonComponent } from "@components/utils/button/button.component";
-import { CommonModule } from "@angular/common";
+import { NgClass } from "@angular/common";
+import { GameService } from "@services/game.service";
+import { combineLatest, Subject, takeUntil } from "rxjs";
+import { DraggableItemsListComponent } from "./draggable-items-list/draggable-items-list.component";
 
 @Component({
 	selector: "app-matching-game",
-	imports: [CdkDrag, CdkDropList, ButtonComponent, CommonModule],
+	imports: [ButtonComponent, NgClass, DraggableItemsListComponent],
 	templateUrl: "./matching-game.component.html",
-	styleUrls: ["./matching-game.component.css"],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class MatchingGameComponent implements OnInit {
+export class MatchingGameComponent implements OnInit, OnDestroy {
+	private destroy$ = new Subject<void>();
+	currentStageId = 0;
+	matches: IMatch[] | null = null;
 	terms: string[] = [];
 	definitions: string[] = [];
 	results: boolean[] = [];
+	isVisible = false;
+	answered = false;
 
-	constructor(private matchingGameService: MatchingGameService) {}
+	constructor(private gameService: GameService) {}
 
 	ngOnInit() {
-		this.matchingGameService.generateMatchingGame(5);
+		combineLatest([this.gameService.stages$, this.gameService.currentStageId$])
+			.pipe(takeUntil(this.destroy$))
+			.subscribe(([stages, currentId]) => {
+				this.currentStageId = currentId;
+				this.matches = stages[currentId].data;
+				this.answered = stages[currentId].answered;
 
-		this.terms = this.matchingGameService.terms.sort(() => Math.random() - 0.5);
-		this.definitions = this.matchingGameService.definitions.sort(() => Math.random() - 0.5);
+				if (!this.matches) return;
+
+				if (!this.answered) {
+					this.terms = this.matches.map((m) => m.term).sort(() => Math.random() - 0.5);
+					this.definitions = this.matches
+						.map((m) => m.definition)
+						.sort(() => Math.random() - 0.5);
+				}
+
+				this.isVisible = !this.answered;
+			});
 	}
 
-	reorder(arr: string[], event: CdkDragDrop<string[]>) {
+	reorder(e: [string[], CdkDragDrop<string[]>]) {
+		const [arr, event] = e;
+
 		moveItemInArray(arr, event.previousIndex, event.currentIndex);
 	}
 
 	checkAnswers() {
-		this.results = this.matchingGameService.checkAnswers(this.terms, this.definitions);
+		this.results = this.gameService.answerMatchingGameQuestion(this.terms, this.definitions);
+		this.isVisible = false;
+		this.gameService.goToNextStage();
+	}
 
-		console.log(this.results);
+	ngOnDestroy() {
+		this.destroy$.next();
+		this.destroy$.complete();
 	}
 }
