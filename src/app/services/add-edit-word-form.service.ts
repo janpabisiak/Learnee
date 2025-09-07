@@ -19,8 +19,11 @@ export class AddWordFormService {
 
 	constructor(private wordsService: WordsService) {
 		this.form = new FormGroup({
-			word: new FormControl("", [Validators.required, Validators.maxLength(100)]),
-			definition: new FormControl("", [Validators.required, Validators.maxLength(10_000)]),
+			word: new FormControl<string>("", [Validators.required, Validators.maxLength(100)]),
+			definition: new FormControl<string>("", [
+				Validators.required,
+				Validators.maxLength(10_000),
+			]),
 		});
 
 		this.setupSubscriptions();

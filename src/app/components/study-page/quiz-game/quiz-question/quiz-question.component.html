@@ -1,8 +1,0 @@
-@if (question) {
-<h2 class="text-4xl font-semibold mb-5"><span class="font-bold">{{question.id + 1}}.</span> {{question.content}}</h2>
-<ul class="flex flex-col gap-3">
-    @for (answer of question.possibleAnswers; track answer.id) {
-    <app-question-answer [answer]="answer" [showAnswer]="question.answered"></app-question-answer>
-    }
-</ul>
-}

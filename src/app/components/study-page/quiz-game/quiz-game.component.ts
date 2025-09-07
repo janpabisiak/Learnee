@@ -1,34 +1,40 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { IQuestion } from "../../../types/question.interface";
-import { Subscription } from "rxjs";
-import { QuizProgressBarComponent } from "./quiz-progress-bar/quiz-progress-bar.component";
-import { QuizQuestionComponent } from "./quiz-question/quiz-question.component";
-import { QuizService } from "@services/quiz.service";
+import { QuestionAnswerComponent } from "./question-answer/question-answer.component";
+import { combineLatest, Subject, takeUntil } from "rxjs";
+import { GameService } from "@services/game.service";
+import { NgClass } from "@angular/common";
 
 @Component({
 	selector: "app-quiz-game",
-	imports: [QuizProgressBarComponent, QuizQuestionComponent],
+	imports: [QuestionAnswerComponent, NgClass],
 	templateUrl: "./quiz-game.component.html",
-	standalone: true,
 })
 export class QuizGameComponent implements OnInit, OnDestroy {
-	private subscriptions = new Subscription();
-	questions: IQuestion[] = [];
+	private destroy$ = new Subject<void>();
+	currentStageId: number = 0;
+	question: IQuestion | null = null;
+	isVisible = false;
 
-	constructor(private quizService: QuizService) {}
+	constructor(private gameService: GameService) {}
 
 	ngOnInit() {
-		this.quizService.generateQuestions(10);
+		combineLatest([this.gameService.stages$, this.gameService.currentStageId$])
+			.pipe(takeUntil(this.destroy$))
+			.subscribe(([stages, currentId]) => {
+				this.currentStageId = currentId;
+				this.question = stages[currentId].data;
 
-		this.subscriptions.add(
-			this.quizService.questions$.subscribe((questions) => {
-				this.questions = questions;
-			})
-		);
+				this.isVisible = true;
+			});
+	}
+
+	changeVisibility() {
+		this.isVisible = false;
 	}
 
 	ngOnDestroy() {
-		this.subscriptions.unsubscribe();
-		this.quizService.destroy();
+		this.destroy$.next();
+		this.destroy$.complete();
 	}
 }

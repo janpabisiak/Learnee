@@ -1,6 +1,24 @@
 <main class="py-8 flex-1">
+    @if (!stages.length) {
+    <div class="flex flex-col max-w-7xl mx-auto">
+        <section class="flex items-center justify-between">
+            <h2 class="text-5xl font-bold">Prepare game</h2>
+            <app-button [type]="'primary'" [disabled]="hasSelectedGames" (buttonClicked)="startGame()">Start a game</app-button>
+        </section>
+        <app-game-selector></app-game-selector>
+    </div>
+    } @else {
     <section class="flex flex-col gap-10 max-w-4xl mx-auto">
+        <app-study-progress-bar></app-study-progress-bar>
+        @let currentStage = getCurrentStage();
+        @switch (currentStage.type) {
+        @case (EAvailableGames.Quiz) {
+        <app-quiz-game></app-quiz-game>
+        }
+        @case (EAvailableGames.MatchingGame) {
         <app-matching-game></app-matching-game>
-        <!-- <app-quiz-game></app-quiz-game> -->
+        }
+        }
     </section>
+    }
 </main>
