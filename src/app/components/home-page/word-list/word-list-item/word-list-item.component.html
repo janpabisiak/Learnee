@@ -1,9 +1,9 @@
-<li class="flex justify-between gap-6 p-6 border-2 rounded-xl border-gray-200 shadow-2xs shadow-gray-50">
+<li class="flex justify-between gap-6 p-6 border-2 rounded-xl bg-gray-50 border-gray-200 shadow-2xs shadow-gray-50">
     <div class="flex items-center gap-6">
         <div>
             <div class="flex items-center gap-3">
                 <h4 class="text-2xl font-bold">{{word.name | sentencecase}}</h4>
-                <button class="text-gray-50 rounded-md px-2 cursor-pointer" [ngClass]="word.isLearning ? 'bg-emerald-600' : 'bg-red-700'" (click)="toggleIsLearning()">
+                <button class="text-gray-50 rounded-md px-2 cursor-pointer duration-300" [ngClass]="word.isLearning ? 'bg-emerald-600' : 'bg-red-700'" (click)="toggleIsLearning()">
                     {{word.isLearning ? "To learn" : "Not learning"}}
                 </button>
             </div>
@@ -11,7 +11,7 @@
         </div>
     </div>
     <div class="relative">
-        <ion-icon class="text-2xl text-gray-900 ionicon-thick cursor-pointer" name="settings-outline" (click)="toggleDropdownMenu()"></ion-icon>
+        <ion-icon class="text-2xl text-gray-900 ionicon-thick cursor-pointer hover:rotate-45 duration-300" name="settings-outline" (click)="toggleDropdownMenu()"></ion-icon>
         @if (isDropdownOpen) {
         <div class="flex flex-col gap-2 min-w-[160px] p-4 absolute top-0 left-8 bg-gray-50 border-2 border-gray-200 rounded-md" id="dropdown">
             <p class="cursor-pointer" (click)="editWord()">Edit word</p>

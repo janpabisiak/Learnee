@@ -8,7 +8,7 @@
         </div>
         <div class="flex flex-col gap-1">
             <label class="text-gray-500" for="definition">Definition <span class="text-red-700">*</span></label>
-            <textarea class="p-2 bg-gray-100 rounded-md border-1 border-gray-200 outline-0" name="definition" formControlName="definition" [ngClass]="{'show-validation': isSubmitAttempted}" (focus)="fetchWordDefinition()" #wordDefinition></textarea>
+            <textarea class="p-2 bg-gray-100 rounded-md border-1 border-gray-200 outline-0 placeholder-gray-400 overflow-hidden" name="definition" formControlName="definition" [ngClass]="{'show-validation': isSubmitAttempted}" (focus)="fetchWordDefinition()" #wordDefinition></textarea>
             <span class="text-sm text-red-700" *ngIf="isSubmitAttempted && definition?.touched && definition?.invalid && definition?.hasError('required')">Definition is required.</span>
             <span class="text-sm text-red-700" *ngIf="isSubmitAttempted && definition?.touched && definition?.invalid && definition?.hasError('maxlength')">Too many chars.</span>
         </div>
