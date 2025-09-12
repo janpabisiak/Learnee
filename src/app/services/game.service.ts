@@ -1,7 +1,9 @@
 import { Injectable } from "@angular/core";
-import { MatchingGameService } from "./matching-game.service";
+import { IMatch, MatchingGameService } from "./matching-game.service";
 import { QuizService } from "./quiz.service";
 import { BehaviorSubject } from "rxjs";
+import { ITrueFalseGameData, TrueFalseGameService } from "./true-false-game.service";
+import { IQuestion } from "../types/question.interface";
 
 @Injectable({
 	providedIn: "root",
@@ -11,6 +13,7 @@ export class GameService {
 	private selectedGames = new BehaviorSubject<EAvailableGames[]>([
 		EAvailableGames.Quiz,
 		EAvailableGames.MatchingGame,
+		EAvailableGames.TrueOrFalse,
 	]);
 	private currentStageId = new BehaviorSubject<number>(0);
 	stages$ = this.stages.asObservable();
@@ -20,7 +23,8 @@ export class GameService {
 
 	constructor(
 		private matchingGameService: MatchingGameService,
-		private quizService: QuizService
+		private quizService: QuizService,
+		private trueFalseGameService: TrueFalseGameService
 	) {}
 
 	generateStages() {
@@ -33,23 +37,25 @@ export class GameService {
 
 		const stages = randomGames.map((gameIndex, i) => {
 			switch (selectedGames[gameIndex]) {
-				case EAvailableGames.MatchingGame: {
-					return {
-						id: i,
-						type: EAvailableGames.MatchingGame,
-						data: this.matchingGameService.generateMatchingGame(),
-						answered: false,
-						answeredCorrect: false,
-					};
+				case EAvailableGames.MatchingGame:
+					return this.setStageData(
+						i,
+						EAvailableGames.MatchingGame,
+						this.matchingGameService.generateMatchingGame()
+					);
+				case EAvailableGames.TrueOrFalse: {
+					return this.setStageData(
+						i,
+						EAvailableGames.TrueOrFalse,
+						this.trueFalseGameService.generateTrueFalseGame()
+					);
 				}
 				default: {
-					return {
-						id: i,
-						type: EAvailableGames.Quiz,
-						data: this.quizService.generateQuestion(),
-						answered: false,
-						answeredCorrect: false,
-					};
+					return this.setStageData(
+						i,
+						EAvailableGames.Quiz,
+						this.quizService.generateQuestion()
+					);
 				}
 			}
 		});
@@ -107,6 +113,24 @@ export class GameService {
 		return results;
 	}
 
+	answerTrueFalseGameQuestion(isTrue: boolean) {
+		const currentStageId = this.currentStageId.value;
+		const stages = this.stages.value;
+		const currentStage = stages[currentStageId];
+
+		const updatedStages = stages.map((stage) =>
+			stage.id === currentStageId
+				? {
+						...stage,
+						answered: true,
+						answeredCorrect: currentStage.data.isCorrect === isTrue,
+				  }
+				: stage
+		);
+
+		this.stages.next(updatedStages);
+	}
+
 	goToNextStage() {
 		const currentStageId = this.currentStageId.value;
 
@@ -119,6 +143,20 @@ export class GameService {
 
 	updateSelectedGames(selectedGames: EAvailableGames[]) {
 		this.selectedGames.next(selectedGames);
+	}
+
+	private setStageData(
+		id: number,
+		type: EAvailableGames,
+		gameData: IQuestion | IMatch[] | ITrueFalseGameData
+	): IStage {
+		return {
+			id,
+			type,
+			data: gameData,
+			answered: false,
+			answeredCorrect: false,
+		};
 	}
 }
 

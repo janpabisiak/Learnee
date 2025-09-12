@@ -9,7 +9,7 @@ import { IQuestion } from "../types/question.interface";
 export class QuizService {
 	constructor(private wordsService: WordsService) {}
 
-	generateQuestion() {
+	generateQuestion(): IQuestion {
 		const question: IQuestion = {
 			content: "",
 			possibleAnswers: [],
@@ -17,7 +17,6 @@ export class QuizService {
 			answeredCorrect: false,
 		};
 		const randomWord = this.wordsService.getRandomLearningWord();
-		if (!randomWord) return;
 
 		question.content = randomWord.name;
 		const answer: IAnswer = {
@@ -33,7 +32,6 @@ export class QuizService {
 		let possibleAnswersLength = addedAnswers.length;
 		while (possibleAnswersLength < 4) {
 			const randomWord = this.wordsService.getRandomLearningWord();
-			if (!randomWord) return;
 
 			// Try again if word is already in added answers array
 			if (addedAnswers.includes(randomWord.definition)) continue;

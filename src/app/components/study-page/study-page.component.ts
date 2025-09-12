@@ -6,12 +6,14 @@ import { QuizGameComponent } from "./quiz-game/quiz-game.component";
 import { StudyProgressBarComponent } from "./study-progress-bar/study-progress-bar.component";
 import { ButtonComponent } from "@components/utils/button/button.component";
 import { GameSelectorComponent } from "./game-selector/game-selector.component";
+import { TrueFalseGameComponent } from "./true-false-game/true-false-game.component";
 
 @Component({
 	selector: "app-study-page",
 	imports: [
 		QuizGameComponent,
 		MatchingGameComponent,
+		TrueFalseGameComponent,
 		StudyProgressBarComponent,
 		ButtonComponent,
 		GameSelectorComponent,
