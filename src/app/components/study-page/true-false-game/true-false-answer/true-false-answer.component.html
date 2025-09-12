@@ -1,0 +1,8 @@
+<li class="p-4 border-1 rounded-md text-2xl" [ngClass]="{
+                'bg-gray-100 border-gray-300 cursor-pointer': !isAnswered,
+                'bg-emerald-300 border-emerald-400': isAnswered && isCorrect === type,
+                'bg-red-400 border-red-400': isAnswered && isCorrect === !type,
+                'animate-fadeIn cursor-default': isAnswered,
+            }" (click)="answerQuestion(type)">
+    {{type ? "True" : "False"}}
+</li>

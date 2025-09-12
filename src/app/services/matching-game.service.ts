@@ -7,12 +7,11 @@ import { WordsService } from "./words.service";
 export class MatchingGameService {
 	constructor(private wordsService: WordsService) {}
 
-	generateMatchingGame(amount: number = 5) {
+	generateMatchingGame(amount: number = 5): IMatch[] {
 		const matches: IMatch[] = [];
 
 		while (matches.length < amount) {
 			const randomWord = this.wordsService.getRandomLearningWord();
-			if (!randomWord) return;
 
 			if (matches.some((t) => t.id === randomWord.id)) continue;
 
