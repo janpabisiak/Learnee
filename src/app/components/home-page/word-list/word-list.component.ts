@@ -27,6 +27,7 @@ export class WordListComponent implements OnInit, OnDestroy {
 			.subscribe(([sortedWordList, filteredWordList]) => {
 				this.sortedWordList = sortedWordList;
 				this.filteredWordList = filteredWordList;
+
 				this.isWordListLoaded = true;
 			});
 	}
