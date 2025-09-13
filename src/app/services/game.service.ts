@@ -4,6 +4,7 @@ import { QuizService } from "./quiz.service";
 import { BehaviorSubject } from "rxjs";
 import { ITrueFalseGameData, TrueFalseGameService } from "./true-false-game.service";
 import { IQuestion } from "../types/question.interface";
+import { FillGapsGameService, IFillGapsGameData } from "./fill-gaps-game.service";
 
 @Injectable({
 	providedIn: "root",
@@ -14,6 +15,7 @@ export class GameService {
 		EAvailableGames.Quiz,
 		EAvailableGames.MatchingGame,
 		EAvailableGames.TrueOrFalse,
+		EAvailableGames.FillGaps,
 	]);
 	private currentStageId = new BehaviorSubject<number>(0);
 	stages$ = this.stages.asObservable();
@@ -24,7 +26,8 @@ export class GameService {
 	constructor(
 		private matchingGameService: MatchingGameService,
 		private quizService: QuizService,
-		private trueFalseGameService: TrueFalseGameService
+		private trueFalseGameService: TrueFalseGameService,
+		private fillGapsGameService: FillGapsGameService
 	) {}
 
 	generateStages() {
@@ -43,20 +46,24 @@ export class GameService {
 						EAvailableGames.MatchingGame,
 						this.matchingGameService.generateMatchingGame()
 					);
-				case EAvailableGames.TrueOrFalse: {
+				case EAvailableGames.TrueOrFalse:
 					return this.setStageData(
 						i,
 						EAvailableGames.TrueOrFalse,
 						this.trueFalseGameService.generateTrueFalseGame()
 					);
-				}
-				default: {
+				case EAvailableGames.FillGaps:
+					return this.setStageData(
+						i,
+						EAvailableGames.FillGaps,
+						this.fillGapsGameService.generateFillGapsGame()
+					);
+				default:
 					return this.setStageData(
 						i,
 						EAvailableGames.Quiz,
 						this.quizService.generateQuestion()
 					);
-				}
 			}
 		});
 
@@ -131,6 +138,25 @@ export class GameService {
 		this.stages.next(updatedStages);
 	}
 
+	answerFillGapsGameQuestion(answer: string) {
+		const currentStageId = this.currentStageId.value;
+		const stages = this.stages.value;
+		const currentStage = stages[currentStageId];
+
+		const updatedStages = stages.map((stage) =>
+			stage.id === currentStageId
+				? {
+						...stage,
+						answered: true,
+						answeredCorrect:
+							currentStage.data.word.toLowerCase() === answer.toLowerCase(),
+				  }
+				: stage
+		);
+
+		this.stages.next(updatedStages);
+	}
+
 	goToNextStage() {
 		const currentStageId = this.currentStageId.value;
 
@@ -148,7 +174,7 @@ export class GameService {
 	private setStageData(
 		id: number,
 		type: EAvailableGames,
-		gameData: IQuestion | IMatch[] | ITrueFalseGameData
+		gameData: IQuestion | IMatch[] | ITrueFalseGameData | IFillGapsGameData
 	): IStage {
 		return {
 			id,
