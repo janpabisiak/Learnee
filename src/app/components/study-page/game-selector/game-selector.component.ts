@@ -11,6 +11,7 @@ import { Subject, takeUntil } from "rxjs";
 export class GameSelectorComponent implements OnInit {
 	availableGames = availableGames;
 	selectedGames: EAvailableGames[] = [];
+	allGamesSelected = false;
 	private destroy$ = new Subject<void>();
 
 	constructor(private gameService: GameService) {}
@@ -20,10 +21,21 @@ export class GameSelectorComponent implements OnInit {
 			.pipe(takeUntil(this.destroy$))
 			.subscribe((selectedGames) => {
 				this.selectedGames = selectedGames;
+				this.allGamesSelected = selectedGames.length === availableGames.length;
 			});
 	}
 
-	toggleGameSelection(game: EAvailableGames) {
+	toggleGameSelection(game: EAvailableGames | "all") {
+		if (game === "all") {
+			this.gameService.updateSelectedGames(
+				!this.allGamesSelected
+					? (availableGames.map((game) => game.title) as EAvailableGames[])
+					: []
+			);
+
+			return;
+		}
+
 		const isGameSelected = this.selectedGames.includes(game);
 
 		if (isGameSelected) {

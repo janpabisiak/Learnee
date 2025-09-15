@@ -9,11 +9,11 @@ import { EAvailableGames, IGame } from "@services/game.service";
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GameSelectorItemComponent {
-	@Input({ required: true }) game!: IGame;
+	@Input() game: IGame | null = null;
 	@Input({ required: true }) isSelected: boolean = false;
-	@Output() gameClicked = new EventEmitter<EAvailableGames>();
+	@Output() gameClicked = new EventEmitter<EAvailableGames | "all">();
 
-	onGameClicked(game: EAvailableGames) {
+	onGameClicked(game: EAvailableGames | "all") {
 		this.gameClicked.emit(game);
 	}
 }

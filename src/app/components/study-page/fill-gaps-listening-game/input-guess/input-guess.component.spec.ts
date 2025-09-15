@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FillGapsGameComponent } from './fill-gaps-game.component';
+import { InputGuessComponent } from './input-guess.component';
 
-describe('FillGapsGameComponent', () => {
-  let component: FillGapsGameComponent;
-  let fixture: ComponentFixture<FillGapsGameComponent>;
+describe('InputGuessComponent', () => {
+  let component: InputGuessComponent;
+  let fixture: ComponentFixture<InputGuessComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FillGapsGameComponent]
+      imports: [InputGuessComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(FillGapsGameComponent);
+    fixture = TestBed.createComponent(InputGuessComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

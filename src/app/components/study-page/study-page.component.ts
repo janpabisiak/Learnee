@@ -7,7 +7,7 @@ import { StudyProgressBarComponent } from "./study-progress-bar/study-progress-b
 import { ButtonComponent } from "@components/utils/button/button.component";
 import { GameSelectorComponent } from "./game-selector/game-selector.component";
 import { TrueFalseGameComponent } from "./true-false-game/true-false-game.component";
-import { FillGapsGameComponent } from "./fill-gaps-game/fill-gaps-game.component";
+import { FillGapsGameComponent } from "./fill-gaps-listening-game/fill-gaps-listening-game.component";
 
 @Component({
 	selector: "app-study-page",
