@@ -4,20 +4,20 @@ import { WordsService } from "./words.service";
 @Injectable({
 	providedIn: "root",
 })
-export class FillGapsGameService {
+export class FillGapsListeningGameService {
 	constructor(private wordsService: WordsService) {}
 
-	generateFillGapsGame() {
+	generateFillGapsListeningGame() {
 		const randomWord = this.wordsService.getRandomLearningWord();
 
 		return {
 			word: randomWord.name,
 			definition: randomWord.definition,
-		} as IFillGapsGameData;
+		} as IFillGapsListeningGameData;
 	}
 }
 
-export interface IFillGapsGameData {
+export interface IFillGapsListeningGameData {
 	word: string;
 	definition: string;
 }
