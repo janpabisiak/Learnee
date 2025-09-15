@@ -4,7 +4,10 @@ import { QuizService } from "./quiz.service";
 import { BehaviorSubject } from "rxjs";
 import { ITrueFalseGameData, TrueFalseGameService } from "./true-false-game.service";
 import { IQuestion } from "../types/question.interface";
-import { FillGapsGameService, IFillGapsGameData } from "./fill-gaps-game.service";
+import {
+	FillGapsListeningGameService,
+	IFillGapsListeningGameData,
+} from "./fill-gaps-listening-game.service";
 
 @Injectable({
 	providedIn: "root",
@@ -16,6 +19,7 @@ export class GameService {
 		EAvailableGames.MatchingGame,
 		EAvailableGames.TrueOrFalse,
 		EAvailableGames.FillGaps,
+		EAvailableGames.Listening,
 	]);
 	private currentStageId = new BehaviorSubject<number>(0);
 	stages$ = this.stages.asObservable();
@@ -27,7 +31,7 @@ export class GameService {
 		private matchingGameService: MatchingGameService,
 		private quizService: QuizService,
 		private trueFalseGameService: TrueFalseGameService,
-		private fillGapsGameService: FillGapsGameService
+		private fillGapsListeningGameService: FillGapsListeningGameService
 	) {}
 
 	generateStages() {
@@ -56,7 +60,13 @@ export class GameService {
 					return this.setStageData(
 						i,
 						EAvailableGames.FillGaps,
-						this.fillGapsGameService.generateFillGapsGame()
+						this.fillGapsListeningGameService.generateFillGapsListeningGame()
+					);
+				case EAvailableGames.Listening:
+					return this.setStageData(
+						i,
+						EAvailableGames.Listening,
+						this.fillGapsListeningGameService.generateFillGapsListeningGame()
 					);
 				default:
 					return this.setStageData(
@@ -157,6 +167,25 @@ export class GameService {
 		this.stages.next(updatedStages);
 	}
 
+	answerListeningGameQuestion(answer: string) {
+		const currentStageId = this.currentStageId.value;
+		const stages = this.stages.value;
+		const currentStage = stages[currentStageId];
+
+		const updatedStages = stages.map((stage) =>
+			stage.id === currentStageId
+				? {
+						...stage,
+						answered: true,
+						answeredCorrect:
+							currentStage.data.word.toLowerCase() === answer.toLowerCase(),
+				  }
+				: stage
+		);
+
+		this.stages.next(updatedStages);
+	}
+
 	goToNextStage() {
 		const currentStageId = this.currentStageId.value;
 
@@ -174,7 +203,7 @@ export class GameService {
 	private setStageData(
 		id: number,
 		type: EAvailableGames,
-		gameData: IQuestion | IMatch[] | ITrueFalseGameData | IFillGapsGameData
+		gameData: IQuestion | IMatch[] | ITrueFalseGameData | IFillGapsListeningGameData
 	): IStage {
 		return {
 			id,
