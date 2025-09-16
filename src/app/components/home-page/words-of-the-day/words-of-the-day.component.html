@@ -1,0 +1,10 @@
+<div class="relative flex flex-col gap-3 justify-between p-4 border-2 bg-gray-50 border-gray-200 rounded-xl animate-slideIn">
+    <h3 class="text-2xl font-bold self-center">Word of the day</h3>
+    @if (wordsOfTheDay.length) {
+    <app-wotd-item [word]="wordsOfTheDay[currentWordId].name" [definition]="wordsOfTheDay[currentWordId].definition"></app-wotd-item>
+    <div class="flex gap-2 mt-3">
+        <app-button class="flex flex-1 [&>button]:grow [&>button]:justify-center" [type]="'secondary'" (buttonClicked)="nextWord()">Next</app-button>
+        <app-button [type]="'primary'" (buttonClicked)="addWord()">Add to wordlist</app-button>
+    </div>
+    }
+</div>

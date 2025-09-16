@@ -6,6 +6,10 @@
 <app-confirm-word-deletion-modal></app-confirm-word-deletion-modal>
 }
 
+@if (isLoading) {
+<app-spinner></app-spinner>
+}
+
 <app-toaster-container [toasters]="toasters"></app-toaster-container>
 
 <app-header></app-header>

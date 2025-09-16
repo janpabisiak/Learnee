@@ -41,7 +41,7 @@ export class AddWordFormService {
 
 	setupForEditing(word: IWord) {
 		this.wordToEditData = word;
-		this.isEditing = true;
+		this.isEditing = !this.wordToEditData?.toBeAdded;
 
 		this.word.setValue(word.name);
 		this.definition.setValue(word.definition);
@@ -58,10 +58,10 @@ export class AddWordFormService {
 
 		const [word, definition] = [this.word.value, this.definition.value];
 
-		if (!this.wordToEditData) {
+		if (!this.isEditing) {
 			this.wordsService.addWord(word, definition);
 		} else {
-			this.wordsService.editWord(this.wordToEditData.id, word, definition);
+			this.wordsService.editWord(this.wordToEditData!.id, word, definition);
 		}
 	}
 
