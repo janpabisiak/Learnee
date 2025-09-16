@@ -1,0 +1,11 @@
+{
+	"/api/rss": {
+		"target": "https://www.merriam-webster.com/wotd/feed/rss2",
+		"secure": true,
+		"changeOrigin": true,
+		"logLevel": "debug",
+		"pathRewrite": {
+			"^/api/rss": ""
+		}
+	}
+}
