@@ -11,6 +11,8 @@ import {
 } from "@components/utils/toaster-container/toaster-container.component";
 import { ToasterService } from "@services/toaster.service";
 import { IToaster } from "../app/types/toaster.interface";
+import { WordsService } from "@services/words.service";
+import { SpinnerComponent } from "@components/utils/spinner/spinner.component";
 
 @Component({
 	selector: "app-root",
@@ -20,6 +22,7 @@ import { IToaster } from "../app/types/toaster.interface";
 		AddEditWordModalComponent,
 		ConfirmWordDeletionModalComponent,
 		ToasterContainerComponent,
+		SpinnerComponent,
 	],
 	templateUrl: "./app.component.html",
 	standalone: true,
@@ -27,9 +30,11 @@ import { IToaster } from "../app/types/toaster.interface";
 export class AppComponent implements OnInit, OnDestroy {
 	modalService = inject(ModalService);
 	toasterService = inject(ToasterService);
+	wordsService = inject(WordsService);
 	subscriptions = new Subscription();
 	isWordAddingModalOpen = false;
 	isWordDeletingModalOpen = false;
+	isLoading = true;
 	toasters: IToaster[] = [];
 	EToasterPositions = EToasterPositions;
 
@@ -45,6 +50,12 @@ export class AppComponent implements OnInit, OnDestroy {
 		this.subscriptions.add(
 			this.modalService.isWordDeletionModalOpen$.subscribe((isOpen) => {
 				this.isWordDeletingModalOpen = isOpen;
+			})
+		);
+
+		this.subscriptions.add(
+			this.wordsService.wordsOfTheDay$.subscribe((wordsOfTheDay) => {
+				this.isLoading = !wordsOfTheDay.length;
 			})
 		);
 
