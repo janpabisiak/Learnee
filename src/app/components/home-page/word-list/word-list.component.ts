@@ -1,5 +1,5 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, OnDestroy, OnInit } from "@angular/core";
-import { combineLatest, Subject, Subscription, takeUntil } from "rxjs";
+import { combineLatest, Subject, takeUntil } from "rxjs";
 import { WordsService } from "../../../services/words.service";
 import { IWord } from "../../../types/word.interface";
 import { WordListItemComponent } from "./word-list-item/word-list-item.component";
