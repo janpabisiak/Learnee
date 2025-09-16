@@ -1,8 +1,8 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "../../environment/environment";
 import { IWord } from "../types/word.interface";
-import { BehaviorSubject, map, Observable, take } from "rxjs";
+import { BehaviorSubject, catchError, map, Observable, of, take } from "rxjs";
 import { LocalStorageService } from "./local-storage.service";
 import { ToasterService } from "./toaster.service";
 import { EToasterTypes } from "@components/utils/toaster-container/toaster/toaster.component";
@@ -17,17 +17,21 @@ export class WordsService {
 	private wordList = new BehaviorSubject<IWord[]>([]);
 	private sortedWordList = new BehaviorSubject<IWord[]>([]);
 	private filteredWordList = new BehaviorSubject<IWord[]>([]);
+	private wordsOfTheDay = new BehaviorSubject<IWord[]>([]);
 	private searchQuery = "";
 
 	wordList$ = this.wordList.asObservable();
 	sortedWordList$ = this.sortedWordList.asObservable();
 	filteredWordList$ = this.filteredWordList.asObservable();
+	wordsOfTheDay$ = this.wordsOfTheDay.asObservable();
 
 	constructor(
 		private http: HttpClient,
 		private localStorageService: LocalStorageService,
 		private toasterService: ToasterService
 	) {
+		this.getWordsOfTheDay();
+
 		const wordList = this.localStorageService.loadData("word-list");
 		if (wordList) {
 			this.wordList.next(wordList);
@@ -215,6 +219,57 @@ export class WordsService {
 		});
 
 		this.updateWordList(updatedWordList);
+	}
+
+	private getWordsOfTheDay() {
+		const currentDate = new Date();
+		const dateString = `${currentDate.getDate().toString().padStart(2, "0")}.${currentDate
+			.getMonth()
+			.toString()
+			.padStart(2, "0")}.${currentDate.getFullYear()}`;
+
+		if (this.localStorageService.loadData("wotd-fetched-date") === dateString) {
+			const words = this.localStorageService.loadData("wotd-words") as IWord[];
+
+			this.wordsOfTheDay.next(words);
+		}
+
+		this.http
+			.get("/api/rss", { responseType: "text" })
+			.pipe(
+				take(1),
+				map((response: string) => {
+					const data = new DOMParser().parseFromString(response, "application/xml");
+					const items = Array.from(data.querySelectorAll("item"));
+
+					const words = items
+						.map((item, i) => {
+							const [word, definition]: string[] = [
+								item.querySelector("title")?.textContent || "",
+								item.querySelector("shortdef")?.textContent || "",
+							];
+
+							if (!word || !definition) return undefined;
+
+							return {
+								id: i,
+								name: word,
+								definition,
+								isLearning: false,
+							};
+						})
+						.filter((word): word is IWord => word !== undefined);
+
+					this.wordsOfTheDay.next(words);
+					this.localStorageService.saveData("wotd-words", words);
+					this.localStorageService.saveData("wotd-fetched-date", dateString);
+				}),
+				catchError((error: HttpErrorResponse) => {
+					console.error(error);
+					return of([]);
+				})
+			)
+			.subscribe();
 	}
 }
 

@@ -3,4 +3,5 @@ export interface IWord {
 	name: string;
 	definition: string;
 	isLearning: boolean;
+	toBeAdded?: boolean;
 }
