@@ -1,0 +1,8 @@
+<div class="flex flex-col gap-3 justify-between p-4 border-2 bg-gray-50 border-gray-200 rounded-xl animate-slideIn">
+    <h3 class="text-2xl font-bold self-center">Your statistics</h3>
+    <div class="flex flex-wrap gap-1.5 justify-center">
+        @for (day of statistics; track day.date) {
+        <app-heat-map-item [day]="day" [maxPlays]="maxPlays"></app-heat-map-item>
+        }
+    </div>
+</div>
