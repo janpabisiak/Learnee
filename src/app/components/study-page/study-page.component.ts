@@ -21,8 +21,7 @@ import { FillGapsGameComponent } from "./fill-gaps-listening-game/fill-gaps-list
 		GameSelectorComponent,
 	],
 	templateUrl: "./study-page.component.html",
-	providers: [GameService],
-	schemas: [CUSTOM_ELEMENTS_SCHEMA],
+	providers: [],
 })
 export class StudyPageComponent implements OnInit, OnDestroy {
 	private destroy$ = new Subject<void>();
@@ -53,6 +52,10 @@ export class StudyPageComponent implements OnInit, OnDestroy {
 
 	startGame() {
 		this.gameService.generateStages();
+	}
+
+	cancelGame() {
+		this.gameService.cancelGame();
 	}
 
 	ngOnDestroy() {

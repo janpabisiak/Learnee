@@ -212,6 +212,10 @@ export class GameService {
 
 		isCorrect ? this.levelService.addXpPoints(expOnWin) : this.levelService.removeXpPoints(5);
 	}
+
+	cancelGame() {
+		this.stages.next([]);
+	}
 }
 
 export interface IStage {
