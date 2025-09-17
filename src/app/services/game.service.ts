@@ -26,7 +26,7 @@ export class GameService {
 	stages$ = this.stages.asObservable();
 	selectedGames$ = this.selectedGames.asObservable();
 	currentStageId$ = this.currentStageId.asObservable();
-	numberOfStages = 10;
+	numberOfStages = 15;
 
 	constructor(
 		private matchingGameService: MatchingGameService,
@@ -105,6 +105,7 @@ export class GameService {
 		);
 
 		this.stages.next(updatedStages);
+		this.updateUserXp(EAvailableGames.Quiz, question.answeredCorrect);
 	}
 
 	answerMatchingGameQuestion(terms: string[], definitions: string[]) {
@@ -118,17 +119,20 @@ export class GameService {
 			definitions
 		);
 
+		const isCorrect = results.every((r) => r);
+
 		const updatedStages = stages.map((stage) =>
 			stage.id === currentStageId
 				? {
 						...stage,
 						answered: true,
-						answeredCorrect: results.every((r) => r),
+						answeredCorrect: isCorrect,
 				  }
 				: stage
 		);
 
 		this.stages.next(updatedStages);
+		this.updateUserXp(EAvailableGames.MatchingGame, isCorrect);
 
 		return results;
 	}
@@ -138,55 +142,41 @@ export class GameService {
 		const stages = this.stages.value;
 		const currentStage = stages[currentStageId];
 
+		const isCorrect = currentStage.data.isCorrect === isTrue;
+
 		const updatedStages = stages.map((stage) =>
 			stage.id === currentStageId
 				? {
 						...stage,
 						answered: true,
-						answeredCorrect: currentStage.data.isCorrect === isTrue,
+						answeredCorrect: isCorrect,
 				  }
 				: stage
 		);
 
 		this.stages.next(updatedStages);
+		this.updateUserXp(EAvailableGames.TrueOrFalse, isCorrect);
 	}
 
-	answerFillGapsGameQuestion(answer: string) {
+	answerFillGapsListeningGameQuestion(answer: string) {
 		const currentStageId = this.currentStageId.value;
 		const stages = this.stages.value;
 		const currentStage = stages[currentStageId];
 
-		const updatedStages = stages.map((stage) =>
-			stage.id === currentStageId
-				? {
-						...stage,
-						answered: true,
-						answeredCorrect:
-							currentStage.data.word.toLowerCase() === answer.toLowerCase(),
-				  }
-				: stage
-		);
-
-		this.stages.next(updatedStages);
-	}
-
-	answerListeningGameQuestion(answer: string) {
-		const currentStageId = this.currentStageId.value;
-		const stages = this.stages.value;
-		const currentStage = stages[currentStageId];
+		const isCorrect = currentStage.data.word.toLowerCase() === answer.toLowerCase();
 
 		const updatedStages = stages.map((stage) =>
 			stage.id === currentStageId
 				? {
 						...stage,
 						answered: true,
-						answeredCorrect:
-							currentStage.data.word.toLowerCase() === answer.toLowerCase(),
+						answeredCorrect: isCorrect,
 				  }
 				: stage
 		);
 
 		this.stages.next(updatedStages);
+		this.updateUserXp(EAvailableGames.FillGaps, isCorrect);
 	}
 
 	goToNextStage() {
@@ -216,6 +206,12 @@ export class GameService {
 			answeredCorrect: false,
 		};
 	}
+
+	private updateUserXp(type: EAvailableGames, isCorrect: boolean) {
+		const expOnWin = availableGames.find((game) => game.title === type)!.expIfWin;
+
+		isCorrect ? this.levelService.addXpPoints(expOnWin) : this.levelService.removeXpPoints(5);
+	}
 }
 
 export interface IStage {
@@ -239,6 +235,7 @@ export interface IGame {
 	title: EAvailableGames;
 	description: string;
 	icon: string;
+	expIfWin: number;
 }
 
 export const availableGames: IGame[] = [
@@ -247,29 +244,34 @@ export const availableGames: IGame[] = [
 		title: EAvailableGames.Quiz,
 		description: "Select correct definition for given word",
 		icon: "library-outline",
+		expIfWin: 4,
 	},
 	{
 		id: 1,
 		title: EAvailableGames.MatchingGame,
 		description: "Match word with its definition",
 		icon: "shuffle-outline",
+		expIfWin: 6,
 	},
 	{
 		id: 2,
 		title: EAvailableGames.TrueOrFalse,
 		description: "Check whether word has correct definition",
 		icon: "help-outline",
+		expIfWin: 2,
 	},
 	{
 		id: 3,
 		title: EAvailableGames.FillGaps,
 		description: "Check whether word has correct definition",
 		icon: "text-outline",
+		expIfWin: 4,
 	},
 	{
 		id: 4,
 		title: EAvailableGames.Listening,
 		description: "Select correct word from read definition",
 		icon: "volume-medium-outline",
+		expIfWin: 4, // must be the same as for FillGaps game cause of the same answer reveal method
 	},
 ];

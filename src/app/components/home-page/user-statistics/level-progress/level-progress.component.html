@@ -1,0 +1,12 @@
+<h3 class="text-2xl font-bold text-center mb-2">Level progress</h3>
+<div class="flex gap-3">
+    <h5>Level {{level}}</h5>
+    <div class="relative flex-1 hover:[&>div]:opacity-100">
+        <progress id="level-progress" class="w-full h-full rounded-md bg-gray-200 [&::-webkit-progress-bar]:bg-emerald-600 [&::-moz-progress-bar]:bg-emerald-600" [value]="levelProgress" max="100">dupa</progress>
+        <label for="level-progress" class="absolute top-0 left-2 text-gray-50">{{levelProgress}}%</label>
+        <div class="absolute bottom-full left-1/2 -translate-x-1/2 bg-gray-900 w-max text-gray-50 py-1 px-3 rounded-md opacity-0 duration-300 pointer-events-none">
+            {{xpPoints}} / {{xpForNextLevel}}
+        </div>
+    </div>
+    <h5>Level {{level + 1}}</h5>
+</div>

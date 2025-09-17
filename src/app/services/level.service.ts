@@ -6,49 +6,68 @@ import { LocalStorageService } from "./local-storage.service";
 	providedIn: "root",
 })
 export class LevelService {
-	private expPoints = new BehaviorSubject<number>(0);
+	private xpPoints = new BehaviorSubject<number>(0);
 	private level = new BehaviorSubject<number>(0);
 	private statistics = new BehaviorSubject<Map<string, number>>(new Map<string, number>());
-	expPoints$ = this.expPoints.asObservable();
+	xpPoints$ = this.xpPoints.asObservable();
 	level$ = this.level.asObservable();
 	statistics$ = this.statistics.asObservable();
 
 	constructor(private localStorageService: LocalStorageService) {
 		const statistics = this.localStorageService.loadData("statistics");
-		const expPoints = this.localStorageService.loadData("exp-points");
+		const xpPoints = this.localStorageService.loadData("xp-points");
 
 		if (statistics) {
 			this.statistics.next(statistics);
 		}
 
-		if (expPoints) {
-			this.expPoints.next(expPoints);
+		if (xpPoints) {
+			this.xpPoints.next(xpPoints);
 		}
 
 		this.addMissingDatesToStatistics();
 		this.calcLevel();
 	}
 
-	addExpPoints(amount: number) {
-		this.expPoints.next(this.expPoints.value + amount);
-		this.updateExpPoints();
+	addXpPoints(amount: number) {
+		this.xpPoints.next(this.xpPoints.value + amount);
+		this.updateXpPoints();
 	}
 
-	removeExpPoints(amount: number) {
-		const currentExpPoints = this.expPoints.value;
-		if (currentExpPoints < amount) return;
+	removeXpPoints(amount: number) {
+		const currentXpPoints = this.xpPoints.value;
+		if (currentXpPoints < amount) {
+			this.xpPoints.next(0);
+		} else {
+			this.xpPoints.next(currentXpPoints - amount);
+		}
 
-		this.expPoints.next(this.expPoints.value - amount);
-		this.updateExpPoints();
+		this.updateXpPoints();
 	}
 
 	private calcLevel() {
-		this.level.next(Math.floor(this.expPoints.value / 2));
+		let xp = this.xpPoints.value;
+		let level = 0;
+		let requiredXp = 50;
+
+		while (xp > requiredXp) {
+			level++;
+			xp -= requiredXp;
+			requiredXp += 50;
+		}
+
+		this.level.next(level);
 	}
 
-	private updateExpPoints() {
+	calcNeededXp(level: number, xp: number = 0): number {
+		if (level === 0) return xp;
+
+		return this.calcNeededXp(level - 1, xp + level * 50);
+	}
+
+	private updateXpPoints() {
 		this.calcLevel();
-		this.localStorageService.saveData("exp-points", this.expPoints.value);
+		this.localStorageService.saveData("xp-points", this.xpPoints.value);
 	}
 
 	private addMissingDatesToStatistics() {
