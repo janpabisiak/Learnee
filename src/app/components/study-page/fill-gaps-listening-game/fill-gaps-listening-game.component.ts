@@ -58,7 +58,7 @@ export class FillGapsGameComponent implements OnInit, OnDestroy {
 		if (this.data?.answered) return;
 
 		this.isVisible = false;
-		this.gameService.answerFillGapsGameQuestion(this.inputValue);
+		this.gameService.answerFillGapsListeningGameQuestion(this.inputValue);
 		this.inputValue = this.data?.data.word;
 
 		this.gameService.goToNextStage();
