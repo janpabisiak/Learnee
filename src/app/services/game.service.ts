@@ -8,6 +8,7 @@ import {
 	FillGapsListeningGameService,
 	IFillGapsListeningGameData,
 } from "./fill-gaps-listening-game.service";
+import { LevelService } from "./level.service";
 
 @Injectable({
 	providedIn: "root",
@@ -31,7 +32,8 @@ export class GameService {
 		private matchingGameService: MatchingGameService,
 		private quizService: QuizService,
 		private trueFalseGameService: TrueFalseGameService,
-		private fillGapsListeningGameService: FillGapsListeningGameService
+		private fillGapsListeningGameService: FillGapsListeningGameService,
+		private levelService: LevelService
 	) {}
 
 	generateStages() {
@@ -78,6 +80,7 @@ export class GameService {
 		});
 
 		this.stages.next(stages);
+		this.levelService.registerGame();
 	}
 
 	setNumberOfStages(amount: number) {

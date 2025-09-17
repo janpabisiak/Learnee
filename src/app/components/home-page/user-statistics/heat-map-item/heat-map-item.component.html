@@ -1,0 +1,12 @@
+<div class="relative">
+    <div class="w-6 h-6 rounded-sm cursor-pointer hover:[&+.absolute]:opacity-100 duration-300" [ngClass]="{
+        'bg-gray-200 hover:bg-gray-300': percentOfMax === 0,
+        'bg-emerald-800 hover:bg-emerald-900': percentOfMax > 0 && percentOfMax <= .25,
+        'bg-emerald-700 hover:bg-emerald-800': percentOfMax > .25 && percentOfMax <= .50,
+        'bg-emerald-600 hover:bg-emerald-700': percentOfMax > .50 && percentOfMax <= .75,
+        'bg-emerald-500 hover:bg-emerald-600': percentOfMax > .75,
+    }"></div>
+    <div class="absolute bottom-[100%] bg-gray-900 w-max text-gray-50 py-1 px-3 rounded-md opacity-0 -translate-x-1/2 duration-300 pointer-events-none">
+        {{day.numberOfPlays}} play{{day.numberOfPlays > 1 || day.numberOfPlays === 0 ? 's' : ''}} on {{day.date | date:'longDate'}}
+    </div>
+</div>
