@@ -222,13 +222,13 @@ export class WordsService {
 	}
 
 	private getWordsOfTheDay() {
-		const currentDate = new Date();
-		const dateString = `${currentDate.getDate().toString().padStart(2, "0")}.${currentDate
-			.getMonth()
-			.toString()
-			.padStart(2, "0")}.${currentDate.getFullYear()}`;
+		const date = new Date();
+		date.setUTCHours(0, 0, 0, 0);
 
-		if (this.localStorageService.loadData("wotd-fetched-date") === dateString) {
+		if (
+			this.localStorageService.loadData("wotd-fetched-date") ===
+			date.toISOString().split("T")[0]
+		) {
 			const words = this.localStorageService.loadData("wotd-words") as IWord[];
 
 			this.wordsOfTheDay.next(words);
@@ -262,7 +262,10 @@ export class WordsService {
 
 					this.wordsOfTheDay.next(words);
 					this.localStorageService.saveData("wotd-words", words);
-					this.localStorageService.saveData("wotd-fetched-date", dateString);
+					this.localStorageService.saveData(
+						"wotd-fetched-date",
+						date.toISOString().split("T")[0]
+					);
 				}),
 				catchError((error: HttpErrorResponse) => {
 					console.error(error);
