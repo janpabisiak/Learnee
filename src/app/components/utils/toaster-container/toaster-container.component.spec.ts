@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { ToasterContainerComponent } from "./toaster-container.component";
+import { ToasterComponent } from "./toaster/toaster.component";
 
 describe("ToasterComponent", () => {
 	let component: ToasterContainerComponent;
@@ -8,7 +9,7 @@ describe("ToasterComponent", () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [ToasterContainerComponent],
+			imports: [ToasterContainerComponent, ToasterComponent],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(ToasterContainerComponent);

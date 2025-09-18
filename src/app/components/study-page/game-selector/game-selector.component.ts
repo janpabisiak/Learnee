@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { availableGames, EAvailableGames, GameService } from "@services/game.service";
 import { GameSelectorItemComponent } from "./game-selector-item/game-selector-item.component";
 import { Subject, takeUntil } from "rxjs";
@@ -8,7 +8,7 @@ import { Subject, takeUntil } from "rxjs";
 	imports: [GameSelectorItemComponent],
 	templateUrl: "./game-selector.component.html",
 })
-export class GameSelectorComponent implements OnInit {
+export class GameSelectorComponent implements OnInit, OnDestroy {
 	availableGames = availableGames;
 	selectedGames: EAvailableGames[] = [];
 	allGamesSelected = false;
@@ -43,5 +43,10 @@ export class GameSelectorComponent implements OnInit {
 		} else {
 			this.gameService.updateSelectedGames([...this.selectedGames, game]);
 		}
+	}
+
+	ngOnDestroy() {
+		this.destroy$.next();
+		this.destroy$.complete();
 	}
 }

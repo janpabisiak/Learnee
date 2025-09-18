@@ -16,18 +16,16 @@ import { UserStatisticsComponent } from "./user-statistics/user-statistics.compo
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HomePageComponent implements OnInit, OnDestroy {
-	subscriptions = new Subscription();
+	private subscription = new Subscription();
 	modalService = inject(ModalService);
 	wordList: IWord[] = [];
 
 	constructor(private wordsService: WordsService) {}
 
 	ngOnInit() {
-		this.subscriptions.add(
-			this.wordsService.wordList$.subscribe((wordList) => {
-				this.wordList = wordList;
-			})
-		);
+		this.subscription = this.wordsService.wordList$.subscribe((wordList) => {
+			this.wordList = wordList;
+		});
 	}
 
 	toggleIsAddWordModalOpen(state: boolean) {
@@ -35,6 +33,6 @@ export class HomePageComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnDestroy() {
-		this.subscriptions.unsubscribe();
+		this.subscription.unsubscribe();
 	}
 }

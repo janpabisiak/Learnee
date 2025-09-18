@@ -1,4 +1,4 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { Component } from "@angular/core";
 import { HeaderNavbarComponent } from "./header-navbar/header-navbar.component";
 import { RouterLink } from "@angular/router";
 
@@ -7,6 +7,5 @@ import { RouterLink } from "@angular/router";
 	imports: [HeaderNavbarComponent, RouterLink],
 	templateUrl: "./header.component.html",
 	standalone: true,
-	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HeaderComponent {}

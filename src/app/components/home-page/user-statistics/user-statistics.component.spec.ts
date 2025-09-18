@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { UserStatisticsComponent } from "./user-statistics.component";
+import { LevelProgressComponent } from "./level-progress/level-progress.component";
+import { HeatMapComponent } from "./heat-map/heat-map.component";
 
 describe("UserStatisticsComponent", () => {
 	let component: UserStatisticsComponent;
@@ -8,7 +10,7 @@ describe("UserStatisticsComponent", () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [UserStatisticsComponent],
+			imports: [UserStatisticsComponent, LevelProgressComponent, HeatMapComponent],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(UserStatisticsComponent);

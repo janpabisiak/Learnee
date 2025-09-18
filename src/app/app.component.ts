@@ -31,12 +31,12 @@ export class AppComponent implements OnInit, OnDestroy {
 	modalService = inject(ModalService);
 	toasterService = inject(ToasterService);
 	wordsService = inject(WordsService);
-	subscriptions = new Subscription();
 	isWordAddingModalOpen = false;
 	isWordDeletingModalOpen = false;
 	isLoading = true;
 	toasters: IToaster[] = [];
 	EToasterPositions = EToasterPositions;
+	private subscriptions = new Subscription();
 
 	ngOnInit() {
 		this.toasterService.startAutoRemoving();

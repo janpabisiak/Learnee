@@ -1,23 +1,92 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { GameSelectorComponent } from './game-selector.component';
+import { GameSelectorComponent } from "./game-selector.component";
+import { provideHttpClient } from "@angular/common/http";
+import { GameSelectorItemComponent } from "./game-selector-item/game-selector-item.component";
+import {
+	createMockGameService,
+	IMockGameService,
+	mockAvailableGames,
+	mockSelectedGames,
+} from "app/app.component.spec";
+import { EAvailableGames, GameService } from "@services/game.service";
 
-describe('GameSelectorComponent', () => {
-  let component: GameSelectorComponent;
-  let fixture: ComponentFixture<GameSelectorComponent>;
+describe("GameSelectorComponent", () => {
+	let component: GameSelectorComponent;
+	let fixture: ComponentFixture<GameSelectorComponent>;
+	let mockGameService: IMockGameService;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [GameSelectorComponent]
-    })
-    .compileComponents();
+	beforeEach(async () => {
+		mockGameService = createMockGameService();
 
-    fixture = TestBed.createComponent(GameSelectorComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+		await TestBed.configureTestingModule({
+			imports: [GameSelectorComponent, GameSelectorItemComponent],
+			providers: [provideHttpClient(), { provide: GameService, useValue: mockGameService }],
+		}).compileComponents();
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+		fixture = TestBed.createComponent(GameSelectorComponent);
+		component = fixture.componentInstance;
+		fixture.detectChanges();
+	});
+
+	it("should create", () => {
+		expect(component).toBeTruthy();
+	});
+
+	it("should set properties depending on selectedGames$ subscription", () => {
+		mockGameService.selectedGames$.next(mockSelectedGames);
+
+		expect(component.selectedGames).toEqual(mockSelectedGames);
+		expect(component.allGamesSelected).toBeFalse();
+	});
+
+	it('should select all games when "all" is passed and none are selected', () => {
+		component.toggleGameSelection("all");
+
+		expect(mockGameService.updateSelectedGames).toHaveBeenCalledWith(
+			Object.values(EAvailableGames)
+		);
+	});
+
+	it('should deselect all games when "all" is passed and all are selected', () => {
+		component.selectedGames = mockAvailableGames;
+		component.allGamesSelected = true;
+		component.toggleGameSelection("all");
+
+		expect(mockGameService.updateSelectedGames).toHaveBeenCalledWith([]);
+	});
+
+	it("should add a game if it is not selected", () => {
+		component.selectedGames = mockSelectedGames;
+		component.toggleGameSelection(mockAvailableGames[1]);
+
+		expect(mockGameService.updateSelectedGames).toHaveBeenCalledWith([
+			...mockSelectedGames,
+			mockAvailableGames[1],
+		]);
+	});
+
+	it("should remove a game if it is already selected", () => {
+		component.selectedGames = [mockAvailableGames[0]];
+		component.toggleGameSelection(mockAvailableGames[0]);
+
+		expect(mockGameService.updateSelectedGames).toHaveBeenCalledWith([]);
+	});
+
+	it("should not break when deselecting from an empty list", () => {
+		component.selectedGames = [];
+		component.toggleGameSelection(mockAvailableGames[0]);
+
+		expect(mockGameService.updateSelectedGames).toHaveBeenCalledWith([mockAvailableGames[0]]);
+	});
+
+	it("should remove subscription on component destroy", () => {
+		const nextSpy = spyOn(component["destroy$"], "next");
+		const completeSpy = spyOn(component["destroy$"], "complete");
+
+		component.ngOnDestroy();
+
+		expect(nextSpy).toHaveBeenCalledTimes(1);
+		expect(completeSpy).toHaveBeenCalledTimes(1);
+	});
 });
