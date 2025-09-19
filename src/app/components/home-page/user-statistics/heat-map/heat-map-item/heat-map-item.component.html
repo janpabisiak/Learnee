@@ -1,4 +1,4 @@
-<div class="relative">
+<li class="relative">
     <div class="w-6 h-6 rounded-sm cursor-pointer hover:[&+.absolute]:opacity-100 hover:[&+.absolute]:block duration-300" [ngClass]="{
         'bg-gray-200 hover:bg-gray-300': percentOfMax === 0,
         'bg-emerald-800 hover:bg-emerald-900': percentOfMax > 0 && percentOfMax <= .25,
@@ -9,4 +9,4 @@
     <div class="absolute bottom-full left-1/2 -translate-x-1/2 bg-gray-900 w-max text-gray-50 py-1 px-3 rounded-md opacity-0 duration-300 pointer-events-none hidden">
         {{day.numberOfPlays}} play{{day.numberOfPlays > 1 || day.numberOfPlays === 0 ? 's' : ''}} on {{day.date | date:'longDate'}}
     </div>
-</div>
+</li>

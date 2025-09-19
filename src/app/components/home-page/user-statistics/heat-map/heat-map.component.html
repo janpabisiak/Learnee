@@ -1,6 +1,6 @@
 <h3 class="text-2xl text-center font-bold mb-2">Your statistics</h3>
-<div class="grid grid-cols-10 gap-1.5 justify-items-center">
+<ul class="grid grid-cols-10 gap-1.5 justify-items-center">
     @for (day of statistics; track day.date) {
     <app-heat-map-item [day]="day" [maxPlays]="maxPlays"></app-heat-map-item>
     }
-</div>
+</ul>
