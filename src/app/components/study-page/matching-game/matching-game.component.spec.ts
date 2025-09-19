@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { MatchingGameComponent } from "./matching-game.component";
+import { provideHttpClient } from "@angular/common/http";
+import { DraggableItemsListComponent } from "./draggable-items-list/draggable-items-list.component";
+import { ButtonComponent } from "@components/utils/button/button.component";
 
 describe("MatchingGameComponent", () => {
 	let component: MatchingGameComponent;
@@ -8,7 +11,8 @@ describe("MatchingGameComponent", () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [MatchingGameComponent],
+			imports: [MatchingGameComponent, DraggableItemsListComponent, ButtonComponent],
+			providers: [provideHttpClient()],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(MatchingGameComponent);
@@ -18,5 +22,15 @@ describe("MatchingGameComponent", () => {
 
 	it("should create", () => {
 		expect(component).toBeTruthy();
+	});
+
+	it("should remove subscription on component destroy", () => {
+		const nextSpy = spyOn(component["destroy$"], "next");
+		const completeSpy = spyOn(component["destroy$"], "complete");
+
+		component.ngOnDestroy();
+
+		expect(nextSpy).toHaveBeenCalledTimes(1);
+		expect(completeSpy).toHaveBeenCalledTimes(1);
 	});
 });

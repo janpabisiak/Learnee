@@ -1,12 +1,12 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { Component } from "@angular/core";
 import { HeaderNavbarComponent } from "./header-navbar/header-navbar.component";
-import { RouterLink } from "@angular/router";
+import { HamburgerComponent } from "./hamburger/hamburger.component";
+import { LogoComponent } from "./logo/logo.component";
 
 @Component({
 	selector: "app-header",
-	imports: [HeaderNavbarComponent, RouterLink],
+	imports: [HeaderNavbarComponent, HamburgerComponent, LogoComponent],
 	templateUrl: "./header.component.html",
 	standalone: true,
-	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HeaderComponent {}

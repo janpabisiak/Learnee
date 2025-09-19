@@ -10,7 +10,7 @@ import { IStatistics } from "@services/level.service";
 export class HeatMapItemComponent implements OnInit {
 	@Input({ required: true }) day!: IStatistics;
 	@Input({ required: true }) maxPlays!: number;
-	percentOfMax: number = 0;
+	percentOfMax = 0;
 
 	ngOnInit() {
 		this.percentOfMax = isNaN(this.day.numberOfPlays / this.maxPlays)

@@ -11,9 +11,9 @@
         </div>
     </div>
     <div class="relative">
-        <ion-icon class="text-2xl text-gray-900 ionicon-thick cursor-pointer hover:rotate-45 duration-300" name="settings-outline" (click)="toggleDropdownMenu()"></ion-icon>
+        <ion-icon class="text-2xl ionicon-thick cursor-pointer hover:rotate-45 duration-300" name="settings-outline" (click)="toggleDropdownMenu()"></ion-icon>
         @if (isDropdownOpen) {
-        <div class="flex flex-col gap-2 min-w-[160px] p-4 absolute top-0 left-8 bg-gray-50 border-2 border-gray-200 rounded-md" id="dropdown">
+        <div class="flex flex-col gap-2 min-w-40 p-4 absolute top-0 right-full bg-gray-50 border-2 border-gray-200 rounded-md" id="dropdown">
             <p class="cursor-pointer" (click)="editWord()">Edit word</p>
             <p class="cursor-pointer" (click)="deleteWord()">Delete word</p>
         </div>
