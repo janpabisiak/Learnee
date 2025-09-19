@@ -1,18 +1,19 @@
-import { Component, inject, OnDestroy, OnInit } from "@angular/core";
+import { Component, HostListener, inject, OnDestroy, OnInit } from "@angular/core";
 import { RouterModule } from "@angular/router";
-import { AddEditWordModalComponent } from "@components/home-page/add-edit-word-modal/add-edit-word-modal.component";
 import { HeaderComponent } from "@components/header/header.component";
-import { ModalService } from "@services/modal.service";
-import { Subscription } from "rxjs";
+import { MobileMenuComponent } from "@components/header/mobile-menu/mobile-menu.component";
+import { AddEditWordModalComponent } from "@components/home-page/add-edit-word-modal/add-edit-word-modal.component";
 import { ConfirmWordDeletionModalComponent } from "@components/home-page/confirm-word-deletion-modal/confirm-word-deletion-modal.component";
+import { SpinnerComponent } from "@components/utils/spinner/spinner.component";
 import {
 	EToasterPositions,
 	ToasterContainerComponent,
 } from "@components/utils/toaster-container/toaster-container.component";
+import { ModalService } from "@services/modal.service";
 import { ToasterService } from "@services/toaster.service";
-import { IToaster } from "../app/types/toaster.interface";
 import { WordsService } from "@services/words.service";
-import { SpinnerComponent } from "@components/utils/spinner/spinner.component";
+import { Subscription } from "rxjs";
+import { IToaster } from "../app/types/toaster.interface";
 
 @Component({
 	selector: "app-root",
@@ -23,6 +24,7 @@ import { SpinnerComponent } from "@components/utils/spinner/spinner.component";
 		ConfirmWordDeletionModalComponent,
 		ToasterContainerComponent,
 		SpinnerComponent,
+		MobileMenuComponent,
 	],
 	templateUrl: "./app.component.html",
 	standalone: true,
@@ -33,10 +35,17 @@ export class AppComponent implements OnInit, OnDestroy {
 	wordsService = inject(WordsService);
 	isWordAddingModalOpen = false;
 	isWordDeletingModalOpen = false;
+	isMobileNavbarOpen = false;
 	isLoading = true;
 	toasters: IToaster[] = [];
 	EToasterPositions = EToasterPositions;
 	private subscriptions = new Subscription();
+	@HostListener("click", ["$event.target"])
+	onClick(el: HTMLElement) {
+		if (el.id === "mobile-menu-overlay") {
+			this.modalService.toggleIsMobileNavbarOpen(false);
+		}
+	}
 
 	ngOnInit() {
 		this.toasterService.startAutoRemoving();
@@ -50,6 +59,12 @@ export class AppComponent implements OnInit, OnDestroy {
 		this.subscriptions.add(
 			this.modalService.isWordDeletionModalOpen$.subscribe((isOpen) => {
 				this.isWordDeletingModalOpen = isOpen;
+			})
+		);
+
+		this.subscriptions.add(
+			this.modalService.isMobileNavbarOpen$.subscribe((isOpen) => {
+				this.isMobileNavbarOpen = isOpen;
 			})
 		);
 

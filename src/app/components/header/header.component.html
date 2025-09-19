@@ -1,8 +1,7 @@
 <div class="py-4 px-8 border-b-1 border-gray-200 ">
     <header class="flex justify-between items-center max-w-7xl mx-auto">
-        <h1 class="text-4xl font-bold">
-            <a [routerLink]="['/']">Learnee</a>
-        </h1>
-        <app-header-navbar></app-header-navbar>
+        <app-logo></app-logo>
+        <app-header-navbar class="hidden md:block"></app-header-navbar>
+        <app-hamburger class="md:hidden"></app-hamburger>
     </header>
 </div>

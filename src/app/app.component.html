@@ -10,7 +10,12 @@
 <app-spinner></app-spinner>
 }
 
+@if (isMobileNavbarOpen) {
+<app-mobile-menu></app-mobile-menu>
+}
+
 <app-toaster-container [toasters]="toasters"></app-toaster-container>
+
 
 <app-header></app-header>
 <router-outlet></router-outlet>

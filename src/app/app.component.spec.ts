@@ -62,6 +62,7 @@ describe("AppComponent", () => {
 	it("should initialize default values on init", () => {
 		expect(app.isWordAddingModalOpen).toBeFalse();
 		expect(app.isWordDeletingModalOpen).toBeFalse();
+		expect(app.isMobileNavbarOpen).toBeFalse();
 		expect(app.isLoading).toBeTrue();
 		expect(app.toasters).toEqual([]);
 		expect(app.EToasterPositions).toEqual(EToasterPositions);
@@ -81,6 +82,7 @@ describe("AppComponent", () => {
 	it("should set fields values depending on subscriptions", () => {
 		mockModalService.isWordAddingModalOpen$.next(true);
 		mockModalService.isWordDeletionModalOpen$.next(true);
+		mockModalService.isMobileNavbarOpen$.next(true);
 		mockWordsService.wordsOfTheDay$.next(mockWords);
 		mockToasterService.toasters$.next(mockToasters);
 
@@ -88,6 +90,7 @@ describe("AppComponent", () => {
 
 		expect(app.isWordAddingModalOpen).toBeTrue();
 		expect(app.isWordDeletingModalOpen).toBeTrue();
+		expect(app.isMobileNavbarOpen).toBeTrue();
 		expect(app.isLoading).toBeFalse();
 		expect(app.toasters).toEqual(mockToasters);
 	});
@@ -174,8 +177,10 @@ export const mockSelectedGames: EAvailableGames[] = [EAvailableGames.FillGaps];
 export const createMockModalService = () => ({
 	isWordAddingModalOpen$: new BehaviorSubject<boolean>(false),
 	isWordDeletionModalOpen$: new BehaviorSubject<boolean>(false),
+	isMobileNavbarOpen$: new BehaviorSubject<boolean>(false),
 	toggleShowWordAddingModal: jasmine.createSpy("toggleShowWordAddingModal"),
 	toggleShowWordDeletionModal: jasmine.createSpy("toggleShowWordDeletionModal"),
+	toggleIsMobileNavbarOpen: jasmine.createSpy("toggleIsMobileNavbarOpen"),
 });
 
 export const createMockToasterService = () => ({
