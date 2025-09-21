@@ -22,6 +22,7 @@ export class InputGuessComponent implements AfterViewChecked {
 	@Input({ required: true }) wordLength!: number;
 	@Input({ required: true }) answered!: boolean;
 	@Input({ required: true }) answeredCorrect!: boolean;
+	@Input({ required: true }) disabled!: boolean;
 	@Output() valueChanged = new EventEmitter<string>();
 	@HostListener("input", ["$event.target"])
 	onInput(inputEl: HTMLInputElement) {

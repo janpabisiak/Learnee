@@ -183,7 +183,7 @@ export class GameService {
 		const currentStageId = this.currentStageId.value;
 
 		setTimeout(() => {
-			if (currentStageId < this.stages.value.length - 1) {
+			if (currentStageId < this.stages.value.length) {
 				this.currentStageId.next(currentStageId + 1);
 			}
 		}, 2000);
@@ -215,6 +215,7 @@ export class GameService {
 
 	cancelGame() {
 		this.stages.next([]);
+		this.currentStageId.next(0);
 	}
 }
 
