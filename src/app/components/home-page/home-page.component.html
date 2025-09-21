@@ -1,12 +1,10 @@
-<main class="p-8 flex-1">
-    <section class="flex flex-col max-w-7xl mx-auto">
-        <app-section-title [title]="'Wordlist'" [tagContent]="`${wordList.length} words`" [buttonType]="'no-background'" [buttonIcon]="'add-circle-outline'" [buttonContent]="'Add new word'" (buttonClicked)="toggleIsAddWordModalOpen(true)"></app-section-title>
-        <div class="flex flex-col lg:grid lg:grid-cols-[2fr_22rem] mt-6 gap-6">
-            <app-word-list></app-word-list>
-            <div class="flex flex-col md:flex-row lg:flex-col gap-3">
-                <app-words-of-the-day class="flex-1 lg:flex-none"></app-words-of-the-day>
-                <app-user-statistics class="flex-1 lg:flex-none"></app-user-statistics>
-            </div>
+<section class="flex flex-col max-w-7xl mx-auto">
+    <app-section-title [title]="'Wordlist'" [tagContent]="`${wordList.length} words`" [buttonType]="'no-background'" [buttonIcon]="'add-circle-outline'" [buttonContent]="'Add new word'" (buttonClicked)="toggleIsAddWordModalOpen(true)"></app-section-title>
+    <div class="flex flex-col lg:grid lg:grid-cols-[2fr_22rem] mt-6 gap-6">
+        <app-word-list></app-word-list>
+        <div class="flex flex-col md:flex-row lg:flex-col gap-3">
+            <app-words-of-the-day class="flex-1 lg:flex-none"></app-words-of-the-day>
+            <app-user-statistics class="flex-1 lg:flex-none"></app-user-statistics>
         </div>
-    </section>
-</main>
+    </div>
+</section>
