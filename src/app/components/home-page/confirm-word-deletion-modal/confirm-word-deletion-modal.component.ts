@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { ModalComponent } from "@components/utils/modal/modal.component";
 import { ConfirmWordDeletionService } from "@services/confirm-word-deletion.service";
 import { ModalService } from "@services/modal.service";
@@ -10,7 +10,7 @@ import { WordsService } from "@services/words.service";
 	imports: [ModalComponent],
 	templateUrl: "./confirm-word-deletion-modal.component.html",
 })
-export class ConfirmWordDeletionModalComponent {
+export class ConfirmWordDeletionModalComponent implements OnInit, OnDestroy {
 	word: IWord | null = null;
 	purgeWords = false;
 
@@ -18,7 +18,9 @@ export class ConfirmWordDeletionModalComponent {
 		private modalService: ModalService,
 		private wordsService: WordsService,
 		private confirmWordDeletionService: ConfirmWordDeletionService
-	) {
+	) {}
+
+	ngOnInit() {
 		this.word = this.confirmWordDeletionService.word;
 		this.purgeWords = this.confirmWordDeletionService.purgeWords;
 	}
@@ -32,5 +34,9 @@ export class ConfirmWordDeletionModalComponent {
 		if (this.purgeWords) this.wordsService.purgeWordList();
 
 		this.closeModal();
+	}
+
+	ngOnDestroy() {
+		this.confirmWordDeletionService.destroy();
 	}
 }

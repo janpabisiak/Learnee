@@ -4,15 +4,20 @@ import { WordsService } from "../../services/words.service";
 import { IWord } from "../../types/word.interface";
 import { WordListComponent } from "./word-list/word-list.component";
 import { ModalService } from "@services/modal.service";
-import { ButtonComponent } from "@components/utils/button/button.component";
 import { WordsOfTheDayComponent } from "./words-of-the-day/words-of-the-day.component";
 import { UserStatisticsComponent } from "./user-statistics/user-statistics.component";
+import { SectionTitleComponent } from "@components/utils/section-title/section-title.component";
 
 @Component({
 	selector: "app-home-page",
 	standalone: true,
 	templateUrl: "./home-page.component.html",
-	imports: [WordListComponent, ButtonComponent, WordsOfTheDayComponent, UserStatisticsComponent],
+	imports: [
+		WordListComponent,
+		WordsOfTheDayComponent,
+		UserStatisticsComponent,
+		SectionTitleComponent,
+	],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HomePageComponent implements OnInit, OnDestroy {

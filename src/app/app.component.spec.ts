@@ -99,6 +99,21 @@ describe("AppComponent", () => {
 		expect(app.toasters).toEqual(mockToasters);
 	});
 
+	it("should disable mobile navbar on mobile-menu-overlay click", () => {
+		const htmlEl = document.createElement("div");
+		htmlEl.id = "mobile-menu-overlay";
+		app.onClick(htmlEl);
+
+		expect(mockModalService.toggleIsMobileNavbarOpen).toHaveBeenCalledOnceWith(false);
+	});
+
+	it("should NOT disable mobile navbar on click outside mobile-menu-overlay", () => {
+		const htmlEl = document.createElement("div");
+		app.onClick(htmlEl);
+
+		expect(mockModalService.toggleIsMobileNavbarOpen).not.toHaveBeenCalled();
+	});
+
 	it("should remove subscriptions on destroy", () => {
 		const unsubscribeSpy = spyOn(app["subscriptions"], "unsubscribe");
 		app.ngOnDestroy();
@@ -230,6 +245,7 @@ export const createMockGameService = () => ({
 	goToNextStage: jasmine.createSpy("goToNextStage"),
 	generateStages: jasmine.createSpy("generateStages"),
 	updateSelectedGames: jasmine.createSpy("updateSelectedGames"),
+	cancelGame: jasmine.createSpy("cancelGame"),
 });
 
 export const createMockConfirmWordDeletionService = () => ({
