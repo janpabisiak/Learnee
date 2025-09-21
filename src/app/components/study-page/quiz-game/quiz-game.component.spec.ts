@@ -37,6 +37,14 @@ describe("QuizGameComponent", () => {
 		expect(component.isVisible).toBeTrue();
 	});
 
+	it("should set properties values depending on component input", () => {
+		component.stage = mockStages[0];
+		component.ngOnInit();
+
+		expect(component.currentStageId).toBe(0);
+		expect(component.question).toEqual(mockStages[0].data);
+	});
+
 	it("should change isVisible on changeVisibility call", () => {
 		component.changeVisibility();
 

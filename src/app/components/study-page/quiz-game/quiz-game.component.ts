@@ -1,8 +1,8 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, Input, OnDestroy, OnInit } from "@angular/core";
 import { IQuestion } from "../../../types/question.interface";
 import { QuestionAnswerComponent } from "./question-answer/question-answer.component";
 import { combineLatest, Subject, takeUntil } from "rxjs";
-import { GameService } from "@services/game.service";
+import { GameService, IStage } from "@services/game.service";
 import { NgClass } from "@angular/common";
 
 @Component({
@@ -11,6 +11,7 @@ import { NgClass } from "@angular/common";
 	templateUrl: "./quiz-game.component.html",
 })
 export class QuizGameComponent implements OnInit, OnDestroy {
+	@Input() stage: IStage | null = null;
 	private destroy$ = new Subject<void>();
 	currentStageId: number = 0;
 	question: IQuestion | null = null;
@@ -19,9 +20,18 @@ export class QuizGameComponent implements OnInit, OnDestroy {
 	constructor(private gameService: GameService) {}
 
 	ngOnInit() {
+		if (this.stage) {
+			this.currentStageId = this.stage.id;
+			this.question = this.stage.data;
+
+			return;
+		}
+
 		combineLatest([this.gameService.stages$, this.gameService.currentStageId$])
 			.pipe(takeUntil(this.destroy$))
 			.subscribe(([stages, currentId]) => {
+				if (!stages || !stages[currentId]) return;
+
 				this.currentStageId = currentId;
 				this.question = stages[currentId].data;
 

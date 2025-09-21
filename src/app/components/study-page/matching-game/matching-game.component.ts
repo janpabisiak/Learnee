@@ -1,19 +1,20 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, OnDestroy, OnInit } from "@angular/core";
 import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
-import { IMatch } from "@services/matching-game.service";
+import { NgClass, NgIf } from "@angular/common";
+import { Component, CUSTOM_ELEMENTS_SCHEMA, Input, OnDestroy, OnInit } from "@angular/core";
 import { ButtonComponent } from "@components/utils/button/button.component";
-import { NgClass } from "@angular/common";
-import { GameService } from "@services/game.service";
+import { GameService, IStage } from "@services/game.service";
+import { IMatch } from "@services/matching-game.service";
 import { combineLatest, Subject, takeUntil } from "rxjs";
 import { DraggableItemsListComponent } from "./draggable-items-list/draggable-items-list.component";
 
 @Component({
 	selector: "app-matching-game",
-	imports: [ButtonComponent, NgClass, DraggableItemsListComponent],
+	imports: [ButtonComponent, NgClass, DraggableItemsListComponent, NgIf],
 	templateUrl: "./matching-game.component.html",
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class MatchingGameComponent implements OnInit, OnDestroy {
+	@Input() stage: IStage | null = null;
 	private destroy$ = new Subject<void>();
 	currentStageId = 0;
 	matches: IMatch[] | null = null;
@@ -26,9 +27,26 @@ export class MatchingGameComponent implements OnInit, OnDestroy {
 	constructor(private gameService: GameService) {}
 
 	ngOnInit() {
+		if (this.stage) this.initFromInput();
+		else this.initSubscriptions();
+	}
+
+	private initFromInput() {
+		const data = this.stage!.data;
+
+		this.currentStageId = this.stage!.id;
+		this.terms = data.map((match: IMatch) => match.term);
+		this.definitions = data.map((match: IMatch) => match.definition);
+		this.answered = this.stage!.answered;
+		this.results = Array(data.length).fill(true);
+	}
+
+	private initSubscriptions() {
 		combineLatest([this.gameService.stages$, this.gameService.currentStageId$])
 			.pipe(takeUntil(this.destroy$))
 			.subscribe(([stages, currentId]) => {
+				if (!stages || !stages[currentId]) return;
+
 				this.currentStageId = currentId;
 				this.matches = stages[currentId].data;
 				this.answered = stages[currentId].answered;
