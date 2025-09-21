@@ -1,0 +1,19 @@
+@if (stage) {
+@switch (stage.type) {
+@case (EAvailableGames.Quiz) {
+<app-quiz-game [stage]="stage.answered ? stage : null"></app-quiz-game>
+}
+@case (EAvailableGames.MatchingGame) {
+<app-matching-game [stage]="stage.answered ? stage : null"></app-matching-game>
+}
+@case (EAvailableGames.TrueOrFalse) {
+<app-true-false-game [stage]="stage.answered ? stage : null"></app-true-false-game>
+}
+@case (EAvailableGames.FillGaps) {
+<app-fill-gaps-listening-game [stage]="stage.answered ? stage : null"></app-fill-gaps-listening-game>
+}
+@case (EAvailableGames.Listening) {
+<app-fill-gaps-listening-game [stage]="stage.answered ? stage : null"></app-fill-gaps-listening-game>
+}
+}
+}

@@ -1,0 +1,10 @@
+<section class="flex flex-col max-w-7xl mx-auto">
+    <app-section-title [title]="'Game finished'" [buttonType]="'primary'" [buttonContent]="'Play again'" (buttonClicked)="cancelGame()"></app-section-title>
+    <ul class="my-8 flex flex-col gap-3">
+        @for (stage of stages; track stage.id) {
+        <li class="flex flex-col gap-3 border-2 bg-gray-50 border-gray-200 rounded-xl p-5">
+            <app-game-container [stage]="stage"></app-game-container>
+        </li>
+        }
+    </ul>
+</section>

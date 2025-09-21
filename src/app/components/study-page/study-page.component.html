@@ -1,36 +1,5 @@
 <main class="p-8 flex-1">
-    @if (!stages.length) {
-    <div class="flex flex-col max-w-7xl mx-auto">
-        <section class="flex items-center justify-between">
-            <h2 class="text-5xl font-bold">Prepare game</h2>
-            <app-button [type]="'primary'" [disabled]="hasSelectedGames" (buttonClicked)="startGame()">Start a game</app-button>
-        </section>
-        <app-game-selector></app-game-selector>
-    </div>
-    } @else {
-    <section class="flex flex-col gap-10 max-w-4xl mx-auto">
-        <div class="flex flex-col gap-6">
-            <app-button [type]="'secondary'" (buttonClicked)="cancelGame()">Cancel game</app-button>
-            <app-study-progress-bar></app-study-progress-bar>
-        </div>
-        @let currentStage = getCurrentStage();
-        @switch (currentStage.type) {
-        @case (EAvailableGames.Quiz) {
-        <app-quiz-game></app-quiz-game>
-        }
-        @case (EAvailableGames.MatchingGame) {
-        <app-matching-game></app-matching-game>
-        }
-        @case (EAvailableGames.TrueOrFalse) {
-        <app-true-false-game></app-true-false-game>
-        }
-        @case (EAvailableGames.FillGaps) {
-        <app-fill-gaps-listening-game></app-fill-gaps-listening-game>
-        }
-        @case (EAvailableGames.Listening) {
-        <app-fill-gaps-listening-game></app-fill-gaps-listening-game>
-        }
-        }
-    </section>
-    }
+    <app-game-selector *ngIf="!stages.length"></app-game-selector>
+    <app-game-section *ngIf="stages.length && currentStageId < stages.length"></app-game-section>
+    <app-game-results *ngIf="stages.length && currentStageId === stages.length"></app-game-results>
 </main>

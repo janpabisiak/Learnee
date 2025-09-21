@@ -1,25 +1,14 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, OnDestroy, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { EAvailableGames, GameService, IStage } from "@services/game.service";
 import { combineLatest, Subject, takeUntil } from "rxjs";
-import { MatchingGameComponent } from "./matching-game/matching-game.component";
-import { QuizGameComponent } from "./quiz-game/quiz-game.component";
-import { StudyProgressBarComponent } from "./study-progress-bar/study-progress-bar.component";
-import { ButtonComponent } from "@components/utils/button/button.component";
 import { GameSelectorComponent } from "./game-selector/game-selector.component";
-import { TrueFalseGameComponent } from "./true-false-game/true-false-game.component";
-import { FillGapsGameComponent } from "./fill-gaps-listening-game/fill-gaps-listening-game.component";
+import { GameResultsComponent } from "./game-results/game-results.component";
+import { NgIf } from "@angular/common";
+import { GameSectionComponent } from "./game-section/game-section.component";
 
 @Component({
 	selector: "app-study-page",
-	imports: [
-		QuizGameComponent,
-		MatchingGameComponent,
-		TrueFalseGameComponent,
-		FillGapsGameComponent,
-		StudyProgressBarComponent,
-		ButtonComponent,
-		GameSelectorComponent,
-	],
+	imports: [GameSelectorComponent, GameResultsComponent, NgIf, GameSectionComponent],
 	templateUrl: "./study-page.component.html",
 	providers: [],
 })
@@ -28,34 +17,16 @@ export class StudyPageComponent implements OnInit, OnDestroy {
 	stages: IStage[] = [];
 	currentStageId = 0;
 	EAvailableGames = EAvailableGames;
-	hasSelectedGames = false;
 
 	constructor(private gameService: GameService) {}
 
 	ngOnInit() {
-		combineLatest([
-			this.gameService.selectedGames$,
-			this.gameService.stages$,
-			this.gameService.currentStageId$,
-		])
+		combineLatest([this.gameService.stages$, this.gameService.currentStageId$])
 			.pipe(takeUntil(this.destroy$))
-			.subscribe(([selectedGames, stages, currentId]) => {
-				this.hasSelectedGames = !selectedGames.length;
+			.subscribe(([stages, currentId]) => {
 				this.stages = stages;
 				this.currentStageId = currentId;
 			});
-	}
-
-	getCurrentStage() {
-		return this.stages[this.currentStageId];
-	}
-
-	startGame() {
-		this.gameService.generateStages();
-	}
-
-	cancelGame() {
-		this.gameService.cancelGame();
 	}
 
 	ngOnDestroy() {
