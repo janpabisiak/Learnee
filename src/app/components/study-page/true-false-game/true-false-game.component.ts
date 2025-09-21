@@ -1,5 +1,5 @@
 import { NgClass } from "@angular/common";
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, Input, OnDestroy, OnInit } from "@angular/core";
 import { GameService, IStage } from "@services/game.service";
 import { combineLatest, Subject, takeUntil } from "rxjs";
 import { TrueFalseAnswerComponent } from "./true-false-answer/true-false-answer.component";
@@ -10,6 +10,7 @@ import { TrueFalseAnswerComponent } from "./true-false-answer/true-false-answer.
 	templateUrl: "./true-false-game.component.html",
 })
 export class TrueFalseGameComponent implements OnInit, OnDestroy {
+	@Input() stage: IStage | null = null;
 	currentStageId = 0;
 	data: IStage | null = null;
 	isVisible = false;
@@ -19,9 +20,19 @@ export class TrueFalseGameComponent implements OnInit, OnDestroy {
 	constructor(private gameService: GameService) {}
 
 	ngOnInit() {
+		if (this.stage) {
+			this.currentStageId = this.stage.id;
+			this.data = this.stage;
+			this.showAnswer = true;
+
+			return;
+		}
+
 		combineLatest([this.gameService.stages$, this.gameService.currentStageId$])
 			.pipe(takeUntil(this.destroy$))
 			.subscribe(([stages, currentStageId]) => {
+				if (!stages || !stages[currentStageId]) return;
+
 				this.currentStageId = currentStageId;
 				this.data = stages[currentStageId];
 

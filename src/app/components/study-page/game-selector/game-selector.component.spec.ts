@@ -10,6 +10,7 @@ import {
 	mockSelectedGames,
 } from "app/app.component.spec";
 import { EAvailableGames, GameService } from "@services/game.service";
+import { SectionTitleComponent } from "@components/utils/section-title/section-title.component";
 
 describe("GameSelectorComponent", () => {
 	let component: GameSelectorComponent;
@@ -20,7 +21,7 @@ describe("GameSelectorComponent", () => {
 		mockGameService = createMockGameService();
 
 		await TestBed.configureTestingModule({
-			imports: [GameSelectorComponent, GameSelectorItemComponent],
+			imports: [GameSelectorComponent, GameSelectorItemComponent, SectionTitleComponent],
 			providers: [provideHttpClient(), { provide: GameService, useValue: mockGameService }],
 		}).compileComponents();
 
@@ -78,6 +79,12 @@ describe("GameSelectorComponent", () => {
 		component.toggleGameSelection(mockAvailableGames[0]);
 
 		expect(mockGameService.updateSelectedGames).toHaveBeenCalledWith([mockAvailableGames[0]]);
+	});
+
+	it("should call gameService.generateStages on startGame call", () => {
+		component.startGame();
+
+		expect(mockGameService.generateStages).toHaveBeenCalledTimes(1);
 	});
 
 	it("should remove subscription on component destroy", () => {

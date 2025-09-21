@@ -19,6 +19,8 @@ import { WordsService } from "@services/words.service";
 import { EToasterTypes } from "@components/utils/toaster-container/toaster/toaster.component";
 import { IStatistics } from "@services/level.service";
 import { EAvailableGames, IStage } from "@services/game.service";
+import { FooterComponent } from "@components/footer/footer.component";
+import { MobileMenuComponent } from "@components/header/mobile-menu/mobile-menu.component";
 
 describe("AppComponent", () => {
 	let fixture: ComponentFixture<AppComponent>;
@@ -40,6 +42,8 @@ describe("AppComponent", () => {
 				ConfirmWordDeletionModalComponent,
 				ToasterContainerComponent,
 				SpinnerComponent,
+				MobileMenuComponent,
+				FooterComponent,
 			],
 			providers: [
 				provideHttpClient(),
@@ -93,6 +97,21 @@ describe("AppComponent", () => {
 		expect(app.isMobileNavbarOpen).toBeTrue();
 		expect(app.isLoading).toBeFalse();
 		expect(app.toasters).toEqual(mockToasters);
+	});
+
+	it("should disable mobile navbar on mobile-menu-overlay click", () => {
+		const htmlEl = document.createElement("div");
+		htmlEl.id = "mobile-menu-overlay";
+		app.onClick(htmlEl);
+
+		expect(mockModalService.toggleIsMobileNavbarOpen).toHaveBeenCalledOnceWith(false);
+	});
+
+	it("should NOT disable mobile navbar on click outside mobile-menu-overlay", () => {
+		const htmlEl = document.createElement("div");
+		app.onClick(htmlEl);
+
+		expect(mockModalService.toggleIsMobileNavbarOpen).not.toHaveBeenCalled();
 	});
 
 	it("should remove subscriptions on destroy", () => {
@@ -226,6 +245,7 @@ export const createMockGameService = () => ({
 	goToNextStage: jasmine.createSpy("goToNextStage"),
 	generateStages: jasmine.createSpy("generateStages"),
 	updateSelectedGames: jasmine.createSpy("updateSelectedGames"),
+	cancelGame: jasmine.createSpy("cancelGame"),
 });
 
 export const createMockConfirmWordDeletionService = () => ({

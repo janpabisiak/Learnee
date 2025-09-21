@@ -7,4 +7,9 @@ import { IWord } from "../types/word.interface";
 export class ConfirmWordDeletionService {
 	word: IWord | null = null;
 	purgeWords = false;
+
+	destroy() {
+		this.word = null;
+		this.purgeWords = false;
+	}
 }

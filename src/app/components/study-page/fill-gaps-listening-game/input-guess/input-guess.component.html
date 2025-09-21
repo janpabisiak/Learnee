@@ -1,4 +1,4 @@
 <input class="pb-1 font-bold tracking-[0.5ch] outline-0" [style.--n-char]="wordLength" [ngClass]="{
             'text-green-600': answered && answeredCorrect,
             'text-red-600': answered && !answeredCorrect,
-        }" [maxLength]="wordLength" [value]="value" #input />
+        }" [maxLength]="wordLength" [value]="value" [disabled]="disabled" #input />

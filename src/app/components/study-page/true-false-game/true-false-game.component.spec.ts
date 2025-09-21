@@ -37,6 +37,15 @@ describe("TrueFalseGameComponent", () => {
 		expect(component.isVisible).toBeTrue();
 	});
 
+	it("should set properties depending on component input", () => {
+		component.stage = mockStages[0];
+		component.ngOnInit();
+
+		expect(component.currentStageId).toBe(0);
+		expect(component.data).toEqual(mockStages[0]);
+		expect(component.showAnswer).toBeTrue();
+	});
+
 	it("should call gameService methods on answerQuestion call", () => {
 		component.answerQuestion(true);
 

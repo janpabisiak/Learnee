@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { LevelProgressComponent } from "./level-progress.component";
+import { ProgressBarComponent } from "@components/utils/progress-bar/progress-bar.component";
 
 describe("LevelProgressComponent", () => {
 	let component: LevelProgressComponent;
@@ -8,7 +9,7 @@ describe("LevelProgressComponent", () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [LevelProgressComponent],
+			imports: [LevelProgressComponent, ProgressBarComponent],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(LevelProgressComponent);

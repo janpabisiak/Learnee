@@ -4,13 +4,10 @@ import { provideHttpClient } from "@angular/common/http";
 import { ButtonComponent } from "@components/utils/button/button.component";
 import { GameService } from "@services/game.service";
 import { createMockGameService, IMockGameService } from "app/app.component.spec";
-import { FillGapsGameComponent } from "./fill-gaps-listening-game/fill-gaps-listening-game.component";
 import { GameSelectorComponent } from "./game-selector/game-selector.component";
-import { MatchingGameComponent } from "./matching-game/matching-game.component";
-import { QuizGameComponent } from "./quiz-game/quiz-game.component";
 import { StudyPageComponent } from "./study-page.component";
 import { StudyProgressBarComponent } from "./study-progress-bar/study-progress-bar.component";
-import { TrueFalseGameComponent } from "./true-false-game/true-false-game.component";
+import { GameSectionComponent } from "./game-section/game-section.component";
 
 describe("StudyPageComponent", () => {
 	let component: StudyPageComponent;
@@ -26,10 +23,7 @@ describe("StudyPageComponent", () => {
 				ButtonComponent,
 				GameSelectorComponent,
 				StudyProgressBarComponent,
-				QuizGameComponent,
-				MatchingGameComponent,
-				TrueFalseGameComponent,
-				FillGapsGameComponent,
+				GameSectionComponent,
 			],
 			providers: [provideHttpClient(), { provide: GameService, useValue: mockGameService }],
 		}).compileComponents();

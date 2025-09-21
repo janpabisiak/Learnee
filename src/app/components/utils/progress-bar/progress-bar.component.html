@@ -1,0 +1,10 @@
+<div class="relative flex-1 hover:[&>div]:opacity-100 w-full h-full">
+    <progress id="progress" class="w-full h-full rounded-md [&::-webkit-progress-bar]:bg-emerald-600 [&::-moz-progress-bar]:bg-emerald-600" [value]="progress" max="100" [ngClass]="{
+        'bg-gray-200': type === EProgressBarTypes.Default,
+        'bg-red-400': type === EProgressBarTypes.GameResults
+    }"></progress>
+    <label for="progress" class="absolute top-0 left-2 text-gray-50">{{progress}}%</label>
+    <div class="absolute bottom-full left-1/2 -translate-x-1/2 bg-gray-900 w-max text-gray-50 py-1 px-3 rounded-md opacity-0 duration-300 pointer-events-none">
+        {{tooltipContent}}
+    </div>
+</div>
