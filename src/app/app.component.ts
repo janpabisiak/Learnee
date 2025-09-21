@@ -14,6 +14,7 @@ import { ToasterService } from "@services/toaster.service";
 import { WordsService } from "@services/words.service";
 import { Subscription } from "rxjs";
 import { IToaster } from "../app/types/toaster.interface";
+import { FooterComponent } from "@components/footer/footer.component";
 
 @Component({
 	selector: "app-root",
@@ -25,6 +26,7 @@ import { IToaster } from "../app/types/toaster.interface";
 		ToasterContainerComponent,
 		SpinnerComponent,
 		MobileMenuComponent,
+		FooterComponent,
 	],
 	templateUrl: "./app.component.html",
 	standalone: true,

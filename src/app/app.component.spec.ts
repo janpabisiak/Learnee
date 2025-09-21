@@ -19,6 +19,8 @@ import { WordsService } from "@services/words.service";
 import { EToasterTypes } from "@components/utils/toaster-container/toaster/toaster.component";
 import { IStatistics } from "@services/level.service";
 import { EAvailableGames, IStage } from "@services/game.service";
+import { FooterComponent } from "@components/footer/footer.component";
+import { MobileMenuComponent } from "@components/header/mobile-menu/mobile-menu.component";
 
 describe("AppComponent", () => {
 	let fixture: ComponentFixture<AppComponent>;
@@ -40,6 +42,8 @@ describe("AppComponent", () => {
 				ConfirmWordDeletionModalComponent,
 				ToasterContainerComponent,
 				SpinnerComponent,
+				MobileMenuComponent,
+				FooterComponent,
 			],
 			providers: [
 				provideHttpClient(),
