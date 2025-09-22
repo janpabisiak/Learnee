@@ -29,10 +29,11 @@ describe("GameResultsComponent", () => {
 		expect(component).toBeTruthy();
 	});
 
-	it("should update stages property on subject change", () => {
+	it("should update properties values on subscriptions changes", () => {
 		mockGameService.stages$.next(mockStages);
 
 		expect(component.stages).toEqual(mockStages);
+		expect(component.correctAnswerAmount).toBe(0);
 	});
 
 	it("should call gameService.cancelGame on cancelGame call", () => {

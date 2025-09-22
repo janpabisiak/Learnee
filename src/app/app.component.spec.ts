@@ -21,6 +21,7 @@ import { IStatistics } from "@services/level.service";
 import { EAvailableGames, IStage } from "@services/game.service";
 import { FooterComponent } from "@components/footer/footer.component";
 import { MobileMenuComponent } from "@components/header/mobile-menu/mobile-menu.component";
+import { IResultRange } from "@services/pagination.service";
 
 describe("AppComponent", () => {
 	let fixture: ComponentFixture<AppComponent>;
@@ -193,6 +194,11 @@ export const mockAvailableGames: EAvailableGames[] = [
 
 export const mockSelectedGames: EAvailableGames[] = [EAvailableGames.FillGaps];
 
+export const mockResultRange: IResultRange = {
+	start: 0,
+	end: 10,
+};
+
 export const createMockModalService = () => ({
 	isWordAddingModalOpen$: new BehaviorSubject<boolean>(false),
 	isWordDeletionModalOpen$: new BehaviorSubject<boolean>(false),
@@ -253,6 +259,15 @@ export const createMockConfirmWordDeletionService = () => ({
 	purgeWords: false,
 });
 
+export const createMockPaginationService = () => ({
+	page$: new BehaviorSubject<number>(1),
+	maxPage$: new BehaviorSubject<number>(1),
+	wordsPerPage$: new BehaviorSubject<number>(5),
+	resultRange$: new BehaviorSubject<IResultRange>(mockResultRange),
+	setPage: jasmine.createSpy("setPage"),
+	setWordsPerPage: jasmine.createSpy("setWordsPerPage"),
+});
+
 export type IMockModalService = ReturnType<typeof createMockModalService>;
 export type IMockToasterService = ReturnType<typeof createMockToasterService>;
 export type IMockWordsService = ReturnType<typeof createMockWordsService>;
@@ -263,3 +278,4 @@ export type IMockMockConfirmWordDeletionService = ReturnType<
 >;
 export type IMockWebSpeechService = ReturnType<typeof createMockWebSpeechService>;
 export type IMockGameService = ReturnType<typeof createMockGameService>;
+export type IMockPaginationService = ReturnType<typeof createMockPaginationService>;

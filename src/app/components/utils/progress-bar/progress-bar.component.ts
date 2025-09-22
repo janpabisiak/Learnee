@@ -7,7 +7,7 @@ import { Component, Input } from "@angular/core";
 	templateUrl: "./progress-bar.component.html",
 })
 export class ProgressBarComponent {
-	@Input({ required: true }) progress!: number;
+	@Input({ required: true }) progress = 0;
 	@Input() type: string = EProgressBarTypes.Default;
 	@Input() tooltipContent!: string;
 	EProgressBarTypes = EProgressBarTypes;

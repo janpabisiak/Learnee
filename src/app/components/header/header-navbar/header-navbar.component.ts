@@ -1,13 +1,15 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { HeaderNavbarItemComponent } from "./header-navbar-item/header-navbar-item.component";
 import { ActivatedRoute, NavigationStart, Route, Router } from "@angular/router";
+import { Subject, takeUntil } from "rxjs";
 
 @Component({
 	selector: "app-header-navbar",
 	imports: [HeaderNavbarItemComponent],
 	templateUrl: "./header-navbar.component.html",
 })
-export class HeaderNavbarComponent implements OnInit {
+export class HeaderNavbarComponent implements OnInit, OnDestroy {
+	private destroy$ = new Subject<void>();
 	currentUrl: string = "";
 	navLinks = [
 		{
@@ -33,10 +35,15 @@ export class HeaderNavbarComponent implements OnInit {
 	constructor(private router: Router) {}
 
 	ngOnInit() {
-		this.router.events.subscribe((e) => {
+		this.router.events.pipe(takeUntil(this.destroy$)).subscribe((e) => {
 			if (e instanceof NavigationStart) {
 				this.currentUrl = e.url;
 			}
 		});
+	}
+
+	ngOnDestroy() {
+		this.destroy$.next();
+		this.destroy$.complete();
 	}
 }
