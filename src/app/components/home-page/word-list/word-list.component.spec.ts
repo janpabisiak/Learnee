@@ -5,6 +5,7 @@ import { provideHttpClient } from "@angular/common/http";
 import { WordListOptionsComponent } from "./word-list-options/word-list-options.component";
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { WordListItemComponent } from "./word-list-item/word-list-item.component";
+import { PaginationContainerComponent } from "./pagination-container/pagination-container.component";
 
 describe("WordListComponent", () => {
 	let component: WordListComponent;
@@ -12,7 +13,12 @@ describe("WordListComponent", () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [WordListComponent, WordListOptionsComponent, WordListItemComponent],
+			imports: [
+				WordListComponent,
+				WordListOptionsComponent,
+				WordListItemComponent,
+				PaginationContainerComponent,
+			],
 			providers: [provideHttpClient()],
 			schemas: [CUSTOM_ELEMENTS_SCHEMA],
 		}).compileComponents();
