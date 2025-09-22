@@ -1,7 +1,7 @@
 <nav class="justify-self-end w-fit">
     <ul class="flex text-xl font-light gap-8">
         @for (link of navLinks; track link.id) {
-        <app-header-navbar-item [url]="link.url" [text]="link.text" [icon]="link.icon"></app-header-navbar-item>
+        <app-header-navbar-item [url]="link.url" [isActive]="link.url === currentUrl" [text]="link.text" [icon]="link.icon"></app-header-navbar-item>
         }
     </ul>
 </nav>
