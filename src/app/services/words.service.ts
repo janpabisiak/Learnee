@@ -2,10 +2,11 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "../../environment/environment";
 import { IWord } from "../types/word.interface";
-import { BehaviorSubject, catchError, map, Observable, of, take } from "rxjs";
+import { BehaviorSubject, catchError, combineLatest, map, Observable, of, take } from "rxjs";
 import { LocalStorageService } from "./local-storage.service";
 import { ToasterService } from "./toaster.service";
 import { EToasterTypes } from "@components/utils/toaster-container/toaster/toaster.component";
+import { PaginationService } from "./pagination.service";
 
 @Injectable({
 	providedIn: "root",
@@ -17,18 +18,21 @@ export class WordsService {
 	private wordList = new BehaviorSubject<IWord[]>([]);
 	private sortedWordList = new BehaviorSubject<IWord[]>([]);
 	private filteredWordList = new BehaviorSubject<IWord[]>([]);
+	private paginatedWordList = new BehaviorSubject<IWord[]>([]);
 	private wordsOfTheDay = new BehaviorSubject<IWord[]>([]);
 	private searchQuery = "";
 
 	wordList$ = this.wordList.asObservable();
 	sortedWordList$ = this.sortedWordList.asObservable();
 	filteredWordList$ = this.filteredWordList.asObservable();
+	paginatedWordList$ = this.paginatedWordList.asObservable();
 	wordsOfTheDay$ = this.wordsOfTheDay.asObservable();
 
 	constructor(
 		private http: HttpClient,
 		private localStorageService: LocalStorageService,
-		private toasterService: ToasterService
+		private toasterService: ToasterService,
+		private paginationService: PaginationService
 	) {
 		this.getWordsOfTheDay();
 
@@ -39,6 +43,13 @@ export class WordsService {
 
 			this.filteredWordList.next(wordList);
 		}
+
+		combineLatest([
+			this.paginationService.page$,
+			this.paginationService.wordsPerPage$,
+		]).subscribe(() => {
+			this.paginateWordList();
+		});
 	}
 
 	private getResponseFromWordAPI(word: string) {
@@ -61,6 +72,7 @@ export class WordsService {
 		this.sortedWordList.next(updatedWordList);
 		this.filteredWordList.next(updatedWordList);
 		this.filterWordList(this.searchQuery);
+		this.paginateWordList();
 	}
 
 	sortWordList(sortType: ESortTypes = ESortTypes.NameASC) {
@@ -126,6 +138,13 @@ export class WordsService {
 		);
 
 		this.filteredWordList.next(filteredWordList);
+		this.paginateWordList();
+	}
+
+	paginateWordList() {
+		this.paginatedWordList.next(
+			this.paginationService.paginateWordList(this.filteredWordList.value)
+		);
 	}
 
 	fetchWordDefinition$(word: string): Observable<string> {

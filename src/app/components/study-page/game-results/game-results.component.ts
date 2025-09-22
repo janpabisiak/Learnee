@@ -26,8 +26,9 @@ export class GameResultsComponent implements OnInit, OnDestroy {
 				(acc, stage) => acc + +(stage.answeredCorrect === true),
 				0
 			);
-			this.correctAnswerPercentage =
-				Math.round(this.correctAnswerAmount / stages.length) * 100;
+			this.correctAnswerPercentage = stages.length
+				? Math.round((this.correctAnswerAmount / stages.length) * 100)
+				: 0;
 		});
 	}
 

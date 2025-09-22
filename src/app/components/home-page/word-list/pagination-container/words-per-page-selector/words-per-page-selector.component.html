@@ -1,0 +1,10 @@
+<div class="flex items-center gap-2">
+    <label class="text-gray-500" for="rowsPerPage">Rows per page:</label>
+    <select class="bg-gray-100 rounded-md border-1 border-gray-200 h-9 p-2" [value]="wordsPerPage" (change)="setWordsPerPage()" #select>
+        <option [value]="5">5</option>
+        <option [value]="10">10</option>
+        <option [value]="20">20</option>
+        <option [value]="30">30</option>
+        <option [value]="50">50</option>
+    </select>
+</div>

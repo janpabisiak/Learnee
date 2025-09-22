@@ -9,7 +9,7 @@
 @if (sortedWordList.length) {
 <app-word-list-options></app-word-list-options>
 
-<ng-container *ngIf="!filteredWordList.length">
+<ng-container *ngIf="!paginatedWordList.length">
     <div class="flex flex-col items-center gap-1 bg-gray-100 p-6 rounded-xl shadow-xs">
         <ion-icon class="p-3 text-6xl text-gray-600 bg-gray-200 ionicon-thick rounded-full mb-4" name="close-outline"></ion-icon>
         <h3 class="text-2xl">No words found.</h3>
@@ -17,11 +17,12 @@
     </div>
 </ng-container>
 
-<ng-container *ngIf="filteredWordList.length">
+<ng-container *ngIf="paginatedWordList.length">
     <ul class="flex flex-col gap-3" [ngClass]="isWordListLoaded ? 'animate-slideIn' : ''">
-        @for (word of filteredWordList; track word.id; let i = $index) {
+        @for (word of paginatedWordList; track word.id; let i = $index) {
         <app-word-list-item [word]="word"></app-word-list-item>
         }
     </ul>
+    <app-pagination-container></app-pagination-container>
 </ng-container>
 }
