@@ -11,7 +11,6 @@ import { WebSpeechService } from "@services/web-speech.service";
 	selector: "app-fill-gaps-listening-game",
 	imports: [ButtonComponent, SentenceCasePipe, NgClass, InputGuessComponent, NgIf],
 	templateUrl: "./fill-gaps-listening-game.component.html",
-	styleUrls: ["./fill-gaps-listening-game.component.css"],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class FillGapsGameComponent implements OnInit, OnDestroy {

@@ -73,7 +73,7 @@ export class AddEditWordModalComponent implements OnInit, OnDestroy {
 	}
 
 	fetchWordDefinition() {
-		if (this.isDefinitionFetched || !this.word.value) return;
+		if (this.isDefinitionFetched || !this.word.value || this.definition.value) return;
 
 		this.wordDefinitionEl.nativeElement.placeholder = "Auto fetching definition...";
 		this.wordDefinitionEl.nativeElement.disabled = true;
