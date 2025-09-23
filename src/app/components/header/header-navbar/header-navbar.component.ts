@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { HeaderNavbarItemComponent } from "./header-navbar-item/header-navbar-item.component";
-import { ActivatedRoute, NavigationStart, Route, Router } from "@angular/router";
+import { NavigationStart, Router } from "@angular/router";
 import { Subject, takeUntil } from "rxjs";
+import { HeaderNavbarItemComponent } from "./header-navbar-item/header-navbar-item.component";
 
 @Component({
 	selector: "app-header-navbar",
@@ -29,6 +29,12 @@ export class HeaderNavbarComponent implements OnInit, OnDestroy {
 			url: "/study",
 			text: "Study",
 			icon: "school-outline",
+		},
+		{
+			id: 3,
+			url: "/settings",
+			text: "Settings",
+			icon: "settings-outline",
 		},
 	];
 

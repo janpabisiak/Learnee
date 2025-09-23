@@ -15,6 +15,7 @@ import { WordsService } from "@services/words.service";
 import { Subscription } from "rxjs";
 import { IToaster } from "../app/types/toaster.interface";
 import { FooterComponent } from "@components/footer/footer.component";
+import { SettingsService } from "@services/settings.service";
 
 @Component({
 	selector: "app-root",
@@ -32,9 +33,10 @@ import { FooterComponent } from "@components/footer/footer.component";
 	standalone: true,
 })
 export class AppComponent implements OnInit, OnDestroy {
-	modalService = inject(ModalService);
-	toasterService = inject(ToasterService);
-	wordsService = inject(WordsService);
+	private modalService = inject(ModalService);
+	private toasterService = inject(ToasterService);
+	private wordsService = inject(WordsService);
+	private settingsService = inject(SettingsService);
 	isWordAddingModalOpen = false;
 	isWordDeletingModalOpen = false;
 	isMobileNavbarOpen = false;
@@ -81,6 +83,8 @@ export class AppComponent implements OnInit, OnDestroy {
 				this.toasters = toasters;
 			})
 		);
+
+		this.settingsService.toggleDarkClass();
 	}
 
 	ngOnDestroy() {
