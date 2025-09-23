@@ -1,5 +1,5 @@
 <ul class="flex gap-1.5">
     @for (index of pages; track index) {
-    <li><button class="h-9 w-9 flex justify-center items-center border-2 bg-gray-50 border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 duration-300" [ngClass]="page === index + 1 ? '!bg-emerald-600 !border-emerald-600 text-gray-50' : ''" (click)="setPage(index + 1)">{{index + 1}}</button></li>
+    <li><button class="h-9 w-9 flex justify-center items-center border-2 bg-gray-50 border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 duration-300 dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:border-zinc-700" [ngClass]="page === index + 1 ? '!bg-emerald-600 !border-emerald-600 text-gray-50' : ''" (click)="setPage(index + 1)">{{index + 1}}</button></li>
     }
 </ul>

@@ -13,3 +13,14 @@ input {
 
 	font: 5ch Consolas, monospace;
 }
+
+:host-context(body.dark) input {
+	background: repeating-linear-gradient(
+			90deg,
+			var(--color-zinc-700) 0,
+			var(--color-zinc-700) 1ch,
+			transparent 0,
+			transparent calc(1.5ch)
+		)
+		0 100% / calc(var(--in-w) - 0.5ch) 3px no-repeat;
+}

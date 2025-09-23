@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Signika:wght@300..700&display=swap");
 @import "tailwindcss";
-/* @custom-variant dark (&:where(.dark, .dark *)); */
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
 	--font-signika: "Signika", sans-serif;
@@ -71,13 +71,28 @@
 		border: 2px solid var(--color-emerald-600);
 	}
 
+	.dark input.show-validation.ng-touched.ng-valid,
+	.dark textarea.show-validation.ng-touched.ng-valid {
+		border: 2px solid var(--color-emerald-600);
+	}
+
 	input.show-validation.ng-touched.ng-invalid,
 	textarea.show-validation.ng-touched.ng-invalid {
 		border: 2px solid var(--color-red-600);
 	}
 
+	.dark input.show-validation.ng-touched.ng-invalid,
+	.dark textarea.show-validation.ng-touched.ng-invalid {
+		border: 2px solid var(--color-red-800);
+	}
+
 	::selection {
 		color: var(--color-gray-50);
 		background-color: var(--color-emerald-600);
+	}
+
+	.dark ::selection {
+		color: var(--color-gray-50);
+		background-color: var(--color-emerald-800);
 	}
 }

@@ -5,7 +5,7 @@
         @if (data.type === EAvailableGames.FillGaps) {
         <h5 class="text-xl">{{data.data.definition | sentencecase}}</h5>
         } @else {
-        <div class="flex justify-center items-center p-3 bg-emerald-600 rounded-2xl shadow-xs cursor-pointer" (click)="readWordDefinition()">
+        <div class="flex justify-center items-center p-3 bg-emerald-600 rounded-2xl shadow-xs cursor-pointer dark:bg-emerald-700 dark:border-emerald-800" (click)="readWordDefinition()">
             <ion-icon class="text-7xl ionicon-thick text-emerald-900" name="play"></ion-icon>
         </div>
         }
