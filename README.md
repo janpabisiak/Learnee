@@ -1,59 +1,68 @@
-# LearningEnglishApp
+# Learnee [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/janpabisiak/JustBucks/blob/master/LICENSE)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.1.
+Learnee's is web app developed in Angular whose main goal is to provide a free and convenient solution for learning new terms. With six built-in games, you can broaden your horizons more rapidly than even before, and thanks to gamification (in the form of daily stats and XP system), you will be more motivated to succeed in your ambitions in fun way.
 
-## Development server
+Learnee was created to enhance my personal learning process as a free, privacy-oriented, and ad-free alternative to other similar apps.
 
-To start a local development server, run:
+This project is still in progress.
+
+## Features
+
+-   **Terms management**: Allows users to easily add, edit, and delete terms. Users can also easily decide which terms they want to learn and which they don't.
+-   **Auto-generated definition**: Learnee will provide you example definition for a given word, thanks to its connection with an external API.
+-   **Word of the day**: Get a daily suggested term to learn.
+-   **Search and sort**: Quickly find specific words with a search bar and sort options.
+-   **User settings**: Select between light and dark mode, and export or delete your data with ease.
+-   **Pagination**: Efficiently navigate through large datasets with pagination controls. Decide how many terms to display per page.
+-   **User statistics**: Visual representations on a heatmap chart with the number of plays from the latest 30 days.
+-   **XP system**: Gain XP points for every won game and lose them if your answer is incorrect.
+-   **Games included**: Start learning by playing one of 6 included game: quiz, matching game, true of false, fill gaps, and listening game.
+
+## Tech Stack
+
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+![Angular](https://img.shields.io/badge/angular-%23DD0031.svg?style=for-the-badge&logo=angular&logoColor=white)
+![Jasmine](https://img.shields.io/badge/jasmine-%238A4182.svg?style=for-the-badge&logo=jasmine&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
+
+## Run Locally
+
+I. Clone the project
 
 ```bash
-ng serve
+git clone https://github.com/janpabisiak/Learnee.git
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+II. Go to the project directory
 
 ```bash
-ng generate component component-name
+cd JustBucks
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+III. Install dependencies
 
 ```bash
-ng generate --help
+npm install
 ```
 
-## Building
+IV. Create environment files using sample file (`src/environment/environment.sample.ts`).
 
-To build the project run:
+V. Start the app instance
 
 ```bash
-ng build
+npm run dev
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
+## Run unit tests
 
 To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
 
 ```bash
-ng test
+npm run test
 ```
 
-## Running end-to-end tests
+## License
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/janpabisiak/Learnee/blob/main/LICENSE) file for details.
