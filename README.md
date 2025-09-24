@@ -52,7 +52,7 @@ IV. Create environment files using sample file (`src/environment/environment.sam
 V. Start the app instance
 
 ```bash
-npm run dev
+npm run start
 ```
 
 ## Run unit tests
