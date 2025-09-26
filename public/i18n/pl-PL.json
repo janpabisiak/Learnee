@@ -1,0 +1,107 @@
+{
+	"nav.home": "Start",
+	"nav.study": "Nauka",
+	"nav.settings": "Ustawienia",
+
+	"wordlist.title": "Lista słów",
+	"wordlist.count": "{{count}} słowa",
+	"wordlist.addNew": "Nowe słowo",
+	"wordlist.searchPlaceholder": "Szukaj po słowie lub definicji",
+	"wordlist.sort.nameAsc": "Sortuj rosnąco wg. słowa",
+	"wordlist.sort.nameDesc": "Sortuj malejąco wg. słowa",
+	"wordlist.sort.definitionAsc": "Sortuj rosnąco wg. definicji",
+	"wordlist.sort.definitionDesc": "Sortuj malejąco wg. definicji",
+	"wordlist.sort.learningAsc": "Sortuj rosnąco wg. stanu",
+	"wordlist.sort.learningDesc": "Sortuj malejąco wg stanu",
+	"wordlist.removeAll": "Wyczyść listę",
+	"wordlist.notLearning": "Nie uczone",
+	"wordlist.toLearn": "Do nauki",
+	"wordlist.noWords": "Brak słów.",
+	"wordlist.addNewWord": "Dodaj słowo przyciskiem po prawej stronie.",
+	"wordlist.adjustSearchQuery": "Zmień kryteria wyszukiwania.",
+	"wordlist.edit": "Edytuj",
+	"wordlist.delete": "Usuń",
+
+	"pagination.showing": "Wyświetlono {{from}}–{{to}} z {{total}}",
+	"pagination.rowsPerPage": "Na stronę:",
+
+	"wotd.title": "Słowo dnia",
+	"wotd.next": "Następne",
+	"wotd.addToWordlist": "Dodaj do listy",
+
+	"stats.title": "Statystyki",
+	"stats.plays": "{{count}} gier dnia {{date}}",
+	"level.title": "Postęp poziomu",
+	"level.label": "Poziom {{level}}",
+
+	"modal.add.title": "Nowe słowo",
+	"modal.add.word": "Słowo",
+	"modal.add.word.enter": "Wpisz słowo",
+	"modal.add.word.required": "Pole wymagane.",
+	"modal.add.definition": "Definicja",
+	"modal.add.definition.required": "Pole wymagane.",
+	"modal.add.too.many.chars": "Za dużo znaków (maks. {{length}}).",
+
+	"modal.edit.title": "Edytuj słowo",
+
+	"modal.delete.title": "Potwierdź usunięcie",
+	"modal.delete.confirm.delete": "Usunąć {{entity}} z listy słów?",
+
+	"modal.label.add": "Dodaj",
+	"modal.label.save": "Zapisz",
+	"modal.label.confirm": "OK",
+	"modal.label.cancel": "Anuluj",
+	"modal.label.everything": "wszystko",
+
+	"study.prepare.title": "Przygotuj grę",
+	"study.prepare.button": "Start",
+
+	"study.games.cancel.label": "Przerwij grę",
+	"study.games.checkAnswer.label": "Sprawdź",
+	"study.games.all.title": "Wszystkie",
+	"study.games.all.description": "Wybierz wszystkie gry",
+
+	"study.games.quiz.title": "Quiz",
+	"study.games.quiz.description": "Wybierz poprawną definicję dla słowa",
+
+	"study.games.matching.title": "Dopasowywanie",
+	"study.games.matching.description": "Połącz słowo z definicją",
+
+	"study.games.trueFalse.title": "Prawda/fałsz",
+	"study.games.trueFalse.description": "Czy słowo ma poprawną definicję?",
+	"study.games.trueFalse.true.label": "Prawda",
+	"study.games.trueFalse.false.label": "Fałsz",
+
+	"study.games.fillGaps.title": "Uzupełnij luki",
+	"study.games.fillGaps.description": "Wstaw brakujące słowo",
+
+	"study.games.listening.title": "Słuchanie",
+	"study.games.listening.description": "Wybierz słowo z przeczytanej definicji",
+
+	"study.games.fillGapsListening.subtitle": "Jakie to słowo?",
+
+	"study.finished.title": "Koniec gry",
+	"study.finished.button": "Zagraj ponownie",
+
+	"settings.title": "Ustawienia",
+
+	"settings.darkMode.title": "Tryb ciemny",
+	"settings.darkMode.description": "Jasny lub ciemny wygląd",
+
+	"settings.language.title": "Język",
+	"settings.language.description": "Zmień język aplikacji",
+	"settings.language.english": "Angielski",
+	"settings.language.polish": "Polski",
+
+	"settings.export.title": "Eksport danych",
+	"settings.export.description": "Pobierz wszystkie dane w formacie JSON",
+	"settings.export.button": "Eksportuj",
+
+	"settings.delete.title": "Usuń dane",
+	"settings.delete.description": "Usuń wszystkie dane z pamięci przeglądarki",
+	"settings.delete.button": "Usuń",
+
+	"footer.copyright": "Copyright © {{year}} | Jan Pabisiak",
+
+	"error.notFound": "Błąd 404 – Strona nie istnieje"
+}
