@@ -4,6 +4,7 @@ import { WordListSearchBarComponent } from "./word-list-search-bar.component";
 import { provideHttpClient } from "@angular/common/http";
 import { createMockWordsService, IMockWordsService } from "app/app.component.spec";
 import { WordsService } from "@services/words.service";
+import { provideTranslateService } from "@ngx-translate/core";
 
 describe("WordListSearchBarComponent", () => {
 	let component: WordListSearchBarComponent;
@@ -15,7 +16,13 @@ describe("WordListSearchBarComponent", () => {
 
 		await TestBed.configureTestingModule({
 			imports: [WordListSearchBarComponent],
-			providers: [provideHttpClient(), { provide: WordsService, useValue: mockWordsService }],
+			providers: [
+				provideHttpClient(),
+				{ provide: WordsService, useValue: mockWordsService },
+				provideTranslateService({
+					fallbackLang: "en",
+				}),
+			],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(WordListSearchBarComponent);

@@ -12,6 +12,7 @@ import {
 } from "app/app.component.spec";
 import { PaginationService } from "@services/pagination.service";
 import { WordsService } from "@services/words.service";
+import { provideTranslateService } from "@ngx-translate/core";
 
 describe("ResultsIndicatorComponent", () => {
 	let component: ResultsIndicatorComponent;
@@ -29,6 +30,9 @@ describe("ResultsIndicatorComponent", () => {
 				provideHttpClient(),
 				{ provide: PaginationService, useValue: mockPaginationService },
 				{ provide: WordsService, useValue: mockWordsService },
+				provideTranslateService({
+					fallbackLang: "en",
+				}),
 			],
 		}).compileComponents();
 

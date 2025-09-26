@@ -5,6 +5,7 @@ import { PaginationButtonsComponent } from "./pagination-buttons/pagination-butt
 import { ResultsIndicatorComponent } from "./results-indicator/results-indicator.component";
 import { WordsPerPageSelectorComponent } from "./words-per-page-selector/words-per-page-selector.component";
 import { provideHttpClient } from "@angular/common/http";
+import { provideTranslateService } from "@ngx-translate/core";
 
 describe("PaginationContainerComponent", () => {
 	let component: PaginationContainerComponent;
@@ -18,7 +19,12 @@ describe("PaginationContainerComponent", () => {
 				ResultsIndicatorComponent,
 				WordsPerPageSelectorComponent,
 			],
-			providers: [provideHttpClient()],
+			providers: [
+				provideHttpClient(),
+				provideTranslateService({
+					fallbackLang: "en",
+				}),
+			],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(PaginationContainerComponent);

@@ -14,6 +14,7 @@ import {
 } from "app/app.component.spec";
 import { ModalService } from "@services/modal.service";
 import { WordsService } from "@services/words.service";
+import { provideTranslateService } from "@ngx-translate/core";
 
 describe("ConfirmWordDeletionModalComponent", () => {
 	let component: ConfirmWordDeletionModalComponent;
@@ -37,6 +38,9 @@ describe("ConfirmWordDeletionModalComponent", () => {
 					provide: ConfirmWordDeletionModalComponent,
 					useValue: mockConfirmWordDeletionService,
 				},
+				provideTranslateService({
+					fallbackLang: "en",
+				}),
 			],
 		}).compileComponents();
 

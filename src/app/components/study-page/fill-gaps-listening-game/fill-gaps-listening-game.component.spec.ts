@@ -15,6 +15,7 @@ import {
 } from "app/app.component.spec";
 import { WebSpeechService } from "@services/web-speech.service";
 import { GameService } from "@services/game.service";
+import { provideTranslateService } from "@ngx-translate/core";
 
 describe("FillGapsGameComponent", () => {
 	let component: FillGapsGameComponent;
@@ -37,6 +38,9 @@ describe("FillGapsGameComponent", () => {
 				provideHttpClient(),
 				{ provide: WebSpeechService, useValue: mockWebSpeechService },
 				{ provide: GameService, useValue: mockGameService },
+				provideTranslateService({
+					fallbackLang: "en",
+				}),
 			],
 			schemas: [CUSTOM_ELEMENTS_SCHEMA],
 		}).compileComponents();

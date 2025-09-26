@@ -1,5 +1,5 @@
 <ng-container *ngIf="translations">
     <app-modal [title]="translations['modal.delete.title']" [isDanger]="true" [showCloseIcon]="false" (closeButtonClicked)="closeModal()" [primaryButtonText]="translations['modal.label.confirm']" [secondaryButtonText]="translations['modal.label.cancel']" (primaryButtonClicked)="confirmDeletion()" (secondaryButtonClicked)="closeModal()">
-        <p>{{'modal.delete.confirm.delete' | translate : {entity: purgeWords ? translations['modal.label.everything'] : word!.name } }}</p>
+        <p>{{'modal.delete.confirm.delete' | translate : {entity: purgeWords ? translations['modal.label.everything'] : word?.name } }}</p>
     </app-modal>
 </ng-container>

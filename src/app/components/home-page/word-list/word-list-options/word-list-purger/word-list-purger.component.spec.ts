@@ -10,6 +10,7 @@ import {
 } from "app/app.component.spec";
 import { ModalService } from "@services/modal.service";
 import { ConfirmWordDeletionService } from "@services/confirm-word-deletion.service";
+import { provideTranslateService } from "@ngx-translate/core";
 
 describe("WordListPurgerComponent", () => {
 	let component: WordListPurgerComponent;
@@ -26,6 +27,9 @@ describe("WordListPurgerComponent", () => {
 			providers: [
 				{ provide: ModalService, useValue: mockModalService },
 				{ provide: ConfirmWordDeletionService, useValue: mockConfirmWordDeletionService },
+				provideTranslateService({
+					fallbackLang: "en",
+				}),
 			],
 		}).compileComponents();
 

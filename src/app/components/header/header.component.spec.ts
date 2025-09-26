@@ -5,6 +5,7 @@ import { provideRouter } from "@angular/router";
 import { HeaderNavbarComponent } from "./header-navbar/header-navbar.component";
 import { HamburgerComponent } from "./hamburger/hamburger.component";
 import { LogoComponent } from "./logo/logo.component";
+import { provideTranslateService } from "@ngx-translate/core";
 
 describe("HeaderComponent", () => {
 	let component: HeaderComponent;
@@ -13,7 +14,12 @@ describe("HeaderComponent", () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			imports: [HeaderComponent, HeaderNavbarComponent, HamburgerComponent, LogoComponent],
-			providers: [provideRouter([])],
+			providers: [
+				provideRouter([]),
+				provideTranslateService({
+					fallbackLang: "en",
+				}),
+			],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(HeaderComponent);

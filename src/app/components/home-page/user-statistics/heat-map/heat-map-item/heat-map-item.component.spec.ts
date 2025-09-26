@@ -4,6 +4,7 @@ import { HeatMapItemComponent } from "./heat-map-item.component";
 import { provideHttpClient } from "@angular/common/http";
 import { DatePipe } from "@angular/common";
 import { mockStatistics } from "app/app.component.spec";
+import { provideTranslateService } from "@ngx-translate/core";
 
 describe("HeatMapItemComponent", () => {
 	let component: HeatMapItemComponent;
@@ -12,7 +13,12 @@ describe("HeatMapItemComponent", () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			imports: [HeatMapItemComponent, DatePipe],
-			providers: [provideHttpClient()],
+			providers: [
+				provideHttpClient(),
+				provideTranslateService({
+					fallbackLang: "en",
+				}),
+			],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(HeatMapItemComponent);

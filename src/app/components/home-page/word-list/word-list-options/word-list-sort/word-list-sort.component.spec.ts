@@ -4,6 +4,7 @@ import { WordListSortComponent } from "./word-list-sort.component";
 import { provideHttpClient } from "@angular/common/http";
 import { createMockWordsService, IMockWordsService, mockWords } from "app/app.component.spec";
 import { ESortTypes, WordsService } from "@services/words.service";
+import { provideTranslateService } from "@ngx-translate/core";
 
 describe("WordListSortComponent", () => {
 	let component: WordListSortComponent;
@@ -15,7 +16,13 @@ describe("WordListSortComponent", () => {
 
 		await TestBed.configureTestingModule({
 			imports: [WordListSortComponent],
-			providers: [provideHttpClient(), { provide: WordsService, useValue: mockWordsService }],
+			providers: [
+				provideHttpClient(),
+				{ provide: WordsService, useValue: mockWordsService },
+				provideTranslateService({
+					fallbackLang: "en",
+				}),
+			],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(WordListSortComponent);

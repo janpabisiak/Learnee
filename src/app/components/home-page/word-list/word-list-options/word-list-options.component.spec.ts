@@ -5,6 +5,7 @@ import { provideHttpClient } from "@angular/common/http";
 import { WordListPurgerComponent } from "./word-list-purger/word-list-purger.component";
 import { WordListSearchBarComponent } from "./word-list-search-bar/word-list-search-bar.component";
 import { WordListSortComponent } from "./word-list-sort/word-list-sort.component";
+import { provideTranslateService } from "@ngx-translate/core";
 
 describe("WordListOptionsComponent", () => {
 	let component: WordListOptionsComponent;
@@ -18,7 +19,12 @@ describe("WordListOptionsComponent", () => {
 				WordListSearchBarComponent,
 				WordListSortComponent,
 			],
-			providers: [provideHttpClient()],
+			providers: [
+				provideHttpClient(),
+				provideTranslateService({
+					fallbackLang: "en",
+				}),
+			],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(WordListOptionsComponent);

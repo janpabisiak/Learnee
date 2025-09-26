@@ -15,6 +15,7 @@ import {
 } from "app/app.component.spec";
 import { ModalService } from "@services/modal.service";
 import { WordsService } from "@services/words.service";
+import { provideTranslateService } from "@ngx-translate/core";
 
 describe("HomePageComponent", () => {
 	let component: HomePageComponent;
@@ -38,6 +39,9 @@ describe("HomePageComponent", () => {
 				provideHttpClient(),
 				{ provide: ModalService, useValue: mockModalService },
 				{ provide: WordsService, useValue: mockWordsService },
+				provideTranslateService({
+					fallbackLang: "en",
+				}),
 			],
 		}).compileComponents();
 

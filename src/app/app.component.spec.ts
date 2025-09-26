@@ -22,6 +22,7 @@ import { EAvailableGames, IStage } from "@services/game.service";
 import { FooterComponent } from "@components/footer/footer.component";
 import { MobileMenuComponent } from "@components/header/mobile-menu/mobile-menu.component";
 import { IResultRange } from "@services/pagination.service";
+import { provideTranslateService } from "@ngx-translate/core";
 
 describe("AppComponent", () => {
 	let fixture: ComponentFixture<AppComponent>;
@@ -52,6 +53,9 @@ describe("AppComponent", () => {
 				{ provide: ToasterService, useValue: mockToasterService },
 				{ provide: ModalService, useValue: mockModalService },
 				{ provide: WordsService, useValue: mockWordsService },
+				provideTranslateService({
+					fallbackLang: "en",
+				}),
 			],
 		}).compileComponents();
 

@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { TrueFalseAnswerComponent } from "./true-false-answer.component";
+import { provideTranslateService } from "@ngx-translate/core";
 
 describe("TrueFalseAnswerComponent", () => {
 	let component: TrueFalseAnswerComponent;
@@ -9,6 +10,11 @@ describe("TrueFalseAnswerComponent", () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			imports: [TrueFalseAnswerComponent],
+			providers: [
+				provideTranslateService({
+					fallbackLang: "en",
+				}),
+			],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(TrueFalseAnswerComponent);

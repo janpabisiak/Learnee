@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { WordsPerPageSelectorComponent } from "./words-per-page-selector.component";
 import { createMockPaginationService, IMockPaginationService } from "app/app.component.spec";
 import { PaginationService } from "@services/pagination.service";
+import { provideTranslateService } from "@ngx-translate/core";
 
 describe("WordsPerPageSelectorComponent", () => {
 	let component: WordsPerPageSelectorComponent;
@@ -14,7 +15,12 @@ describe("WordsPerPageSelectorComponent", () => {
 
 		await TestBed.configureTestingModule({
 			imports: [WordsPerPageSelectorComponent],
-			providers: [{ provide: PaginationService, useValue: mockPaginationService }],
+			providers: [
+				{ provide: PaginationService, useValue: mockPaginationService },
+				provideTranslateService({
+					fallbackLang: "en",
+				}),
+			],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(WordsPerPageSelectorComponent);

@@ -6,6 +6,7 @@ import { GameService } from "@services/game.service";
 import { createMockGameService, IMockGameService, mockStages } from "app/app.component.spec";
 import { GameContainerComponent } from "../game-section/game-container/game-container.component";
 import { GameResultsComponent } from "./game-results.component";
+import { provideTranslateService } from "@ngx-translate/core";
 
 describe("GameResultsComponent", () => {
 	let component: GameResultsComponent;
@@ -17,7 +18,13 @@ describe("GameResultsComponent", () => {
 
 		await TestBed.configureTestingModule({
 			imports: [GameResultsComponent, SectionTitleComponent, GameContainerComponent],
-			providers: [provideHttpClient(), { provide: GameService, useValue: mockGameService }],
+			providers: [
+				provideHttpClient(),
+				{ provide: GameService, useValue: mockGameService },
+				provideTranslateService({
+					fallbackLang: "en",
+				}),
+			],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(GameResultsComponent);

@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { GameSelectorItemComponent } from "./game-selector-item.component";
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { EAvailableGames } from "@services/game.service";
+import { provideTranslateService } from "@ngx-translate/core";
 
 describe("GameSelectorItemComponent", () => {
 	let component: GameSelectorItemComponent;
@@ -11,6 +12,11 @@ describe("GameSelectorItemComponent", () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			imports: [GameSelectorItemComponent],
+			providers: [
+				provideTranslateService({
+					fallbackLang: "en",
+				}),
+			],
 			schemas: [CUSTOM_ELEMENTS_SCHEMA],
 		}).compileComponents();
 

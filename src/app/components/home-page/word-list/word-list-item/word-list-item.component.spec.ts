@@ -22,6 +22,7 @@ import { WebSpeechService } from "@services/web-speech.service";
 import { WordsService } from "@services/words.service";
 import { ModalService } from "@services/modal.service";
 import { ConfirmWordDeletionService } from "@services/confirm-word-deletion.service";
+import { provideTranslateService } from "@ngx-translate/core";
 
 describe("WordListItemComponent", () => {
 	let component: WordListItemComponent;
@@ -48,6 +49,9 @@ describe("WordListItemComponent", () => {
 				{ provide: WordsService, useValue: mockWordsService },
 				{ provide: ModalService, useValue: mockModalService },
 				{ provide: ConfirmWordDeletionService, useValue: mockConfirmWordDeletionService },
+				provideTranslateService({
+					fallbackLang: "en",
+				}),
 			],
 			schemas: [CUSTOM_ELEMENTS_SCHEMA],
 		}).compileComponents();

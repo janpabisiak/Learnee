@@ -11,6 +11,7 @@ import {
 } from "app/app.component.spec";
 import { EAvailableGames, GameService } from "@services/game.service";
 import { SectionTitleComponent } from "@components/utils/section-title/section-title.component";
+import { provideTranslateService } from "@ngx-translate/core";
 
 describe("GameSelectorComponent", () => {
 	let component: GameSelectorComponent;
@@ -22,7 +23,13 @@ describe("GameSelectorComponent", () => {
 
 		await TestBed.configureTestingModule({
 			imports: [GameSelectorComponent, GameSelectorItemComponent, SectionTitleComponent],
-			providers: [provideHttpClient(), { provide: GameService, useValue: mockGameService }],
+			providers: [
+				provideHttpClient(),
+				{ provide: GameService, useValue: mockGameService },
+				provideTranslateService({
+					fallbackLang: "en",
+				}),
+			],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(GameSelectorComponent);

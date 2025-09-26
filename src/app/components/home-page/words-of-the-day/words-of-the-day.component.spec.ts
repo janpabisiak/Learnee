@@ -16,6 +16,7 @@ import {
 import { WordsService } from "@services/words.service";
 import { ModalService } from "@services/modal.service";
 import { AddWordFormService } from "@services/add-edit-word-form.service";
+import { provideTranslateService } from "@ngx-translate/core";
 
 describe("WordsOfTheDayComponent", () => {
 	let component: WordsOfTheDayComponent;
@@ -36,6 +37,9 @@ describe("WordsOfTheDayComponent", () => {
 				{ provide: WordsService, useValue: mockWordsService },
 				{ provide: ModalService, useValue: mockModalService },
 				{ provide: AddWordFormService, useValue: mockAddWordFormService },
+				provideTranslateService({
+					fallbackLang: "en",
+				}),
 			],
 		}).compileComponents();
 

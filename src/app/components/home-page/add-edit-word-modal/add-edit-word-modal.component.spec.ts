@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { provideHttpClient } from "@angular/common/http";
 import { AddEditWordModalComponent } from "./add-edit-word-modal.component";
 import { ModalComponent } from "@components/utils/modal/modal.component";
+import { provideTranslateService } from "@ngx-translate/core";
 
 describe("AddEditWordModalComponent", () => {
 	let component: AddEditWordModalComponent;
@@ -11,7 +12,12 @@ describe("AddEditWordModalComponent", () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			imports: [AddEditWordModalComponent, ModalComponent],
-			providers: [provideHttpClient()],
+			providers: [
+				provideHttpClient(),
+				provideTranslateService({
+					fallbackLang: "en",
+				}),
+			],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(AddEditWordModalComponent);

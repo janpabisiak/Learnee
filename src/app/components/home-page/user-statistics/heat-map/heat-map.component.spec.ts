@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { HeatMapComponent } from "./heat-map.component";
+import { provideTranslateService } from "@ngx-translate/core";
 
 describe("HeatMapComponent", () => {
 	let component: HeatMapComponent;
@@ -9,6 +10,11 @@ describe("HeatMapComponent", () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			imports: [HeatMapComponent],
+			providers: [
+				provideTranslateService({
+					fallbackLang: "en",
+				}),
+			],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(HeatMapComponent);

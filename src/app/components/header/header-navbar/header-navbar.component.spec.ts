@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { provideRouter } from "@angular/router";
 import { HeaderNavbarItemComponent } from "./header-navbar-item/header-navbar-item.component";
 import { HeaderNavbarComponent } from "./header-navbar.component";
+import { provideTranslateService } from "@ngx-translate/core";
 
 describe("HeaderNavbarComponent", () => {
 	let component: HeaderNavbarComponent;
@@ -10,7 +11,12 @@ describe("HeaderNavbarComponent", () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			imports: [HeaderNavbarComponent, HeaderNavbarItemComponent],
-			providers: [provideRouter([])],
+			providers: [
+				provideRouter([]),
+				provideTranslateService({
+					fallbackLang: "en",
+				}),
+			],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(HeaderNavbarComponent);

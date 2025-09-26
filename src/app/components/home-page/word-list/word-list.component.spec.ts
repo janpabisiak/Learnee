@@ -6,6 +6,7 @@ import { WordListOptionsComponent } from "./word-list-options/word-list-options.
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { WordListItemComponent } from "./word-list-item/word-list-item.component";
 import { PaginationContainerComponent } from "./pagination-container/pagination-container.component";
+import { provideTranslateService } from "@ngx-translate/core";
 
 describe("WordListComponent", () => {
 	let component: WordListComponent;
@@ -19,7 +20,12 @@ describe("WordListComponent", () => {
 				WordListItemComponent,
 				PaginationContainerComponent,
 			],
-			providers: [provideHttpClient()],
+			providers: [
+				provideHttpClient(),
+				provideTranslateService({
+					fallbackLang: "en",
+				}),
+			],
 			schemas: [CUSTOM_ELEMENTS_SCHEMA],
 		}).compileComponents();
 

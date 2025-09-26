@@ -4,6 +4,7 @@ import { MatchingGameComponent } from "./matching-game.component";
 import { provideHttpClient } from "@angular/common/http";
 import { DraggableItemsListComponent } from "./draggable-items-list/draggable-items-list.component";
 import { ButtonComponent } from "@components/utils/button/button.component";
+import { provideTranslateService } from "@ngx-translate/core";
 
 describe("MatchingGameComponent", () => {
 	let component: MatchingGameComponent;
@@ -12,7 +13,12 @@ describe("MatchingGameComponent", () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			imports: [MatchingGameComponent, DraggableItemsListComponent, ButtonComponent],
-			providers: [provideHttpClient()],
+			providers: [
+				provideHttpClient(),
+				provideTranslateService({
+					fallbackLang: "en",
+				}),
+			],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(MatchingGameComponent);
