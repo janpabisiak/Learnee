@@ -1,5 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { Component, CUSTOM_ELEMENTS_SCHEMA, OnDestroy, OnInit } from "@angular/core";
+import { TranslatePipe } from "@ngx-translate/core";
 import { combineLatest, Subject, takeUntil } from "rxjs";
 import { WordsService } from "../../../services/words.service";
 import { IWord } from "../../../types/word.interface";
@@ -14,6 +15,7 @@ import { WordListOptionsComponent } from "./word-list-options/word-list-options.
 		WordListItemComponent,
 		WordListOptionsComponent,
 		PaginationContainerComponent,
+		TranslatePipe,
 	],
 	templateUrl: "./word-list.component.html",
 	standalone: true,

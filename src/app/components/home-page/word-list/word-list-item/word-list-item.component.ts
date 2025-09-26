@@ -7,11 +7,12 @@ import { WordsService } from "@services/words.service";
 import { ModalService } from "@services/modal.service";
 import { ConfirmWordDeletionService } from "@services/confirm-word-deletion.service";
 import { NgClass } from "@angular/common";
+import { TranslatePipe } from "@ngx-translate/core";
 
 @Component({
 	selector: "app-word-list-item",
 	templateUrl: "./word-list-item.component.html",
-	imports: [SentenceCasePipe, NgClass],
+	imports: [SentenceCasePipe, NgClass, TranslatePipe],
 	standalone: true,
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

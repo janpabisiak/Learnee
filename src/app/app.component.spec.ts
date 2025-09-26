@@ -74,7 +74,7 @@ describe("AppComponent", () => {
 	});
 
 	it("should start auto removing toasters on init", () => {
-		expect(app.toasterService.startAutoRemoving).toHaveBeenCalledTimes(1);
+		expect(app["toasterService"].startAutoRemoving).toHaveBeenCalledTimes(1);
 	});
 
 	it("should add subscriptions to an array", () => {

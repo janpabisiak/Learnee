@@ -1,12 +1,14 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { availableGames, EAvailableGames, GameService } from "@services/game.service";
 import { GameSelectorItemComponent } from "./game-selector-item/game-selector-item.component";
-import { Subject, takeUntil } from "rxjs";
+import { Subject, take, takeUntil } from "rxjs";
 import { SectionTitleComponent } from "@components/utils/section-title/section-title.component";
+import { TranslateService } from "@ngx-translate/core";
+import { NgIf } from "@angular/common";
 
 @Component({
 	selector: "app-game-selector",
-	imports: [GameSelectorItemComponent, SectionTitleComponent],
+	imports: [GameSelectorItemComponent, SectionTitleComponent, NgIf],
 	templateUrl: "./game-selector.component.html",
 })
 export class GameSelectorComponent implements OnInit, OnDestroy {
@@ -14,9 +16,10 @@ export class GameSelectorComponent implements OnInit, OnDestroy {
 	selectedGames: EAvailableGames[] = [];
 	allGamesSelected = false;
 	hasSelectedGames = true;
+	translations: Record<string, string> | null = null;
 	private destroy$ = new Subject<void>();
 
-	constructor(private gameService: GameService) {}
+	constructor(private gameService: GameService, private translation: TranslateService) {}
 
 	ngOnInit() {
 		this.gameService.selectedGames$
@@ -25,6 +28,13 @@ export class GameSelectorComponent implements OnInit, OnDestroy {
 				this.hasSelectedGames = !!selectedGames.length;
 				this.selectedGames = selectedGames;
 				this.allGamesSelected = selectedGames.length === availableGames.length;
+			});
+
+		this.translation
+			.get(["study.prepare.title", "study.prepare.button"])
+			.pipe(take(1))
+			.subscribe((translations) => {
+				this.translations = translations;
 			});
 	}
 

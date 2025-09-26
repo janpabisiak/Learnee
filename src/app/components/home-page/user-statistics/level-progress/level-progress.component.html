@@ -1,6 +1,6 @@
-<h3 class="text-2xl font-bold text-center mb-2">Level progress</h3>
+<h3 class="text-2xl font-bold text-center mb-2">{{'level.title' | translate}}</h3>
 <div class="flex gap-3">
-    <h5>Level {{level + 1}}</h5>
+    <h5>{{'level.label' | translate : {level: level + 1} }}</h5>
     <app-progress-bar class="flex-1" [progress]="levelProgress" [tooltipContent]="`${xpPoints} / ${xpForNextLevel}`"></app-progress-bar>
-    <h5>Level {{level + 2}}</h5>
+    <h5>{{'level.label' | translate : {level: level + 2} }}</h5>
 </div>

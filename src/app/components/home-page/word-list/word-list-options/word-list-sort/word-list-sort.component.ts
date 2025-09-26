@@ -1,10 +1,11 @@
 import { Component, HostListener, OnDestroy, OnInit } from "@angular/core";
+import { TranslatePipe } from "@ngx-translate/core";
 import { ESortTypes, WordsService } from "@services/words.service";
 import { Subject, takeUntil } from "rxjs";
 
 @Component({
 	selector: "app-word-list-sort",
-	imports: [],
+	imports: [TranslatePipe],
 	templateUrl: "./word-list-sort.component.html",
 })
 export class WordListSortComponent implements OnInit, OnDestroy {

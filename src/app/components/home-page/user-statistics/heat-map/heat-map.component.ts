@@ -2,10 +2,11 @@ import { Component, OnDestroy, OnInit } from "@angular/core";
 import { IStatistics, LevelService } from "@services/level.service";
 import { Subject, takeUntil } from "rxjs";
 import { HeatMapItemComponent } from "./heat-map-item/heat-map-item.component";
+import { TranslatePipe } from "@ngx-translate/core";
 
 @Component({
 	selector: "app-heat-map",
-	imports: [HeatMapItemComponent],
+	imports: [HeatMapItemComponent, TranslatePipe],
 	templateUrl: "./heat-map.component.html",
 })
 export class HeatMapComponent implements OnInit, OnDestroy {

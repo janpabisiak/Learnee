@@ -1,3 +1,5 @@
-<app-modal [title]="'Confirm deletion'" [isDanger]="true" [showCloseIcon]="false" (closeButtonClicked)="closeModal()" [primaryButtonText]="'Confirm'" [secondaryButtonText]="'Cancel'" (primaryButtonClicked)="confirmDeletion()" (secondaryButtonClicked)="closeModal()">
-    <p>Are you sure that you want to delete <b>{{purgeWords ? 'everything' : word?.name}}</b> from your wordlist?</p>
-</app-modal>
+<ng-container *ngIf="translations">
+    <app-modal [title]="translations['modal.delete.title']" [isDanger]="true" [showCloseIcon]="false" (closeButtonClicked)="closeModal()" [primaryButtonText]="translations['modal.label.confirm']" [secondaryButtonText]="translations['modal.label.cancel']" (primaryButtonClicked)="confirmDeletion()" (secondaryButtonClicked)="closeModal()">
+        <p>{{'modal.delete.confirm.delete' | translate : {entity: purgeWords ? translations['modal.label.everything'] : word!.name } }}</p>
+    </app-modal>
+</ng-container>

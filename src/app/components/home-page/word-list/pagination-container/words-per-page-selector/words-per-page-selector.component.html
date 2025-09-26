@@ -1,5 +1,5 @@
 <div class="flex items-center gap-2">
-    <label class="text-gray-500" for="rowsPerPage">Rows per page:</label>
+    <label class="text-gray-500" for="rowsPerPage">{{'pagination.rowsPerPage' | translate}}</label>
     <select class="bg-gray-100 rounded-md border-1 border-gray-200 h-9 p-2 dark:bg-zinc-800 dark:border-zinc-700" [value]="wordsPerPage" (change)="setWordsPerPage()" #select>
         <option [value]="5">5</option>
         <option [value]="10">10</option>

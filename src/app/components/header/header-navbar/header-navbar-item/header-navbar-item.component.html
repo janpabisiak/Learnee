@@ -1,5 +1,5 @@
 <li>
     <a class="flex items-center gap-1.5 duration-300" [ngClass]="isActive ? 'text-emerald-700' : ''" [routerLink]="[url]">
-        <ion-icon class="ionicon-thick" [name]="icon"></ion-icon> {{text}}
+        <ion-icon class="ionicon-thick" [name]="icon"></ion-icon> {{text | translate}}
     </a>
 </li>

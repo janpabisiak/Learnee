@@ -6,10 +6,11 @@ import { SentenceCasePipe } from "@pipes/sentence-case.pipe";
 import { NgClass, NgIf } from "@angular/common";
 import { InputGuessComponent } from "@components/study-page/fill-gaps-listening-game/input-guess/input-guess.component";
 import { WebSpeechService } from "@services/web-speech.service";
+import { TranslatePipe } from "@ngx-translate/core";
 
 @Component({
 	selector: "app-fill-gaps-listening-game",
-	imports: [ButtonComponent, SentenceCasePipe, NgClass, InputGuessComponent, NgIf],
+	imports: [ButtonComponent, SentenceCasePipe, NgClass, InputGuessComponent, NgIf, TranslatePipe],
 	templateUrl: "./fill-gaps-listening-game.component.html",
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

@@ -1,1 +1,1 @@
-<p class="text-gray-500" *ngIf="resultRange">Showing {{resultRange.start + 1}}-{{resultRange.end}} from {{numberOfWords}}</p>
+<p class="text-gray-500" *ngIf="resultRange">{{'pagination.showing' | translate : {from: resultRange.start + 1, to: resultRange.end, total: numberOfWords} }}</p>

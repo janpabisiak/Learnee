@@ -1,11 +1,12 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
+import { ProgressBarComponent } from "@components/utils/progress-bar/progress-bar.component";
+import { TranslatePipe } from "@ngx-translate/core";
 import { LevelService } from "@services/level.service";
 import { combineLatest, Subject, takeUntil } from "rxjs";
-import { ProgressBarComponent } from "@components/utils/progress-bar/progress-bar.component";
 
 @Component({
 	selector: "app-level-progress",
-	imports: [ProgressBarComponent],
+	imports: [ProgressBarComponent, TranslatePipe],
 	templateUrl: "./level-progress.component.html",
 })
 export class LevelProgressComponent implements OnInit, OnDestroy {

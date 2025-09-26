@@ -6,10 +6,11 @@ import { ButtonComponent } from "@components/utils/button/button.component";
 import { WotdItemComponent } from "./wotd-item/wotd-item.component";
 import { ModalService } from "@services/modal.service";
 import { AddWordFormService } from "@services/add-edit-word-form.service";
+import { TranslatePipe } from "@ngx-translate/core";
 
 @Component({
 	selector: "app-words-of-the-day",
-	imports: [ButtonComponent, WotdItemComponent, WotdItemComponent],
+	imports: [ButtonComponent, WotdItemComponent, WotdItemComponent, TranslatePipe],
 	templateUrl: "./words-of-the-day.component.html",
 })
 export class WordsOfTheDayComponent implements OnInit, OnDestroy {

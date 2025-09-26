@@ -1,5 +1,5 @@
-<section class="flex flex-col max-w-7xl mx-auto">
-    <app-section-title [title]="'Game finished'" [buttonType]="'primary'" [buttonContent]="'Play again'" (buttonClicked)="cancelGame()"></app-section-title>
+<section *ngIf="translations" class="flex flex-col max-w-7xl mx-auto">
+    <app-section-title [title]="translations['study.finished.title']" [buttonType]="'primary'" [buttonContent]="translations['study.finished.button']" (buttonClicked)="cancelGame()"></app-section-title>
     <app-progress-bar class="[&>div>progress]:h-6 mt-6" [progress]="correctAnswerPercentage" [type]="'gameResults'" [tooltipContent]="`${correctAnswerAmount}/${stages.length}`"></app-progress-bar>
     <ul class="my-8 flex flex-col gap-5">
         @for (stage of stages; track stage.id) {

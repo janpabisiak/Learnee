@@ -7,6 +7,6 @@
         'bg-emerald-500 hover:bg-emerald-600': percentOfMax > .75,
     }"></div>
     <div class="absolute bottom-full left-1/2 -translate-x-1/2 bg-gray-900 w-max text-gray-50 py-1 px-3 rounded-md opacity-0 duration-300 pointer-events-none hidden dark:bg-zinc-700">
-        {{day.numberOfPlays}} play{{day.numberOfPlays > 1 || day.numberOfPlays === 0 ? 's' : ''}} on {{day.date | date:'longDate'}}
+        {{'stats.plays' | translate : {count: day.numberOfPlays, date: day.date | date : 'longDate' : '' : currentLanguage} }}
     </div>
 </li>

@@ -15,25 +15,19 @@ export class HeaderNavbarComponent implements OnInit, OnDestroy {
 		{
 			id: 0,
 			url: "/",
-			text: "Home",
+			text: "nav.home",
 			icon: "home-outline",
 		},
 		{
 			id: 1,
-			url: "/folders",
-			text: "Folders",
-			icon: "folder-outline",
-		},
-		{
-			id: 2,
 			url: "/study",
-			text: "Study",
+			text: "nav.study",
 			icon: "school-outline",
 		},
 		{
-			id: 3,
+			id: 2,
 			url: "/settings",
-			text: "Settings",
+			text: "nav.settings",
 			icon: "settings-outline",
 		},
 	];

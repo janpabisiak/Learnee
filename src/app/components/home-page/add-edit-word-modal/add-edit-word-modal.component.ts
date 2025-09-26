@@ -2,6 +2,7 @@ import { CommonModule } from "@angular/common";
 import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from "@angular/core";
 import { ReactiveFormsModule } from "@angular/forms";
 import { ModalComponent } from "@components/utils/modal/modal.component";
+import { TranslatePipe, TranslateService } from "@ngx-translate/core";
 import { AddWordFormService } from "@services/add-edit-word-form.service";
 import { ModalService } from "@services/modal.service";
 import { WordsService } from "@services/words.service";
@@ -11,7 +12,7 @@ import { Subscription, take } from "rxjs";
 	selector: "app-add-edit-word-modal",
 	standalone: true,
 	templateUrl: "./add-edit-word-modal.component.html",
-	imports: [ModalComponent, ReactiveFormsModule, CommonModule],
+	imports: [ModalComponent, ReactiveFormsModule, CommonModule, TranslatePipe],
 })
 export class AddEditWordModalComponent implements OnInit, OnDestroy {
 	@ViewChild("wordDefinition") wordDefinitionEl!: ElementRef<HTMLTextAreaElement>;
@@ -20,12 +21,14 @@ export class AddEditWordModalComponent implements OnInit, OnDestroy {
 	isSubmitAttempted = false;
 	isSubmitDisabled = false;
 	isDefinitionFetched = false;
+	translations: Record<string, string> | null = null;
 
 	constructor(
 		private modalService: ModalService,
 		private addEditWordFormService: AddWordFormService,
 		private wordsService: WordsService,
-		private renderer: Renderer2
+		private renderer: Renderer2,
+		private translation: TranslateService
 	) {}
 
 	ngOnInit() {
@@ -55,6 +58,20 @@ export class AddEditWordModalComponent implements OnInit, OnDestroy {
 				);
 			})
 		);
+
+		this.translation
+			.get([
+				"modal.add.title",
+				"modal.edit.title",
+				"modal.add.word.enter",
+				"modal.label.add",
+				"modal.label.save",
+				"modal.label.cancel",
+			])
+			.pipe(take(1))
+			.subscribe((translations) => {
+				this.translations = translations;
+			});
 	}
 
 	toggleIsAddWordModalOpen(state: boolean) {

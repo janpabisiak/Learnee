@@ -1,16 +1,18 @@
-<app-modal [title]="isEditing ? 'Edit word' : 'Add new word'" (closeButtonClicked)="toggleIsAddWordModalOpen(false)" [primaryButtonText]="isEditing ? 'Save' : 'Add word'" [secondaryButtonText]="'Cancel'" [primaryButtonDisabled]="isSubmitDisabled" (primaryButtonClicked)="submitForm()" (secondaryButtonClicked)="toggleIsAddWordModalOpen(false)">
-    <form class="flex flex-col gap-4" [formGroup]="form">
-        <div class="flex flex-col gap-1">
-            <label class="text-gray-500" for="word">Word <span class="text-red-700">*</span></label>
-            <input class="p-3 bg-gray-100 rounded-md border-1 border-gray-200 placeholder-gray-500 outline-0 dark:bg-zinc-800 dark:border-zinc-700" type="text" name="word" placeholder="Enter word" formControlName="word" [ngClass]="{'show-validation': isSubmitAttempted}">
-            <span class="text-sm text-red-700" *ngIf="isSubmitAttempted && word?.invalid && word?.hasError('required')">Word is required.</span>
-            <span class="text-sm text-red-700" *ngIf="isSubmitAttempted && word?.invalid && word?.hasError('maxlength')">Too many chars.</span>
-        </div>
-        <div class="flex flex-col gap-1">
-            <label class="text-gray-500" for="definition">Definition <span class="text-red-700">*</span></label>
-            <textarea class="p-2 bg-gray-100 rounded-md border-1 border-gray-200 outline-0 placeholder-gray-400 overflow-hidden dark:bg-zinc-800 dark:border-zinc-700" name="definition" formControlName="definition" [ngClass]="{'show-validation': isSubmitAttempted}" (focus)="fetchWordDefinition()" #wordDefinition></textarea>
-            <span class="text-sm text-red-700" *ngIf="isSubmitAttempted && definition?.touched && definition?.invalid && definition?.hasError('required')">Definition is required.</span>
-            <span class="text-sm text-red-700" *ngIf="isSubmitAttempted && definition?.touched && definition?.invalid && definition?.hasError('maxlength')">Too many chars.</span>
-        </div>
-    </form>
-</app-modal>
+<ng-container *ngIf="translations">
+    <app-modal [title]="isEditing ? translations['modal.edit.title'] : translations['modal.add.title']" (closeButtonClicked)="toggleIsAddWordModalOpen(false)" [primaryButtonText]="isEditing ? translations['modal.label.save'] : translations['modal.label.add']" [secondaryButtonText]="translations['modal.label.cancel']" [primaryButtonDisabled]="isSubmitDisabled" (primaryButtonClicked)="submitForm()" (secondaryButtonClicked)="toggleIsAddWordModalOpen(false)">
+        <form class="flex flex-col gap-4" [formGroup]="form">
+            <div class="flex flex-col gap-1">
+                <label class="text-gray-500" for="word">{{'modal.add.word' | translate}} <span class="text-red-700">*</span></label>
+                <input class="p-3 bg-gray-100 rounded-md border-1 border-gray-200 placeholder-gray-500 outline-0 dark:bg-zinc-800 dark:border-zinc-700" type="text" name="word" [placeholder]="translations['modal.add.word.enter']" formControlName="word" [ngClass]="{'show-validation': isSubmitAttempted}">
+                <span class="text-sm text-red-700" *ngIf="isSubmitAttempted && word?.invalid && word?.hasError('required')">{{'modal.add.word.required' | translate}}</span>
+                <span class="text-sm text-red-700" *ngIf="isSubmitAttempted && word?.invalid && word?.hasError('maxlength')">{{'modal.add.too.many.chars' | translate : {length: 100} }}</span>
+            </div>
+            <div class="flex flex-col gap-1">
+                <label class="text-gray-500" for="definition">{{'modal.add.definition' | translate}} <span class="text-red-700">*</span></label>
+                <textarea class="p-2 bg-gray-100 rounded-md border-1 border-gray-200 outline-0 placeholder-gray-400 overflow-hidden dark:bg-zinc-800 dark:border-zinc-700" name="definition" formControlName="definition" [ngClass]="{'show-validation': isSubmitAttempted}" (focus)="fetchWordDefinition()" #wordDefinition></textarea>
+                <span class="text-sm text-red-700" *ngIf="isSubmitAttempted && definition?.touched && definition?.invalid && definition?.hasError('required')">{{'modal.add.definition.required' | translate}}</span>
+                <span class="text-sm text-red-700" *ngIf="isSubmitAttempted && definition?.touched && definition?.invalid && definition?.hasError('maxlength')">{{'modal.add.word.required' | translate : {length: 10000} }}</span>
+            </div>
+        </form>
+    </app-modal>
+</ng-container>

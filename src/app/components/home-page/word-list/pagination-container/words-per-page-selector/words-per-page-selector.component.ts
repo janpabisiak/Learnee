@@ -1,10 +1,11 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from "@angular/core";
+import { TranslatePipe } from "@ngx-translate/core";
 import { PaginationService } from "@services/pagination.service";
 import { Subscription } from "rxjs";
 
 @Component({
 	selector: "app-words-per-page-selector",
-	imports: [],
+	imports: [TranslatePipe],
 	templateUrl: "./words-per-page-selector.component.html",
 })
 export class WordsPerPageSelectorComponent implements OnInit, OnDestroy {

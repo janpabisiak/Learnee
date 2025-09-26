@@ -1,0 +1,107 @@
+{
+	"nav.home": "Home",
+	"nav.study": "Study",
+	"nav.settings": "Settings",
+
+	"wordlist.title": "Wordlist",
+	"wordlist.count": "{{count}} words",
+	"wordlist.addNew": "Add new word",
+	"wordlist.searchPlaceholder": "Search for word by name or definition",
+	"wordlist.sort.nameAsc": "Sort by name ASC",
+	"wordlist.sort.nameDesc": "Sort by name DESC",
+	"wordlist.sort.definitionAsc": "Sort by definition ASC",
+	"wordlist.sort.definitionDesc": "Sort by definition DESC",
+	"wordlist.sort.learningAsc": "Sort by learning ASC",
+	"wordlist.sort.learningDesc": "Sort by learning DESC",
+	"wordlist.removeAll": "Remove all words",
+	"wordlist.notLearning": "Not learning",
+	"wordlist.toLearn": "To learn",
+	"wordlist.noWords": "No words found.",
+	"wordlist.addNewWord": "Add new word by clicking button on right side of this webpage.",
+	"wordlist.adjustSearchQuery": "Try to adjust your search query.",
+	"wordlist.edit": "Edit word",
+	"wordlist.delete": "Delete word",
+
+	"pagination.showing": "Showing {{from}}-{{to}} from {{total}}",
+	"pagination.rowsPerPage": "Rows per page:",
+
+	"wotd.title": "Word of the day",
+	"wotd.next": "Next",
+	"wotd.addToWordlist": "Add to wordlist",
+
+	"stats.title": "Your statistics",
+	"stats.plays": "{{count}} plays on {{date}}",
+	"level.title": "Level progress",
+	"level.label": "Level {{level}}",
+
+	"modal.add.title": "Add new word",
+	"modal.add.word": "Word",
+	"modal.add.word.enter": "Enter word",
+	"modal.add.word.required": "Word is required.",
+	"modal.add.definition": "Definition",
+	"modal.add.definition.required": "Definition is required.",
+	"modal.add.too.many.chars": "Too many chars (max. {{length}}).",
+
+	"modal.edit.title": "Edit word",
+
+	"modal.delete.title": "Confirm deletion",
+	"modal.delete.confirm.delete": "Are you sure that you want to delete {{entity}} from your wordlist?",
+
+	"modal.label.add": "Add word",
+	"modal.label.save": "Save",
+	"modal.label.confirm": "Confirm",
+	"modal.label.cancel": "Cancel",
+	"modal.label.everything": "everything",
+
+	"study.prepare.title": "Prepare game",
+	"study.prepare.button": "Start a game",
+
+	"study.games.cancel.label": "Cancel game",
+	"study.games.checkAnswer.label": "Check answer",
+	"study.games.all.title": "All",
+	"study.games.all.description": "Select all games",
+
+	"study.games.quiz.title": "Quiz",
+	"study.games.quiz.description": "Select correct definition for given word",
+
+	"study.games.matching.title": "Matching",
+	"study.games.matching.description": "Match word with its definition",
+
+	"study.games.trueFalse.title": "True or false",
+	"study.games.trueFalse.description": "Check whether word has correct definition",
+	"study.games.trueFalse.true.label": "True",
+	"study.games.trueFalse.false.label": "False",
+
+	"study.games.fillGaps.title": "Fill gaps",
+	"study.games.fillGaps.description": "Check whether word has correct definition",
+
+	"study.games.listening.title": "Listening",
+	"study.games.listening.description": "Select correct word from read definition",
+
+	"study.games.fillGapsListening.subtitle": "What word is it?",
+
+	"study.finished.title": "Game finished",
+	"study.finished.button": "Play again",
+
+	"settings.title": "Settings",
+
+	"settings.darkMode.title": "Dark mode",
+	"settings.darkMode.description": "Switch between light and dark mode",
+
+	"settings.language.title": "Language",
+	"settings.language.description": "Change display language",
+	"settings.language.english": "English",
+	"settings.language.polish": "Polish",
+
+	"settings.export.title": "Export your data",
+	"settings.export.description": "Get all your data to your computer in json format",
+	"settings.export.button": "Export data",
+
+	"settings.delete.title": "Delete your data",
+	"settings.delete.description": "Delete all your data from browser's local storage",
+	"settings.delete.button": "Delete data",
+
+	"footer.copyright": "Copyright © {{year}} | Jan Pabisiak",
+
+	"error.notFound": "Error 404 - Not found"
+}

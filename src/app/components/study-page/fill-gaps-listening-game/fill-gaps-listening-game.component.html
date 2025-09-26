@@ -1,6 +1,6 @@
 @if (data) {
 <div [ngClass]="!stage && isVisible ? 'animate-slideIn' : ''">
-    <h2 class="text-4xl font-semibold mb-5"><span class="font-bold">{{currentStageId + 1}}.</span> What word is it?</h2>
+    <h2 class="text-4xl font-semibold mb-5"><span class="font-bold">{{currentStageId + 1}}.</span> {{'study.games.fillGapsListening.subtitle' | translate}}</h2>
     <div class="flex gap-4 flex-col items-center">
         @if (data.type === EAvailableGames.FillGaps) {
         <h5 class="text-xl">{{data.data.definition | sentencecase}}</h5>
@@ -12,7 +12,7 @@
         <app-input-guess [value]="inputValue" [answered]="data.answered" [answeredCorrect]="data.answeredCorrect" [wordLength]="wordLength" [disabled]="!!stage || data.answered" (valueChanged)="updateInputValue($event)"></app-input-guess>
     </div>
     <div class="mt-8 flex justify-end" *ngIf="!stage">
-        <app-button class="[&>button]:w-48 [&>button]:justify-center" [type]="'primary'" [disabled]="data.answered" (buttonClicked)="answerQuestion()">Check answer</app-button>
+        <app-button class="[&>button]:w-48 [&>button]:justify-center" [type]="'primary'" [disabled]="data.answered" (buttonClicked)="answerQuestion()">{{'study.games.checkAnswer.label' | translate}}</app-button>
     </div>
 </div>
 }

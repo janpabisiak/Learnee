@@ -1,5 +1,5 @@
-<section class="flex flex-col max-w-7xl mx-auto">
-    <app-section-title [title]="'Prepare game'" [buttonType]="'primary'" [buttonContent]="'Start a game'" [buttonDisabled]="!hasSelectedGames" (buttonClicked)="startGame()"></app-section-title>
+<section *ngIf="translations" class="flex flex-col max-w-7xl mx-auto">
+    <app-section-title [title]="translations['study.prepare.title']" [buttonType]="'primary'" [buttonContent]="translations['study.prepare.button']" [buttonDisabled]="!hasSelectedGames" (buttonClicked)="startGame()"></app-section-title>
     <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-3 my-8">
         <app-game-selector-item [isSelected]="allGamesSelected" (gameClicked)="toggleGameSelection($event)"></app-game-selector-item>
         @for (game of availableGames; track game.id) {

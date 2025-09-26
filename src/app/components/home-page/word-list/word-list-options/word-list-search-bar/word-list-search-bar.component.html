@@ -1,1 +1,1 @@
-<input class="p-3 w-full bg-gray-100 rounded-md border-1 border-gray-200 placeholder-gray-500 h-12 outline-0 dark:bg-zinc-800 dark:border-zinc-700" type="text" placeholder="Search for word by name or definition">
+<input *ngIf="translationValue" class="p-3 w-full bg-gray-100 rounded-md border-1 border-gray-200 placeholder-gray-500 h-12 outline-0 dark:bg-zinc-800 dark:border-zinc-700" type="text" [placeholder]="translationValue">

@@ -1,6 +1,6 @@
 @if (data) {
 <div [ngClass]="!stage && isVisible ? 'animate-slideIn' : ''">
-    <h2 class="text-4xl font-semibold mb-5"><span class="font-bold">{{currentStageId + 1}}.</span> {{data.data.word}} means {{data.data.definition}}</h2>
+    <h2 class="text-4xl font-semibold mb-5"><span class="font-bold">{{currentStageId + 1}}.</span> {{data.data.word}} - {{data.data.definition}}</h2>
     <ul class="flex flex-col gap-3">
         @for (type of [true, false]; track type) {
         <app-true-false-answer [type]="type" [isAnswered]="data.answered" [isCorrect]="data.answeredCorrect" (answered)="answerQuestion($event)"></app-true-false-answer>

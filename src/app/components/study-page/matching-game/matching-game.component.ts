@@ -6,10 +6,11 @@ import { GameService, IStage } from "@services/game.service";
 import { IMatch } from "@services/matching-game.service";
 import { combineLatest, Subject, takeUntil } from "rxjs";
 import { DraggableItemsListComponent } from "./draggable-items-list/draggable-items-list.component";
+import { TranslatePipe } from "@ngx-translate/core";
 
 @Component({
 	selector: "app-matching-game",
-	imports: [ButtonComponent, NgClass, DraggableItemsListComponent, NgIf],
+	imports: [ButtonComponent, NgClass, DraggableItemsListComponent, NgIf, TranslatePipe],
 	templateUrl: "./matching-game.component.html",
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
