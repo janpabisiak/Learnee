@@ -8,8 +8,8 @@ import {
 	IMockMockConfirmWordDeletionService,
 	IMockModalService,
 } from "app/app.component.spec";
-import { ModalService } from "@services/modal.service";
-import { ConfirmWordDeletionService } from "@services/confirm-word-deletion.service";
+import { ModalService } from "@services/modal/modal.service";
+import { ConfirmWordDeletionService } from "@services/confirm-word-deletion/confirm-word-deletion.service";
 import { provideTranslateService } from "@ngx-translate/core";
 
 describe("WordListPurgerComponent", () => {

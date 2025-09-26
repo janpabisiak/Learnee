@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { GameSelectorItemComponent } from "./game-selector-item.component";
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { EAvailableGames } from "@services/game.service";
+import { EAvailableGames } from "@services/game/game.service";
 import { provideTranslateService } from "@ngx-translate/core";
 
 describe("GameSelectorItemComponent", () => {

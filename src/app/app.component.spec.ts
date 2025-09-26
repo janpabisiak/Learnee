@@ -12,16 +12,16 @@ import {
 import { SpinnerComponent } from "@components/utils/spinner/spinner.component";
 import { BehaviorSubject } from "rxjs";
 import { IToaster } from "./types/toaster.interface";
-import { ToasterService } from "@services/toaster.service";
-import { ModalService } from "@services/modal.service";
+import { ToasterService } from "@services/toaster/toaster.service";
+import { ModalService } from "@services/modal/modal.service";
 import { IWord } from "./types/word.interface";
-import { WordsService } from "@services/words.service";
+import { WordsService } from "@services/words/words.service";
 import { EToasterTypes } from "@components/utils/toaster-container/toaster/toaster.component";
-import { IStatistics } from "@services/level.service";
-import { EAvailableGames, IStage } from "@services/game.service";
+import { IStatistics } from "@services/level/level.service";
+import { EAvailableGames, IStage } from "@services/game/game.service";
 import { FooterComponent } from "@components/footer/footer.component";
 import { MobileMenuComponent } from "@components/header/mobile-menu/mobile-menu.component";
-import { IResultRange } from "@services/pagination.service";
+import { IResultRange } from "@services/pagination/pagination.service";
 import { provideTranslateService } from "@ngx-translate/core";
 
 describe("AppComponent", () => {

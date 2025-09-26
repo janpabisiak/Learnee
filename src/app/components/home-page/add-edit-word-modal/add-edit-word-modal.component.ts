@@ -3,9 +3,9 @@ import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from "
 import { ReactiveFormsModule } from "@angular/forms";
 import { ModalComponent } from "@components/utils/modal/modal.component";
 import { TranslatePipe, TranslateService } from "@ngx-translate/core";
-import { AddWordFormService } from "@services/add-edit-word-form.service";
-import { ModalService } from "@services/modal.service";
-import { WordsService } from "@services/words.service";
+import { AddWordFormService } from "@services/add-edit-word-form/add-edit-word-form.service";
+import { ModalService } from "@services/modal/modal.service";
+import { WordsService } from "@services/words/words.service";
 import { Subscription, take } from "rxjs";
 
 @Component({

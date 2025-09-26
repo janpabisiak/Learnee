@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { WordsPerPageSelectorComponent } from "./words-per-page-selector.component";
 import { createMockPaginationService, IMockPaginationService } from "app/app.component.spec";
-import { PaginationService } from "@services/pagination.service";
+import { PaginationService } from "@services/pagination/pagination.service";
 import { provideTranslateService } from "@ngx-translate/core";
 
 describe("WordsPerPageSelectorComponent", () => {

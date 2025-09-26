@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { WordListSortComponent } from "./word-list-sort.component";
 import { provideHttpClient } from "@angular/common/http";
 import { createMockWordsService, IMockWordsService, mockWords } from "app/app.component.spec";
-import { ESortTypes, WordsService } from "@services/words.service";
+import { ESortTypes, WordsService } from "@services/words/words.service";
 import { provideTranslateService } from "@ngx-translate/core";
 
 describe("WordListSortComponent", () => {

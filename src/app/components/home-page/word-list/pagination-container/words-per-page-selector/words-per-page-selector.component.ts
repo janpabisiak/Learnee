@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { TranslatePipe } from "@ngx-translate/core";
-import { PaginationService } from "@services/pagination.service";
+import { PaginationService } from "@services/pagination/pagination.service";
 import { Subscription } from "rxjs";
 
 @Component({

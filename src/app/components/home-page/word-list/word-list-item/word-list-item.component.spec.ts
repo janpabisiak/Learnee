@@ -17,11 +17,11 @@ import {
 	IMockWordsService,
 	mockWords,
 } from "app/app.component.spec";
-import { AddWordFormService } from "@services/add-edit-word-form.service";
-import { WebSpeechService } from "@services/web-speech.service";
-import { WordsService } from "@services/words.service";
-import { ModalService } from "@services/modal.service";
-import { ConfirmWordDeletionService } from "@services/confirm-word-deletion.service";
+import { AddWordFormService } from "@services/add-edit-word-form/add-edit-word-form.service";
+import { WebSpeechService } from "@services/web-speech/web-speech.service";
+import { WordsService } from "@services/words/words.service";
+import { ModalService } from "@services/modal/modal.service";
+import { ConfirmWordDeletionService } from "@services/confirm-word-deletion/confirm-word-deletion.service";
 import { provideTranslateService } from "@ngx-translate/core";
 
 describe("WordListItemComponent", () => {

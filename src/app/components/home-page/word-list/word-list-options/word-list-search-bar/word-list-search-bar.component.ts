@@ -1,7 +1,7 @@
 import { NgIf } from "@angular/common";
 import { Component, HostListener, OnInit } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
-import { WordsService } from "@services/words.service";
+import { WordsService } from "@services/words/words.service";
 import { take } from "rxjs";
 
 @Component({

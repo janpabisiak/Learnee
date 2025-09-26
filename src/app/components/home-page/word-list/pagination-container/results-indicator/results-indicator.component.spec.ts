@@ -10,8 +10,8 @@ import {
 	mockResultRange,
 	mockWords,
 } from "app/app.component.spec";
-import { PaginationService } from "@services/pagination.service";
-import { WordsService } from "@services/words.service";
+import { PaginationService } from "@services/pagination/pagination.service";
+import { WordsService } from "@services/words/words.service";
 import { provideTranslateService } from "@ngx-translate/core";
 
 describe("ResultsIndicatorComponent", () => {

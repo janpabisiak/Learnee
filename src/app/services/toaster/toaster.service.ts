@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { IToaster } from "../types/toaster.interface";
+import { IToaster } from "../../types/toaster.interface";
 import { BehaviorSubject } from "rxjs";
 import { EToasterTypes } from "@components/utils/toaster-container/toaster/toaster.component";
 

@@ -12,8 +12,8 @@ import {
 	IMockWordsService,
 	mockWords,
 } from "app/app.component.spec";
-import { ModalService } from "@services/modal.service";
-import { WordsService } from "@services/words.service";
+import { ModalService } from "@services/modal/modal.service";
+import { WordsService } from "@services/words/words.service";
 import { provideTranslateService } from "@ngx-translate/core";
 
 describe("ConfirmWordDeletionModalComponent", () => {

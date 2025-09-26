@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { BehaviorSubject, Subscription } from "rxjs";
-import { WordsService } from "./words.service";
-import { IWord } from "../types/word.interface";
+import { WordsService } from "@services/words/words.service";
+import { IWord } from "../../types/word.interface";
 
 @Injectable({
 	providedIn: "root",

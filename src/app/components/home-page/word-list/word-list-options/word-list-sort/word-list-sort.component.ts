@@ -1,6 +1,6 @@
 import { Component, HostListener, OnDestroy, OnInit } from "@angular/core";
 import { TranslatePipe } from "@ngx-translate/core";
-import { ESortTypes, WordsService } from "@services/words.service";
+import { ESortTypes, WordsService } from "@services/words/words.service";
 import { Subject, takeUntil } from "rxjs";
 
 @Component({

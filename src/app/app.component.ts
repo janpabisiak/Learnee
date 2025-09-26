@@ -9,13 +9,13 @@ import {
 	EToasterPositions,
 	ToasterContainerComponent,
 } from "@components/utils/toaster-container/toaster-container.component";
-import { ModalService } from "@services/modal.service";
-import { ToasterService } from "@services/toaster.service";
-import { WordsService } from "@services/words.service";
+import { ModalService } from "@services/modal/modal.service";
+import { ToasterService } from "@services/toaster/toaster.service";
+import { WordsService } from "@services/words/words.service";
 import { Subscription } from "rxjs";
 import { IToaster } from "../app/types/toaster.interface";
 import { FooterComponent } from "@components/footer/footer.component";
-import { SettingsService } from "@services/settings.service";
+import { SettingsService } from "@services/settings/settings.service";
 
 @Component({
 	selector: "app-root",

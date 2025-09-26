@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { PaginationButtonsComponent } from "./pagination-buttons.component";
 import { createMockPaginationService, IMockPaginationService } from "app/app.component.spec";
-import { PaginationService } from "@services/pagination.service";
+import { PaginationService } from "@services/pagination/pagination.service";
 
 describe("PaginationButtonsComponent", () => {
 	let component: PaginationButtonsComponent;

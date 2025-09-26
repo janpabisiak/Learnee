@@ -1,11 +1,11 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, Input, OnDestroy, OnInit } from "@angular/core";
-import { EAvailableGames, GameService, IStage } from "@services/game.service";
+import { EAvailableGames, GameService, IStage } from "@services/game/game.service";
 import { combineLatest, skip, Subject, takeUntil } from "rxjs";
 import { ButtonComponent } from "@components/utils/button/button.component";
 import { SentenceCasePipe } from "@pipes/sentence-case.pipe";
 import { NgClass, NgIf } from "@angular/common";
 import { InputGuessComponent } from "@components/study-page/fill-gaps-listening-game/input-guess/input-guess.component";
-import { WebSpeechService } from "@services/web-speech.service";
+import { WebSpeechService } from "@services/web-speech/web-speech.service";
 import { TranslatePipe } from "@ngx-translate/core";
 
 @Component({

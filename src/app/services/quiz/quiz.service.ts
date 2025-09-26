@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
-import { WordsService } from "./words.service";
-import { IAnswer } from "../types/answer.interface";
-import { IQuestion } from "../types/question.interface";
+import { WordsService } from "@services/words/words.service";
+import { IAnswer } from "../../types/answer.interface";
+import { IQuestion } from "../../types/question.interface";
 
 @Injectable({
 	providedIn: "root",

@@ -2,7 +2,7 @@ import { CommonModule } from "@angular/common";
 import { Component, CUSTOM_ELEMENTS_SCHEMA, OnDestroy, OnInit } from "@angular/core";
 import { TranslatePipe } from "@ngx-translate/core";
 import { combineLatest, Subject, takeUntil } from "rxjs";
-import { WordsService } from "../../../services/words.service";
+import { WordsService } from "../../../services/words/words.service";
 import { IWord } from "../../../types/word.interface";
 import { PaginationContainerComponent } from "./pagination-container/pagination-container.component";
 import { WordListItemComponent } from "./word-list-item/word-list-item.component";

@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { EAvailableGames, GameService, IStage } from "@services/game.service";
+import { EAvailableGames, GameService, IStage } from "@services/game/game.service";
 import { combineLatest, Subject, takeUntil } from "rxjs";
 import { GameSelectorComponent } from "./game-selector/game-selector.component";
 import { GameResultsComponent } from "./game-results/game-results.component";

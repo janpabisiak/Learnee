@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { provideHttpClient } from "@angular/common/http";
 import { ButtonComponent } from "@components/utils/button/button.component";
-import { GameService } from "@services/game.service";
+import { GameService } from "@services/game/game.service";
 import { createMockGameService, IMockGameService } from "app/app.component.spec";
 import { GameSelectorComponent } from "./game-selector/game-selector.component";
 import { StudyPageComponent } from "./study-page.component";

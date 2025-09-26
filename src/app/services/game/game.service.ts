@@ -1,14 +1,17 @@
 import { Injectable } from "@angular/core";
-import { IMatch, MatchingGameService } from "./matching-game.service";
-import { QuizService } from "./quiz.service";
+import { IMatch, MatchingGameService } from "@services/matching-game/matching-game.service";
+import { QuizService } from "@services/quiz/quiz.service";
 import { BehaviorSubject } from "rxjs";
-import { ITrueFalseGameData, TrueFalseGameService } from "./true-false-game.service";
-import { IQuestion } from "../types/question.interface";
+import {
+	ITrueFalseGameData,
+	TrueFalseGameService,
+} from "../true-false-game/true-false-game.service";
+import { IQuestion } from "../../types/question.interface";
 import {
 	FillGapsListeningGameService,
 	IFillGapsListeningGameData,
-} from "./fill-gaps-listening-game.service";
-import { LevelService } from "./level.service";
+} from "@services/fill-gaps-listening-game/fill-gaps-listening-game.service";
+import { LevelService } from "@services/level/level.service";
 
 @Injectable({
 	providedIn: "root",
