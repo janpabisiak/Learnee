@@ -40,7 +40,7 @@ git clone https://github.com/janpabisiak/Learnee.git
 II. Go to the project directory
 
 ```bash
-cd JustBucks
+cd Learnee
 ```
 
 III. Install dependencies
