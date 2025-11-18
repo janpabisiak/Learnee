@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { ModalComponent } from "@components/utils/modal/modal.component";
 import { ConfirmWordDeletionService } from "@services/confirm-word-deletion/confirm-word-deletion.service";
-import { ModalService } from "@services/modal/modal.service";
+import { EModalType, ModalService } from "@services/modal/modal.service";
 import { IWord } from "../../../types/word.interface";
 import { WordsService } from "@services/words/words.service";
 import { TranslatePipe, TranslateService } from "@ngx-translate/core";
@@ -43,7 +43,7 @@ export class ConfirmWordDeletionModalComponent implements OnInit, OnDestroy {
 	}
 
 	closeModal() {
-		this.modalService.toggleShowWordDeletionModal(false);
+		this.modalService.toggleModal(EModalType.WordDeletion, false);
 	}
 
 	confirmDeletion() {

@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { HamburgerComponent } from "./hamburger.component";
 import { createMockModalService, IMockModalService } from "app/app.component.spec";
-import { ModalService } from "@services/modal/modal.service";
+import { EModalType, ModalService } from "@services/modal/modal.service";
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 
 describe("HamburgerComponent", () => {
@@ -34,10 +34,13 @@ describe("HamburgerComponent", () => {
 		expect(component.isMobileNavbarOpen).toBeTrue();
 	});
 
-	it("should call modalService.toggleIsMobileNavbarOpen on toggleNavbarMenu call", () => {
+	it("should show mobile navbar on toggleNavbarMenu call", () => {
 		component.toggleNavbarMenu();
 
-		expect(mockModalService.toggleIsMobileNavbarOpen).toHaveBeenCalledOnceWith(true);
+		expect(mockModalService.toggleModal).toHaveBeenCalledOnceWith(
+			EModalType.MobileNavbar,
+			true
+		);
 	});
 
 	it("should remove subscription on component destroy", () => {

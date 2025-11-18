@@ -20,7 +20,7 @@ import {
 import { AddWordFormService } from "@services/add-edit-word-form/add-edit-word-form.service";
 import { WebSpeechService } from "@services/web-speech/web-speech.service";
 import { WordsService } from "@services/words/words.service";
-import { ModalService } from "@services/modal/modal.service";
+import { EModalType, ModalService } from "@services/modal/modal.service";
 import { ConfirmWordDeletionService } from "@services/confirm-word-deletion/confirm-word-deletion.service";
 import { provideTranslateService } from "@ngx-translate/core";
 
@@ -82,7 +82,7 @@ describe("WordListItemComponent", () => {
 		const toggleDropdownMenuSpy = spyOn(component, "toggleDropdownMenu");
 		component.editWord();
 
-		expect(mockModalService.toggleShowWordAddingModal).toHaveBeenCalledOnceWith(true);
+		expect(mockModalService.toggleModal).toHaveBeenCalledOnceWith(EModalType.WordAdding, true);
 		expect(mockAddWordFormService.setupForEditing).toHaveBeenCalledOnceWith(component.word);
 		expect(toggleDropdownMenuSpy).toHaveBeenCalledTimes(1);
 	});
@@ -104,7 +104,10 @@ describe("WordListItemComponent", () => {
 		const toggleDropdownMenuSpy = spyOn(component, "toggleDropdownMenu");
 		component.deleteWord();
 
-		expect(mockModalService.toggleShowWordDeletionModal).toHaveBeenCalledOnceWith(true);
+		expect(mockModalService.toggleModal).toHaveBeenCalledOnceWith(
+			EModalType.WordDeletion,
+			true
+		);
 		expect(mockConfirmWordDeletionService.word).toEqual(component.word);
 		expect(toggleDropdownMenuSpy).toHaveBeenCalledTimes(1);
 	});

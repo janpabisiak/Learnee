@@ -32,12 +32,14 @@ export class ToasterService {
 	}
 
 	startAutoRemoving() {
-		setInterval(() => {
-			const updatedToasters: IToaster[] = this.toasters.value.filter(
-				(t) => t.expirationTimestamp > new Date().getTime() - 1
-			);
+		setInterval(() => this.filterToasters, 1000);
+	}
 
-			this.toasters.next(updatedToasters);
-		}, 1000);
+	private filterToasters() {
+		const updatedToasters: IToaster[] = this.toasters.value.filter(
+			(t) => t.expirationTimestamp > new Date().getTime() - 1
+		);
+
+		this.toasters.next(updatedToasters);
 	}
 }

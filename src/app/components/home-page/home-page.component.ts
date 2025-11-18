@@ -2,7 +2,7 @@ import { NgIf } from "@angular/common";
 import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, OnDestroy, OnInit } from "@angular/core";
 import { SectionTitleComponent } from "@components/utils/section-title/section-title.component";
 import { TranslateService } from "@ngx-translate/core";
-import { ModalService } from "@services/modal/modal.service";
+import { EModalType, ModalService } from "@services/modal/modal.service";
 import { combineLatest, Subscription } from "rxjs";
 import { WordsService } from "../../services/words/words.service";
 import { IWord } from "../../types/word.interface";
@@ -50,7 +50,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
 	}
 
 	toggleIsAddWordModalOpen(state: boolean) {
-		this.modalService.toggleShowWordAddingModal(state);
+		this.modalService.toggleModal(EModalType.WordAdding, state);
 	}
 
 	ngOnDestroy() {

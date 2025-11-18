@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { ButtonComponent } from "@components/utils/button/button.component";
 import { TranslatePipe } from "@ngx-translate/core";
 import { ConfirmWordDeletionService } from "@services/confirm-word-deletion/confirm-word-deletion.service";
-import { ModalService } from "@services/modal/modal.service";
+import { EModalType, ModalService } from "@services/modal/modal.service";
 
 @Component({
 	selector: "app-word-list-purger",
@@ -16,7 +16,7 @@ export class WordListPurgerComponent {
 	) {}
 
 	openModal() {
-		this.modalService.toggleShowWordDeletionModal(true);
+		this.modalService.toggleModal(EModalType.WordDeletion, true);
 		this.confirmWordDeletionService.purgeWords = true;
 	}
 }

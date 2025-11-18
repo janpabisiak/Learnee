@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { ModalComponent } from "@components/utils/modal/modal.component";
 import { TranslatePipe, TranslateService } from "@ngx-translate/core";
 import { AddWordFormService } from "@services/add-edit-word-form/add-edit-word-form.service";
-import { ModalService } from "@services/modal/modal.service";
+import { EModalType, ModalService } from "@services/modal/modal.service";
 import { WordsService } from "@services/words/words.service";
 import { Subscription, take } from "rxjs";
 
@@ -75,7 +75,7 @@ export class AddEditWordModalComponent implements OnInit, OnDestroy {
 	}
 
 	toggleIsAddWordModalOpen(state: boolean) {
-		this.modalService.toggleShowWordAddingModal(state);
+		this.modalService.toggleModal(EModalType.WordAdding, state);
 	}
 
 	submitForm() {
@@ -83,7 +83,7 @@ export class AddEditWordModalComponent implements OnInit, OnDestroy {
 
 		if (isFormValid) {
 			this.addEditWordFormService.submitForm();
-			this.modalService.toggleShowWordAddingModal(false);
+			this.modalService.toggleModal(EModalType.WordAdding, false);
 		} else {
 			this.form.markAllAsTouched();
 		}

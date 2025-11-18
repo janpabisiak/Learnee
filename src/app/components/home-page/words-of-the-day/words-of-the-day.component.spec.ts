@@ -14,7 +14,7 @@ import {
 	mockWords,
 } from "app/app.component.spec";
 import { WordsService } from "@services/words/words.service";
-import { ModalService } from "@services/modal/modal.service";
+import { EModalType, ModalService } from "@services/modal/modal.service";
 import { AddWordFormService } from "@services/add-edit-word-form/add-edit-word-form.service";
 import { provideTranslateService } from "@ngx-translate/core";
 
@@ -78,7 +78,7 @@ describe("WordsOfTheDayComponent", () => {
 		component.currentWordId = 1;
 		component.addWord();
 
-		expect(mockModalService.toggleShowWordAddingModal).toHaveBeenCalledOnceWith(true);
+		expect(mockModalService.toggleModal).toHaveBeenCalledOnceWith(EModalType.WordAdding, true);
 		expect(mockAddWordFormService.setupForEditing).toHaveBeenCalledOnceWith({
 			...mockWords[1],
 			id: 0,

@@ -13,7 +13,7 @@ import {
 	IMockWordsService,
 	mockWords,
 } from "app/app.component.spec";
-import { ModalService } from "@services/modal/modal.service";
+import { EModalType, ModalService } from "@services/modal/modal.service";
 import { WordsService } from "@services/words/words.service";
 import { provideTranslateService } from "@ngx-translate/core";
 
@@ -66,7 +66,10 @@ describe("HomePageComponent", () => {
 	it("should toggle visibility of word adding modal on toggleIsAddWordModalOpen call", () => {
 		component.toggleIsAddWordModalOpen(true);
 
-		expect(component.modalService.toggleShowWordAddingModal).toHaveBeenCalledWith(true);
+		expect(component.modalService.toggleModal).toHaveBeenCalledWith(
+			EModalType.WordAdding,
+			true
+		);
 	});
 
 	it("should unsubscribe on component destroy", () => {
