@@ -12,8 +12,8 @@ import {
 	IMockWordsService,
 	mockWords,
 } from "app/app.component.spec";
-import { ModalService } from "@services/modal.service";
-import { WordsService } from "@services/words.service";
+import { EModalType, ModalService } from "@services/modal/modal.service";
+import { WordsService } from "@services/words/words.service";
 import { provideTranslateService } from "@ngx-translate/core";
 
 describe("ConfirmWordDeletionModalComponent", () => {
@@ -53,10 +53,13 @@ describe("ConfirmWordDeletionModalComponent", () => {
 		expect(component).toBeTruthy();
 	});
 
-	it("should call modalService.toggleShowWordDeletionModal on closeModal call", () => {
+	it("should hide word deletion modal on closeModal call", () => {
 		component.closeModal();
 
-		expect(mockModalService.toggleShowWordDeletionModal).toHaveBeenCalledOnceWith(false);
+		expect(mockModalService.toggleModal).toHaveBeenCalledOnceWith(
+			EModalType.WordDeletion,
+			false
+		);
 	});
 
 	it("should call wordsService.removeWord on confirmDeletion call when purgeWords is false", () => {

@@ -12,17 +12,18 @@ import {
 import { SpinnerComponent } from "@components/utils/spinner/spinner.component";
 import { BehaviorSubject } from "rxjs";
 import { IToaster } from "./types/toaster.interface";
-import { ToasterService } from "@services/toaster.service";
-import { ModalService } from "@services/modal.service";
+import { ToasterService } from "@services/toaster/toaster.service";
+import { EModalType, ModalService } from "@services/modal/modal.service";
 import { IWord } from "./types/word.interface";
-import { WordsService } from "@services/words.service";
+import { WordsService } from "@services/words/words.service";
 import { EToasterTypes } from "@components/utils/toaster-container/toaster/toaster.component";
-import { IStatistics } from "@services/level.service";
-import { EAvailableGames, IStage } from "@services/game.service";
+import { IStatistics } from "@services/level/level.service";
+import { EAvailableGames, IStage } from "@services/game/game.service";
 import { FooterComponent } from "@components/footer/footer.component";
 import { MobileMenuComponent } from "@components/header/mobile-menu/mobile-menu.component";
-import { IResultRange } from "@services/pagination.service";
+import { IResultRange } from "@services/pagination/pagination.service";
 import { provideTranslateService } from "@ngx-translate/core";
+import { EAvailableLanguages } from "@services/settings/settings.service";
 
 describe("AppComponent", () => {
 	let fixture: ComponentFixture<AppComponent>;
@@ -109,14 +110,17 @@ describe("AppComponent", () => {
 		htmlEl.id = "mobile-menu-overlay";
 		app.onClick(htmlEl);
 
-		expect(mockModalService.toggleIsMobileNavbarOpen).toHaveBeenCalledOnceWith(false);
+		expect(mockModalService.toggleModal).toHaveBeenCalledOnceWith(
+			EModalType.MobileNavbar,
+			false
+		);
 	});
 
 	it("should NOT disable mobile navbar on click outside mobile-menu-overlay", () => {
 		const htmlEl = document.createElement("div");
 		app.onClick(htmlEl);
 
-		expect(mockModalService.toggleIsMobileNavbarOpen).not.toHaveBeenCalled();
+		expect(mockModalService.toggleModal).not.toHaveBeenCalled();
 	});
 
 	it("should remove subscriptions on destroy", () => {
@@ -147,14 +151,14 @@ export const mockToasters: IToaster[] = [
 		id: 0,
 		content: "test",
 		duration: 5,
-		expirationTimestamp: new Date().getTime() + 5,
+		expirationTimestamp: new Date().getTime() + 5 * 1000,
 		type: EToasterTypes.Success,
 	},
 	{
 		id: 1,
 		content: "test_2",
 		duration: 7,
-		expirationTimestamp: new Date().getTime() + 7,
+		expirationTimestamp: new Date().getTime() + 7 * 1000,
 		type: EToasterTypes.Error,
 	},
 ];
@@ -207,9 +211,7 @@ export const createMockModalService = () => ({
 	isWordAddingModalOpen$: new BehaviorSubject<boolean>(false),
 	isWordDeletionModalOpen$: new BehaviorSubject<boolean>(false),
 	isMobileNavbarOpen$: new BehaviorSubject<boolean>(false),
-	toggleShowWordAddingModal: jasmine.createSpy("toggleShowWordAddingModal"),
-	toggleShowWordDeletionModal: jasmine.createSpy("toggleShowWordDeletionModal"),
-	toggleIsMobileNavbarOpen: jasmine.createSpy("toggleIsMobileNavbarOpen"),
+	toggleModal: jasmine.createSpy("toggleShowWordAddingModal"),
 });
 
 export const createMockToasterService = () => ({
@@ -272,6 +274,19 @@ export const createMockPaginationService = () => ({
 	setWordsPerPage: jasmine.createSpy("setWordsPerPage"),
 });
 
+export const createMockLocalStorageService = () => ({
+	hasKeys$: new BehaviorSubject<boolean>(false),
+	loadData: jasmine.createSpy("loadData"),
+	saveData: jasmine.createSpy("saveData"),
+	exportData: jasmine.createSpy("exportData"),
+	deleteData: jasmine.createSpy("deleteData"),
+});
+
+export const createMockSettingsService = () => ({
+	isDarkMode$: new BehaviorSubject<boolean>(false),
+	currentLanguage$: new BehaviorSubject<EAvailableLanguages>(EAvailableLanguages.English),
+});
+
 export type IMockModalService = ReturnType<typeof createMockModalService>;
 export type IMockToasterService = ReturnType<typeof createMockToasterService>;
 export type IMockWordsService = ReturnType<typeof createMockWordsService>;
@@ -283,3 +298,5 @@ export type IMockMockConfirmWordDeletionService = ReturnType<
 export type IMockWebSpeechService = ReturnType<typeof createMockWebSpeechService>;
 export type IMockGameService = ReturnType<typeof createMockGameService>;
 export type IMockPaginationService = ReturnType<typeof createMockPaginationService>;
+export type IMockLocalStorageService = ReturnType<typeof createMockLocalStorageService>;
+export type IMockSettingsService = ReturnType<typeof createMockSettingsService>;

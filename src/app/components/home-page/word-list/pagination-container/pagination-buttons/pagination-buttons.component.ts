@@ -1,6 +1,6 @@
 import { NgClass } from "@angular/common";
 import { Component } from "@angular/core";
-import { PaginationService } from "@services/pagination.service";
+import { PaginationService } from "@services/pagination/pagination.service";
 import { combineLatest, Subscription } from "rxjs";
 
 @Component({

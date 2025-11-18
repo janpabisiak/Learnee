@@ -1,11 +1,11 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, Input } from "@angular/core";
 import { SentenceCasePipe } from "../../../../pipes/sentence-case.pipe";
-import { WebSpeechService } from "../../../../services/web-speech.service";
+import { WebSpeechService } from "../../../../services/web-speech/web-speech.service";
 import { IWord } from "../../../../types/word.interface";
-import { AddWordFormService } from "@services/add-edit-word-form.service";
-import { WordsService } from "@services/words.service";
-import { ModalService } from "@services/modal.service";
-import { ConfirmWordDeletionService } from "@services/confirm-word-deletion.service";
+import { AddWordFormService } from "@services/add-edit-word-form/add-edit-word-form.service";
+import { WordsService } from "@services/words/words.service";
+import { EModalType, ModalService } from "@services/modal/modal.service";
+import { ConfirmWordDeletionService } from "@services/confirm-word-deletion/confirm-word-deletion.service";
 import { NgClass } from "@angular/common";
 import { TranslatePipe } from "@ngx-translate/core";
 
@@ -37,7 +37,7 @@ export class WordListItemComponent {
 	}
 
 	editWord() {
-		this.modalService.toggleShowWordAddingModal(true);
+		this.modalService.toggleModal(EModalType.WordAdding, true);
 		this.addWordFormService.setupForEditing(this.word);
 		this.toggleDropdownMenu();
 	}
@@ -51,7 +51,7 @@ export class WordListItemComponent {
 	}
 
 	deleteWord() {
-		this.modalService.toggleShowWordDeletionModal(true);
+		this.modalService.toggleModal(EModalType.WordDeletion, true);
 		this.confirmWordDeletionService.word = this.word;
 		this.toggleDropdownMenu();
 	}

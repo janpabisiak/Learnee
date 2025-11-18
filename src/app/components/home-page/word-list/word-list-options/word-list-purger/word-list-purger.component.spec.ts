@@ -8,8 +8,8 @@ import {
 	IMockMockConfirmWordDeletionService,
 	IMockModalService,
 } from "app/app.component.spec";
-import { ModalService } from "@services/modal.service";
-import { ConfirmWordDeletionService } from "@services/confirm-word-deletion.service";
+import { EModalType, ModalService } from "@services/modal/modal.service";
+import { ConfirmWordDeletionService } from "@services/confirm-word-deletion/confirm-word-deletion.service";
 import { provideTranslateService } from "@ngx-translate/core";
 
 describe("WordListPurgerComponent", () => {
@@ -42,10 +42,13 @@ describe("WordListPurgerComponent", () => {
 		expect(component).toBeTruthy();
 	});
 
-	it("should call modalService.toggleShowWordDeletionModal and set purgeWords on openModal call", () => {
+	it("should show word deletion modal and set purgeWords on openModal call", () => {
 		component.openModal();
 
-		expect(mockModalService.toggleShowWordDeletionModal).toHaveBeenCalledOnceWith(true);
+		expect(mockModalService.toggleModal).toHaveBeenCalledOnceWith(
+			EModalType.WordDeletion,
+			true
+		);
 		expect(mockConfirmWordDeletionService.purgeWords).toBeTrue();
 	});
 });

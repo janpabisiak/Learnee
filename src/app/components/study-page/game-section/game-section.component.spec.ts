@@ -6,7 +6,7 @@ import { ButtonComponent } from "@components/utils/button/button.component";
 import { StudyProgressBarComponent } from "../study-progress-bar/study-progress-bar.component";
 import { createMockGameService, IMockGameService, mockStages } from "app/app.component.spec";
 import { provideHttpClient } from "@angular/common/http";
-import { GameService } from "@services/game.service";
+import { GameService } from "@services/game/game.service";
 
 describe("GameSectionComponent", () => {
 	let component: GameSectionComponent;

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { IWord } from "../types/word.interface";
+import { IWord } from "../../types/word.interface";
 import { BehaviorSubject } from "rxjs";
 
 @Injectable({
@@ -26,14 +26,14 @@ export class PaginationService {
 		this.page.next(page);
 	}
 
-	calcMaxPage() {
+	private calcMaxPage() {
 		const maxPage = Math.ceil(this.numberOfWords / this.wordsPerPage.value) || 1;
 
 		if (this.page.value > maxPage) this.page.next(maxPage);
 		this.maxPage.next(maxPage);
 	}
 
-	calcResultRange() {
+	private calcResultRange() {
 		const page = this.page.value;
 		const wordsPerPage = this.wordsPerPage.value;
 

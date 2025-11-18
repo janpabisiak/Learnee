@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { WordsService } from "@services/words.service";
+import { WordsService } from "@services/words/words.service";
 import { IWord } from "../../../types/word.interface";
 import { Subject, takeUntil } from "rxjs";
 import { ButtonComponent } from "@components/utils/button/button.component";
 import { WotdItemComponent } from "./wotd-item/wotd-item.component";
-import { ModalService } from "@services/modal.service";
-import { AddWordFormService } from "@services/add-edit-word-form.service";
+import { EModalType, ModalService } from "@services/modal/modal.service";
+import { AddWordFormService } from "@services/add-edit-word-form/add-edit-word-form.service";
 import { TranslatePipe } from "@ngx-translate/core";
 
 @Component({
@@ -41,7 +41,7 @@ export class WordsOfTheDayComponent implements OnInit, OnDestroy {
 	}
 
 	addWord() {
-		this.modalService.toggleShowWordAddingModal(true);
+		this.modalService.toggleModal(EModalType.WordAdding, true);
 		this.addWordFormService.setupForEditing({
 			...this.wordsOfTheDay[this.currentWordId],
 			id: 0,

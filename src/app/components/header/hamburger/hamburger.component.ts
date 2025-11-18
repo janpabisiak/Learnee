@@ -1,6 +1,6 @@
 import { NgClass } from "@angular/common";
 import { Component, CUSTOM_ELEMENTS_SCHEMA, OnDestroy, OnInit } from "@angular/core";
-import { ModalService } from "@services/modal.service";
+import { EModalType, ModalService } from "@services/modal/modal.service";
 import { Subject, takeUntil } from "rxjs";
 
 @Component({
@@ -24,7 +24,7 @@ export class HamburgerComponent implements OnInit, OnDestroy {
 	}
 
 	toggleNavbarMenu() {
-		this.modalService.toggleIsMobileNavbarOpen(!this.isMobileNavbarOpen);
+		this.modalService.toggleModal(EModalType.MobileNavbar, !this.isMobileNavbarOpen);
 	}
 
 	ngOnDestroy() {

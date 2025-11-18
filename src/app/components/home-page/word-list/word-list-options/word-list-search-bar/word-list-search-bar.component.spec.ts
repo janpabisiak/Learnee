@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { WordListSearchBarComponent } from "./word-list-search-bar.component";
 import { provideHttpClient } from "@angular/common/http";
 import { createMockWordsService, IMockWordsService } from "app/app.component.spec";
-import { WordsService } from "@services/words.service";
+import { WordsService } from "@services/words/words.service";
 import { provideTranslateService } from "@ngx-translate/core";
 
 describe("WordListSearchBarComponent", () => {

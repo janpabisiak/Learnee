@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { ProgressBarComponent } from "@components/utils/progress-bar/progress-bar.component";
 import { TranslatePipe } from "@ngx-translate/core";
-import { LevelService } from "@services/level.service";
+import { LevelService } from "@services/level/level.service";
 import { combineLatest, Subject, takeUntil } from "rxjs";
 
 @Component({

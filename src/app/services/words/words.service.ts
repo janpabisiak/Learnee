@@ -1,12 +1,12 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { environment } from "../../environment/environment";
-import { IWord } from "../types/word.interface";
+import { environment } from "../../../environment/environment";
+import { IWord } from "../../types/word.interface";
 import { BehaviorSubject, catchError, combineLatest, map, Observable, of, take } from "rxjs";
-import { LocalStorageService } from "./local-storage.service";
-import { ToasterService } from "./toaster.service";
+import { LocalStorageService } from "../local-storage/local-storage.service";
+import { ToasterService } from "@services/toaster/toaster.service";
 import { EToasterTypes } from "@components/utils/toaster-container/toaster/toaster.component";
-import { PaginationService } from "./pagination.service";
+import { PaginationService } from "@services/pagination/pagination.service";
 
 @Injectable({
 	providedIn: "root",

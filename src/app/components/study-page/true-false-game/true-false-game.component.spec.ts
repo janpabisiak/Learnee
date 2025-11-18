@@ -4,7 +4,7 @@ import { TrueFalseGameComponent } from "./true-false-game.component";
 import { provideHttpClient } from "@angular/common/http";
 import { TrueFalseAnswerComponent } from "./true-false-answer/true-false-answer.component";
 import { createMockGameService, IMockGameService, mockStages } from "app/app.component.spec";
-import { GameService } from "@services/game.service";
+import { GameService } from "@services/game/game.service";
 
 describe("TrueFalseGameComponent", () => {
 	let component: TrueFalseGameComponent;

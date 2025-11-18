@@ -13,8 +13,8 @@ import {
 	IMockWebSpeechService,
 	mockStages,
 } from "app/app.component.spec";
-import { WebSpeechService } from "@services/web-speech.service";
-import { GameService } from "@services/game.service";
+import { WebSpeechService } from "@services/web-speech/web-speech.service";
+import { GameService } from "@services/game/game.service";
 import { provideTranslateService } from "@ngx-translate/core";
 
 describe("FillGapsGameComponent", () => {

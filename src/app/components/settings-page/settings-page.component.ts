@@ -4,8 +4,8 @@ import { FormsModule } from "@angular/forms";
 import { ButtonComponent } from "@components/utils/button/button.component";
 import { SectionTitleComponent } from "@components/utils/section-title/section-title.component";
 import { TranslatePipe, TranslateService } from "@ngx-translate/core";
-import { LocalStorageService } from "@services/local-storage.service";
-import { EAvailableLanguages, SettingsService } from "@services/settings.service";
+import { LocalStorageService } from "@services/local-storage/local-storage.service";
+import { EAvailableLanguages, SettingsService } from "@services/settings/settings.service";
 import { combineLatest, Subscription, take } from "rxjs";
 
 @Component({

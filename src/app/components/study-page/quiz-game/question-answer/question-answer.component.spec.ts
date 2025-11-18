@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { QuestionAnswerComponent } from "./question-answer.component";
 import { provideHttpClient } from "@angular/common/http";
 import { createMockGameService, IMockGameService } from "app/app.component.spec";
-import { GameService } from "@services/game.service";
+import { GameService } from "@services/game/game.service";
 
 describe("QuestionAnswerComponent", () => {
 	let component: QuestionAnswerComponent;

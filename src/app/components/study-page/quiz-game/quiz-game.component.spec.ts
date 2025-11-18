@@ -4,7 +4,7 @@ import { QuizGameComponent } from "./quiz-game.component";
 import { provideHttpClient } from "@angular/common/http";
 import { QuestionAnswerComponent } from "./question-answer/question-answer.component";
 import { createMockGameService, IMockGameService, mockStages } from "app/app.component.spec";
-import { GameService } from "@services/game.service";
+import { GameService } from "@services/game/game.service";
 
 describe("QuizGameComponent", () => {
 	let component: QuizGameComponent;

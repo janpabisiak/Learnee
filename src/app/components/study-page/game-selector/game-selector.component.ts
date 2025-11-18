@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { availableGames, EAvailableGames, GameService } from "@services/game.service";
+import { availableGames, EAvailableGames, GameService } from "@services/game/game.service";
 import { GameSelectorItemComponent } from "./game-selector-item/game-selector-item.component";
 import { Subject, take, takeUntil } from "rxjs";
 import { SectionTitleComponent } from "@components/utils/section-title/section-title.component";

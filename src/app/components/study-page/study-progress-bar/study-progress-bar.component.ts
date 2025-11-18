@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { GameService, IStage } from "@services/game.service";
+import { GameService, IStage } from "@services/game/game.service";
 import { combineLatest, Subject, takeUntil } from "rxjs";
 
 @Component({

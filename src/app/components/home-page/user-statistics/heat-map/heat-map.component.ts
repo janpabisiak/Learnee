@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { IStatistics, LevelService } from "@services/level.service";
+import { IStatistics, LevelService } from "@services/level/level.service";
 import { Subject, takeUntil } from "rxjs";
 import { HeatMapItemComponent } from "./heat-map-item/heat-map-item.component";
 import { TranslatePipe } from "@ngx-translate/core";

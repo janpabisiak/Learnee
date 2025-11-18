@@ -4,7 +4,7 @@ import { Injectable } from "@angular/core";
 	providedIn: "root",
 })
 export class WebSpeechService {
-	synth = window.speechSynthesis;
+	private synth = window.speechSynthesis;
 
 	readText(text: string) {
 		this.synth.cancel();

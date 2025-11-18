@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { CanActivate, Router } from "@angular/router";
 import { EToasterTypes } from "@components/utils/toaster-container/toaster/toaster.component";
-import { ToasterService } from "@services/toaster.service";
-import { WordsService } from "@services/words.service";
+import { ToasterService } from "@services/toaster/toaster.service";
+import { WordsService } from "@services/words/words.service";
 
 @Injectable({
 	providedIn: "root",

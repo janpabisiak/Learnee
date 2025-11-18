@@ -6,13 +6,19 @@ import { BehaviorSubject } from "rxjs";
 })
 export class LocalStorageService {
 	private hasKeys = new BehaviorSubject<boolean>(false);
-
 	hasKeys$ = this.hasKeys.asObservable();
 
 	loadData(key: string) {
-		const value = localStorage.getItem(key);
+		const data = localStorage.getItem(key);
 
-		if (value) return JSON.parse(value);
+		if (data) {
+			try {
+				return JSON.parse(data);
+			} catch (e) {
+				console.error("Failed to parse JSON:", e);
+				return data;
+			}
+		}
 		return false;
 	}
 
@@ -22,6 +28,16 @@ export class LocalStorageService {
 	}
 
 	exportData() {
+		const localStorageAsJson = this.getLocalStorageAsJson();
+		this.downloadData(localStorageAsJson);
+	}
+
+	deleteData() {
+		localStorage.clear();
+		this.hasKeys.next(false);
+	}
+
+	private getLocalStorageAsJson() {
 		const data: Record<string, string> = {};
 
 		for (let i = 0; i < localStorage.length; i++) {
@@ -31,9 +47,11 @@ export class LocalStorageService {
 			data[key] = this.loadData(key);
 		}
 
-		const json = JSON.stringify(data, null, 2);
+		return JSON.stringify(data, null, 2);
+	}
 
-		const blob = new Blob([json], { type: "application/json" });
+	private downloadData(data: string) {
+		const blob = new Blob([data], { type: "application/json" });
 		const fileURL = URL.createObjectURL(blob);
 
 		const downloadLink = document.createElement("a");
@@ -45,10 +63,5 @@ export class LocalStorageService {
 		downloadLink.click();
 
 		URL.revokeObjectURL(fileURL);
-	}
-
-	deleteData() {
-		localStorage.clear();
-		this.hasKeys.next(false);
 	}
 }
