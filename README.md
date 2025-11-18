@@ -63,6 +63,9 @@ To execute unit tests with the [Karma](https://karma-runner.github.io) test runn
 npm run test
 ```
 
+## Credits
+This project uses [Ionicons](https://ionic.io/ionicons), [Lingua Robot API](https://publicapi.dev/lingua-robot-api) and [Merriam-Webster's WOTD RSS Feed](https://www.merriam-webster.com/wotd/feed/rss2).
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](https://github.com/janpabisiak/Learnee/blob/main/LICENSE) file for details.
