@@ -17,7 +17,7 @@
 				"build": {
 					"builder": "@angular-devkit/build-angular:application",
 					"options": {
-						"outputPath": "dist/learning-english-app",
+						"outputPath": "dist/learnee",
 						"index": "src/index.html",
 						"browser": "src/main.ts",
 						"polyfills": ["zone.js", "@angular/localize/init"],
@@ -60,10 +60,10 @@
 					"builder": "@angular-devkit/build-angular:dev-server",
 					"configurations": {
 						"production": {
-							"buildTarget": "LearningEnglishApp:build:production"
+							"buildTarget": "Learnee:build:production"
 						},
 						"development": {
-							"buildTarget": "LearningEnglishApp:build:development"
+							"buildTarget": "Learnee:build:development"
 						}
 					},
 					"defaultConfiguration": "development",
@@ -92,5 +92,8 @@
 				}
 			}
 		}
+	},
+	"cli": {
+		"analytics": false
 	}
 }
