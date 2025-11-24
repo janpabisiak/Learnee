@@ -1,0 +1,8 @@
+/node_modules
+/.git
+/.vscode
+/coverage
+/dist
+/_screenshots
+LICENSE
+package-lock.json
