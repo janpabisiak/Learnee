@@ -1,4 +1,6 @@
-# Learnee [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/janpabisiak/JustBucks/blob/master/LICENSE)
+<img width="1906" height="908" alt="obraz" src="https://github.com/user-attachments/assets/2b83451d-5c30-4016-8852-658172a1fbaa" />
+
+# Learnee [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/janpabisiak/Learnee/blob/master/LICENSE)
 
 Learnee's is web app developed in Angular whose main goal is to provide a free and convenient solution for learning new terms. With six built-in games, you can broaden your horizons more rapidly than even before, and thanks to gamification (in the form of daily stats and XP system), you will be more motivated to succeed in your ambitions in fun way.
 
@@ -38,7 +40,7 @@ git clone https://github.com/janpabisiak/Learnee.git
 II. Go to the project directory
 
 ```bash
-cd JustBucks
+cd Learnee
 ```
 
 III. Install dependencies
