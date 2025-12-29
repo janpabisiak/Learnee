@@ -34,8 +34,8 @@ export class FillGapsGameComponent implements OnInit, OnDestroy {
 		if (this.stage) {
 			this.currentStageId = this.stage.id;
 			this.data = this.stage;
-			this.inputValue = this.data.data.word;
-			this.wordLength = this.stage.data.word.length;
+			this.inputValue = this.data.data.word.trim();
+			this.wordLength = this.stage.data.word.trim().length;
 
 			return;
 		}
@@ -47,7 +47,7 @@ export class FillGapsGameComponent implements OnInit, OnDestroy {
 
 				this.currentStageId = currentStageId;
 				this.data = stages[currentStageId];
-				this.wordLength = this.data.data.word.length;
+				this.wordLength = this.data.data.word.trim().length;
 			});
 
 		this.gameService.currentStageId$.pipe(takeUntil(this.destroy$), skip(1)).subscribe(() => {
@@ -70,8 +70,8 @@ export class FillGapsGameComponent implements OnInit, OnDestroy {
 		if (this.data?.answered) return;
 
 		this.isVisible = false;
-		this.gameService.answerFillGapsListeningGameQuestion(this.inputValue);
-		this.inputValue = this.data?.data.word;
+		this.gameService.answerFillGapsListeningGameQuestion(this.inputValue.trim());
+		this.inputValue = this.data?.data.word.trim();
 
 		this.gameService.goToNextStage();
 	}

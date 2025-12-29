@@ -166,7 +166,7 @@ export class GameService {
 		const stages = this.stages.value;
 		const currentStage = stages[currentStageId];
 
-		const isCorrect = currentStage.data.word.toLowerCase() === answer.toLowerCase();
+		const isCorrect = currentStage.data.word.trim().toLowerCase() === answer.toLowerCase();
 
 		const updatedStages = stages.map((stage) =>
 			stage.id === currentStageId

@@ -14,13 +14,7 @@ import { WordsOfTheDayComponent } from "./words-of-the-day/words-of-the-day.comp
 	selector: "app-home-page",
 	standalone: true,
 	templateUrl: "./home-page.component.html",
-	imports: [
-		WordListComponent,
-		WordsOfTheDayComponent,
-		UserStatisticsComponent,
-		SectionTitleComponent,
-		NgIf,
-	],
+	imports: [WordListComponent, UserStatisticsComponent, SectionTitleComponent, NgIf],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HomePageComponent implements OnInit, OnDestroy {

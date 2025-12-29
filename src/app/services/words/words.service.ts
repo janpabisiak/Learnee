@@ -34,7 +34,7 @@ export class WordsService {
 		private toasterService: ToasterService,
 		private paginationService: PaginationService
 	) {
-		this.getWordsOfTheDay();
+		//this.getWordsOfTheDay();
 
 		const wordList = this.localStorageService.loadData("word-list");
 		if (wordList) {

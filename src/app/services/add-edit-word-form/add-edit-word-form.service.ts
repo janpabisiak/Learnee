@@ -56,7 +56,7 @@ export class AddWordFormService {
 	submitForm() {
 		if (!this.isFormValid()) return;
 
-		const [word, definition] = [this.word.value, this.definition.value];
+		const [word, definition] = [this.word.value.trim(), this.definition.value.trim()];
 
 		if (!this.isEditing) {
 			this.wordsService.addWord(word, definition);

@@ -1,7 +1,7 @@
 @if (currentStage) {
 <section class="flex flex-col gap-10 max-w-4xl mx-auto">
     <div class="flex flex-col gap-6">
-        <app-button [type]="'secondary'" (buttonClicked)="cancelGame()">{{'study.games.cancel.label' | translate}}</app-button>
+        <app-button [type]="'secondary'" (buttonClicked)="cancelGame()" (escapeClicked)="cancelGame()">{{'study.games.cancel.label' | translate}}</app-button>
         <app-study-progress-bar></app-study-progress-bar>
     </div>
     <app-game-container [stage]="currentStage"></app-game-container>

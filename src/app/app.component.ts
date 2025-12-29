@@ -40,7 +40,7 @@ export class AppComponent implements OnInit, OnDestroy {
 	isWordAddingModalOpen = false;
 	isWordDeletingModalOpen = false;
 	isMobileNavbarOpen = false;
-	isLoading = true;
+	isLoading = false;
 	toasters: IToaster[] = [];
 	EToasterPositions = EToasterPositions;
 	private subscriptions = new Subscription();
@@ -72,11 +72,11 @@ export class AppComponent implements OnInit, OnDestroy {
 			})
 		);
 
-		this.subscriptions.add(
-			this.wordsService.wordsOfTheDay$.subscribe((wordsOfTheDay) => {
-				this.isLoading = !wordsOfTheDay.length;
-			})
-		);
+		// this.subscriptions.add(
+		// 	this.wordsService.wordsOfTheDay$.subscribe((wordsOfTheDay) => {
+		// 		this.isLoading = !wordsOfTheDay.length;
+		// 	})
+		// );
 
 		this.subscriptions.add(
 			this.toasterService.toasters$.subscribe((toasters) => {
