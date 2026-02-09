@@ -4,7 +4,7 @@
 	"scripts": {
 		"ng": "ng",
 		"start": "ng serve --host 0.0.0.0",
-		"build": "ng build",
+		"build": "node create-environment.ts && ng build --configuration production",
 		"watch": "ng build --watch --configuration development",
 		"test": "ng test --watch=false --code-coverage"
 	},
@@ -21,6 +21,7 @@
 		"@ngx-translate/core": "^17.0.0",
 		"@ngx-translate/http-loader": "^17.0.0",
 		"@tailwindcss/postcss": "^4.1.11",
+		"dotenv": "^17.2.4",
 		"postcss": "^8.5.6",
 		"rxjs": "~7.8.0",
 		"tailwindcss": "^4.1.11",
