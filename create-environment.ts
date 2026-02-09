@@ -2,7 +2,7 @@ import "dotenv/config";
 import fs from "fs";
 import path from "path";
 
-const ENVIRONMENT_FILE_PATH = "./src/environment/environment.prod.ts";
+const ENVIRONMENT_FILE_PATH = "./src/environment/environment.ts";
 
 const directory = path.dirname(ENVIRONMENT_FILE_PATH);
 if (!fs.existsSync(directory)) {
@@ -23,14 +23,11 @@ const environmentVariables: IEnvironmentVariables = {
 	apiKey: process.env["API_KEY"] ?? "",
 };
 
-fs.writeFileSync(
-	ENVIRONMENT_FILE_PATH,
-	`
-        export const environment = {
-            production: ${environmentVariables.production},
-            apiHost: "${environmentVariables.apiHost}",
-            apiUrl: "${environmentVariables.apiUrl}",
-            apiKey: "${environmentVariables.apiKey}",
-        };
-    `,
-);
+const fileData = `export const environment = {
+    production: ${environmentVariables.production},
+    apiHost: "${environmentVariables.apiHost}",
+    apiUrl: "${environmentVariables.apiUrl}",
+    apiKey: "${environmentVariables.apiKey}",
+};`;
+
+fs.writeFileSync(ENVIRONMENT_FILE_PATH, fileData);
