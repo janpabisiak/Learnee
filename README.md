@@ -2,7 +2,7 @@
 
 # Learnee [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/janpabisiak/Learnee/blob/master/LICENSE)
 
-Learnee's is web app developed in Angular whose main goal is to provide a free and convenient solution for learning new terms. With six built-in games, you can broaden your horizons more rapidly than even before, and thanks to gamification (in the form of daily stats and XP system), you will be more motivated to succeed in your ambitions in fun way.
+Learnee is a web app developed in Angular whose main goal is to provide a free and convenient solution for learning new terms. With six built-in games, you can broaden your horizons more rapidly than even before, and thanks to gamification (in the form of daily stats and XP system), you will be more motivated to succeed in your ambitions in fun way.
 
 Learnee was created to enhance my personal learning process as a free, privacy-oriented, and ad-free alternative to other similar apps.
 
