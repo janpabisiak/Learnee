@@ -32,7 +32,7 @@ export class WordsService {
 		private http: HttpClient,
 		private localStorageService: LocalStorageService,
 		private toasterService: ToasterService,
-		private paginationService: PaginationService
+		private paginationService: PaginationService,
 	) {
 		//this.getWordsOfTheDay();
 
@@ -79,7 +79,7 @@ export class WordsService {
 		switch (sortType) {
 			case ESortTypes.NameDESC: {
 				const sortedWordList = this.wordList.value.sort((a, b) =>
-					b.name.localeCompare(a.name)
+					b.name.localeCompare(a.name),
 				);
 				this.sortedWordList.next(sortedWordList);
 				this.filterWordList(this.searchQuery);
@@ -87,7 +87,7 @@ export class WordsService {
 			}
 			case ESortTypes.DefinitionASC: {
 				const sortedWordList = this.wordList.value.sort((a, b) =>
-					a.definition.localeCompare(b.definition)
+					a.definition.localeCompare(b.definition),
 				);
 				this.sortedWordList.next(sortedWordList);
 				this.filterWordList(this.searchQuery);
@@ -95,7 +95,7 @@ export class WordsService {
 			}
 			case ESortTypes.DefinitionDESC: {
 				const sortedWordList = this.wordList.value.sort((a, b) =>
-					b.definition.localeCompare(a.definition)
+					b.definition.localeCompare(a.definition),
 				);
 				this.sortedWordList.next(sortedWordList);
 				this.filterWordList(this.searchQuery);
@@ -103,7 +103,7 @@ export class WordsService {
 			}
 			case ESortTypes.IsLearningASC: {
 				const sortedWordList = this.wordList.value.sort(
-					(a, b) => +a.isLearning - +b.isLearning
+					(a, b) => +a.isLearning - +b.isLearning,
 				);
 				this.sortedWordList.next(sortedWordList);
 				this.filterWordList(this.searchQuery);
@@ -111,7 +111,7 @@ export class WordsService {
 			}
 			case ESortTypes.IsLearningDESC: {
 				const sortedWordList = this.wordList.value.sort(
-					(a, b) => +b.isLearning - +a.isLearning
+					(a, b) => +b.isLearning - +a.isLearning,
 				);
 				this.sortedWordList.next(sortedWordList);
 				this.filterWordList(this.searchQuery);
@@ -119,7 +119,7 @@ export class WordsService {
 			}
 			default: {
 				const sortedWordList = this.wordList.value.sort((a, b) =>
-					a.name.localeCompare(b.name)
+					a.name.localeCompare(b.name),
 				);
 				this.sortedWordList.next(sortedWordList);
 				this.filterWordList(this.searchQuery);
@@ -134,7 +134,7 @@ export class WordsService {
 		const sortedWordList = this.sortedWordList.value;
 		const filteredWordList = sortedWordList.filter(
 			(w) =>
-				w.name.toLowerCase().includes(query) || w.definition.toLowerCase().includes(query)
+				w.name.toLowerCase().includes(query) || w.definition.toLowerCase().includes(query),
 		);
 
 		this.filteredWordList.next(filteredWordList);
@@ -143,17 +143,19 @@ export class WordsService {
 
 	paginateWordList() {
 		this.paginatedWordList.next(
-			this.paginationService.paginateWordList(this.filteredWordList.value)
+			this.paginationService.paginateWordList(this.filteredWordList.value),
 		);
 	}
 
 	fetchWordDefinition$(word: string): Observable<string> {
+		if (environment.production) return of("");
+
 		return this.getResponseFromWordAPI(word).pipe(
 			take(1),
 			map(
 				(response: any) =>
-					response.entries?.[0]?.lexemes?.[0]?.senses?.[0]?.definition ?? ""
-			)
+					response.entries?.[0]?.lexemes?.[0]?.senses?.[0]?.definition ?? "",
+			),
 		);
 	}
 
@@ -216,7 +218,7 @@ export class WordsService {
 
 	editWord(wordId: number, word: string, definition: string) {
 		const updatedWordList = [...this.wordList.value].map((w) =>
-			w.id === wordId ? { ...w, name: word, definition } : w
+			w.id === wordId ? { ...w, name: word, definition } : w,
 		);
 
 		this.updateWordList(updatedWordList);
@@ -283,13 +285,13 @@ export class WordsService {
 					this.localStorageService.saveData("wotd-words", words);
 					this.localStorageService.saveData(
 						"wotd-fetched-date",
-						date.toISOString().split("T")[0]
+						date.toISOString().split("T")[0],
 					);
 				}),
 				catchError((error: HttpErrorResponse) => {
 					console.error(error);
 					return of([]);
-				})
+				}),
 			)
 			.subscribe();
 	}
