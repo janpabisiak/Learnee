@@ -6,7 +6,7 @@ Learnee is a web app developed in Angular whose main goal is to provide a free a
 
 Learnee was created to enhance my personal learning process as a free, privacy-oriented, and ad-free alternative to other similar apps.
 
-This project is still in progress.
+[Demo](https://learnee.janpabisiak.com)
 
 ## Features
 
