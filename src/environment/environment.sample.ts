@@ -3,4 +3,5 @@ export const environment = {
 	apiHost: "",
 	apiUrl: "",
 	apiKey: "",
+	rssUrl: "",
 };

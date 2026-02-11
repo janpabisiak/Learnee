@@ -14,6 +14,7 @@ interface IEnvironmentVariables {
 	apiHost: string;
 	apiUrl: string;
 	apiKey: string;
+	rssUrl: string;
 }
 
 const environmentVariables: IEnvironmentVariables = {
@@ -21,6 +22,7 @@ const environmentVariables: IEnvironmentVariables = {
 	apiHost: process.env["API_HOST"] ?? "",
 	apiUrl: process.env["API_URL"] ?? "",
 	apiKey: process.env["API_KEY"] ?? "",
+	rssUrl: process.env["RSS_URL"] ?? "",
 };
 
 const fileData = `export const environment = {
@@ -28,6 +30,7 @@ const fileData = `export const environment = {
     apiHost: "${environmentVariables.apiHost}",
     apiUrl: "${environmentVariables.apiUrl}",
     apiKey: "${environmentVariables.apiKey}",
+	rssUrl: "${environmentVariables.rssUrl}",
 };`;
 
 fs.writeFileSync(ENVIRONMENT_FILE_PATH, fileData);

@@ -57,31 +57,31 @@ export class AppComponent implements OnInit, OnDestroy {
 		this.subscriptions.add(
 			this.modalService.isWordAddingModalOpen$.subscribe((isOpen) => {
 				this.isWordAddingModalOpen = isOpen;
-			})
+			}),
 		);
 
 		this.subscriptions.add(
 			this.modalService.isWordDeletionModalOpen$.subscribe((isOpen) => {
 				this.isWordDeletingModalOpen = isOpen;
-			})
+			}),
 		);
 
 		this.subscriptions.add(
 			this.modalService.isMobileNavbarOpen$.subscribe((isOpen) => {
 				this.isMobileNavbarOpen = isOpen;
-			})
+			}),
 		);
 
-		// this.subscriptions.add(
-		// 	this.wordsService.wordsOfTheDay$.subscribe((wordsOfTheDay) => {
-		// 		this.isLoading = !wordsOfTheDay.length;
-		// 	})
-		// );
+		this.subscriptions.add(
+			this.wordsService.wordsOfTheDay$.subscribe((wordsOfTheDay) => {
+				this.isLoading = !wordsOfTheDay.length;
+			}),
+		);
 
 		this.subscriptions.add(
 			this.toasterService.toasters$.subscribe((toasters) => {
 				this.toasters = toasters;
-			})
+			}),
 		);
 
 		this.settingsService.toggleDarkClass();

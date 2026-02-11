@@ -13,8 +13,7 @@ import { PaginationService } from "@services/pagination/pagination.service";
 })
 export class WordsService {
 	private apiUrl = environment.apiUrl;
-	private apiHost = environment.apiHost;
-	private apiKey = environment.apiKey;
+	private rssUrl = environment.rssUrl;
 	private wordList = new BehaviorSubject<IWord[]>([]);
 	private sortedWordList = new BehaviorSubject<IWord[]>([]);
 	private filteredWordList = new BehaviorSubject<IWord[]>([]);
@@ -34,7 +33,7 @@ export class WordsService {
 		private toasterService: ToasterService,
 		private paginationService: PaginationService,
 	) {
-		//this.getWordsOfTheDay();
+		this.getWordsOfTheDay();
 
 		const wordList = this.localStorageService.loadData("word-list");
 		if (wordList) {
@@ -53,12 +52,7 @@ export class WordsService {
 	}
 
 	private getResponseFromWordAPI(word: string) {
-		return this.http.get(this.apiUrl + word, {
-			headers: {
-				"x-rapidapi-host": this.apiHost,
-				"x-rapidapi-key": this.apiKey,
-			},
-		});
+		return this.http.get(this.apiUrl + word);
 	}
 
 	private saveData(wordList: IWord[]) {
@@ -148,8 +142,6 @@ export class WordsService {
 	}
 
 	fetchWordDefinition$(word: string): Observable<string> {
-		if (environment.production) return of("");
-
 		return this.getResponseFromWordAPI(word).pipe(
 			take(1),
 			map(
@@ -256,7 +248,7 @@ export class WordsService {
 		}
 
 		this.http
-			.get("/api/rss", { responseType: "text" })
+			.get(this.rssUrl, { responseType: "text" })
 			.pipe(
 				take(1),
 				map((response: string) => {

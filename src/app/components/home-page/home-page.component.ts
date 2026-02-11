@@ -14,7 +14,13 @@ import { WordsOfTheDayComponent } from "./words-of-the-day/words-of-the-day.comp
 	selector: "app-home-page",
 	standalone: true,
 	templateUrl: "./home-page.component.html",
-	imports: [WordListComponent, UserStatisticsComponent, SectionTitleComponent, NgIf],
+	imports: [
+		WordListComponent,
+		WordsOfTheDayComponent,
+		UserStatisticsComponent,
+		SectionTitleComponent,
+		NgIf,
+	],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HomePageComponent implements OnInit, OnDestroy {
@@ -23,7 +29,10 @@ export class HomePageComponent implements OnInit, OnDestroy {
 	wordList: IWord[] = [];
 	translations: Record<string, string> | null = null;
 
-	constructor(private wordsService: WordsService, private translation: TranslateService) {}
+	constructor(
+		private wordsService: WordsService,
+		private translation: TranslateService,
+	) {}
 
 	ngOnInit() {
 		this.subscription = combineLatest([
@@ -37,7 +46,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
 			if (this.translations && "wordlist.count" in this.translations) {
 				this.translations["wordlist.count"] = this.translations["wordlist.count"].replace(
 					"{{count}}",
-					this.wordList.length.toString()
+					this.wordList.length.toString(),
 				);
 			}
 		});
