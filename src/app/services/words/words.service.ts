@@ -2,11 +2,12 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "../../../environment/environment";
 import { IWord } from "../../types/word.interface";
-import { BehaviorSubject, catchError, combineLatest, map, Observable, of, take } from "rxjs";
+import { BehaviorSubject, catchError, combineLatest, map, Observable, of, switchMap, take } from "rxjs";
 import { LocalStorageService } from "../local-storage/local-storage.service";
 import { ToasterService } from "@services/toaster/toaster.service";
 import { EToasterTypes } from "@components/utils/toaster-container/toaster/toaster.component";
 import { PaginationService } from "@services/pagination/pagination.service";
+import { SettingsService } from "@services/settings/settings.service";
 
 @Injectable({
 	providedIn: "root",
@@ -32,6 +33,7 @@ export class WordsService {
 		private localStorageService: LocalStorageService,
 		private toasterService: ToasterService,
 		private paginationService: PaginationService,
+		private settingsService: SettingsService,
 	) {
 		this.getWordsOfTheDay();
 
@@ -142,12 +144,19 @@ export class WordsService {
 	}
 
 	fetchWordDefinition$(word: string): Observable<string> {
-		return this.getResponseFromWordAPI(word).pipe(
+		return this.settingsService.isFetchWordDefinitionEnabled$.pipe(
 			take(1),
-			map(
-				(response: any) =>
-					response.entries?.[0]?.lexemes?.[0]?.senses?.[0]?.definition ?? "",
-			),
+			switchMap((isEnabled) => {
+				if (!isEnabled) return of("");
+
+				return this.getResponseFromWordAPI(word).pipe(
+					take(1),
+					map(
+						(response: any) =>
+							response.entries?.[0]?.lexemes?.[0]?.senses?.[0]?.definition ?? "",
+					),
+				);
+			}),
 		);
 	}
 

@@ -88,6 +88,9 @@
 	"settings.darkMode.title": "Dark mode",
 	"settings.darkMode.description": "Switch between light and dark mode",
 
+	"settings.fetchDefinition.title": "Fetch word definition",
+	"settings.fetchDefinition.description": "Automatically fetch word definition from external API",
+
 	"settings.language.title": "Language",
 	"settings.language.description": "Change display language",
 	"settings.language.english": "English",

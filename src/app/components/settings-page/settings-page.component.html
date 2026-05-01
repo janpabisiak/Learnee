@@ -11,6 +11,13 @@
             </div>
             <div class="flex justify-between items-center">
                 <div class="flex flex-col">
+                    <h4 class="text-xl font-semibold">{{'settings.fetchDefinition.title' | translate}}</h4>
+                    <p class="text-gray-500">{{'settings.fetchDefinition.description' | translate}}</p>
+                </div>
+                <input type="checkbox" class="w-6 h-6 accent-emerald-700 " (change)="toggleFetchWordDefinition()" [(ngModel)]="isFetchWordDefinitionEnabled">
+            </div>
+            <div class="flex justify-between items-center">
+                <div class="flex flex-col">
                     <h4 class="text-xl font-semibold">{{'settings.language.title' | translate}}</h4>
                     <p class="text-gray-500">{{'settings.language.description' | translate}}</p>
                 </div>

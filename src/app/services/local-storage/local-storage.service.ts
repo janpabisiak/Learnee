@@ -11,7 +11,7 @@ export class LocalStorageService {
 	loadData(key: string) {
 		const data = localStorage.getItem(key);
 
-		if (data) {
+		if (data !== null) {
 			try {
 				return JSON.parse(data);
 			} catch (e) {
@@ -19,7 +19,8 @@ export class LocalStorageService {
 				return data;
 			}
 		}
-		return false;
+
+		return null;
 	}
 
 	saveData(key: string, value: {}) {

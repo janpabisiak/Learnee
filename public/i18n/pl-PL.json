@@ -88,6 +88,9 @@
 	"settings.darkMode.title": "Tryb ciemny",
 	"settings.darkMode.description": "Jasny lub ciemny wygląd",
 
+	"settings.fetchDefinition.title": "Pobieranie definicji",
+	"settings.fetchDefinition.description": "Automatycznie pobieraj definicję słowa z zewnętrznego API",
+
 	"settings.language.title": "Język",
 	"settings.language.description": "Zmień język aplikacji",
 	"settings.language.english": "Angielski",

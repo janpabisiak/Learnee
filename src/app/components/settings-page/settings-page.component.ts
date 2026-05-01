@@ -15,6 +15,7 @@ import { combineLatest, Subscription, take } from "rxjs";
 })
 export class SettingsPageComponent implements OnInit {
 	isDarkMode = false;
+	isFetchWordDefinitionEnabled = true;
 	hasKeys = false;
 	currentLanguage = EAvailableLanguages.English;
 	translations: Record<string, string> | null = null;
@@ -24,19 +25,23 @@ export class SettingsPageComponent implements OnInit {
 	constructor(
 		private settingsService: SettingsService,
 		private localStorage: LocalStorageService,
-		private translation: TranslateService
+		private translation: TranslateService,
 	) {}
 
 	ngOnInit() {
 		this.subscription = combineLatest([
 			this.settingsService.isDarkMode$,
+			this.settingsService.isFetchWordDefinitionEnabled$,
 			this.localStorage.hasKeys$,
 			this.settingsService.currentLanguage$,
-		]).subscribe(([isDarkMode, hasKeys, currentLanguage]) => {
-			this.isDarkMode = isDarkMode;
-			this.hasKeys = hasKeys;
-			this.currentLanguage = currentLanguage;
-		});
+		]).subscribe(
+			([isDarkMode, isFetchWordDefinitionEnabled, hasKeys, currentLanguage]) => {
+				this.isDarkMode = isDarkMode;
+				this.isFetchWordDefinitionEnabled = isFetchWordDefinitionEnabled;
+				this.hasKeys = hasKeys;
+				this.currentLanguage = currentLanguage;
+			},
+		);
 
 		this.translation
 			.get("settings.title")
@@ -48,6 +53,10 @@ export class SettingsPageComponent implements OnInit {
 
 	toggleDarkMode() {
 		this.settingsService.setIsDarkMode(this.isDarkMode);
+	}
+
+	toggleFetchWordDefinition() {
+		this.settingsService.setIsFetchWordDefinitionEnabled(this.isFetchWordDefinitionEnabled);
 	}
 
 	setCurrentLanguage(e: any) {
