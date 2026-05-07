@@ -6,6 +6,7 @@ import { BehaviorSubject } from "rxjs";
 })
 export class LocalStorageService {
 	private hasKeys = new BehaviorSubject<boolean>(false);
+	private importedData: Record<string, any> | null = null;
 	hasKeys$ = this.hasKeys.asObservable();
 
 	loadData(key: string) {
@@ -36,6 +37,26 @@ export class LocalStorageService {
 	deleteData() {
 		localStorage.clear();
 		this.hasKeys.next(false);
+		window.location.reload();
+	}
+
+	setImportedData(data: Record<string, any> | null) {
+		this.importedData = data;
+	}
+
+	getImportedData() {
+		return this.importedData;
+	}
+
+	importData(data: Record<string, any>) {
+		localStorage.clear();
+
+		Object.entries(data).forEach(([key, value]) => {
+			localStorage.setItem(key, JSON.stringify(value));
+		});
+
+		this.hasKeys.next(Object.keys(data).length > 0);
+		window.location.reload();
 	}
 
 	private getLocalStorageAsJson() {

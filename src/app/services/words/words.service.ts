@@ -2,7 +2,16 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "../../../environment/environment";
 import { IWord } from "../../types/word.interface";
-import { BehaviorSubject, catchError, combineLatest, map, Observable, of, switchMap, take } from "rxjs";
+import {
+	BehaviorSubject,
+	catchError,
+	combineLatest,
+	map,
+	Observable,
+	of,
+	switchMap,
+	take,
+} from "rxjs";
 import { LocalStorageService } from "../local-storage/local-storage.service";
 import { ToasterService } from "@services/toaster/toaster.service";
 import { EToasterTypes } from "@components/utils/toaster-container/toaster/toaster.component";

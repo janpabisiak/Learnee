@@ -47,6 +47,9 @@
 	"modal.delete.title": "Confirm deletion",
 	"modal.delete.confirm.delete": "Are you sure that you want to delete {{entity}} from your wordlist?",
 
+	"modal.import.title": "Confirm Import",
+	"modal.import.description": "Importing this file will completely replace your current wordlist and statistics. This action cannot be undone.",
+
 	"modal.label.add": "Add word",
 	"modal.label.save": "Save",
 	"modal.label.confirm": "Confirm",
@@ -99,6 +102,10 @@
 	"settings.export.title": "Export your data",
 	"settings.export.description": "Get all your data to your computer in json format",
 	"settings.export.button": "Export data",
+
+	"settings.import.title": "Import your data",
+	"settings.import.description": "Upload a JSON file to restore your data",
+	"settings.import.button": "Import data",
 
 	"settings.delete.title": "Delete your data",
 	"settings.delete.description": "Delete all your data from browser's local storage",

@@ -16,6 +16,7 @@ import { Subscription } from "rxjs";
 import { IToaster } from "../app/types/toaster.interface";
 import { FooterComponent } from "@components/footer/footer.component";
 import { SettingsService } from "@services/settings/settings.service";
+import { ConfirmImportModalComponent } from "@components/settings-page/confirm-import-modal/confirm-import-modal.component";
 
 @Component({
 	selector: "app-root",
@@ -24,6 +25,7 @@ import { SettingsService } from "@services/settings/settings.service";
 		HeaderComponent,
 		AddEditWordModalComponent,
 		ConfirmWordDeletionModalComponent,
+		ConfirmImportModalComponent,
 		ToasterContainerComponent,
 		SpinnerComponent,
 		MobileMenuComponent,
@@ -39,6 +41,7 @@ export class AppComponent implements OnInit, OnDestroy {
 	private settingsService = inject(SettingsService);
 	isWordAddingModalOpen = false;
 	isWordDeletingModalOpen = false;
+	isImportConfirmationModalOpen = false;
 	isMobileNavbarOpen = false;
 	isLoading = false;
 	toasters: IToaster[] = [];
@@ -63,6 +66,12 @@ export class AppComponent implements OnInit, OnDestroy {
 		this.subscriptions.add(
 			this.modalService.isWordDeletionModalOpen$.subscribe((isOpen) => {
 				this.isWordDeletingModalOpen = isOpen;
+			}),
+		);
+
+		this.subscriptions.add(
+			this.modalService.isImportConfirmationModalOpen$.subscribe((isOpen) => {
+				this.isImportConfirmationModalOpen = isOpen;
 			}),
 		);
 

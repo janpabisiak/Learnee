@@ -47,6 +47,9 @@
 	"modal.delete.title": "Potwierdź usunięcie",
 	"modal.delete.confirm.delete": "Usunąć {{entity}} z listy słów?",
 
+	"modal.import.title": "Potwierdź import",
+	"modal.import.description": "Zaimportowanie tego pliku całkowicie zastąpi aktualną listę słów i Twoje statystyki. Tej operacji nie można cofnąć.",
+
 	"modal.label.add": "Dodaj",
 	"modal.label.save": "Zapisz",
 	"modal.label.confirm": "OK",
@@ -99,6 +102,10 @@
 	"settings.export.title": "Eksport danych",
 	"settings.export.description": "Pobierz wszystkie dane w formacie JSON",
 	"settings.export.button": "Eksportuj",
+
+	"settings.import.title": "Import danych",
+	"settings.import.description": "Prześlij plik JSON, aby zaimportować swoje dane",
+	"settings.import.button": "Importuj",
 
 	"settings.delete.title": "Usuń dane",
 	"settings.delete.description": "Usuń wszystkie dane z pamięci przeglądarki",

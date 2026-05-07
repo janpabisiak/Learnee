@@ -6,6 +6,10 @@
 <app-confirm-word-deletion-modal></app-confirm-word-deletion-modal>
 }
 
+@if (isImportConfirmationModalOpen) {
+<app-confirm-import-modal></app-confirm-import-modal>
+}
+
 @if (isLoading) {
 <app-spinner></app-spinner>
 }

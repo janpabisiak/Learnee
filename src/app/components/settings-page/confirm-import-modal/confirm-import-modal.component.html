@@ -1,0 +1,12 @@
+<app-modal
+    *ngIf="translations"
+    [title]="translations['modal.import.title']"
+    [isDanger]="true"
+    [showCloseIcon]="false"
+    (closeButtonClicked)="closeModal()"
+    [primaryButtonText]="translations['modal.label.confirm']"
+    [secondaryButtonText]="translations['modal.label.cancel']"
+    (primaryButtonClicked)="confirm()"
+    (secondaryButtonClicked)="closeModal()">
+    <p class="text-gray-500">{{translations['modal.import.description']}}</p>
+</app-modal>
