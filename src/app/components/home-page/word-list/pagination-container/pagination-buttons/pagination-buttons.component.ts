@@ -23,7 +23,10 @@ export class PaginationButtonsComponent {
 		]).subscribe(([page, maxPage]) => {
 			this.page = page;
 			this.maxPage = maxPage;
-			this.pages = Array.from({ length: maxPage }, (_, i) => i);
+			this.pages = Array.from({ length: maxPage }, (_, i) => i).slice(
+				page - 3 < 0 ? 0 : page - 3,
+				page + 2,
+			);
 		});
 	}
 
