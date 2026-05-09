@@ -40,10 +40,10 @@ describe("WordListSortComponent", () => {
 		expect(component.hasNotLearningWords).toBeTrue();
 	});
 
-	it("should call wordsService.sortWordList on sortWordList call", () => {
+	it("should call wordsService.sortWordList on changeSortType call", () => {
 		const selectElement = document.createElement("select");
 		selectElement.value = ESortTypes.DefinitionASC;
-		component.sortWordList(selectElement);
+		component.changeSortType(selectElement.value);
 
 		expect(mockWordsService.sortWordList).toHaveBeenCalledOnceWith(selectElement.value);
 	});

@@ -10,6 +10,7 @@ export class ToasterService {
 	private toasters = new BehaviorSubject<IToaster[]>([]);
 	toasters$ = this.toasters.asObservable();
 	toasterTypes = EToasterTypes;
+	private nextId = 0;
 
 	addToaster({
 		type = this.toasterTypes.Success,
@@ -21,18 +22,18 @@ export class ToasterService {
 		duration: number;
 	}) {
 		const toaster = {
-			id: this.toasters.value.length,
+			id: this.nextId++,
 			type,
 			content,
 			duration,
 			expirationTimestamp: new Date().getTime() + duration * 1000,
 		};
 
-		this.toasters.next([...this.toasters.value, toaster]);
+		this.toasters.next([toaster, ...this.toasters.value]);
 	}
 
 	startAutoRemoving() {
-		setInterval(() => this.filterToasters, 1000);
+		setInterval(() => this.filterToasters(), 1000);
 	}
 
 	private filterToasters() {

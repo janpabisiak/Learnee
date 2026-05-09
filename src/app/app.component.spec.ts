@@ -228,6 +228,7 @@ export const createMockWordsService = () => ({
 	purgeWordList: jasmine.createSpy("purgeWordList"),
 	filterWordList: jasmine.createSpy("filterWordList"),
 	sortWordList: jasmine.createSpy("sortWordList"),
+	changeSortType: jasmine.createSpy("changeSortType"),
 });
 
 export const createMockLevelService = () => ({

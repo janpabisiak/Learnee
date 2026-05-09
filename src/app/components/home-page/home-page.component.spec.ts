@@ -55,12 +55,12 @@ describe("HomePageComponent", () => {
 	});
 
 	it("should subscribe to wordList$ on component init", () => {
-		expect(component.wordList).toEqual([]);
+		expect(component.numOfWords).toEqual(0);
 
 		mockWordsService.wordList$.next(mockWords);
 		component.ngOnInit();
 
-		expect(component.wordList).toEqual(mockWords);
+		expect(component.numOfWords).toEqual(mockWords.length);
 	});
 
 	it("should toggle visibility of word adding modal on toggleIsAddWordModalOpen call", () => {
