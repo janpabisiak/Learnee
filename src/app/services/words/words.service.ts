@@ -18,6 +18,32 @@ import { EToasterTypes } from "@components/utils/toaster-container/toaster/toast
 import { PaginationService } from "@services/pagination/pagination.service";
 import { SettingsService } from "@services/settings/settings.service";
 
+export enum ESortTypes {
+	NameASC = "nameASC",
+	NameDESC = "nameDESC",
+	DefinitionASC = "definitionASC",
+	DefinitionDESC = "definitionDESC",
+	IsLearningASC = "isLearningASC",
+	IsLearningDESC = "isLearningDESC",
+	IdASC = "idASC",
+	IdDESC = "idDESC",
+}
+
+const sortOptions: Record<ESortTypes, (wordList: IWord[]) => IWord[]> = {
+	[ESortTypes.NameASC]: (wordList) => [...wordList].sort((a, b) => a.name.localeCompare(b.name)),
+	[ESortTypes.NameDESC]: (wordList) => [...wordList].sort((a, b) => b.name.localeCompare(a.name)),
+	[ESortTypes.DefinitionASC]: (wordList) =>
+		[...wordList].sort((a, b) => a.definition.localeCompare(b.definition)),
+	[ESortTypes.DefinitionDESC]: (wordList) =>
+		[...wordList].sort((a, b) => b.definition.localeCompare(a.definition)),
+	[ESortTypes.IsLearningASC]: (wordList) =>
+		[...wordList].sort((a, b) => +a.isLearning - +b.isLearning),
+	[ESortTypes.IsLearningDESC]: (wordList) =>
+		[...wordList].sort((a, b) => +b.isLearning - +a.isLearning),
+	[ESortTypes.IdASC]: (wordList) => [...wordList],
+	[ESortTypes.IdDESC]: (wordList) => [...wordList].reverse(),
+};
+
 @Injectable({
 	providedIn: "root",
 })
@@ -29,6 +55,7 @@ export class WordsService {
 	private filteredWordList = new BehaviorSubject<IWord[]>([]);
 	private paginatedWordList = new BehaviorSubject<IWord[]>([]);
 	private wordsOfTheDay = new BehaviorSubject<IWord[]>([]);
+	private currentSortType = new BehaviorSubject<ESortTypes>(ESortTypes.IdDESC);
 	private searchQuery = "";
 
 	wordList$ = this.wordList.asObservable();
@@ -36,6 +63,7 @@ export class WordsService {
 	filteredWordList$ = this.filteredWordList.asObservable();
 	paginatedWordList$ = this.paginatedWordList.asObservable();
 	wordsOfTheDay$ = this.wordsOfTheDay.asObservable();
+	currentSortType$ = this.currentSortType.asObservable();
 
 	constructor(
 		private http: HttpClient,
@@ -50,8 +78,6 @@ export class WordsService {
 		if (wordList) {
 			this.wordList.next(wordList);
 			this.sortWordList();
-
-			this.filteredWordList.next(wordList);
 		}
 
 		combineLatest([
@@ -74,63 +100,15 @@ export class WordsService {
 		this.wordList.next(updatedWordList);
 		this.saveData(updatedWordList);
 
-		this.sortedWordList.next(updatedWordList);
-		this.filteredWordList.next(updatedWordList);
-		this.filterWordList(this.searchQuery);
-		this.paginateWordList();
+		this.sortWordList();
 	}
 
-	sortWordList(sortType: ESortTypes = ESortTypes.NameASC) {
-		switch (sortType) {
-			case ESortTypes.NameDESC: {
-				const sortedWordList = this.wordList.value.sort((a, b) =>
-					b.name.localeCompare(a.name),
-				);
-				this.sortedWordList.next(sortedWordList);
-				this.filterWordList(this.searchQuery);
-				break;
-			}
-			case ESortTypes.DefinitionASC: {
-				const sortedWordList = this.wordList.value.sort((a, b) =>
-					a.definition.localeCompare(b.definition),
-				);
-				this.sortedWordList.next(sortedWordList);
-				this.filterWordList(this.searchQuery);
-				break;
-			}
-			case ESortTypes.DefinitionDESC: {
-				const sortedWordList = this.wordList.value.sort((a, b) =>
-					b.definition.localeCompare(a.definition),
-				);
-				this.sortedWordList.next(sortedWordList);
-				this.filterWordList(this.searchQuery);
-				break;
-			}
-			case ESortTypes.IsLearningASC: {
-				const sortedWordList = this.wordList.value.sort(
-					(a, b) => +a.isLearning - +b.isLearning,
-				);
-				this.sortedWordList.next(sortedWordList);
-				this.filterWordList(this.searchQuery);
-				break;
-			}
-			case ESortTypes.IsLearningDESC: {
-				const sortedWordList = this.wordList.value.sort(
-					(a, b) => +b.isLearning - +a.isLearning,
-				);
-				this.sortedWordList.next(sortedWordList);
-				this.filterWordList(this.searchQuery);
-				break;
-			}
-			default: {
-				const sortedWordList = this.wordList.value.sort((a, b) =>
-					a.name.localeCompare(b.name),
-				);
-				this.sortedWordList.next(sortedWordList);
-				this.filterWordList(this.searchQuery);
-				break;
-			}
-		}
+	sortWordList() {
+		const currentSortType = this.currentSortType.value;
+		const wordList = this.wordList.value;
+		const sortedWordList = sortOptions[currentSortType](wordList);
+		this.sortedWordList.next(sortedWordList);
+		this.filterWordList(this.searchQuery);
 	}
 
 	filterWordList(query: string) {
@@ -252,6 +230,11 @@ export class WordsService {
 		this.updateWordList(updatedWordList);
 	}
 
+	changeSortType(value: ESortTypes) {
+		this.currentSortType.next(value);
+		this.sortWordList();
+	}
+
 	private getWordsOfTheDay() {
 		const date = new Date();
 		date.setUTCHours(0, 0, 0, 0);
@@ -305,13 +288,4 @@ export class WordsService {
 			)
 			.subscribe();
 	}
-}
-
-export enum ESortTypes {
-	NameASC = "nameASC",
-	NameDESC = "nameDESC",
-	DefinitionASC = "definitionASC",
-	DefinitionDESC = "definitionDESC",
-	IsLearningASC = "isLearningASC",
-	IsLearningDESC = "isLearningDESC",
 }

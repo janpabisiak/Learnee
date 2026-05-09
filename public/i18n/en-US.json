@@ -13,6 +13,8 @@
 	"wordlist.sort.definitionDesc": "Sort by definition DESC",
 	"wordlist.sort.learningAsc": "Sort by learning ASC",
 	"wordlist.sort.learningDesc": "Sort by learning DESC",
+	"wordlist.sort.idAsc": "Sort by ID ASC",
+	"wordlist.sort.idDesc": "Sort by ID DESC",
 	"wordlist.removeAll": "Remove all words",
 	"wordlist.notLearning": "Not learning",
 	"wordlist.toLearn": "To learn",

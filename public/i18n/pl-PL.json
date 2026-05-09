@@ -13,6 +13,8 @@
 	"wordlist.sort.definitionDesc": "Sortuj malejąco wg. definicji",
 	"wordlist.sort.learningAsc": "Sortuj rosnąco wg. stanu",
 	"wordlist.sort.learningDesc": "Sortuj malejąco wg stanu",
+	"wordlist.sort.idAsc": "Sortuj rosnąco wg. ID",
+	"wordlist.sort.idDesc": "Sortuj malejąco wg. ID",
 	"wordlist.removeAll": "Wyczyść listę",
 	"wordlist.notLearning": "Nie uczone",
 	"wordlist.toLearn": "Do nauki",

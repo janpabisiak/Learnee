@@ -1,10 +1,5 @@
-<select class="p-3 bg-gray-100 rounded-md border-1 border-gray-200 h-12 w-full dark:bg-zinc-800 dark:border-zinc-700">
-    <option value="nameASC">{{'wordlist.sort.nameAsc' | translate}}</option>
-    <option value="nameDESC">{{'wordlist.sort.nameDesc' | translate}}</option>
-    <option value="definitionASC">{{'wordlist.sort.definitionAsc' | translate}}</option>
-    <option value="definitionDESC">{{'wordlist.sort.definitionDesc' | translate}}</option>
-    @if (hasNotLearningWords) {
-    <option value="isLearningASC">{{'wordlist.sort.learningAsc' | translate}}</option>
-    <option value="isLearningDESC">{{'wordlist.sort.learningDesc' | translate}}</option>
+<select class="p-3 bg-gray-100 rounded-md border-1 border-gray-200 h-12 w-full dark:bg-zinc-800 dark:border-zinc-700" (change)="changeSortType(select.value)" #select>
+    @for (sortType of sortTypes; track sortType.type) {
+    <option [value]="sortType.type" [selected]="sortType.type === currentSortType">{{sortType.translationKey | translate}}</option>
     }
 </select>
