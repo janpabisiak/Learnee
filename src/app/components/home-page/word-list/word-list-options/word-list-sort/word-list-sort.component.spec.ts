@@ -45,7 +45,7 @@ describe("WordListSortComponent", () => {
 		selectElement.value = ESortTypes.DefinitionASC;
 		component.changeSortType(selectElement.value);
 
-		expect(mockWordsService.sortWordList).toHaveBeenCalledOnceWith(selectElement.value);
+		expect(mockWordsService.changeSortType).toHaveBeenCalledOnceWith(selectElement.value);
 	});
 
 	it("should destroy subscription on component destroy", () => {

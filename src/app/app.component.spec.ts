@@ -15,7 +15,7 @@ import { IToaster } from "./types/toaster.interface";
 import { ToasterService } from "@services/toaster/toaster.service";
 import { EModalType, ModalService } from "@services/modal/modal.service";
 import { IWord } from "./types/word.interface";
-import { WordsService } from "@services/words/words.service";
+import { ESortTypes, WordsService } from "@services/words/words.service";
 import { EToasterTypes } from "@components/utils/toaster-container/toaster/toaster.component";
 import { IStatistics } from "@services/level/level.service";
 import { EAvailableGames, IStage } from "@services/game/game.service";
@@ -210,6 +210,7 @@ export const mockResultRange: IResultRange = {
 export const createMockModalService = () => ({
 	isWordAddingModalOpen$: new BehaviorSubject<boolean>(false),
 	isWordDeletionModalOpen$: new BehaviorSubject<boolean>(false),
+	isImportConfirmationModalOpen$: new BehaviorSubject<boolean>(false),
 	isMobileNavbarOpen$: new BehaviorSubject<boolean>(false),
 	toggleModal: jasmine.createSpy("toggleShowWordAddingModal"),
 });
@@ -223,6 +224,7 @@ export const createMockWordsService = () => ({
 	wordsOfTheDay$: new BehaviorSubject<IWord[]>([]),
 	wordList$: new BehaviorSubject<IWord[]>([]),
 	filteredWordList$: new BehaviorSubject<IWord[]>([]),
+	currentSortType$: new BehaviorSubject<ESortTypes>(ESortTypes.IdDESC),
 	toggleIsLearning: jasmine.createSpy("toggleIsLearning"),
 	removeWord: jasmine.createSpy("removeWord"),
 	purgeWordList: jasmine.createSpy("purgeWordList"),

@@ -5,21 +5,22 @@ describe("LocalStorageService", () => {
 
 	beforeEach(() => {
 		service = new LocalStorageService();
+		spyOn(service, "reloadPage");
 	});
 
 	describe("loadData()", () => {
 		it("should return data from localStorage if found", () => {
-			localStorage.setItem("test", "test1");
+			localStorage.setItem("test", JSON.stringify("test1"));
 			const result = service.loadData("test");
 
 			expect(result).toBe("test1");
 		});
 
-		it("should return false if no value in localStorage for given key", () => {
+		it("should return null if no value in localStorage for given key", () => {
 			localStorage.removeItem("test");
 			const result = service.loadData("test");
 
-			expect(result).toBeFalse();
+			expect(result).toBeNull();
 		});
 	});
 
@@ -55,7 +56,7 @@ describe("LocalStorageService", () => {
 
 	describe("deleteData()", () => {
 		it("should delete all data from localStorage", () => {
-			localStorage.setItem("test", "test10");
+			localStorage.setItem("test", JSON.stringify("test10"));
 			let localStorageAsJson = service["getLocalStorageAsJson"]();
 
 			expect(localStorageAsJson).toContain('"test": "test10"');
@@ -67,7 +68,7 @@ describe("LocalStorageService", () => {
 		});
 
 		it("should set hasKeys property to false", () => {
-			localStorage.setItem("test", "test5");
+			localStorage.setItem("test", JSON.stringify("test5"));
 			service.deleteData();
 
 			expect(service["hasKeys"].value).toBeFalse();

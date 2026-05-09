@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { StudyProgressBarComponent } from "./study-progress-bar.component";
 import { provideHttpClient } from "@angular/common/http";
+import { provideTranslateService } from "@ngx-translate/core";
 
 describe("StudyProgressBarComponent", () => {
 	let component: StudyProgressBarComponent;
@@ -9,7 +10,12 @@ describe("StudyProgressBarComponent", () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			imports: [StudyProgressBarComponent],
-			providers: [provideHttpClient()],
+			providers: [
+				provideHttpClient(),
+				provideTranslateService({
+					fallbackLang: "en",
+				}),
+			],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(StudyProgressBarComponent);

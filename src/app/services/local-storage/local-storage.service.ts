@@ -37,7 +37,7 @@ export class LocalStorageService {
 	deleteData() {
 		localStorage.clear();
 		this.hasKeys.next(false);
-		window.location.reload();
+		this.reloadPage();
 	}
 
 	setImportedData(data: Record<string, any> | null) {
@@ -56,6 +56,10 @@ export class LocalStorageService {
 		});
 
 		this.hasKeys.next(Object.keys(data).length > 0);
+		this.reloadPage();
+	}
+
+	reloadPage() {
 		window.location.reload();
 	}
 
