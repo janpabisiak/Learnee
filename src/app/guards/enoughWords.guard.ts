@@ -3,6 +3,7 @@ import { CanActivate, Router } from "@angular/router";
 import { EToasterTypes } from "@components/utils/toaster-container/toaster/toaster.component";
 import { ToasterService } from "@services/toaster/toaster.service";
 import { WordsService } from "@services/words/words.service";
+import { TranslateService } from "@ngx-translate/core";
 
 @Injectable({
 	providedIn: "root",
@@ -13,7 +14,8 @@ export class EnoughWordsGuard implements CanActivate {
 	constructor(
 		private wordsService: WordsService,
 		private toasterService: ToasterService,
-		private router: Router
+		private router: Router,
+		private translateService: TranslateService,
 	) {
 		this.wordsService.wordList$.subscribe((wordList) => {
 			this.enoughWords = wordList.filter((w) => w.isLearning).length > 4;
@@ -25,7 +27,7 @@ export class EnoughWordsGuard implements CanActivate {
 
 		this.toasterService.addToaster({
 			type: EToasterTypes.Error,
-			content: "Not enough learning words to start a game.",
+			content: this.translateService.instant("toaster.error.word.notEnoughWords"),
 			duration: 5,
 		});
 

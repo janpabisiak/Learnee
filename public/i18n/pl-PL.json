@@ -115,5 +115,12 @@
 
 	"footer.copyright": "Copyright © {{year}} | Jan Pabisiak",
 
+	"toaster.error.word.notEnoughWords": "Zbyt mało słów do nauki, aby rozpocząć grę.",
+	"toaster.error.word.alreadyExists": "To słowo jest już na Twojej liście",
+	"toaster.success.word.added": "Słowo zostało dodane",
+	"toaster.success.word.deleted": "Słowo zostało usunięte",
+	"toaster.success.word.allDeleted": "Słowa zostały usunięte",
+	"toaster.success.word.edited": "Słowo zostało edytowane",
+
 	"error.notFound": "Błąd 404 – Strona nie istnieje"
 }

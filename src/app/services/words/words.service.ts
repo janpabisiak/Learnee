@@ -17,6 +17,7 @@ import { ToasterService } from "@services/toaster/toaster.service";
 import { EToasterTypes } from "@components/utils/toaster-container/toaster/toaster.component";
 import { PaginationService } from "@services/pagination/pagination.service";
 import { SettingsService } from "@services/settings/settings.service";
+import { TranslateService } from "@ngx-translate/core";
 
 export enum ESortTypes {
 	NameASC = "nameASC",
@@ -71,6 +72,7 @@ export class WordsService {
 		private toasterService: ToasterService,
 		private paginationService: PaginationService,
 		private settingsService: SettingsService,
+		private translateService: TranslateService,
 	) {
 		this.getWordsOfTheDay();
 
@@ -152,7 +154,7 @@ export class WordsService {
 		if (wordList.some((w) => w.name === word && w.definition === definition)) {
 			this.toasterService.addToaster({
 				type: EToasterTypes.Error,
-				content: "This word is already on your wordlist",
+				content: this.translateService.instant("toaster.error.word.alreadyExists"),
 				duration: 5,
 			});
 
@@ -171,7 +173,7 @@ export class WordsService {
 
 		this.toasterService.addToaster({
 			type: EToasterTypes.Success,
-			content: "Word successfully added",
+			content: this.translateService.instant("toaster.success.word.added"),
 			duration: 5,
 		});
 	}
@@ -189,7 +191,7 @@ export class WordsService {
 
 		this.toasterService.addToaster({
 			type: EToasterTypes.Success,
-			content: "Word successfully deleted",
+			content: this.translateService.instant("toaster.success.word.deleted"),
 			duration: 5,
 		});
 	}
@@ -199,7 +201,7 @@ export class WordsService {
 
 		this.toasterService.addToaster({
 			type: EToasterTypes.Success,
-			content: "Words successfully deleted",
+			content: this.translateService.instant("toaster.success.word.allDeleted"),
 			duration: 5,
 		});
 	}
@@ -213,7 +215,7 @@ export class WordsService {
 
 		this.toasterService.addToaster({
 			type: EToasterTypes.Success,
-			content: "Word successfully edited",
+			content: this.translateService.instant("toaster.success.word.edited"),
 			duration: 5,
 		});
 	}

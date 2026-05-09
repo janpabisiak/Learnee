@@ -115,5 +115,12 @@
 
 	"footer.copyright": "Copyright © {{year}} | Jan Pabisiak",
 
+	"toaster.error.word.notEnoughWords": "Not enough learning words to start a game.",
+	"toaster.error.word.alreadyExists": "This word is already on your wordlist",
+	"toaster.success.word.added": "Word successfully added",
+	"toaster.success.word.deleted": "Word successfully deleted",
+	"toaster.success.word.allDeleted": "Words successfully deleted",
+	"toaster.success.word.edited": "Word successfully edited",
+
 	"error.notFound": "Error 404 - Not found"
 }
