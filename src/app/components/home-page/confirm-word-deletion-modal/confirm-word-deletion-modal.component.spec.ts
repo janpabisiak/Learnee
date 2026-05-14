@@ -4,10 +4,8 @@ import { ConfirmWordDeletionModalComponent } from "./confirm-word-deletion-modal
 import { provideHttpClient } from "@angular/common/http";
 import { ModalComponent } from "@components/utils/modal/modal.component";
 import {
-	createMockConfirmWordDeletionService,
 	createMockModalService,
 	createMockWordsService,
-	IMockMockConfirmWordDeletionService,
 	IMockModalService,
 	IMockWordsService,
 	mockWords,
@@ -21,12 +19,10 @@ describe("ConfirmWordDeletionModalComponent", () => {
 	let fixture: ComponentFixture<ConfirmWordDeletionModalComponent>;
 	let mockModalService: IMockModalService;
 	let mockWordsService: IMockWordsService;
-	let mockConfirmWordDeletionService: IMockMockConfirmWordDeletionService;
 
 	beforeEach(async () => {
 		mockModalService = createMockModalService();
 		mockWordsService = createMockWordsService();
-		mockConfirmWordDeletionService = createMockConfirmWordDeletionService();
 
 		await TestBed.configureTestingModule({
 			imports: [ConfirmWordDeletionModalComponent, ModalComponent],
@@ -34,10 +30,6 @@ describe("ConfirmWordDeletionModalComponent", () => {
 				provideHttpClient(),
 				{ provide: ModalService, useValue: mockModalService },
 				{ provide: WordsService, useValue: mockWordsService },
-				{
-					provide: ConfirmWordDeletionModalComponent,
-					useValue: mockConfirmWordDeletionService,
-				},
 				provideTranslateService({
 					fallbackLang: "en",
 				}),
@@ -58,7 +50,7 @@ describe("ConfirmWordDeletionModalComponent", () => {
 
 		expect(mockModalService.toggleModal).toHaveBeenCalledOnceWith(
 			EModalType.WordDeletion,
-			false
+			false,
 		);
 	});
 

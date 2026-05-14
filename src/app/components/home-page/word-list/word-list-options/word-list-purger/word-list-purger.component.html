@@ -1,1 +1,3 @@
-<app-button class="[&>button]:w-full [&>button]:justify-center" [type]="'danger'" [icon]="'flame-outline'" (buttonClicked)="openModal()">{{'wordlist.removeAll' | translate}}</app-button>
+@if (translations) {
+<app-button class="[&>button]:w-full [&>button]:justify-center" [type]="'danger'" [icon]="'flame-outline'" (buttonClicked)="openModal()">{{hasSelectedWords ? translations['wordlist.deleteSelected'] : translations['wordlist.deleteAll'] }}</app-button>
+}

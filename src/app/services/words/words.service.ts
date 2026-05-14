@@ -41,8 +41,8 @@ const sortOptions: Record<ESortTypes, (wordList: IWord[]) => IWord[]> = {
 		[...wordList].sort((a, b) => +a.isLearning - +b.isLearning),
 	[ESortTypes.IsLearningDESC]: (wordList) =>
 		[...wordList].sort((a, b) => +b.isLearning - +a.isLearning),
-	[ESortTypes.IdASC]: (wordList) => [...wordList],
-	[ESortTypes.IdDESC]: (wordList) => [...wordList].reverse(),
+	[ESortTypes.IdASC]: (wordList) => [...wordList].sort((a, b) => a.id - b.id),
+	[ESortTypes.IdDESC]: (wordList) => [...wordList].sort((a, b) => b.id - a.id),
 };
 
 @Injectable({
@@ -55,6 +55,9 @@ export class WordsService {
 	private sortedWordList = new BehaviorSubject<IWord[]>([]);
 	private filteredWordList = new BehaviorSubject<IWord[]>([]);
 	private paginatedWordList = new BehaviorSubject<IWord[]>([]);
+	private selectedIds = new BehaviorSubject<number[]>([]);
+	private hasSelectedIds = new BehaviorSubject<boolean>(false);
+	private wordToDeleteId = new BehaviorSubject<number | null>(null);
 	private wordsOfTheDay = new BehaviorSubject<IWord[]>([]);
 	private currentSortType = new BehaviorSubject<ESortTypes>(ESortTypes.IdDESC);
 	private searchQuery = "";
@@ -63,6 +66,9 @@ export class WordsService {
 	sortedWordList$ = this.sortedWordList.asObservable();
 	filteredWordList$ = this.filteredWordList.asObservable();
 	paginatedWordList$ = this.paginatedWordList.asObservable();
+	selectedIds$ = this.selectedIds.asObservable();
+	hasSelectedIds$ = this.hasSelectedIds.asObservable();
+	wordToDeleteId$ = this.wordToDeleteId.asObservable();
 	wordsOfTheDay$ = this.wordsOfTheDay.asObservable();
 	currentSortType$ = this.currentSortType.asObservable();
 
@@ -194,16 +200,29 @@ export class WordsService {
 			content: this.translateService.instant("toaster.success.word.deleted"),
 			duration: 5,
 		});
+
+		this.wordToDeleteId.next(null);
 	}
 
-	purgeWordList() {
-		this.updateWordList([]);
+	removeManyWords() {
+		if (this.hasSelectedIds.value) {
+			const updatedWordList = this.wordList.value.filter(
+				(word) => !this.selectedIds.value.includes(word.id),
+			);
+
+			this.updateWordList(updatedWordList);
+		} else {
+			this.updateWordList([]);
+		}
 
 		this.toasterService.addToaster({
 			type: EToasterTypes.Success,
-			content: this.translateService.instant("toaster.success.word.allDeleted"),
+			content: this.translateService.instant("toaster.success.word.manyDeleted"),
 			duration: 5,
 		});
+
+		this.selectedIds.next([]);
+		this.hasSelectedIds.next(false);
 	}
 
 	editWord(wordId: number, word: string, definition: string) {
@@ -220,6 +239,10 @@ export class WordsService {
 		});
 	}
 
+	updateWordToDeleteId(wordId: number | null) {
+		this.wordToDeleteId.next(wordId);
+	}
+
 	toggleIsLearning(wordId: number) {
 		const updatedWordList = [...this.wordList.value].map((w) => {
 			if (w.id !== wordId) return w;
@@ -230,6 +253,26 @@ export class WordsService {
 		});
 
 		this.updateWordList(updatedWordList);
+	}
+
+	toggleSelection(wordId: number) {
+		const selectedIds = this.selectedIds.value;
+		const hasWordSelected = selectedIds.includes(wordId);
+		let updatedWordList: number[] = [];
+
+		if (hasWordSelected) {
+			updatedWordList = selectedIds.filter((id) => id !== wordId);
+		} else {
+			updatedWordList = [...selectedIds, wordId];
+		}
+
+		this.selectedIds.next(updatedWordList);
+		this.hasSelectedIds.next(!!updatedWordList.length);
+	}
+
+	unselectAll() {
+		this.selectedIds.next([]);
+		this.hasSelectedIds.next(false);
 	}
 
 	changeSortType(value: ESortTypes) {

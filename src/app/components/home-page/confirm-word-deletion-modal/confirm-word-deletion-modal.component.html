@@ -1,5 +1,3 @@
-<ng-container *ngIf="translations">
-    <app-modal [title]="translations['modal.delete.title']" [isDanger]="true" [showCloseIcon]="false" (closeButtonClicked)="closeModal()" [primaryButtonText]="translations['modal.label.confirm']" [secondaryButtonText]="translations['modal.label.cancel']" (primaryButtonClicked)="confirmDeletion()" (secondaryButtonClicked)="closeModal()">
-        <p>{{'modal.delete.confirm.delete' | translate : {entity: purgeWords ? translations['modal.label.everything'] : word?.name } }}</p>
-    </app-modal>
-</ng-container>
+<app-modal [title]="'modal.delete.title' | translate" [isDanger]="true" [showCloseIcon]="false" (closeButtonClicked)="closeModal()" [primaryButtonText]="'modal.label.confirm' | translate" [secondaryButtonText]="'modal.label.cancel' | translate" (primaryButtonClicked)="confirmDeletion()" (secondaryButtonClicked)="closeModal()">
+    <p>{{'modal.delete.confirm.delete' | translate }}</p>
+</app-modal>

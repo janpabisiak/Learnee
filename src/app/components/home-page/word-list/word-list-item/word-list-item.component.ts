@@ -1,13 +1,13 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, Input } from "@angular/core";
+import { NgClass } from "@angular/common";
+import { Component, CUSTOM_ELEMENTS_SCHEMA, Input, OnDestroy, OnInit } from "@angular/core";
+import { TranslatePipe } from "@ngx-translate/core";
+import { AddWordFormService } from "@services/add-edit-word-form/add-edit-word-form.service";
+import { EModalType, ModalService } from "@services/modal/modal.service";
+import { WordsService } from "@services/words/words.service";
+import { Subject, takeUntil } from "rxjs";
 import { SentenceCasePipe } from "../../../../pipes/sentence-case.pipe";
 import { WebSpeechService } from "../../../../services/web-speech/web-speech.service";
 import { IWord } from "../../../../types/word.interface";
-import { AddWordFormService } from "@services/add-edit-word-form/add-edit-word-form.service";
-import { WordsService } from "@services/words/words.service";
-import { EModalType, ModalService } from "@services/modal/modal.service";
-import { ConfirmWordDeletionService } from "@services/confirm-word-deletion/confirm-word-deletion.service";
-import { NgClass } from "@angular/common";
-import { TranslatePipe } from "@ngx-translate/core";
 
 @Component({
 	selector: "app-word-list-item",
@@ -16,17 +16,24 @@ import { TranslatePipe } from "@ngx-translate/core";
 	standalone: true,
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class WordListItemComponent {
+export class WordListItemComponent implements OnInit, OnDestroy {
 	@Input({ required: true }) word!: IWord;
+	isWordSelected = false;
 	isDropdownOpen = false;
+	private destroy$ = new Subject<void>();
 
 	constructor(
 		private addWordFormService: AddWordFormService,
 		private webSpeechService: WebSpeechService,
 		private wordsService: WordsService,
 		private modalService: ModalService,
-		private confirmWordDeletionService: ConfirmWordDeletionService
 	) {}
+
+	ngOnInit() {
+		this.wordsService.selectedIds$.pipe(takeUntil(this.destroy$)).subscribe((selectedIds) => {
+			this.isWordSelected = selectedIds.includes(this.word.id);
+		});
+	}
 
 	readWord() {
 		if (this.word.name) this.webSpeechService.readText(this.word.name);
@@ -50,9 +57,18 @@ export class WordListItemComponent {
 		this.isDropdownOpen = !this.isDropdownOpen;
 	}
 
+	toggleSelection() {
+		this.wordsService.toggleSelection(this.word.id);
+	}
+
 	deleteWord() {
-		this.modalService.toggleModal(EModalType.WordDeletion, true);
-		this.confirmWordDeletionService.word = this.word;
+		this.wordsService.updateWordToDeleteId(this.word.id);
 		this.toggleDropdownMenu();
+		this.modalService.toggleModal(EModalType.WordDeletion, true);
+	}
+
+	ngOnDestroy() {
+		this.destroy$.next();
+		this.destroy$.complete();
 	}
 }

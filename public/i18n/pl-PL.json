@@ -15,7 +15,9 @@
 	"wordlist.sort.learningDesc": "Sortuj malejąco wg stanu",
 	"wordlist.sort.idAsc": "Sortuj rosnąco wg. ID",
 	"wordlist.sort.idDesc": "Sortuj malejąco wg. ID",
-	"wordlist.removeAll": "Wyczyść listę",
+	"wordlist.deleteAll": "Wyczyść listę",
+	"wordlist.deleteSelected": "Usuń zaznaczone",
+	"wordlist.unselectAll": "Cofnij zaznaczenie",
 	"wordlist.notLearning": "Nie uczone",
 	"wordlist.toLearn": "Do nauki",
 	"wordlist.noWords": "Brak słów.",
@@ -47,7 +49,7 @@
 	"modal.edit.title": "Edytuj słowo",
 
 	"modal.delete.title": "Potwierdź usunięcie",
-	"modal.delete.confirm.delete": "Usunąć {{entity}} z listy słów?",
+	"modal.delete.confirm.delete": "Czy na pewno chcesz to usunąć z listy słów?",
 
 	"modal.import.title": "Potwierdź import",
 	"modal.import.description": "Zaimportowanie tego pliku całkowicie zastąpi aktualną listę słów i Twoje statystyki. Tej operacji nie można cofnąć.",
@@ -119,7 +121,7 @@
 	"toaster.error.word.alreadyExists": "To słowo jest już na Twojej liście",
 	"toaster.success.word.added": "Słowo zostało dodane",
 	"toaster.success.word.deleted": "Słowo zostało usunięte",
-	"toaster.success.word.allDeleted": "Słowa zostały usunięte",
+	"toaster.success.word.manyDeleted": "Słowa zostały usunięte",
 	"toaster.success.word.edited": "Słowo zostało edytowane",
 
 	"error.notFound": "Błąd 404 – Strona nie istnieje"

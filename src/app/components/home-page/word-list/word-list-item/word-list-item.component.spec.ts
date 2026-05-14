@@ -6,12 +6,10 @@ import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { SentenceCasePipe } from "@pipes/sentence-case.pipe";
 import {
 	createMockAddWordFormService,
-	createMockConfirmWordDeletionService,
 	createMockModalService,
 	createMockWebSpeechService,
 	createMockWordsService,
 	IMockAddWordFormService,
-	IMockMockConfirmWordDeletionService,
 	IMockModalService,
 	IMockWebSpeechService,
 	IMockWordsService,
@@ -21,7 +19,6 @@ import { AddWordFormService } from "@services/add-edit-word-form/add-edit-word-f
 import { WebSpeechService } from "@services/web-speech/web-speech.service";
 import { WordsService } from "@services/words/words.service";
 import { EModalType, ModalService } from "@services/modal/modal.service";
-import { ConfirmWordDeletionService } from "@services/confirm-word-deletion/confirm-word-deletion.service";
 import { provideTranslateService } from "@ngx-translate/core";
 
 describe("WordListItemComponent", () => {
@@ -31,14 +28,12 @@ describe("WordListItemComponent", () => {
 	let mockWebSpeechService: IMockWebSpeechService;
 	let mockWordsService: IMockWordsService;
 	let mockModalService: IMockModalService;
-	let mockConfirmWordDeletionService: IMockMockConfirmWordDeletionService;
 
 	beforeEach(async () => {
 		mockAddWordFormService = createMockAddWordFormService();
 		mockWebSpeechService = createMockWebSpeechService();
 		mockWordsService = createMockWordsService();
 		mockModalService = createMockModalService();
-		mockConfirmWordDeletionService = createMockConfirmWordDeletionService();
 
 		await TestBed.configureTestingModule({
 			imports: [WordListItemComponent, SentenceCasePipe],
@@ -48,7 +43,6 @@ describe("WordListItemComponent", () => {
 				{ provide: WebSpeechService, useValue: mockWebSpeechService },
 				{ provide: WordsService, useValue: mockWordsService },
 				{ provide: ModalService, useValue: mockModalService },
-				{ provide: ConfirmWordDeletionService, useValue: mockConfirmWordDeletionService },
 				provideTranslateService({
 					fallbackLang: "en",
 				}),
@@ -106,9 +100,8 @@ describe("WordListItemComponent", () => {
 
 		expect(mockModalService.toggleModal).toHaveBeenCalledOnceWith(
 			EModalType.WordDeletion,
-			true
+			true,
 		);
-		expect(mockConfirmWordDeletionService.word).toEqual(component.word);
 		expect(toggleDropdownMenuSpy).toHaveBeenCalledTimes(1);
 	});
 });

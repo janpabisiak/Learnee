@@ -4,7 +4,6 @@ import { provideHttpClient } from "@angular/common/http";
 import { provideRouter } from "@angular/router";
 import { HeaderComponent } from "@components/header/header.component";
 import { AddEditWordModalComponent } from "@components/home-page/add-edit-word-modal/add-edit-word-modal.component";
-import { ConfirmWordDeletionModalComponent } from "@components/home-page/confirm-word-deletion-modal/confirm-word-deletion-modal.component";
 import {
 	EToasterPositions,
 	ToasterContainerComponent,
@@ -42,7 +41,6 @@ describe("AppComponent", () => {
 				AppComponent,
 				HeaderComponent,
 				AddEditWordModalComponent,
-				ConfirmWordDeletionModalComponent,
 				ToasterContainerComponent,
 				SpinnerComponent,
 				MobileMenuComponent,
@@ -112,7 +110,7 @@ describe("AppComponent", () => {
 
 		expect(mockModalService.toggleModal).toHaveBeenCalledOnceWith(
 			EModalType.MobileNavbar,
-			false
+			false,
 		);
 	});
 
@@ -263,11 +261,6 @@ export const createMockGameService = () => ({
 	cancelGame: jasmine.createSpy("cancelGame"),
 });
 
-export const createMockConfirmWordDeletionService = () => ({
-	word: null as IWord | null,
-	purgeWords: false,
-});
-
 export const createMockPaginationService = () => ({
 	page$: new BehaviorSubject<number>(1),
 	maxPage$: new BehaviorSubject<number>(1),
@@ -295,9 +288,6 @@ export type IMockToasterService = ReturnType<typeof createMockToasterService>;
 export type IMockWordsService = ReturnType<typeof createMockWordsService>;
 export type IMockLevelService = ReturnType<typeof createMockLevelService>;
 export type IMockAddWordFormService = ReturnType<typeof createMockAddWordFormService>;
-export type IMockMockConfirmWordDeletionService = ReturnType<
-	typeof createMockConfirmWordDeletionService
->;
 export type IMockWebSpeechService = ReturnType<typeof createMockWebSpeechService>;
 export type IMockGameService = ReturnType<typeof createMockGameService>;
 export type IMockPaginationService = ReturnType<typeof createMockPaginationService>;
