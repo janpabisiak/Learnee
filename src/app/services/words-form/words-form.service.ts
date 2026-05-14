@@ -7,7 +7,7 @@ import { IWord } from "../../types/word.interface";
 @Injectable({
 	providedIn: "root",
 })
-export class AddWordFormService {
+export class WordsFormService {
 	form: FormGroup;
 	private isSubmitAttempted = new BehaviorSubject<boolean>(false);
 	private isSubmitDisabled = new BehaviorSubject<boolean>(false);
@@ -59,9 +59,9 @@ export class AddWordFormService {
 		const [word, definition] = [this.word.value.trim(), this.definition.value.trim()];
 
 		if (!this.isEditing) {
-			this.wordsService.addWord(word, definition);
+			this.wordsService.add(word, definition);
 		} else {
-			this.wordsService.editWord(this.wordToEditData!.id, word, definition);
+			this.wordsService.edit(this.wordToEditData!.id, word, definition);
 		}
 	}
 

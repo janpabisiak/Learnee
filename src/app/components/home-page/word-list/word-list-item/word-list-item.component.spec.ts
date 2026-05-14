@@ -5,17 +5,18 @@ import { provideHttpClient } from "@angular/common/http";
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { SentenceCasePipe } from "@pipes/sentence-case.pipe";
 import {
-	createMockAddWordFormService,
 	createMockModalService,
 	createMockWebSpeechService,
-	createMockWordsService,
-	IMockAddWordFormService,
 	IMockModalService,
 	IMockWebSpeechService,
+} from "app/app.component.spec";
+import {
+	createMockWordsService,
 	IMockWordsService,
 	mockWords,
-} from "app/app.component.spec";
-import { AddWordFormService } from "@services/add-edit-word-form/add-edit-word-form.service";
+} from "@services/words/words.service.mock";
+import { createMockWordsFormService, IMockWordsFormService } from "@services/words-form/words-form.service.mock";
+import { WordsFormService } from "@services/words-form/words-form.service";
 import { WebSpeechService } from "@services/web-speech/web-speech.service";
 import { WordsService } from "@services/words/words.service";
 import { EModalType, ModalService } from "@services/modal/modal.service";
@@ -24,13 +25,13 @@ import { provideTranslateService } from "@ngx-translate/core";
 describe("WordListItemComponent", () => {
 	let component: WordListItemComponent;
 	let fixture: ComponentFixture<WordListItemComponent>;
-	let mockAddWordFormService: IMockAddWordFormService;
+	let mockWordsFormService: IMockWordsFormService;
 	let mockWebSpeechService: IMockWebSpeechService;
 	let mockWordsService: IMockWordsService;
 	let mockModalService: IMockModalService;
 
 	beforeEach(async () => {
-		mockAddWordFormService = createMockAddWordFormService();
+		mockWordsFormService = createMockWordsFormService();
 		mockWebSpeechService = createMockWebSpeechService();
 		mockWordsService = createMockWordsService();
 		mockModalService = createMockModalService();
@@ -39,7 +40,7 @@ describe("WordListItemComponent", () => {
 			imports: [WordListItemComponent, SentenceCasePipe],
 			providers: [
 				provideHttpClient(),
-				{ provide: AddWordFormService, useValue: mockAddWordFormService },
+				{ provide: WordsFormService, useValue: mockWordsFormService },
 				{ provide: WebSpeechService, useValue: mockWebSpeechService },
 				{ provide: WordsService, useValue: mockWordsService },
 				{ provide: ModalService, useValue: mockModalService },
@@ -66,7 +67,7 @@ describe("WordListItemComponent", () => {
 		expect(mockWebSpeechService.readText).toHaveBeenCalledOnceWith(component.word.name);
 	});
 
-	it("should call webSpeechService.readText method on readWordDefinition call", () => {
+	it("should call webSpeechService.readText method on readWord definition call", () => {
 		component.readWordDefinition();
 
 		expect(mockWebSpeechService.readText).toHaveBeenCalledOnceWith(component.word.definition);
@@ -77,7 +78,7 @@ describe("WordListItemComponent", () => {
 		component.editWord();
 
 		expect(mockModalService.toggleModal).toHaveBeenCalledOnceWith(EModalType.WordAdding, true);
-		expect(mockAddWordFormService.setupForEditing).toHaveBeenCalledOnceWith(component.word);
+		expect(mockWordsFormService.setupForEditing).toHaveBeenCalledOnceWith(component.word);
 		expect(toggleDropdownMenuSpy).toHaveBeenCalledTimes(1);
 	});
 

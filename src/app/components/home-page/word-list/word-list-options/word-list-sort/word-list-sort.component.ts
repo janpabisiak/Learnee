@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { TranslatePipe } from "@ngx-translate/core";
-import { ESortTypes, WordsService } from "@services/words/words.service";
+import { WordsService } from "@services/words/words.service";
+import { ESortTypes } from "@services/words-options/words-options.service";
 import { Subject, takeUntil } from "rxjs";
 
 const sortTypes: Record<ESortTypes, string> = {
@@ -29,11 +30,11 @@ export class WordListSortComponent implements OnInit, OnDestroy {
 	constructor(private wordsService: WordsService) {}
 
 	ngOnInit() {
-		this.wordsService.currentSortType$.pipe(takeUntil(this.destroy$)).subscribe((sortType) => {
+		this.wordsService.sortType$.pipe(takeUntil(this.destroy$)).subscribe((sortType) => {
 			this.currentSortType = sortType;
 		});
 
-		this.wordsService.filteredWordList$.pipe(takeUntil(this.destroy$)).subscribe((wordList) => {
+		this.wordsService.wordList$.pipe(takeUntil(this.destroy$)).subscribe((wordList) => {
 			const hasNotLearningWords = wordList.some((w) => !w.isLearning);
 			const isLearningSortTypes = [ESortTypes.IsLearningASC, ESortTypes.IsLearningDESC];
 
@@ -51,7 +52,7 @@ export class WordListSortComponent implements OnInit, OnDestroy {
 	}
 
 	changeSortType(value: string) {
-		this.wordsService.changeSortType(value as ESortTypes);
+		this.wordsService.setSortType(value as ESortTypes);
 	}
 
 	ngOnDestroy() {

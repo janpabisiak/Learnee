@@ -3,32 +3,26 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { ResultsIndicatorComponent } from "./results-indicator.component";
 import { provideHttpClient } from "@angular/common/http";
 import {
-	createMockPaginationService,
 	createMockWordsService,
-	IMockPaginationService,
 	IMockWordsService,
 	mockResultRange,
 	mockWords,
-} from "app/app.component.spec";
-import { PaginationService } from "@services/pagination/pagination.service";
+} from "@services/words/words.service.mock";
 import { WordsService } from "@services/words/words.service";
 import { provideTranslateService } from "@ngx-translate/core";
 
 describe("ResultsIndicatorComponent", () => {
 	let component: ResultsIndicatorComponent;
 	let fixture: ComponentFixture<ResultsIndicatorComponent>;
-	let mockPaginationService: IMockPaginationService;
 	let mockWordsService: IMockWordsService;
 
 	beforeEach(async () => {
-		mockPaginationService = createMockPaginationService();
 		mockWordsService = createMockWordsService();
 
 		await TestBed.configureTestingModule({
 			imports: [ResultsIndicatorComponent],
 			providers: [
 				provideHttpClient(),
-				{ provide: PaginationService, useValue: mockPaginationService },
 				{ provide: WordsService, useValue: mockWordsService },
 				provideTranslateService({
 					fallbackLang: "en",
@@ -46,8 +40,8 @@ describe("ResultsIndicatorComponent", () => {
 	});
 
 	it("should update properties values on subscriptions update", () => {
-		mockPaginationService.resultRange$.next(mockResultRange);
-		mockWordsService.filteredWordList$.next(mockWords);
+		mockWordsService.resultRange$.next(mockResultRange);
+		mockWordsService.numberOfFilteredWords$.next(mockWords.length);
 
 		expect(component.resultRange).toEqual(mockResultRange);
 		expect(component.numberOfWords).toBe(mockWords.length);

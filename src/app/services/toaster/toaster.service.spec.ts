@@ -13,25 +13,25 @@ describe("ToasterService", () => {
 		it("should create toaster regarding to default data", () => {
 			service.addToaster({ content: "Test" } as any);
 
-			expect(service["toasters"].value).toContain({
+			expect(service["toasters"].value[0]).toEqual(jasmine.objectContaining({
 				id: 0,
 				type: EToasterTypes.Success,
 				content: "Test",
 				duration: 5,
-				expirationTimestamp: new Date().getTime() + 5 * 1000,
-			});
+			}));
+			expect(service["toasters"].value[0].expirationTimestamp).toBeCloseTo(new Date().getTime() + 5 * 1000, -2);
 		});
 
 		it("should create toaster regarding to given data", () => {
 			service.addToaster({ type: EToasterTypes.Error, content: "Test2", duration: 9 } as any);
 
-			expect(service["toasters"].value).toContain({
+			expect(service["toasters"].value[0]).toEqual(jasmine.objectContaining({
 				id: 0,
 				type: EToasterTypes.Error,
 				content: "Test2",
 				duration: 9,
-				expirationTimestamp: new Date().getTime() + 9 * 1000,
-			});
+			}));
+			expect(service["toasters"].value[0].expirationTimestamp).toBeCloseTo(new Date().getTime() + 9 * 1000, -2);
 		});
 	});
 

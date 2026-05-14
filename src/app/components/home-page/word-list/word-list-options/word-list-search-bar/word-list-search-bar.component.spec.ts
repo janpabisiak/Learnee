@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { WordListSearchBarComponent } from "./word-list-search-bar.component";
 import { provideHttpClient } from "@angular/common/http";
-import { createMockWordsService, IMockWordsService } from "app/app.component.spec";
+import { createMockWordsService, IMockWordsService } from "@services/words/words.service.mock";
 import { WordsService } from "@services/words/words.service";
 import { provideTranslateService } from "@ngx-translate/core";
 
@@ -34,11 +34,11 @@ describe("WordListSearchBarComponent", () => {
 		expect(component).toBeTruthy();
 	});
 
-	it("should call wordsService.filterWordList on search method call", () => {
+	it("should call wordsService.setSearchQuery on search method call", () => {
 		const inputElement = document.createElement("input");
 		inputElement.value = "test";
 		component.search(inputElement);
 
-		expect(mockWordsService.filterWordList).toHaveBeenCalledOnceWith("test");
+		expect(mockWordsService.setSearchQuery).toHaveBeenCalledOnceWith("test");
 	});
 });

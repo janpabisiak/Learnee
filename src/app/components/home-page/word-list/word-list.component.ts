@@ -23,19 +23,18 @@ import { WordListOptionsComponent } from "./word-list-options/word-list-options.
 })
 export class WordListComponent implements OnInit, OnDestroy {
 	private destroy$ = new Subject<void>();
-	sortedWordList: IWord[] = [];
-	paginatedWordList: IWord[] = [];
+	hasWords = false;
+	wordList: IWord[] = [];
 	isWordListLoaded = false;
 
 	constructor(private wordsService: WordsService) {}
 
 	ngOnInit() {
-		combineLatest([this.wordsService.sortedWordList$, this.wordsService.paginatedWordList$])
+		combineLatest([this.wordsService.wordList$, this.wordsService.visibleWords$])
 			.pipe(takeUntil(this.destroy$))
-			.subscribe(([sortedWordList, paginatedWordList]) => {
-				this.sortedWordList = sortedWordList;
-				this.paginatedWordList = paginatedWordList;
-
+			.subscribe(([wordList, visibleWords]) => {
+				this.hasWords = wordList.length > 0;
+				this.wordList = visibleWords;
 				this.isWordListLoaded = true;
 			});
 	}

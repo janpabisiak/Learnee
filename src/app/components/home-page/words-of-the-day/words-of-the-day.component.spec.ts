@@ -5,17 +5,18 @@ import { provideHttpClient } from "@angular/common/http";
 import { WotdItemComponent } from "./wotd-item/wotd-item.component";
 import { ButtonComponent } from "@components/utils/button/button.component";
 import {
-	createMockAddWordFormService,
 	createMockModalService,
-	createMockWordsService,
-	IMockAddWordFormService,
 	IMockModalService,
+} from "app/app.component.spec";
+import {
+	createMockWordsService,
 	IMockWordsService,
 	mockWords,
-} from "app/app.component.spec";
+} from "@services/words/words.service.mock";
+import { createMockWordsFormService, IMockWordsFormService } from "@services/words-form/words-form.service.mock";
 import { WordsService } from "@services/words/words.service";
 import { EModalType, ModalService } from "@services/modal/modal.service";
-import { AddWordFormService } from "@services/add-edit-word-form/add-edit-word-form.service";
+import { WordsFormService } from "@services/words-form/words-form.service";
 import { provideTranslateService } from "@ngx-translate/core";
 
 describe("WordsOfTheDayComponent", () => {
@@ -23,12 +24,12 @@ describe("WordsOfTheDayComponent", () => {
 	let fixture: ComponentFixture<WordsOfTheDayComponent>;
 	let mockWordsService: IMockWordsService;
 	let mockModalService: IMockModalService;
-	let mockAddWordFormService: IMockAddWordFormService;
+	let mockWordsFormService: IMockWordsFormService;
 
 	beforeEach(async () => {
 		mockWordsService = createMockWordsService();
 		mockModalService = createMockModalService();
-		mockAddWordFormService = createMockAddWordFormService();
+		mockWordsFormService = createMockWordsFormService();
 
 		await TestBed.configureTestingModule({
 			imports: [WordsOfTheDayComponent, WotdItemComponent, ButtonComponent],
@@ -36,7 +37,7 @@ describe("WordsOfTheDayComponent", () => {
 				provideHttpClient(),
 				{ provide: WordsService, useValue: mockWordsService },
 				{ provide: ModalService, useValue: mockModalService },
-				{ provide: AddWordFormService, useValue: mockAddWordFormService },
+				{ provide: WordsFormService, useValue: mockWordsFormService },
 				provideTranslateService({
 					fallbackLang: "en",
 				}),
@@ -79,7 +80,7 @@ describe("WordsOfTheDayComponent", () => {
 		component.addWord();
 
 		expect(mockModalService.toggleModal).toHaveBeenCalledOnceWith(EModalType.WordAdding, true);
-		expect(mockAddWordFormService.setupForEditing).toHaveBeenCalledOnceWith({
+		expect(mockWordsFormService.setupForEditing).toHaveBeenCalledOnceWith({
 			...mockWords[1],
 			id: 0,
 			toBeAdded: true,

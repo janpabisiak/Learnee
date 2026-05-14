@@ -5,7 +5,7 @@ import { Subject, takeUntil } from "rxjs";
 import { ButtonComponent } from "@components/utils/button/button.component";
 import { WotdItemComponent } from "./wotd-item/wotd-item.component";
 import { EModalType, ModalService } from "@services/modal/modal.service";
-import { AddWordFormService } from "@services/add-edit-word-form/add-edit-word-form.service";
+import { WordsFormService } from "@services/words-form/words-form.service";
 import { TranslatePipe } from "@ngx-translate/core";
 
 @Component({
@@ -21,7 +21,7 @@ export class WordsOfTheDayComponent implements OnInit, OnDestroy {
 	constructor(
 		private wordsService: WordsService,
 		private modalService: ModalService,
-		private addWordFormService: AddWordFormService
+		private wordsFormService: WordsFormService
 	) {}
 
 	ngOnInit() {
@@ -42,7 +42,7 @@ export class WordsOfTheDayComponent implements OnInit, OnDestroy {
 
 	addWord() {
 		this.modalService.toggleModal(EModalType.WordAdding, true);
-		this.addWordFormService.setupForEditing({
+		this.wordsFormService.setupForEditing({
 			...this.wordsOfTheDay[this.currentWordId],
 			id: 0,
 			toBeAdded: true,

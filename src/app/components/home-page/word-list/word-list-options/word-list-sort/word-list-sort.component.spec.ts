@@ -2,8 +2,9 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { WordListSortComponent } from "./word-list-sort.component";
 import { provideHttpClient } from "@angular/common/http";
-import { createMockWordsService, IMockWordsService, mockWords } from "app/app.component.spec";
-import { ESortTypes, WordsService } from "@services/words/words.service";
+import { createMockWordsService, IMockWordsService, mockWords } from "@services/words/words.service.mock";
+import { WordsService } from "@services/words/words.service";
+import { ESortTypes } from "@services/words-options/words-options.service";
 import { provideTranslateService } from "@ngx-translate/core";
 
 describe("WordListSortComponent", () => {
@@ -35,17 +36,17 @@ describe("WordListSortComponent", () => {
 	});
 
 	it("should set hasNotlearningWords field depending on subscription", () => {
-		mockWordsService.filteredWordList$.next(mockWords);
+		mockWordsService.wordList$.next(mockWords);
 
 		expect(component.hasNotLearningWords).toBeTrue();
 	});
 
-	it("should call wordsService.sortWordList on changeSortType call", () => {
+	it("should call wordsService.setSortType on changeSortType call", () => {
 		const selectElement = document.createElement("select");
 		selectElement.value = ESortTypes.DefinitionASC;
 		component.changeSortType(selectElement.value);
 
-		expect(mockWordsService.changeSortType).toHaveBeenCalledOnceWith(selectElement.value);
+		expect(mockWordsService.setSortType).toHaveBeenCalledOnceWith(selectElement.value as ESortTypes);
 	});
 
 	it("should destroy subscription on component destroy", () => {

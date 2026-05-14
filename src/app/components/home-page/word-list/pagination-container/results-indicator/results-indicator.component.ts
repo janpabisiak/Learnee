@@ -1,7 +1,7 @@
 import { NgIf } from "@angular/common";
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { TranslatePipe } from "@ngx-translate/core";
-import { IResultRange, PaginationService } from "@services/pagination/pagination.service";
+import { IResultRange } from "@services/words-options/words-options.service";
 import { WordsService } from "@services/words/words.service";
 import { combineLatest, Subscription } from "rxjs";
 
@@ -15,15 +15,15 @@ export class ResultsIndicatorComponent implements OnInit, OnDestroy {
 	numberOfWords = 0;
 	private subscription = new Subscription();
 
-	constructor(private paginationService: PaginationService, private wordsService: WordsService) {}
+	constructor(private wordsService: WordsService) {}
 
 	ngOnInit() {
 		this.subscription = combineLatest([
-			this.paginationService.resultRange$,
-			this.wordsService.filteredWordList$,
-		]).subscribe(([resultRange, filteredWordList]) => {
+			this.wordsService.resultRange$,
+			this.wordsService.numberOfFilteredWords$,
+		]).subscribe(([resultRange, numberOfFilteredWords]) => {
 			this.resultRange = resultRange;
-			this.numberOfWords = filteredWordList.length;
+			this.numberOfWords = numberOfFilteredWords;
 		});
 	}
 

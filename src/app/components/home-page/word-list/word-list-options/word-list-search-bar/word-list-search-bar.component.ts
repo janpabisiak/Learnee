@@ -14,10 +14,13 @@ export class WordListSearchBarComponent implements OnInit {
 
 	@HostListener("input", ["$event.target"])
 	search(hostEl: HTMLInputElement) {
-		this.wordsService.filterWordList(hostEl.value);
+		this.wordsService.setSearchQuery(hostEl.value);
 	}
 
-	constructor(private wordsService: WordsService, private translation: TranslateService) {}
+	constructor(
+		private wordsService: WordsService,
+		private translation: TranslateService,
+	) {}
 
 	ngOnInit() {
 		this.translation

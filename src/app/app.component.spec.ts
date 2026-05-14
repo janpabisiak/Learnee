@@ -4,23 +4,20 @@ import { provideHttpClient } from "@angular/common/http";
 import { provideRouter } from "@angular/router";
 import { HeaderComponent } from "@components/header/header.component";
 import { AddEditWordModalComponent } from "@components/home-page/add-edit-word-modal/add-edit-word-modal.component";
-import {
-	EToasterPositions,
-	ToasterContainerComponent,
-} from "@components/utils/toaster-container/toaster-container.component";
+import { EToasterPositions, ToasterContainerComponent } from "@components/utils/toaster-container/toaster-container.component";
 import { SpinnerComponent } from "@components/utils/spinner/spinner.component";
 import { BehaviorSubject } from "rxjs";
 import { IToaster } from "./types/toaster.interface";
 import { ToasterService } from "@services/toaster/toaster.service";
 import { EModalType, ModalService } from "@services/modal/modal.service";
-import { IWord } from "./types/word.interface";
-import { ESortTypes, WordsService } from "@services/words/words.service";
+import { WordsService } from "@services/words/words.service";
+import { createMockWordsService, IMockWordsService, mockWords } from "@services/words/words.service.mock";
+import { createMockWordsFormService, IMockWordsFormService } from "@services/words-form/words-form.service.mock";
 import { EToasterTypes } from "@components/utils/toaster-container/toaster/toaster.component";
 import { IStatistics } from "@services/level/level.service";
 import { EAvailableGames, IStage } from "@services/game/game.service";
 import { FooterComponent } from "@components/footer/footer.component";
 import { MobileMenuComponent } from "@components/header/mobile-menu/mobile-menu.component";
-import { IResultRange } from "@services/pagination/pagination.service";
 import { provideTranslateService } from "@ngx-translate/core";
 import { EAvailableLanguages } from "@services/settings/settings.service";
 
@@ -129,21 +126,6 @@ describe("AppComponent", () => {
 	});
 });
 
-export const mockWords: IWord[] = [
-	{
-		id: 0,
-		name: "test_name",
-		definition: "test_definition",
-		isLearning: true,
-	},
-	{
-		id: 1,
-		name: "test_name_2",
-		definition: "test_definition_2",
-		isLearning: false,
-	},
-];
-
 export const mockToasters: IToaster[] = [
 	{
 		id: 0,
@@ -200,11 +182,6 @@ export const mockAvailableGames: EAvailableGames[] = [
 
 export const mockSelectedGames: EAvailableGames[] = [EAvailableGames.FillGaps];
 
-export const mockResultRange: IResultRange = {
-	start: 0,
-	end: 10,
-};
-
 export const createMockModalService = () => ({
 	isWordAddingModalOpen$: new BehaviorSubject<boolean>(false),
 	isWordDeletionModalOpen$: new BehaviorSubject<boolean>(false),
@@ -218,30 +195,10 @@ export const createMockToasterService = () => ({
 	startAutoRemoving: jasmine.createSpy("startAutoRemoving"),
 });
 
-export const createMockWordsService = () => ({
-	wordsOfTheDay$: new BehaviorSubject<IWord[]>([]),
-	wordList$: new BehaviorSubject<IWord[]>([]),
-	filteredWordList$: new BehaviorSubject<IWord[]>([]),
-	currentSortType$: new BehaviorSubject<ESortTypes>(ESortTypes.IdDESC),
-	toggleIsLearning: jasmine.createSpy("toggleIsLearning"),
-	removeWord: jasmine.createSpy("removeWord"),
-	purgeWordList: jasmine.createSpy("purgeWordList"),
-	filterWordList: jasmine.createSpy("filterWordList"),
-	sortWordList: jasmine.createSpy("sortWordList"),
-	changeSortType: jasmine.createSpy("changeSortType"),
-});
-
 export const createMockLevelService = () => ({
 	statistics$: new BehaviorSubject<Map<string, number>>(new Map<string, number>()),
 	xpPoints$: new BehaviorSubject<number>(0),
 	level$: new BehaviorSubject<number>(0),
-});
-
-export const createMockAddWordFormService = () => ({
-	isSubmitAttempted$: new BehaviorSubject<boolean>(false),
-	isSubmitDisabled$: new BehaviorSubject<boolean>(false),
-	toggleShowWordAddingModal: jasmine.createSpy("toggleShowWordAddingModal"),
-	setupForEditing: jasmine.createSpy("setupForEditing"),
 });
 
 export const createMockWebSpeechService = () => ({
@@ -261,15 +218,6 @@ export const createMockGameService = () => ({
 	cancelGame: jasmine.createSpy("cancelGame"),
 });
 
-export const createMockPaginationService = () => ({
-	page$: new BehaviorSubject<number>(1),
-	maxPage$: new BehaviorSubject<number>(1),
-	wordsPerPage$: new BehaviorSubject<number>(5),
-	resultRange$: new BehaviorSubject<IResultRange>(mockResultRange),
-	setPage: jasmine.createSpy("setPage"),
-	setWordsPerPage: jasmine.createSpy("setWordsPerPage"),
-});
-
 export const createMockLocalStorageService = () => ({
 	hasKeys$: new BehaviorSubject<boolean>(false),
 	loadData: jasmine.createSpy("loadData"),
@@ -285,11 +233,8 @@ export const createMockSettingsService = () => ({
 
 export type IMockModalService = ReturnType<typeof createMockModalService>;
 export type IMockToasterService = ReturnType<typeof createMockToasterService>;
-export type IMockWordsService = ReturnType<typeof createMockWordsService>;
 export type IMockLevelService = ReturnType<typeof createMockLevelService>;
-export type IMockAddWordFormService = ReturnType<typeof createMockAddWordFormService>;
 export type IMockWebSpeechService = ReturnType<typeof createMockWebSpeechService>;
 export type IMockGameService = ReturnType<typeof createMockGameService>;
-export type IMockPaginationService = ReturnType<typeof createMockPaginationService>;
 export type IMockLocalStorageService = ReturnType<typeof createMockLocalStorageService>;
 export type IMockSettingsService = ReturnType<typeof createMockSettingsService>;

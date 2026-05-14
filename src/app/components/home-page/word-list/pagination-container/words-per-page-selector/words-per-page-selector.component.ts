@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { TranslatePipe } from "@ngx-translate/core";
-import { PaginationService } from "@services/pagination/pagination.service";
+import { WordsService } from "@services/words/words.service";
 import { Subject, takeUntil } from "rxjs";
 
 @Component({
@@ -13,10 +13,10 @@ export class WordsPerPageSelectorComponent implements OnInit, OnDestroy {
 	wordsPerPageOptions = [10, 20, 30, 50];
 	private destroy$ = new Subject<void>();
 
-	constructor(private paginationService: PaginationService) {}
+	constructor(private wordsService: WordsService) {}
 
 	ngOnInit() {
-		this.paginationService.wordsPerPage$
+		this.wordsService.wordsPerPage$
 			.pipe(takeUntil(this.destroy$))
 			.subscribe((wordsPerPage) => {
 				this.wordsPerPage = wordsPerPage;
@@ -24,7 +24,7 @@ export class WordsPerPageSelectorComponent implements OnInit, OnDestroy {
 	}
 
 	setWordsPerPage(value: number) {
-		this.paginationService.setWordsPerPage(value);
+		this.wordsService.setWordsPerPage(value);
 	}
 
 	ngOnDestroy() {

@@ -35,9 +35,9 @@ export class ConfirmWordDeletionModalComponent implements OnInit {
 
 	confirmDeletion() {
 		if (this.wordId) {
-			this.wordsService.removeWord(this.wordId);
+			this.wordsService.remove(this.wordId);
 		} else {
-			this.wordsService.removeManyWords();
+			this.wordsService.removeMany();
 		}
 
 		this.closeModal();

@@ -3,13 +3,8 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { ConfirmWordDeletionModalComponent } from "./confirm-word-deletion-modal.component";
 import { provideHttpClient } from "@angular/common/http";
 import { ModalComponent } from "@components/utils/modal/modal.component";
-import {
-	createMockModalService,
-	createMockWordsService,
-	IMockModalService,
-	IMockWordsService,
-	mockWords,
-} from "app/app.component.spec";
+import { createMockModalService, IMockModalService } from "app/app.component.spec";
+import { createMockWordsService, IMockWordsService } from "@services/words/words.service.mock";
 import { EModalType, ModalService } from "@services/modal/modal.service";
 import { WordsService } from "@services/words/words.service";
 import { provideTranslateService } from "@ngx-translate/core";
@@ -54,17 +49,17 @@ describe("ConfirmWordDeletionModalComponent", () => {
 		);
 	});
 
-	it("should call wordsService.removeWord on confirmDeletion call when purgeWords is false", () => {
-		component.word = mockWords[0];
+	it("should call wordsService.remove on confirmDeletion call when wordId is set", () => {
+		component.wordId = 1;
 		component.confirmDeletion();
 
-		expect(mockWordsService.removeWord).toHaveBeenCalledOnceWith(component.word.id);
+		expect(mockWordsService.remove).toHaveBeenCalledOnceWith(1);
 	});
 
-	it("should call wordsService.purgeWordList on confirmDeletion call when purgeWords is true", () => {
-		component.purgeWords = true;
+	it("should call wordsService.removeMany on confirmDeletion call when wordId is not set", () => {
+		component.wordId = null;
 		component.confirmDeletion();
 
-		expect(mockWordsService.purgeWordList).toHaveBeenCalledTimes(1);
+		expect(mockWordsService.removeMany).toHaveBeenCalledTimes(1);
 	});
 });

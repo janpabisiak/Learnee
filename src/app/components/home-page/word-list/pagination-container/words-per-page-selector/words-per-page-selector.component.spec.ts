@@ -1,22 +1,22 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { provideTranslateService } from "@ngx-translate/core";
-import { PaginationService } from "@services/pagination/pagination.service";
-import { createMockPaginationService, IMockPaginationService } from "app/app.component.spec";
+import { WordsService } from "@services/words/words.service";
+import { createMockWordsService, IMockWordsService } from "@services/words/words.service.mock";
 import { WordsPerPageSelectorComponent } from "./words-per-page-selector.component";
 
 describe("WordsPerPageSelectorComponent", () => {
 	let component: WordsPerPageSelectorComponent;
 	let fixture: ComponentFixture<WordsPerPageSelectorComponent>;
-	let mockPaginationService: IMockPaginationService;
+	let mockWordsService: IMockWordsService;
 
 	beforeEach(async () => {
-		mockPaginationService = createMockPaginationService();
+		mockWordsService = createMockWordsService();
 
 		await TestBed.configureTestingModule({
 			imports: [WordsPerPageSelectorComponent],
 			providers: [
-				{ provide: PaginationService, useValue: mockPaginationService },
+				{ provide: WordsService, useValue: mockWordsService },
 				provideTranslateService({
 					fallbackLang: "en",
 				}),
@@ -33,15 +33,15 @@ describe("WordsPerPageSelectorComponent", () => {
 	});
 
 	it("should update wordsPerPage property on subscription change", () => {
-		mockPaginationService.wordsPerPage$.next(20);
+		mockWordsService.wordsPerPage$.next(20);
 
 		expect(component.wordsPerPage).toBe(20);
 	});
 
-	it("should call paginationService.setWordsPerPage on setWordsPerPage call", () => {
+	it("should call wordsService.setWordsPerPage on setWordsPerPage call", () => {
 		component.setWordsPerPage(10);
 
-		expect(mockPaginationService.setWordsPerPage).toHaveBeenCalledOnceWith(10);
+		expect(mockWordsService.setWordsPerPage).toHaveBeenCalledOnceWith(10);
 	});
 
 	it("should remove subscription on component destroy", () => {

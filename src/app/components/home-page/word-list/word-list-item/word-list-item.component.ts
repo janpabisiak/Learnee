@@ -1,7 +1,7 @@
 import { NgClass } from "@angular/common";
-import { Component, CUSTOM_ELEMENTS_SCHEMA, Input, OnDestroy, OnInit } from "@angular/core";
+import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, OnDestroy, OnInit } from "@angular/core";
 import { TranslatePipe } from "@ngx-translate/core";
-import { AddWordFormService } from "@services/add-edit-word-form/add-edit-word-form.service";
+import { WordsFormService } from "@services/words-form/words-form.service";
 import { EModalType, ModalService } from "@services/modal/modal.service";
 import { WordsService } from "@services/words/words.service";
 import { Subject, takeUntil } from "rxjs";
@@ -23,7 +23,7 @@ export class WordListItemComponent implements OnInit, OnDestroy {
 	private destroy$ = new Subject<void>();
 
 	constructor(
-		private addWordFormService: AddWordFormService,
+		private wordsFormService: WordsFormService,
 		private webSpeechService: WebSpeechService,
 		private wordsService: WordsService,
 		private modalService: ModalService,
@@ -45,7 +45,7 @@ export class WordListItemComponent implements OnInit, OnDestroy {
 
 	editWord() {
 		this.modalService.toggleModal(EModalType.WordAdding, true);
-		this.addWordFormService.setupForEditing(this.word);
+		this.wordsFormService.setupForEditing(this.word);
 		this.toggleDropdownMenu();
 	}
 

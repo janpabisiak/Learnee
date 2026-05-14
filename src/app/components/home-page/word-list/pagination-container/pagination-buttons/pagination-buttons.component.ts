@@ -1,6 +1,6 @@
 import { NgClass } from "@angular/common";
 import { Component } from "@angular/core";
-import { PaginationService } from "@services/pagination/pagination.service";
+import { WordsService } from "@services/words/words.service";
 import { combineLatest, Subscription } from "rxjs";
 
 @Component({
@@ -14,12 +14,12 @@ export class PaginationButtonsComponent {
 	pages: number[] = [];
 	private subscription = new Subscription();
 
-	constructor(private paginationService: PaginationService) {}
+	constructor(private wordsService: WordsService) {}
 
 	ngOnInit() {
 		this.subscription = combineLatest([
-			this.paginationService.page$,
-			this.paginationService.maxPage$,
+			this.wordsService.page$,
+			this.wordsService.maxPage$,
 		]).subscribe(([page, maxPage]) => {
 			this.page = page;
 			this.maxPage = maxPage;
@@ -31,7 +31,7 @@ export class PaginationButtonsComponent {
 	}
 
 	setPage(page: number) {
-		this.paginationService.setPage(page);
+		this.wordsService.setPage(page);
 	}
 
 	ngOnDestroy() {

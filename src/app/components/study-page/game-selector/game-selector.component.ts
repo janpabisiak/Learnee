@@ -19,13 +19,16 @@ export class GameSelectorComponent implements OnInit, OnDestroy {
 	translations: Record<string, string> | null = null;
 	private destroy$ = new Subject<void>();
 
-	constructor(private gameService: GameService, private translation: TranslateService) {}
+	constructor(
+		private gameService: GameService,
+		private translation: TranslateService,
+	) {}
 
 	ngOnInit() {
 		this.gameService.selectedGames$
 			.pipe(takeUntil(this.destroy$))
 			.subscribe((selectedGames) => {
-				this.hasSelectedGames = !!selectedGames.length;
+				this.hasSelectedGames = selectedGames.length > 0;
 				this.selectedGames = selectedGames;
 				this.allGamesSelected = selectedGames.length === availableGames.length;
 			});
@@ -43,7 +46,7 @@ export class GameSelectorComponent implements OnInit, OnDestroy {
 			this.gameService.updateSelectedGames(
 				!this.allGamesSelected
 					? (availableGames.map((game) => game.title) as EAvailableGames[])
-					: []
+					: [],
 			);
 
 			return;

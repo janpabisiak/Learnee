@@ -6,13 +6,12 @@ import { WordListComponent } from "./word-list/word-list.component";
 import { WordsOfTheDayComponent } from "./words-of-the-day/words-of-the-day.component";
 import { UserStatisticsComponent } from "./user-statistics/user-statistics.component";
 import { ButtonComponent } from "@components/utils/button/button.component";
+import { createMockModalService, IMockModalService } from "app/app.component.spec";
 import {
-	createMockModalService,
 	createMockWordsService,
-	IMockModalService,
 	IMockWordsService,
 	mockWords,
-} from "app/app.component.spec";
+} from "@services/words/words.service.mock";
 import { EModalType, ModalService } from "@services/modal/modal.service";
 import { WordsService } from "@services/words/words.service";
 import { provideTranslateService } from "@ngx-translate/core";
@@ -54,10 +53,10 @@ describe("HomePageComponent", () => {
 		expect(component).toBeTruthy();
 	});
 
-	it("should subscribe to wordList$ on component init", () => {
+	it("should subscribe to numberOfWords$ on component init", () => {
 		expect(component.numOfWords).toEqual(0);
 
-		mockWordsService.wordList$.next(mockWords);
+		mockWordsService.numberOfWords$.next(mockWords.length);
 		component.ngOnInit();
 
 		expect(component.numOfWords).toEqual(mockWords.length);

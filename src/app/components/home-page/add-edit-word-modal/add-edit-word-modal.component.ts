@@ -3,7 +3,7 @@ import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from "
 import { ReactiveFormsModule } from "@angular/forms";
 import { ModalComponent } from "@components/utils/modal/modal.component";
 import { TranslatePipe, TranslateService } from "@ngx-translate/core";
-import { AddWordFormService } from "@services/add-edit-word-form/add-edit-word-form.service";
+import { WordsFormService } from "@services/words-form/words-form.service";
 import { EModalType, ModalService } from "@services/modal/modal.service";
 import { WordsService } from "@services/words/words.service";
 import { Subscription, take } from "rxjs";
@@ -25,7 +25,7 @@ export class AddEditWordModalComponent implements OnInit, OnDestroy {
 
 	constructor(
 		private modalService: ModalService,
-		private addEditWordFormService: AddWordFormService,
+		private wordsFormService: WordsFormService,
 		private wordsService: WordsService,
 		private renderer: Renderer2,
 		private translation: TranslateService
@@ -33,13 +33,13 @@ export class AddEditWordModalComponent implements OnInit, OnDestroy {
 
 	ngOnInit() {
 		this.subscriptions.add(
-			this.addEditWordFormService.isSubmitAttempted$.subscribe((isAttempted) => {
+			this.wordsFormService.isSubmitAttempted$.subscribe((isAttempted) => {
 				this.isSubmitAttempted = isAttempted;
 			})
 		);
 
 		this.subscriptions.add(
-			this.addEditWordFormService.isSubmitDisabled$.subscribe((isDisabled) => {
+			this.wordsFormService.isSubmitDisabled$.subscribe((isDisabled) => {
 				this.isSubmitDisabled = isDisabled;
 			})
 		);
@@ -79,10 +79,10 @@ export class AddEditWordModalComponent implements OnInit, OnDestroy {
 	}
 
 	submitForm() {
-		const isFormValid = this.addEditWordFormService.isFormValid();
+		const isFormValid = this.wordsFormService.isFormValid();
 
 		if (isFormValid) {
-			this.addEditWordFormService.submitForm();
+			this.wordsFormService.submitForm();
 			this.modalService.toggleModal(EModalType.WordAdding, false);
 		} else {
 			this.form.markAllAsTouched();
@@ -95,9 +95,9 @@ export class AddEditWordModalComponent implements OnInit, OnDestroy {
 		this.wordDefinitionEl.nativeElement.placeholder = "Auto fetching definition...";
 		this.wordDefinitionEl.nativeElement.disabled = true;
 		this.wordsService
-			.fetchWordDefinition$(this.word.value)
+			.fetchDefinition$(this.word.value)
 			.pipe(take(1))
-			.subscribe((definition) => {
+			.subscribe((definition: string) => {
 				this.definition.setValue(definition);
 				this.wordDefinitionEl.nativeElement.placeholder = "";
 				this.wordDefinitionEl.nativeElement.disabled = false;
@@ -106,23 +106,23 @@ export class AddEditWordModalComponent implements OnInit, OnDestroy {
 	}
 
 	get isEditing() {
-		return this.addEditWordFormService.getIsEditing();
+		return this.wordsFormService.getIsEditing();
 	}
 
 	get form() {
-		return this.addEditWordFormService.form;
+		return this.wordsFormService.form;
 	}
 
 	get word() {
-		return this.addEditWordFormService.word;
+		return this.wordsFormService.word;
 	}
 
 	get definition() {
-		return this.addEditWordFormService.definition;
+		return this.wordsFormService.definition;
 	}
 
 	ngOnDestroy() {
 		this.subscriptions.unsubscribe();
-		this.addEditWordFormService.reset();
+		this.wordsFormService.reset();
 	}
 }

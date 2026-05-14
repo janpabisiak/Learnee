@@ -30,8 +30,8 @@ export class HomePageComponent implements OnInit, OnDestroy {
 	constructor(private wordsService: WordsService) {}
 
 	ngOnInit() {
-		this.subscription = this.wordsService.wordList$.subscribe((wordList) => {
-			this.numOfWords = wordList.length;
+		this.subscription = this.wordsService.numberOfWords$.subscribe((numberOfWords) => {
+			this.numOfWords = numberOfWords;
 		});
 	}
 

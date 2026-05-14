@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { WotdItemComponent } from "./wotd-item.component";
 import { SentenceCasePipe } from "@pipes/sentence-case.pipe";
-import { mockWords } from "app/app.component.spec";
+import { mockWords } from "@services/words/words.service.mock";
 
 describe("WotdItemComponent", () => {
 	let component: WotdItemComponent;
