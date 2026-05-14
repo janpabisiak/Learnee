@@ -8,7 +8,7 @@ import { BehaviorSubject } from "rxjs";
 export class PaginationService {
 	private page = new BehaviorSubject<number>(1);
 	private maxPage = new BehaviorSubject<number>(1);
-	private wordsPerPage = new BehaviorSubject<number>(5);
+	private wordsPerPage = new BehaviorSubject<number>(10);
 	private resultRange = new BehaviorSubject<IResultRange>({ start: 0, end: 10 });
 	private numberOfWords = 0;
 

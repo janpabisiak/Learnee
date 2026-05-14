@@ -1,10 +1,8 @@
 <div class="flex items-center gap-2">
     <label class="text-gray-500" for="rowsPerPage">{{'pagination.rowsPerPage' | translate}}</label>
-    <select class="bg-gray-100 rounded-md border-1 border-gray-200 h-9 p-2 dark:bg-zinc-800 dark:border-zinc-700" [value]="wordsPerPage" (change)="setWordsPerPage()" #select>
-        <option [value]="5">5</option>
-        <option [value]="10">10</option>
-        <option [value]="20">20</option>
-        <option [value]="30">30</option>
-        <option [value]="50">50</option>
+    <select class="bg-gray-100 rounded-md border-1 border-gray-200 h-9 p-2 dark:bg-zinc-800 dark:border-zinc-700" [value]="wordsPerPage" (change)="setWordsPerPage(+select.value)" #select>
+        @for (option of wordsPerPageOptions; track option) {
+        <option [value]="option">{{option}}</option>
+        }
     </select>
 </div>

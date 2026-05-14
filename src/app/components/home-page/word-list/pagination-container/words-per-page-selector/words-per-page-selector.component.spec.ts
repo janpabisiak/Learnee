@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { WordsPerPageSelectorComponent } from "./words-per-page-selector.component";
-import { createMockPaginationService, IMockPaginationService } from "app/app.component.spec";
-import { PaginationService } from "@services/pagination/pagination.service";
 import { provideTranslateService } from "@ngx-translate/core";
+import { PaginationService } from "@services/pagination/pagination.service";
+import { createMockPaginationService, IMockPaginationService } from "app/app.component.spec";
+import { WordsPerPageSelectorComponent } from "./words-per-page-selector.component";
 
 describe("WordsPerPageSelectorComponent", () => {
 	let component: WordsPerPageSelectorComponent;
@@ -39,19 +39,18 @@ describe("WordsPerPageSelectorComponent", () => {
 	});
 
 	it("should call paginationService.setWordsPerPage on setWordsPerPage call", () => {
-		const selectEl = {
-			nativeElement: document.createElement("select"),
-		};
-		selectEl.nativeElement.value = "10";
-		component.setWordsPerPage();
+		component.setWordsPerPage(10);
 
-		expect(mockPaginationService.setWordsPerPage).toHaveBeenCalledOnceWith(5);
+		expect(mockPaginationService.setWordsPerPage).toHaveBeenCalledOnceWith(10);
 	});
 
 	it("should remove subscription on component destroy", () => {
-		const unsubscribeSpy = spyOn(component["wordsPerPageSubscription"], "unsubscribe");
+		const nextSpy = spyOn(component["destroy$"], "next");
+		const completeSpy = spyOn(component["destroy$"], "complete");
+
 		component.ngOnDestroy();
 
-		expect(unsubscribeSpy).toHaveBeenCalledTimes(1);
+		expect(nextSpy).toHaveBeenCalledTimes(1);
+		expect(completeSpy).toHaveBeenCalledTimes(1);
 	});
 });
