@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { HeatMapItemComponent } from "./heat-map-item.component";
 import { provideHttpClient } from "@angular/common/http";
 import { DatePipe } from "@angular/common";
-import { mockStatistics } from "app/app.component.spec";
+import { mockStatistics } from "@services/statistics/statistics.service.mock";
 import { provideTranslateService } from "@ngx-translate/core";
 
 describe("HeatMapItemComponent", () => {

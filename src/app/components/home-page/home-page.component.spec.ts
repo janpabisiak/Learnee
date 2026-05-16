@@ -6,7 +6,7 @@ import { WordListComponent } from "./word-list/word-list.component";
 import { WordsOfTheDayComponent } from "./words-of-the-day/words-of-the-day.component";
 import { UserStatisticsComponent } from "./user-statistics/user-statistics.component";
 import { ButtonComponent } from "@components/utils/button/button.component";
-import { createMockModalService, IMockModalService } from "app/app.component.spec";
+import { createMockModalService, IMockModalService } from "@services/modal/modal.service.mock";
 import {
 	createMockWordsService,
 	IMockWordsService,

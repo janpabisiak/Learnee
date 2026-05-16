@@ -3,7 +3,7 @@ import { BehaviorSubject } from "rxjs";
 export const createMockWordsFormService = () => ({
 	isSubmitAttempted$: new BehaviorSubject<boolean>(false),
 	isSubmitDisabled$: new BehaviorSubject<boolean>(false),
-	toggleShowWordAddingModal: jasmine.createSpy("toggleShowWordAddingModal"),
+	setupSubscriptions: jasmine.createSpy("setupSubscriptions"),
 	setupForEditing: jasmine.createSpy("setupForEditing"),
 	isFormValid: jasmine.createSpy("isFormValid"),
 	submitForm: jasmine.createSpy("submitForm"),

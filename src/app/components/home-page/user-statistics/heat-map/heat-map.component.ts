@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { IStatistics, LevelService } from "@services/level/level.service";
+import { IStatistics, StatisticsService } from "@services/statistics/statistics.service";
 import { Subject, takeUntil } from "rxjs";
 import { HeatMapItemComponent } from "./heat-map-item/heat-map-item.component";
 import { TranslatePipe } from "@ngx-translate/core";
@@ -14,10 +14,10 @@ export class HeatMapComponent implements OnInit, OnDestroy {
 	maxPlays = 0;
 	private destroy$ = new Subject<void>();
 
-	constructor(private levelService: LevelService) {}
+	constructor(private statisticsService: StatisticsService) {}
 
 	ngOnInit() {
-		this.levelService.statistics$.pipe(takeUntil(this.destroy$)).subscribe((statistics) => {
+		this.statisticsService.statistics$.pipe(takeUntil(this.destroy$)).subscribe((statistics) => {
 			this.statistics = Array.from(statistics).map(([date, numberOfPlays]) => ({
 				date,
 				numberOfPlays,

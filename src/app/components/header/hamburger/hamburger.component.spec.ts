@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { HamburgerComponent } from "./hamburger.component";
-import { createMockModalService, IMockModalService } from "app/app.component.spec";
+import { createMockModalService, IMockModalService } from "@services/modal/modal.service.mock";
 import { EModalType, ModalService } from "@services/modal/modal.service";
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 

@@ -7,7 +7,7 @@ import { ButtonComponent } from "@components/utils/button/button.component";
 import {
 	createMockModalService,
 	IMockModalService,
-} from "app/app.component.spec";
+} from "@services/modal/modal.service.mock";
 import {
 	createMockWordsService,
 	IMockWordsService,

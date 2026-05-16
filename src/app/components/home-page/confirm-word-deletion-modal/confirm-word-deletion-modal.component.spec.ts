@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { ConfirmWordDeletionModalComponent } from "./confirm-word-deletion-modal.component";
 import { provideHttpClient } from "@angular/common/http";
 import { ModalComponent } from "@components/utils/modal/modal.component";
-import { createMockModalService, IMockModalService } from "app/app.component.spec";
+import { createMockModalService, IMockModalService } from "@services/modal/modal.service.mock";
 import { createMockWordsService, IMockWordsService } from "@services/words/words.service.mock";
 import { EModalType, ModalService } from "@services/modal/modal.service";
 import { WordsService } from "@services/words/words.service";

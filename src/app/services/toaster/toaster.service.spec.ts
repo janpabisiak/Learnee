@@ -1,6 +1,6 @@
 import { EToasterTypes } from "@components/utils/toaster-container/toaster/toaster.component";
 import { ToasterService } from "./toaster.service";
-import { mockToasters } from "app/app.component.spec";
+import { mockToasters } from "@services/toaster/toaster.service.mock";
 
 describe("ToasterService", () => {
 	let service: ToasterService;

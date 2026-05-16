@@ -2,12 +2,11 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { SettingsPageComponent } from "./settings-page.component";
 import { provideTranslateService } from "@ngx-translate/core";
+import { createMockSettingsService, IMockSettingsService } from "@services/settings/settings.service.mock";
 import {
 	createMockLocalStorageService,
-	createMockSettingsService,
 	IMockLocalStorageService,
-	IMockSettingsService,
-} from "app/app.component.spec";
+} from "@services/local-storage/local-storage.service.mock";
 import { SettingsService } from "@services/settings/settings.service";
 import { LocalStorageService } from "@services/local-storage/local-storage.service";
 

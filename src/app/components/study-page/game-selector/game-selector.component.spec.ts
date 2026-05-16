@@ -8,7 +8,7 @@ import {
 	IMockGameService,
 	mockAvailableGames,
 	mockSelectedGames,
-} from "app/app.component.spec";
+} from "@services/game/game.service.mock";
 import { EAvailableGames, GameService } from "@services/game/game.service";
 import { SectionTitleComponent } from "@components/utils/section-title/section-title.component";
 import { provideTranslateService } from "@ngx-translate/core";

@@ -6,13 +6,11 @@ import { SentenceCasePipe } from "@pipes/sentence-case.pipe";
 import { InputGuessComponent } from "./input-guess/input-guess.component";
 import { ButtonComponent } from "@components/utils/button/button.component";
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { createMockGameService, IMockGameService, mockStages } from "@services/game/game.service.mock";
 import {
-	createMockGameService,
 	createMockWebSpeechService,
-	IMockGameService,
 	IMockWebSpeechService,
-	mockStages,
-} from "app/app.component.spec";
+} from "@services/web-speech/web-speech.service.mock";
 import { WebSpeechService } from "@services/web-speech/web-speech.service";
 import { GameService } from "@services/game/game.service";
 import { provideTranslateService } from "@ngx-translate/core";

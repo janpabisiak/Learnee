@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { QuestionAnswerComponent } from "./question-answer.component";
 import { provideHttpClient } from "@angular/common/http";
-import { createMockGameService, IMockGameService } from "app/app.component.spec";
+import { createMockGameService, IMockGameService } from "@services/game/game.service.mock";
 import { GameService } from "@services/game/game.service";
 
 describe("QuestionAnswerComponent", () => {

@@ -1,25 +1,34 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { AppComponent } from "./app.component";
 import { provideHttpClient } from "@angular/common/http";
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { provideRouter } from "@angular/router";
-import { HeaderComponent } from "@components/header/header.component";
-import { AddEditWordModalComponent } from "@components/home-page/add-edit-word-modal/add-edit-word-modal.component";
-import { EToasterPositions, ToasterContainerComponent } from "@components/utils/toaster-container/toaster-container.component";
-import { SpinnerComponent } from "@components/utils/spinner/spinner.component";
-import { BehaviorSubject } from "rxjs";
-import { IToaster } from "./types/toaster.interface";
-import { ToasterService } from "@services/toaster/toaster.service";
-import { EModalType, ModalService } from "@services/modal/modal.service";
-import { WordsService } from "@services/words/words.service";
-import { createMockWordsService, IMockWordsService, mockWords } from "@services/words/words.service.mock";
-import { createMockWordsFormService, IMockWordsFormService } from "@services/words-form/words-form.service.mock";
-import { EToasterTypes } from "@components/utils/toaster-container/toaster/toaster.component";
-import { IStatistics } from "@services/level/level.service";
-import { EAvailableGames, IStage } from "@services/game/game.service";
 import { FooterComponent } from "@components/footer/footer.component";
+import { HeaderComponent } from "@components/header/header.component";
 import { MobileMenuComponent } from "@components/header/mobile-menu/mobile-menu.component";
+import { AddEditWordModalComponent } from "@components/home-page/add-edit-word-modal/add-edit-word-modal.component";
+import { SpinnerComponent } from "@components/utils/spinner/spinner.component";
+import {
+	EToasterPositions,
+	ToasterContainerComponent,
+} from "@components/utils/toaster-container/toaster-container.component";
 import { provideTranslateService } from "@ngx-translate/core";
-import { EAvailableLanguages } from "@services/settings/settings.service";
+import { EModalType, ModalService } from "@services/modal/modal.service";
+import {
+	createMockModalService,
+	IMockModalService,
+} from "@services/modal/modal.service.mock";
+import { ToasterService } from "@services/toaster/toaster.service";
+import {
+	createMockToasterService,
+	IMockToasterService,
+	mockToasters,
+} from "@services/toaster/toaster.service.mock";
+import { WordsService } from "@services/words/words.service";
+import {
+	createMockWordsService,
+	IMockWordsService,
+	mockWords,
+} from "@services/words/words.service.mock";
+import { AppComponent } from "./app.component";
 
 describe("AppComponent", () => {
 	let fixture: ComponentFixture<AppComponent>;
@@ -125,116 +134,3 @@ describe("AppComponent", () => {
 		expect(unsubscribeSpy).toHaveBeenCalledTimes(1);
 	});
 });
-
-export const mockToasters: IToaster[] = [
-	{
-		id: 0,
-		content: "test",
-		duration: 5,
-		expirationTimestamp: new Date().getTime() + 5 * 1000,
-		type: EToasterTypes.Success,
-	},
-	{
-		id: 1,
-		content: "test_2",
-		duration: 7,
-		expirationTimestamp: new Date().getTime() + 7 * 1000,
-		type: EToasterTypes.Error,
-	},
-];
-
-export const mockStatisticsMap = new Map() as Map<string, number>;
-mockStatisticsMap.set("2025-09-17T00:00:00.000Z", 4);
-mockStatisticsMap.set("2025-09-18T00:00:00.000Z", 3);
-
-export const mockStatistics: IStatistics[] = [
-	{
-		date: "2025-09-17T00:00:00.000Z",
-		numberOfPlays: 4,
-	},
-	{
-		date: "2025-09-18T00:00:00.000Z",
-		numberOfPlays: 3,
-	},
-];
-
-export const mockStages: IStage[] = [
-	{
-		id: 0,
-		type: EAvailableGames.FillGaps,
-		answered: true,
-		answeredCorrect: false,
-		data: {},
-	},
-	{
-		id: 1,
-		type: EAvailableGames.Listening,
-		answered: false,
-		answeredCorrect: false,
-		data: {},
-	},
-];
-
-export const mockAvailableGames: EAvailableGames[] = [
-	EAvailableGames.FillGaps,
-	EAvailableGames.Listening,
-];
-
-export const mockSelectedGames: EAvailableGames[] = [EAvailableGames.FillGaps];
-
-export const createMockModalService = () => ({
-	isWordAddingModalOpen$: new BehaviorSubject<boolean>(false),
-	isWordDeletionModalOpen$: new BehaviorSubject<boolean>(false),
-	isImportConfirmationModalOpen$: new BehaviorSubject<boolean>(false),
-	isMobileNavbarOpen$: new BehaviorSubject<boolean>(false),
-	toggleModal: jasmine.createSpy("toggleShowWordAddingModal"),
-});
-
-export const createMockToasterService = () => ({
-	toasters$: new BehaviorSubject<IToaster[]>([]),
-	startAutoRemoving: jasmine.createSpy("startAutoRemoving"),
-});
-
-export const createMockLevelService = () => ({
-	statistics$: new BehaviorSubject<Map<string, number>>(new Map<string, number>()),
-	xpPoints$: new BehaviorSubject<number>(0),
-	level$: new BehaviorSubject<number>(0),
-});
-
-export const createMockWebSpeechService = () => ({
-	readText: jasmine.createSpy("readText"),
-});
-
-export const createMockGameService = () => ({
-	stages$: new BehaviorSubject<IStage[]>([]),
-	currentStageId$: new BehaviorSubject<number>(0),
-	selectedGames$: new BehaviorSubject<EAvailableGames[]>([]),
-	answerTrueFalseGameQuestion: jasmine.createSpy("answerTrueFalseGameQuestion"),
-	answerQuizQuestion: jasmine.createSpy("answerQuizQuestion"),
-	answerFillGapsListeningGameQuestion: jasmine.createSpy("answerFillGapsListeningGameQuestion"),
-	goToNextStage: jasmine.createSpy("goToNextStage"),
-	generateStages: jasmine.createSpy("generateStages"),
-	updateSelectedGames: jasmine.createSpy("updateSelectedGames"),
-	cancelGame: jasmine.createSpy("cancelGame"),
-});
-
-export const createMockLocalStorageService = () => ({
-	hasKeys$: new BehaviorSubject<boolean>(false),
-	loadData: jasmine.createSpy("loadData"),
-	saveData: jasmine.createSpy("saveData"),
-	exportData: jasmine.createSpy("exportData"),
-	deleteData: jasmine.createSpy("deleteData"),
-});
-
-export const createMockSettingsService = () => ({
-	isDarkMode$: new BehaviorSubject<boolean>(false),
-	currentLanguage$: new BehaviorSubject<EAvailableLanguages>(EAvailableLanguages.English),
-});
-
-export type IMockModalService = ReturnType<typeof createMockModalService>;
-export type IMockToasterService = ReturnType<typeof createMockToasterService>;
-export type IMockLevelService = ReturnType<typeof createMockLevelService>;
-export type IMockWebSpeechService = ReturnType<typeof createMockWebSpeechService>;
-export type IMockGameService = ReturnType<typeof createMockGameService>;
-export type IMockLocalStorageService = ReturnType<typeof createMockLocalStorageService>;
-export type IMockSettingsService = ReturnType<typeof createMockSettingsService>;

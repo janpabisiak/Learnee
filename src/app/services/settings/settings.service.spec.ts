@@ -1,4 +1,7 @@
-import { createMockLocalStorageService, IMockLocalStorageService } from "app/app.component.spec";
+import {
+	createMockLocalStorageService,
+	IMockLocalStorageService,
+} from "@services/local-storage/local-storage.service.mock";
 import { EAvailableLanguages, SettingsService } from "./settings.service";
 
 describe("SettingsService", () => {

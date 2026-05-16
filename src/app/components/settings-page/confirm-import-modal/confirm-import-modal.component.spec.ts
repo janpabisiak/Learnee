@@ -2,12 +2,8 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { ConfirmImportModalComponent } from "./confirm-import-modal.component";
 import { provideHttpClient } from "@angular/common/http";
 import { ModalComponent } from "@components/utils/modal/modal.component";
-import {
-	createMockLocalStorageService,
-	createMockModalService,
-	IMockLocalStorageService,
-	IMockModalService,
-} from "app/app.component.spec";
+import { createMockLocalStorageService, IMockLocalStorageService } from "@services/local-storage/local-storage.service.mock";
+import { createMockModalService, IMockModalService } from "@services/modal/modal.service.mock";
 import { ModalService } from "@services/modal/modal.service";
 import { LocalStorageService } from "@services/local-storage/local-storage.service";
 import { provideTranslateService } from "@ngx-translate/core";

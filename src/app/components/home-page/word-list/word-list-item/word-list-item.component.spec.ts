@@ -4,12 +4,8 @@ import { WordListItemComponent } from "./word-list-item.component";
 import { provideHttpClient } from "@angular/common/http";
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { SentenceCasePipe } from "@pipes/sentence-case.pipe";
-import {
-	createMockModalService,
-	createMockWebSpeechService,
-	IMockModalService,
-	IMockWebSpeechService,
-} from "app/app.component.spec";
+import { createMockModalService, IMockModalService } from "@services/modal/modal.service.mock";
+import { createMockWebSpeechService, IMockWebSpeechService } from "@services/web-speech/web-speech.service.mock";
 import {
 	createMockWordsService,
 	IMockWordsService,

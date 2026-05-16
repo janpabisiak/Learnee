@@ -4,7 +4,7 @@ import { GameSectionComponent } from "./game-section.component";
 import { GameContainerComponent } from "./game-container/game-container.component";
 import { ButtonComponent } from "@components/utils/button/button.component";
 import { StudyProgressBarComponent } from "../study-progress-bar/study-progress-bar.component";
-import { createMockGameService, IMockGameService, mockStages } from "app/app.component.spec";
+import { createMockGameService, IMockGameService, mockStages } from "@services/game/game.service.mock";
 import { provideHttpClient } from "@angular/common/http";
 import { GameService } from "@services/game/game.service";
 

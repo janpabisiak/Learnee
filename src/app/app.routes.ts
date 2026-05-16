@@ -2,7 +2,7 @@ import { Routes } from "@angular/router";
 import { HomePageComponent } from "./components/home-page/home-page.component";
 import { ErrorPageComponent } from "./components/error-page/error-page.component";
 import { StudyPageComponent } from "@components/study-page/study-page.component";
-import { EnoughWordsGuard } from "./guards/enoughWords.guard";
+import { EnoughWordsGuard } from "./guards/enough-words.guard";
 import { SettingsPageComponent } from "@components/settings-page/settings-page.component";
 
 export const routes: Routes = [
