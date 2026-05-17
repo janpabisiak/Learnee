@@ -1,4 +1,4 @@
-import { EToasterTypes } from "@components/utils/toaster-container/toaster/toaster.component";
+import { EToasterTypes } from "@shared/toaster-container/toaster/toaster.component";
 
 export interface IToaster {
 	id: number;

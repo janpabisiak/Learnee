@@ -10,7 +10,7 @@ import {
 	mockSelectedGames,
 } from "@services/game/game.service.mock";
 import { EAvailableGames, GameService } from "@services/game/game.service";
-import { SectionTitleComponent } from "@components/utils/section-title/section-title.component";
+import { SectionTitleComponent } from "@shared/section-title/section-title.component";
 import { provideTranslateService } from "@ngx-translate/core";
 
 describe("GameSelectorComponent", () => {

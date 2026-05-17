@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from "@angular/core";
 import { WordsService } from "@services/words/words.service";
 import { IWord } from "../../../types/word.interface";
 import { Subject, takeUntil } from "rxjs";
-import { ButtonComponent } from "@components/utils/button/button.component";
+import { ButtonComponent } from "@shared/button/button.component";
 import { WotdItemComponent } from "./wotd-item/wotd-item.component";
 import { EModalType, ModalService } from "@services/modal/modal.service";
 import { WordsFormService } from "@services/words-form/words-form.service";

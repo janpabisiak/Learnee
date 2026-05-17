@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { ButtonComponent } from "@components/utils/button/button.component";
+import { ButtonComponent } from "@shared/button/button.component";
 
 @Component({
 	selector: "app-modal-footer",

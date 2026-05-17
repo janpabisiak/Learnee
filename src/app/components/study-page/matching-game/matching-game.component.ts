@@ -1,7 +1,7 @@
 import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
 import { NgClass, NgIf } from "@angular/common";
 import { Component, CUSTOM_ELEMENTS_SCHEMA, Input, OnDestroy, OnInit } from "@angular/core";
-import { ButtonComponent } from "@components/utils/button/button.component";
+import { ButtonComponent } from "@shared/button/button.component";
 import { GameService, IStage } from "@services/game/game.service";
 import { IMatch } from "@services/matching-game/matching-game.service";
 import { combineLatest, Subject, takeUntil } from "rxjs";

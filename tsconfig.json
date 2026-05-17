@@ -20,6 +20,7 @@
 		"module": "ES2022",
 		"paths": {
 			"@components/*": ["app/components/*"],
+			"@shared/*": ["app/shared/*"],
 			"@services/*": ["app/services/*"],
 			"@types/*": ["app/types/*"],
 			"@pipes/*": ["app/pipes/*"]

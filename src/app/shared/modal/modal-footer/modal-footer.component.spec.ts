@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { ModalFooterComponent } from "./modal-footer.component";
-import { ButtonComponent } from "@components/utils/button/button.component";
+import { ButtonComponent } from "@shared/button/button.component";
 
 describe("ModalFooterComponent", () => {
 	let component: ModalFooterComponent;

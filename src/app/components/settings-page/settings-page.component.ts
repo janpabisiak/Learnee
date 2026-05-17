@@ -1,8 +1,8 @@
 import { NgIf } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { ButtonComponent } from "@components/utils/button/button.component";
-import { SectionTitleComponent } from "@components/utils/section-title/section-title.component";
+import { ButtonComponent } from "@shared/button/button.component";
+import { SectionTitleComponent } from "@shared/section-title/section-title.component";
 import { TranslatePipe, TranslateService } from "@ngx-translate/core";
 import { LocalStorageService } from "@services/local-storage/local-storage.service";
 import { EModalType, ModalService } from "@services/modal/modal.service";

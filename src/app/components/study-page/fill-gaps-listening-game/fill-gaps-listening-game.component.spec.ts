@@ -4,7 +4,7 @@ import { FillGapsGameComponent } from "./fill-gaps-listening-game.component";
 import { provideHttpClient } from "@angular/common/http";
 import { SentenceCasePipe } from "@pipes/sentence-case.pipe";
 import { InputGuessComponent } from "./input-guess/input-guess.component";
-import { ButtonComponent } from "@components/utils/button/button.component";
+import { ButtonComponent } from "@shared/button/button.component";
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { createMockGameService, IMockGameService, mockStages } from "@services/game/game.service.mock";
 import {

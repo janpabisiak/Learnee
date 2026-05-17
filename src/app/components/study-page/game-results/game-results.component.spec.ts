@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { provideHttpClient } from "@angular/common/http";
-import { SectionTitleComponent } from "@components/utils/section-title/section-title.component";
+import { SectionTitleComponent } from "@shared/section-title/section-title.component";
 import { GameService } from "@services/game/game.service";
 import { createMockGameService, IMockGameService, mockStages } from "@services/game/game.service.mock";
 import { GameContainerComponent } from "../game-section/game-container/game-container.component";

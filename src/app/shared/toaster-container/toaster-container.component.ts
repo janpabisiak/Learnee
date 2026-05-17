@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { Component, Input } from "@angular/core";
-import { IToaster } from "../../../types/toaster.interface";
+import { IToaster } from "../../types/toaster.interface";
 import { ToasterComponent } from "./toaster/toaster.component";
 
 @Component({
