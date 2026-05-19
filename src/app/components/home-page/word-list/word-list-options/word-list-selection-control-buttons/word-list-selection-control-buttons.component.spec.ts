@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { WordListSelectionControlButtonComponent } from "./word-list-selection-control-button.component";
+import { WordListSelectionControlButtonsComponent } from "./word-list-selection-control-buttons.component";
 import { createMockWordsService, IMockWordsService } from "@services/words/words.service.mock";
 import { WordsService } from "@services/words/words.service";
 import { provideTranslateService } from "@ngx-translate/core";
 
-describe("WordListSelectionControlButtonComponent", () => {
-	let component: WordListSelectionControlButtonComponent;
-	let fixture: ComponentFixture<WordListSelectionControlButtonComponent>;
+describe("WordListSelectionControlButtonsComponent", () => {
+	let component: WordListSelectionControlButtonsComponent;
+	let fixture: ComponentFixture<WordListSelectionControlButtonsComponent>;
 	let mockWordsService: IMockWordsService;
 
 	beforeEach(async () => {
 		mockWordsService = createMockWordsService();
 
 		await TestBed.configureTestingModule({
-			imports: [WordListSelectionControlButtonComponent],
+			imports: [WordListSelectionControlButtonsComponent],
 			providers: [
 				{ provide: WordsService, useValue: mockWordsService },
 				provideTranslateService({
@@ -23,7 +23,7 @@ describe("WordListSelectionControlButtonComponent", () => {
 			],
 		}).compileComponents();
 
-		fixture = TestBed.createComponent(WordListSelectionControlButtonComponent);
+		fixture = TestBed.createComponent(WordListSelectionControlButtonsComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 	});

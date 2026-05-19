@@ -6,6 +6,7 @@ import { IWord } from "../../types/word.interface";
 import { WordsResourceService } from "@services/words-resource/words-resource.service";
 import { WordsStore } from "../../stores/words.store";
 import { ESortTypes } from "@services/words-options/words-options.service";
+import { combineLatest, map, take } from "rxjs";
 
 @Injectable({
 	providedIn: "root",
@@ -173,6 +174,32 @@ export class WordsService {
 		}
 
 		this.wordsStore.setSelectedIds(updatedSelection);
+	}
+
+	selectAllVisible() {
+		this.visibleWords$
+			.pipe(
+				take(1),
+				map((words) => {
+					const visibleWordIds = words.map((w) => w.id);
+					return Array.from(
+						new Set([...this.wordsStore.selectedIdsValue, ...visibleWordIds]),
+					);
+				}),
+			)
+			.subscribe((updatedSelectedIds) => {
+				this.wordsStore.setSelectedIds(updatedSelectedIds);
+			});
+	}
+
+	setIsLearningForSelected(isLearning: boolean) {
+		const wordList = this.wordsStore.wordListValue;
+		const selectedIds = this.wordsStore.selectedIdsValue;
+
+		const updatedWordList = wordList.map((w) =>
+			selectedIds.includes(w.id) ? { ...w, isLearning } : w,
+		);
+		this.updateWordList(updatedWordList);
 	}
 
 	unselectAll() {

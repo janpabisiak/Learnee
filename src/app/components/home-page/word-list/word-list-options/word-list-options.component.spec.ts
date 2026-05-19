@@ -6,6 +6,7 @@ import { WordListPurgerComponent } from "./word-list-purger/word-list-purger.com
 import { WordListSearchBarComponent } from "./word-list-search-bar/word-list-search-bar.component";
 import { WordListSortComponent } from "./word-list-sort/word-list-sort.component";
 import { provideTranslateService } from "@ngx-translate/core";
+import { WordListSelectionControlButtonsComponent } from "./word-list-selection-control-buttons/word-list-selection-control-buttons.component";
 
 describe("WordListOptionsComponent", () => {
 	let component: WordListOptionsComponent;
@@ -18,6 +19,7 @@ describe("WordListOptionsComponent", () => {
 				WordListPurgerComponent,
 				WordListSearchBarComponent,
 				WordListSortComponent,
+				WordListSelectionControlButtonsComponent,
 			],
 			providers: [
 				provideHttpClient(),
