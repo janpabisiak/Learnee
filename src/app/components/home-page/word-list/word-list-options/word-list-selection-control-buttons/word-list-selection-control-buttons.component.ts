@@ -5,12 +5,13 @@ import { WordsService } from "@services/words/words.service";
 import { Subject, takeUntil } from "rxjs";
 
 @Component({
-	selector: "app-word-list-selection-control-button",
+	selector: "app-word-list-selection-control-buttons",
 	imports: [ButtonComponent, TranslatePipe],
-	templateUrl: "./word-list-selection-control-button.component.html",
+	templateUrl: "./word-list-selection-control-buttons.component.html",
 })
-export class WordListSelectionControlButtonComponent implements OnInit, OnDestroy {
+export class WordListSelectionControlButtonsComponent implements OnInit, OnDestroy {
 	hasSelectedWords = false;
+	isDropdownOpen = false;
 	private destroy$ = new Subject<void>();
 
 	constructor(private wordsService: WordsService) {}
@@ -23,8 +24,21 @@ export class WordListSelectionControlButtonComponent implements OnInit, OnDestro
 			});
 	}
 
+	selectAllVisible() {
+		this.wordsService.selectAllVisible();
+	}
+
 	unselectAll() {
 		this.wordsService.unselectAll();
+	}
+
+	toggleDropdown() {
+		this.isDropdownOpen = !this.isDropdownOpen;
+	}
+
+	setIsLearningForSelected(isLearning: boolean) {
+		this.wordsService.setIsLearningForSelected(isLearning);
+		this.toggleDropdown();
 	}
 
 	ngOnDestroy() {
