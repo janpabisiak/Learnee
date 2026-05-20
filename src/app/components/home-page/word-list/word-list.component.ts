@@ -4,9 +4,9 @@ import { TranslatePipe } from "@ngx-translate/core";
 import { combineLatest, Subject, takeUntil } from "rxjs";
 import { WordsService } from "../../../services/words/words.service";
 import { IWord } from "../../../types/word.interface";
-import { PaginationContainerComponent } from "./pagination-container/pagination-container.component";
 import { WordListItemComponent } from "./word-list-item/word-list-item.component";
 import { WordListOptionsComponent } from "./word-list-options/word-list-options.component";
+import { WordPaginationContainerComponent } from "./word-pagination-container/word-pagination-container.component";
 
 @Component({
 	selector: "app-word-list",
@@ -14,7 +14,7 @@ import { WordListOptionsComponent } from "./word-list-options/word-list-options.
 		CommonModule,
 		WordListItemComponent,
 		WordListOptionsComponent,
-		PaginationContainerComponent,
+		WordPaginationContainerComponent,
 		TranslatePipe,
 	],
 	templateUrl: "./word-list.component.html",

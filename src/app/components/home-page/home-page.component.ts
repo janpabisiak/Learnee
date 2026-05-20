@@ -25,7 +25,6 @@ export class HomePageComponent implements OnInit, OnDestroy {
 	private subscription = new Subscription();
 	modalService = inject(ModalService);
 	numOfWords = 0;
-	translations: Record<string, string> | null = null;
 
 	constructor(private wordsService: WordsService) {}
 

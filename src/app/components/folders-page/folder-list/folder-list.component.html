@@ -1,0 +1,26 @@
+@if (!hasFolders) {
+<div class="flex flex-col items-center gap-1 bg-gray-100 p-6 rounded-xl shadow-xs dark:bg-zinc-800">
+    <ion-icon class="p-3 text-6xl text-gray-600 bg-gray-200 ionicon-thick rounded-full mb-4 dark:bg-zinc-400" name="close-outline"></ion-icon>
+    <h3 class="text-2xl">{{'folderlist.noFolders' | translate}}</h3>
+    <p class="text-gray-500">{{'folderlist.addNewFolder' | translate}}</p>
+</div>
+} @else {
+<app-folder-list-options />
+
+<ng-container *ngIf="folders.length === 0">
+    <div class="flex flex-col items-center gap-1 bg-gray-100 p-6 rounded-xl shadow-xs dark:bg-zinc-800">
+        <ion-icon class="p-3 text-6xl text-gray-600 bg-gray-200 ionicon-thick rounded-full mb-4 dark:bg-zinc-400" name="close-outline"></ion-icon>
+        <h3 class="text-2xl">{{'folderlist.noFolders' | translate}}</h3>
+        <p class="text-gray-500">{{'folderlist.adjustSearchQuery' | translate}}</p>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="folders.length > 0">
+    <ul class="flex flex-col gap-3" [ngClass]="isFolderListLoaded ? 'animate-slideIn' : ''">
+        @for (folder of folders; track folder.id; let i = $index) {
+        <app-folder-list-item [folder]="folder" />
+        }
+    </ul>
+    <app-folder-pagination-container />
+</ng-container>
+}

@@ -1,10 +1,6 @@
 import { Injectable } from "@angular/core";
 import { IWord } from "../../types/word.interface";
-
-export interface IResultRange {
-	start: number;
-	end: number;
-}
+import { IResultRange } from "../../types/resultRange.interface";
 
 export enum ESortTypes {
 	NameASC = "nameASC",

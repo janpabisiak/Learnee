@@ -1,5 +1,6 @@
 {
 	"nav.home": "Start",
+	"nav.folders": "Foldery",
 	"nav.study": "Nauka",
 	"nav.settings": "Ustawienia",
 
@@ -30,6 +31,26 @@
 	"wordlist.edit": "Edytuj",
 	"wordlist.delete": "Usuń",
 
+	"folderlist.title": "Foldery",
+	"folderlist.count": "{{count}} folderów",
+	"folderlist.addNew": "Utwórz folder",
+	"folderlist.searchPlaceholder": "Szukaj po nazwie lub opisie",
+	"folderlist.sort.nameAsc": "Sortuj rosnąco wg. nazwy",
+	"folderlist.sort.nameDesc": "Sortuj malejąco wg. nazwy",
+	"folderlist.sort.descriptionAsc": "Sortuj rosnąco wg. opisu",
+	"folderlist.sort.descriptionDesc": "Sortuj malejąco wg. opisu",
+	"folderlist.sort.idAsc": "Sortuj rosnąco wg. ID",
+	"folderlist.sort.idDesc": "Sortuj malejąco wg. ID",
+	"folderlist.deleteAll": "Wyczyść listę",
+	"folderlist.deleteSelected": "Usuń zaznaczone",
+	"folderlist.selectAllVisible": "Zaznacz widoczne",
+	"folderlist.unselectAll": "Cofnij zaznaczenie",
+	"folderlist.noFolders": "Brak folderów.",
+	"folderlist.addNewFolder": "Utwórz nowy folder przyciskiej po prawej stronie.",
+	"folderlist.adjustSearchQuery": "Zmień kryteria wyszukiwania.",
+	"folderlist.edit": "Edytuj",
+	"folderlist.delete": "Usuń",
+
 	"pagination.showing": "Wyświetlono {{from}}–{{to}} z {{total}}",
 	"pagination.rowsPerPage": "Na stronę:",
 
@@ -56,7 +77,7 @@
 	"modal.delete.confirm.delete": "Czy na pewno chcesz to usunąć z listy słów?",
 
 	"modal.import.title": "Potwierdź import",
-	"modal.import.description": "Zaimportowanie tego pliku całkowicie zastąpi aktualną listę słów i Twoje statystyki. Tej operacji nie można cofnąć.",
+	"modal.import.description": "Zaimportowanie tego pliku całkowicie zastąpi aktualne dane. Tej operacji nie można cofnąć.",
 
 	"modal.label.add": "Dodaj",
 	"modal.label.save": "Zapisz",
@@ -127,6 +148,11 @@
 	"toaster.success.word.deleted": "Słowo zostało usunięte",
 	"toaster.success.word.manyDeleted": "Słowa zostały usunięte",
 	"toaster.success.word.edited": "Słowo zostało edytowane",
+	"toaster.error.folder.alreadyExists": "Ten folder jest już na Twojej liście",
+	"toaster.success.folder.added": "Folder został dodany",
+	"toaster.success.folder.deleted": "Folder został usunięty",
+	"toaster.success.folder.manyDeleted": "Foldery zostały usunięte",
+	"toaster.success.folder.edited": "Folder został edytowany",
 
 	"error.notFound": "Błąd 404 – Strona nie istnieje"
 }

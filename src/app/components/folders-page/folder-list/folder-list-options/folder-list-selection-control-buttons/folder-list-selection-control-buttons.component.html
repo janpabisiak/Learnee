@@ -1,0 +1,8 @@
+<div class="flex justify-between w-full">
+    <app-button [type]="'secondary'" [icon]="'checkmark-circle-outline'" (click)="selectAllVisible()">{{'folderlist.selectAllVisible' | translate}}</app-button>
+    @if (hasSelectedFolders) {
+    <div class="flex gap-3">
+        <app-button [type]="'secondary'" [icon]="'close-outline'" (click)="unselectAll()">{{'folderlist.unselectAll' | translate}}</app-button>
+    </div>
+    }
+</div>

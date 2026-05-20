@@ -1,0 +1,5 @@
+<div class="flex justify-between items-center mt-8">
+    <app-results-counter [resultRange]="resultRange" [total]="numberOfWords" />
+    <app-pagination-buttons [page]="page" [pages]="pages" (changed)="setPage($event)" />
+    <app-items-per-page-selector [currentOption]="wordsPerPage" [options]="wordsPerPageOptions" (changed)="setWordsPerPage($event)" />
+</div>

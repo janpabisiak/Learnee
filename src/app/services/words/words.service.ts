@@ -6,7 +6,7 @@ import { IWord } from "../../types/word.interface";
 import { WordsResourceService } from "@services/words-resource/words-resource.service";
 import { WordsStore } from "../../stores/words.store";
 import { ESortTypes } from "@services/words-options/words-options.service";
-import { combineLatest, map, take } from "rxjs";
+import { map, take } from "rxjs";
 
 @Injectable({
 	providedIn: "root",
@@ -74,7 +74,7 @@ export class WordsService {
 		}
 
 		const newWord: IWord = {
-			id: wordList.length,
+			id: wordList.length > 0 ? Math.max(...wordList.map((f) => f.id)) + 1 : 0,
 			name: word,
 			definition,
 			isLearning: true,

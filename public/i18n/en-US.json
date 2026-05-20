@@ -1,5 +1,6 @@
 {
 	"nav.home": "Home",
+	"nav.folders": "Folders",
 	"nav.study": "Study",
 	"nav.settings": "Settings",
 
@@ -30,6 +31,26 @@
 	"wordlist.edit": "Edit word",
 	"wordlist.delete": "Delete word",
 
+	"folderlist.title": "Folders",
+	"folderlist.count": "{{count}} folders",
+	"folderlist.addNew": "Add new folder",
+	"folderlist.searchPlaceholder": "Search for folder by name or description",
+	"folderlist.sort.nameAsc": "Sort by name ASC",
+	"folderlist.sort.nameDesc": "Sort by name DESC",
+	"folderlist.sort.descriptionAsc": "Sort by description ASC",
+	"folderlist.sort.descriptionDesc": "Sort by description DESC",
+	"folderlist.sort.idAsc": "Sort by ID ASC",
+	"folderlist.sort.idDesc": "Sort by ID DESC",
+	"folderlist.deleteAll": "Delete all folders",
+	"folderlist.deleteSelected": "Delete selected folders",
+	"folderlist.selectAllVisible": "Select all visible",
+	"folderlist.unselectAll": "Unselect all",
+	"folderlist.noFolders": "No folders found.",
+	"folderlist.addNewFolder": "Add new folder by clicking button on right side of this webpage.",
+	"folderlist.adjustSearchQuery": "Try to adjust your search query.",
+	"folderlist.edit": "Edit folder",
+	"folderlist.delete": "Delete folder",
+
 	"pagination.showing": "Showing {{from}}-{{to}} from {{total}}",
 	"pagination.rowsPerPage": "Rows per page:",
 
@@ -56,7 +77,7 @@
 	"modal.delete.confirm.delete": "Are you sure that you want to delete?",
 
 	"modal.import.title": "Confirm Import",
-	"modal.import.description": "Importing this file will completely replace your current wordlist and statistics. This action cannot be undone.",
+	"modal.import.description": "Importing this file will completely replace your current data. This action cannot be undone.",
 
 	"modal.label.add": "Add word",
 	"modal.label.save": "Save",
@@ -127,6 +148,11 @@
 	"toaster.success.word.deleted": "Word successfully deleted",
 	"toaster.success.word.manyDeleted": "Words successfully deleted",
 	"toaster.success.word.edited": "Word successfully edited",
+	"toaster.error.folder.alreadyExists": "This folder is already on your list",
+	"toaster.success.folder.added": "Folder successfully added",
+	"toaster.success.folder.deleted": "Folder successfully deleted",
+	"toaster.success.folder.manyDeleted": "Folders successfully deleted",
+	"toaster.success.folder.edited": "Folder successfully edited",
 
 	"error.notFound": "Error 404 - Not found"
 }

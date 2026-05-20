@@ -1,6 +1,7 @@
 import { BehaviorSubject } from "rxjs";
 import { IWord } from "../../types/word.interface";
-import { ESortTypes, IResultRange } from "@services/words-options/words-options.service";
+import { ESortTypes } from "@services/words-options/words-options.service";
+import { IResultRange } from "../../types/resultRange.interface";
 
 export const mockWords: IWord[] = [
 	{
@@ -50,6 +51,7 @@ export const createMockWordsService = () => ({
 	updateWordToDeleteId: jasmine.createSpy("updateWordToDeleteId"),
 	toggleIsLearning: jasmine.createSpy("toggleIsLearning"),
 	toggleSelection: jasmine.createSpy("toggleSelection"),
+	selectAllVisible: jasmine.createSpy("selectAllVisible"),
 	unselectAll: jasmine.createSpy("unselectAll"),
 });
 
