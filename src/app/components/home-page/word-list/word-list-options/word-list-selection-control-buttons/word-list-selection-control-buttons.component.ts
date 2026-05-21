@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { ButtonComponent } from "@shared/button/button.component";
+import { ButtonComponent } from "@shared/components/button/button.component";
 import { TranslatePipe } from "@ngx-translate/core";
 import { WordsService } from "@services/words/words.service";
 import { Subject, takeUntil } from "rxjs";

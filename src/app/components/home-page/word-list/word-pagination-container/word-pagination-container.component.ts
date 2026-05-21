@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { WordsService } from "@services/words/words.service";
-import { ItemsPerPageSelectorComponent } from "@shared/items-per-page-selector/items-per-page-selector.component";
-import { PaginationButtonsComponent } from "@shared/pagination-buttons/pagination-buttons.component";
-import { ResultsCounterComponent } from "@shared/results-counter/results-counter.component";
+import { ItemsPerPageSelectorComponent } from "@shared/components/items-per-page-selector/items-per-page-selector.component";
+import { PaginationButtonsComponent } from "@shared/components/pagination-buttons/pagination-buttons.component";
+import { ResultsCounterComponent } from "@shared/components/results-counter/results-counter.component";
 import { IResultRange } from "../../../../types/resultRange.interface";
 import { combineLatest, Subject, takeUntil } from "rxjs";
 

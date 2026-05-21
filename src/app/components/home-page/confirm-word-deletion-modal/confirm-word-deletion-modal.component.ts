@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ModalComponent } from "@shared/modal/modal.component";
+import { ModalComponent } from "@shared/components/modal/modal.component";
 import { TranslatePipe } from "@ngx-translate/core";
 import { EModalType, ModalService } from "@services/modal/modal.service";
 import { WordsService } from "@services/words/words.service";

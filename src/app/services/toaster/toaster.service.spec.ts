@@ -1,4 +1,4 @@
-import { EToasterTypes } from "@shared/toaster-container/toaster/toaster.component";
+import { EToasterTypes } from "@shared/constants/toaster.constants";
 import { ToasterService } from "./toaster.service";
 import { mockToasters } from "@services/toaster/toaster.service.mock";
 

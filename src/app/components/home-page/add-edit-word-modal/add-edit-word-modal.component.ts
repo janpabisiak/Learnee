@@ -1,7 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from "@angular/core";
 import { ReactiveFormsModule } from "@angular/forms";
-import { ModalComponent } from "@shared/modal/modal.component";
+import { ModalComponent } from "@shared/components/modal/modal.component";
 import { TranslatePipe, TranslateService } from "@ngx-translate/core";
 import { WordsFormService } from "@services/words-form/words-form.service";
 import { EModalType, ModalService } from "@services/modal/modal.service";

@@ -1,5 +1,5 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, OnDestroy, OnInit } from "@angular/core";
-import { SectionTitleComponent } from "@shared/section-title/section-title.component";
+import { SectionTitleComponent } from "@shared/components/section-title/section-title.component";
 import { TranslatePipe } from "@ngx-translate/core";
 import { EModalType, ModalService } from "@services/modal/modal.service";
 import { Subscription } from "rxjs";

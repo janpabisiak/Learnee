@@ -1,4 +1,4 @@
-import { EToasterTypes } from "@shared/toaster-container/toaster/toaster.component";
+import { EToasterTypes } from "@shared/constants/toaster.constants";
 import { IToaster } from "../../types/toaster.interface";
 import { BehaviorSubject } from "rxjs";
 

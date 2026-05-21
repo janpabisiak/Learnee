@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { MatchingGameComponent } from "./matching-game.component";
 import { provideHttpClient } from "@angular/common/http";
 import { DraggableItemsListComponent } from "./draggable-items-list/draggable-items-list.component";
-import { ButtonComponent } from "@shared/button/button.component";
+import { ButtonComponent } from "@shared/components/button/button.component";
 import { provideTranslateService } from "@ngx-translate/core";
 
 describe("MatchingGameComponent", () => {

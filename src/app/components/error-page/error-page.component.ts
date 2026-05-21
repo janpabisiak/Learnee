@@ -1,6 +1,6 @@
 import { NgIf } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
-import { SectionTitleComponent } from "@shared/section-title/section-title.component";
+import { SectionTitleComponent } from "@shared/components/section-title/section-title.component";
 import { TranslateService } from "@ngx-translate/core";
 import { take } from "rxjs";
 

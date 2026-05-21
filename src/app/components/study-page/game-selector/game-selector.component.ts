@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from "@angular/core";
 import { availableGames, EAvailableGames, GameService } from "@services/game/game.service";
 import { GameSelectorItemComponent } from "./game-selector-item/game-selector-item.component";
 import { Subject, take, takeUntil } from "rxjs";
-import { SectionTitleComponent } from "@shared/section-title/section-title.component";
+import { SectionTitleComponent } from "@shared/components/section-title/section-title.component";
 import { TranslateService } from "@ngx-translate/core";
 import { NgIf } from "@angular/common";
 

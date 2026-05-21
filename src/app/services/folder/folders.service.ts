@@ -4,7 +4,7 @@ import { FoldersStore } from "app/stores/folders/folders.store";
 import { FoldersResourceService } from "@services/folders-resource/folders-resource.service";
 import { EFolderSortTypes } from "@services/folders-options/folders-options.service";
 import { map, take } from "rxjs";
-import { EToasterTypes } from "@shared/toaster-container/toaster/toaster.component";
+import { EToasterTypes } from "@shared/constants/toaster.constants";
 import { ToasterService } from "@services/toaster/toaster.service";
 import { TranslateService } from "@ngx-translate/core";
 

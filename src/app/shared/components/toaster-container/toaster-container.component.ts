@@ -1,7 +1,8 @@
 import { CommonModule } from "@angular/common";
 import { Component, Input } from "@angular/core";
-import { IToaster } from "../../types/toaster.interface";
+import { IToaster } from "../../../types/toaster.interface";
 import { ToasterComponent } from "./toaster/toaster.component";
+import { EToasterPositions } from "@shared/constants/toaster.constants";
 
 @Component({
 	selector: "app-toaster-container",
@@ -12,11 +13,4 @@ export class ToasterContainerComponent {
 	@Input() toasters: IToaster[] = [];
 	@Input() position: EToasterPositions = EToasterPositions.BottomRight;
 	toasterPositions = EToasterPositions;
-}
-
-export enum EToasterPositions {
-	TopLeft = "topLeft",
-	TopRight = "topRight",
-	BottomLeft = "bottomLeft",
-	BottomRight = "bottomRight",
 }

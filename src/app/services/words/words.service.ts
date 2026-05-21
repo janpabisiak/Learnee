@@ -1,5 +1,5 @@
 import { inject, Injectable } from "@angular/core";
-import { EToasterTypes } from "@shared/toaster-container/toaster/toaster.component";
+import { EToasterTypes } from "@shared/constants/toaster.constants";
 import { TranslateService } from "@ngx-translate/core";
 import { ToasterService } from "@services/toaster/toaster.service";
 import { IWord } from "../../types/word.interface";

@@ -1,5 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { Component, CUSTOM_ELEMENTS_SCHEMA, Input } from "@angular/core";
+import { EToasterTypes } from "@shared/constants/toaster.constants";
 
 @Component({
 	selector: "app-toaster",
@@ -12,10 +13,4 @@ export class ToasterComponent {
 	@Input() type: EToasterTypes = EToasterTypes.Success;
 	@Input() duration = 5;
 	toasterTypes = EToasterTypes;
-}
-
-export enum EToasterTypes {
-	Success = "success",
-	Loading = "loading",
-	Error = "error",
 }

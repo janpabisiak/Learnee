@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { WordsOfTheDayComponent } from "./words-of-the-day.component";
 import { provideHttpClient } from "@angular/common/http";
 import { WotdItemComponent } from "./wotd-item/wotd-item.component";
-import { ButtonComponent } from "@shared/button/button.component";
+import { ButtonComponent } from "@shared/components/button/button.component";
 import {
 	createMockModalService,
 	IMockModalService,

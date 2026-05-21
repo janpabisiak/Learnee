@@ -4,11 +4,9 @@ import { HeaderComponent } from "@components/header/header.component";
 import { MobileMenuComponent } from "@components/header/mobile-menu/mobile-menu.component";
 import { AddEditWordModalComponent } from "@components/home-page/add-edit-word-modal/add-edit-word-modal.component";
 import { ConfirmWordDeletionModalComponent } from "@components/home-page/confirm-word-deletion-modal/confirm-word-deletion-modal.component";
-import { SpinnerComponent } from "@shared/spinner/spinner.component";
-import {
-	EToasterPositions,
-	ToasterContainerComponent,
-} from "@shared/toaster-container/toaster-container.component";
+import { SpinnerComponent } from "@shared/components/spinner/spinner.component";
+import { ToasterContainerComponent } from "@shared/components/toaster-container/toaster-container.component";
+import { EToasterPositions } from "@shared/constants/toaster.constants";
 import { EModalType, ModalService } from "@services/modal/modal.service";
 import { ToasterService } from "@services/toaster/toaster.service";
 import { WordsService } from "@services/words/words.service";

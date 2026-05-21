@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { WordListPurgerComponent } from "./word-list-purger.component";
-import { ButtonComponent } from "@shared/button/button.component";
+import { ButtonComponent } from "@shared/components/button/button.component";
 import { createMockModalService, IMockModalService } from "@services/modal/modal.service.mock";
 import { createMockWordsService, IMockWordsService } from "@services/words/words.service.mock";
 import { EModalType, ModalService } from "@services/modal/modal.service";

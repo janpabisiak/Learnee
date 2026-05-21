@@ -8,7 +8,7 @@ import {
 } from "@services/folder/folders.service.mock";
 import { EModalType, ModalService } from "@services/modal/modal.service";
 import { createMockModalService, IMockModalService } from "@services/modal/modal.service.mock";
-import { ButtonComponent } from "@shared/button/button.component";
+import { ButtonComponent } from "@shared/components/button/button.component";
 import { FolderListPurgerComponent } from "./folder-list-purger.component";
 
 describe("FolderListPurgerComponent", () => {

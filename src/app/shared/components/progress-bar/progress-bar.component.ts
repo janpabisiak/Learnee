@@ -1,5 +1,6 @@
 import { NgClass } from "@angular/common";
 import { Component, Input } from "@angular/core";
+import { EProgressBarTypes } from "@shared/constants/progress-bar.constants";
 
 @Component({
 	selector: "app-progress-bar",
@@ -11,9 +12,4 @@ export class ProgressBarComponent {
 	@Input() type: string = EProgressBarTypes.Default;
 	@Input() tooltipContent!: string;
 	EProgressBarTypes = EProgressBarTypes;
-}
-
-export enum EProgressBarTypes {
-	Default = "default",
-	GameResults = "gameResults",
 }

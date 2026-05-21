@@ -7,6 +7,7 @@ import {
 	Input,
 	Output,
 } from "@angular/core";
+import { EButtonTypes } from "@shared/constants/button.constants";
 
 @Component({
 	selector: "app-button",
@@ -36,11 +37,4 @@ export class ButtonComponent {
 	onClick() {
 		this.buttonClicked.emit();
 	}
-}
-
-enum EButtonTypes {
-	Primary = "primary",
-	Secondary = "secondary",
-	Danger = "danger",
-	NoBackground = "no-background",
 }

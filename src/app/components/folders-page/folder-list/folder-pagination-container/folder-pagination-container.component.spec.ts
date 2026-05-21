@@ -3,9 +3,9 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { FolderPaginationContainerComponent } from "./folder-pagination-container.component";
 import { provideHttpClient } from "@angular/common/http";
 import { provideTranslateService } from "@ngx-translate/core";
-import { PaginationButtonsComponent } from "@shared/pagination-buttons/pagination-buttons.component";
-import { ResultsCounterComponent } from "@shared/results-counter/results-counter.component";
-import { ItemsPerPageSelectorComponent } from "@shared/items-per-page-selector/items-per-page-selector.component";
+import { PaginationButtonsComponent } from "@shared/components/pagination-buttons/pagination-buttons.component";
+import { ResultsCounterComponent } from "@shared/components/results-counter/results-counter.component";
+import { ItemsPerPageSelectorComponent } from "@shared/components/items-per-page-selector/items-per-page-selector.component";
 
 describe("FolderPaginationContainerComponent", () => {
 	let component: FolderPaginationContainerComponent;

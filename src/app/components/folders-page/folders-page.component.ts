@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { SectionTitleComponent } from "@shared/section-title/section-title.component";
+import { SectionTitleComponent } from "@shared/components/section-title/section-title.component";
 import { FolderListComponent } from "./folder-list/folder-list.component";
 import { TranslatePipe } from "@ngx-translate/core";
 import { FoldersService } from "@services/folder/folders.service";

@@ -5,7 +5,7 @@ import { HomePageComponent } from "./home-page.component";
 import { WordListComponent } from "./word-list/word-list.component";
 import { WordsOfTheDayComponent } from "./words-of-the-day/words-of-the-day.component";
 import { UserStatisticsComponent } from "./user-statistics/user-statistics.component";
-import { ButtonComponent } from "@shared/button/button.component";
+import { ButtonComponent } from "@shared/components/button/button.component";
 import { createMockModalService, IMockModalService } from "@services/modal/modal.service.mock";
 import {
 	createMockWordsService,
