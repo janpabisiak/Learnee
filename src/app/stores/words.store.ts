@@ -1,7 +1,7 @@
 import { inject, Injectable } from "@angular/core";
 import { BehaviorSubject, combineLatest, map } from "rxjs";
 import { IWord } from "../types/word.interface";
-import { ESortTypes, WordsOptionsService } from "@services/words-options/words-options.service";
+import { EWordSortTypes, WordsOptionsService } from "@services/words-options/words-options.service";
 
 @Injectable({
 	providedIn: "root",
@@ -14,7 +14,7 @@ export class WordsStore {
 	private selectedIds = new BehaviorSubject<number[]>([]);
 	private wordToDeleteId = new BehaviorSubject<number | null>(null);
 	private wordsOfTheDay = new BehaviorSubject<IWord[]>([]);
-	private sortType = new BehaviorSubject<ESortTypes>(ESortTypes.IdDESC);
+	private sortType = new BehaviorSubject<EWordSortTypes>(EWordSortTypes.IdDESC);
 	private searchQuery = new BehaviorSubject<string>("");
 	private page = new BehaviorSubject<number>(1);
 	private wordsPerPage = new BehaviorSubject<number>(10);
@@ -97,7 +97,7 @@ export class WordsStore {
 		this.wordsOfTheDay.next(value);
 	}
 
-	setSortType(value: ESortTypes) {
+	setSortType(value: EWordSortTypes) {
 		this.sortType.next(value);
 	}
 

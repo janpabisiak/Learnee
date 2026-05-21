@@ -5,7 +5,7 @@ import { ToasterService } from "@services/toaster/toaster.service";
 import { IWord } from "../../types/word.interface";
 import { WordsResourceService } from "@services/words-resource/words-resource.service";
 import { WordsStore } from "../../stores/words.store";
-import { ESortTypes } from "@services/words-options/words-options.service";
+import { EWordSortTypes } from "@services/words-options/words-options.service";
 import { map, take } from "rxjs";
 
 @Injectable({
@@ -41,7 +41,7 @@ export class WordsService {
 		this.saveData(updatedWordList);
 	}
 
-	setSortType(value: ESortTypes) {
+	setSortType(value: EWordSortTypes) {
 		this.wordsStore.setSortType(value);
 	}
 

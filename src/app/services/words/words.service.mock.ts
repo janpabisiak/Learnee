@@ -1,6 +1,6 @@
 import { BehaviorSubject } from "rxjs";
 import { IWord } from "../../types/word.interface";
-import { ESortTypes } from "@services/words-options/words-options.service";
+import { EWordSortTypes } from "@services/words-options/words-options.service";
 import { IResultRange } from "../../types/resultRange.interface";
 
 export const mockWords: IWord[] = [
@@ -31,7 +31,7 @@ export const createMockWordsService = () => ({
 	hasSelectedIds$: new BehaviorSubject<boolean>(false),
 	wordToDeleteId$: new BehaviorSubject<number | null>(null),
 	wordsOfTheDay$: new BehaviorSubject<IWord[]>([]),
-	sortType$: new BehaviorSubject<ESortTypes>(ESortTypes.IdDESC),
+	sortType$: new BehaviorSubject<EWordSortTypes>(EWordSortTypes.IdDESC),
 	searchQuery$: new BehaviorSubject<string>(""),
 	visibleWords$: new BehaviorSubject<IWord[]>([]),
 	page$: new BehaviorSubject<number>(1),

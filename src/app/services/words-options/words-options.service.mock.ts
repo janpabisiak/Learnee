@@ -1,11 +1,11 @@
 import { IResultRange } from "../../types/resultRange.interface";
 import { IWord } from "../../types/word.interface";
-import { ESortTypes } from "./words-options.service";
+import { EWordSortTypes } from "./words-options.service";
 
 export const createMockWordsOptionsService = () => ({
 	sort: jasmine
 		.createSpy("sort")
-		.and.callFake((wordList: IWord[], _sortType: ESortTypes) => wordList),
+		.and.callFake((wordList: IWord[], _sortType: EWordSortTypes) => wordList),
 	filter: jasmine
 		.createSpy("filter")
 		.and.callFake((wordList: IWord[], _query: string) => wordList),

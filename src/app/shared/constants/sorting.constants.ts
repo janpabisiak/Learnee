@@ -18,3 +18,10 @@ export const commonSortOptions: Record<
 	[ECommonSortTypes.NameDESC]: (entities) =>
 		[...entities].sort((a, b) => b.name.localeCompare(a.name)),
 };
+
+export const commonSortOptionsTranslationKeys: Record<ECommonSortTypes, string> = {
+	[ECommonSortTypes.IdASC]: "itemlist.sort.idAsc",
+	[ECommonSortTypes.IdDESC]: "itemlist.sort.idDesc",
+	[ECommonSortTypes.NameASC]: "itemlist.sort.nameAsc",
+	[ECommonSortTypes.NameDESC]: "itemlist.sort.nameDesc",
+};

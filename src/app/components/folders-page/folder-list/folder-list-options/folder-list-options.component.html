@@ -1,6 +1,6 @@
 <div class="grid xl:grid-cols-[1.5fr_1fr_1fr] md:grid-cols-2 gap-3 mb-5">
-    <app-folder-list-search-bar class="md:col-span-2 xl:col-span-1" />
-    <app-folder-list-sort />
-    <app-folder-list-purger />
-    <app-folder-list-selection-control-buttons class="col-span-full" />
+    <app-search-bar class="md:col-span-2 xl:col-span-1" [translationKey]="'folderlist.search'" (searched)="search($event)" />
+    <app-items-sort [sortOptions]="sortOptions" [currentSortOption]="currentSortOption" (changed)="changeSortType($event)" />
+    <app-items-purger [hasSelectedItems]="hasSelectedFolders" (clicked)="openDeletionModal()" />
+    <app-items-selection-control-buttons class="col-span-full" [hasSelectedItems]="hasSelectedFolders" (selectAllClicked)="selectAllVisible()" (unselectAllClicked)="unselectAll()" />
 </div>

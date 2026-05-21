@@ -3,7 +3,7 @@ import { IWord } from "../../types/word.interface";
 import { IResultRange } from "../../types/resultRange.interface";
 import { commonSortOptions } from "@shared/constants/sorting.constants";
 
-export enum ESortTypes {
+export enum EWordSortTypes {
 	IdASC = "idASC",
 	IdDESC = "idDESC",
 	NameASC = "nameASC",
@@ -14,15 +14,15 @@ export enum ESortTypes {
 	IsLearningDESC = "isLearningDESC",
 }
 
-const sortOptions: Record<ESortTypes, (wordList: IWord[]) => IWord[]> = {
+const sortOptions: Record<EWordSortTypes, (wordList: IWord[]) => IWord[]> = {
 	...commonSortOptions,
-	[ESortTypes.DefinitionASC]: (wordList) =>
+	[EWordSortTypes.DefinitionASC]: (wordList) =>
 		[...wordList].sort((a, b) => a.definition.localeCompare(b.definition)),
-	[ESortTypes.DefinitionDESC]: (wordList) =>
+	[EWordSortTypes.DefinitionDESC]: (wordList) =>
 		[...wordList].sort((a, b) => b.definition.localeCompare(a.definition)),
-	[ESortTypes.IsLearningASC]: (wordList) =>
+	[EWordSortTypes.IsLearningASC]: (wordList) =>
 		[...wordList].sort((a, b) => +a.isLearning - +b.isLearning),
-	[ESortTypes.IsLearningDESC]: (wordList) =>
+	[EWordSortTypes.IsLearningDESC]: (wordList) =>
 		[...wordList].sort((a, b) => +b.isLearning - +a.isLearning),
 };
 
@@ -30,7 +30,7 @@ const sortOptions: Record<ESortTypes, (wordList: IWord[]) => IWord[]> = {
 	providedIn: "root",
 })
 export class WordsOptionsService {
-	sort(wordList: IWord[], sortType: ESortTypes) {
+	sort(wordList: IWord[], sortType: EWordSortTypes) {
 		return sortOptions[sortType](wordList);
 	}
 
