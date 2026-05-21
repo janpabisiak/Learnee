@@ -1,21 +1,21 @@
 import { Injectable } from "@angular/core";
 import { IWord } from "../../types/word.interface";
 import { IResultRange } from "../../types/resultRange.interface";
+import { commonSortOptions } from "@shared/constants/sorting.constants";
 
 export enum ESortTypes {
+	IdASC = "idASC",
+	IdDESC = "idDESC",
 	NameASC = "nameASC",
 	NameDESC = "nameDESC",
 	DefinitionASC = "definitionASC",
 	DefinitionDESC = "definitionDESC",
 	IsLearningASC = "isLearningASC",
 	IsLearningDESC = "isLearningDESC",
-	IdASC = "idASC",
-	IdDESC = "idDESC",
 }
 
 const sortOptions: Record<ESortTypes, (wordList: IWord[]) => IWord[]> = {
-	[ESortTypes.NameASC]: (wordList) => [...wordList].sort((a, b) => a.name.localeCompare(b.name)),
-	[ESortTypes.NameDESC]: (wordList) => [...wordList].sort((a, b) => b.name.localeCompare(a.name)),
+	...commonSortOptions,
 	[ESortTypes.DefinitionASC]: (wordList) =>
 		[...wordList].sort((a, b) => a.definition.localeCompare(b.definition)),
 	[ESortTypes.DefinitionDESC]: (wordList) =>
@@ -24,8 +24,6 @@ const sortOptions: Record<ESortTypes, (wordList: IWord[]) => IWord[]> = {
 		[...wordList].sort((a, b) => +a.isLearning - +b.isLearning),
 	[ESortTypes.IsLearningDESC]: (wordList) =>
 		[...wordList].sort((a, b) => +b.isLearning - +a.isLearning),
-	[ESortTypes.IdASC]: (wordList) => [...wordList].sort((a, b) => a.id - b.id),
-	[ESortTypes.IdDESC]: (wordList) => [...wordList].sort((a, b) => b.id - a.id),
 };
 
 @Injectable({
