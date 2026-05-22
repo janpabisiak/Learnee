@@ -7,7 +7,8 @@ import { ConfirmWordDeletionModalComponent } from "@components/home-page/confirm
 import { SpinnerComponent } from "@shared/components/spinner/spinner.component";
 import { ToasterContainerComponent } from "@shared/components/toaster-container/toaster-container.component";
 import { EToasterPositions } from "@shared/constants/toaster.constants";
-import { EModalType, ModalService } from "@services/modal/modal.service";
+import { ModalService } from "@services/modal/modal.service";
+import { EModalType } from "@shared/constants/modal.constants";
 import { ToasterService } from "@services/toaster/toaster.service";
 import { WordsService } from "@services/words/words.service";
 import { Subscription } from "rxjs";

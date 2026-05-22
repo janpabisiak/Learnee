@@ -4,7 +4,7 @@ import { FoldersStore } from "app/stores/folders/folders.store";
 import { FoldersResourceService } from "@services/folders-resource/folders-resource.service";
 import { EFolderSortTypes } from "@services/folders-options/folders-options.service";
 import { map, take } from "rxjs";
-import { EToasterTypes } from "@shared/constants/toaster.constants";
+import { DEFAULT_TOASTER_DURATION, EToasterTypes } from "@shared/constants/toaster.constants";
 import { ToasterService } from "@services/toaster/toaster.service";
 import { TranslateService } from "@ngx-translate/core";
 
@@ -62,7 +62,7 @@ export class FoldersService {
 			this.toasterService.addToaster({
 				type: EToasterTypes.Error,
 				content: this.translateService.instant("toaster.error.folder.alreadyExists"),
-				duration: 5,
+				duration: DEFAULT_TOASTER_DURATION,
 			});
 
 			return;
@@ -81,7 +81,7 @@ export class FoldersService {
 		this.toasterService.addToaster({
 			type: EToasterTypes.Success,
 			content: this.translateService.instant("toaster.success.folder.added"),
-			duration: 5,
+			duration: DEFAULT_TOASTER_DURATION,
 		});
 	}
 
@@ -92,7 +92,7 @@ export class FoldersService {
 		this.toasterService.addToaster({
 			type: EToasterTypes.Success,
 			content: this.translateService.instant("toaster.success.folder.deleted"),
-			duration: 5,
+			duration: DEFAULT_TOASTER_DURATION,
 		});
 
 		this.foldersStore.setFolderToDeleteId(null);
@@ -114,7 +114,7 @@ export class FoldersService {
 		this.toasterService.addToaster({
 			type: EToasterTypes.Success,
 			content: this.translateService.instant("toaster.success.folder.manyDeleted"),
-			duration: 5,
+			duration: DEFAULT_TOASTER_DURATION,
 		});
 
 		this.unselectAll();
@@ -130,7 +130,7 @@ export class FoldersService {
 		this.toasterService.addToaster({
 			type: EToasterTypes.Success,
 			content: this.translateService.instant("toaster.success.folder.edited"),
-			duration: 5,
+			duration: DEFAULT_TOASTER_DURATION,
 		});
 	}
 

@@ -3,6 +3,7 @@ import { NgClass, NgIf } from "@angular/common";
 import { Component, CUSTOM_ELEMENTS_SCHEMA, Input, OnDestroy, OnInit } from "@angular/core";
 import { ButtonComponent } from "@shared/components/button/button.component";
 import { GameService, IStage } from "@services/game/game.service";
+import { EAvailableGames } from "@shared/constants/game.constants";
 import { IMatch } from "@services/matching-game/matching-game.service";
 import { combineLatest, Subject, takeUntil } from "rxjs";
 import { DraggableItemsListComponent } from "./draggable-items-list/draggable-items-list.component";

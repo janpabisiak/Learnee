@@ -10,3 +10,6 @@ export enum EToasterTypes {
 	Loading = "loading",
 	Error = "error",
 }
+
+export const DEFAULT_TOASTER_DURATION = 5;
+export const TOASTER_CLEANUP_INTERVAL = 1000;

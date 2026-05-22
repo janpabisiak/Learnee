@@ -5,8 +5,10 @@ import { ButtonComponent } from "@shared/components/button/button.component";
 import { SectionTitleComponent } from "@shared/components/section-title/section-title.component";
 import { TranslatePipe, TranslateService } from "@ngx-translate/core";
 import { LocalStorageService } from "@services/local-storage/local-storage.service";
-import { EModalType, ModalService } from "@services/modal/modal.service";
-import { EAvailableLanguages, SettingsService } from "@services/settings/settings.service";
+import { ModalService } from "@services/modal/modal.service";
+import { SettingsService } from "@services/settings/settings.service";
+import { EAvailableLanguages } from "@shared/constants/settings.constants";
+import { EModalType } from "@shared/constants/modal.constants";
 import { combineLatest, Subscription, take } from "rxjs";
 
 @Component({

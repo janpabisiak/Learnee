@@ -7,7 +7,8 @@ import {
 	createMockFoldersService,
 	IMockFoldersService,
 } from "@services/folder/folders.service.mock";
-import { EModalType, ModalService } from "@services/modal/modal.service";
+import { ModalService } from "@services/modal/modal.service";
+import { EModalType } from "@shared/constants/modal.constants";
 import { createMockModalService, IMockModalService } from "@services/modal/modal.service.mock";
 import { ItemsPurgerComponent } from "@shared/components/items-purger/items-purger.component";
 import { ItemsSelectionControlButtonsComponent } from "@shared/components/items-selection-control-buttons/items-selection-control-buttons.component";

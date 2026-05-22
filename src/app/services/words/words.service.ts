@@ -1,5 +1,5 @@
 import { inject, Injectable } from "@angular/core";
-import { EToasterTypes } from "@shared/constants/toaster.constants";
+import { DEFAULT_TOASTER_DURATION, EToasterTypes } from "@shared/constants/toaster.constants";
 import { TranslateService } from "@ngx-translate/core";
 import { ToasterService } from "@services/toaster/toaster.service";
 import { IWord } from "../../types/word.interface";
@@ -67,7 +67,7 @@ export class WordsService {
 			this.toasterService.addToaster({
 				type: EToasterTypes.Error,
 				content: this.translateService.instant("toaster.error.word.alreadyExists"),
-				duration: 5,
+				duration: DEFAULT_TOASTER_DURATION,
 			});
 
 			return;
@@ -86,7 +86,7 @@ export class WordsService {
 		this.toasterService.addToaster({
 			type: EToasterTypes.Success,
 			content: this.translateService.instant("toaster.success.word.added"),
-			duration: 5,
+			duration: DEFAULT_TOASTER_DURATION,
 		});
 	}
 
@@ -104,7 +104,7 @@ export class WordsService {
 		this.toasterService.addToaster({
 			type: EToasterTypes.Success,
 			content: this.translateService.instant("toaster.success.word.deleted"),
-			duration: 5,
+			duration: DEFAULT_TOASTER_DURATION,
 		});
 
 		this.wordsStore.setWordToDeleteId(null);
@@ -126,7 +126,7 @@ export class WordsService {
 		this.toasterService.addToaster({
 			type: EToasterTypes.Success,
 			content: this.translateService.instant("toaster.success.word.manyDeleted"),
-			duration: 5,
+			duration: DEFAULT_TOASTER_DURATION,
 		});
 
 		this.unselectAll();
@@ -142,7 +142,7 @@ export class WordsService {
 		this.toasterService.addToaster({
 			type: EToasterTypes.Success,
 			content: this.translateService.instant("toaster.success.word.edited"),
-			duration: 5,
+			duration: DEFAULT_TOASTER_DURATION,
 		});
 	}
 

@@ -1,5 +1,6 @@
 import { BehaviorSubject } from "rxjs";
-import { EAvailableGames, IStage } from "./game.service";
+import { IStage } from "./game.service";
+import { EAvailableGames } from "@shared/constants/game.constants";
 
 export const mockStages: IStage[] = [
 	{

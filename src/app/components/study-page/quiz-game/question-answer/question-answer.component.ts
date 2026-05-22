@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { IAnswer } from "../../../../types/answer.interface";
 import { CommonModule } from "@angular/common";
 import { GameService } from "@services/game/game.service";
+import { EAvailableGames } from "@shared/constants/game.constants";
 
 @Component({
 	selector: "app-question-answer",

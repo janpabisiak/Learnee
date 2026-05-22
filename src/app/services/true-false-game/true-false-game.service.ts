@@ -7,7 +7,7 @@ import { WordsService } from "@services/words/words.service";
 export class TrueFalseGameService {
 	constructor(private wordsService: WordsService) {}
 
-	generateTrueFalseGame() {
+	generateTrueFalseGame(): ITrueFalseGameData {
 		const selectedWord = this.wordsService.getRandomLearningWord();
 		const shouldGetDifferentDef = Math.random() > 0.5;
 
@@ -16,7 +16,7 @@ export class TrueFalseGameService {
 				word: selectedWord.name,
 				definition: selectedWord.definition,
 				isCorrect: true,
-			} as ITrueFalseGameData;
+			};
 		}
 
 		let anotherWord = this.wordsService.getRandomLearningWord();
@@ -28,7 +28,7 @@ export class TrueFalseGameService {
 			word: selectedWord.name,
 			definition: anotherWord.definition,
 			isCorrect: false,
-		} as ITrueFalseGameData;
+		};
 	}
 }
 

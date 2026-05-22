@@ -13,6 +13,7 @@ import {
 } from "@services/web-speech/web-speech.service.mock";
 import { WebSpeechService } from "@services/web-speech/web-speech.service";
 import { GameService } from "@services/game/game.service";
+import { EAvailableGames } from "@shared/constants/game.constants";
 import { provideTranslateService } from "@ngx-translate/core";
 
 describe("FillGapsGameComponent", () => {

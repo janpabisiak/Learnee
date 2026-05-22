@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { TranslatePipe } from "@ngx-translate/core";
-import { EModalType, ModalService } from "@services/modal/modal.service";
+import { ModalService } from "@services/modal/modal.service";
+import { EModalType } from "@shared/constants/modal.constants";
 import { EWordSortTypes } from "@services/words-options/words-options.service";
 import { WordsService } from "@services/words/words.service";
 import { ButtonComponent } from "@shared/components/button/button.component";

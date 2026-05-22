@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { SectionTitleComponent } from "@shared/components/section-title/section-title.component";
-import { EAvailableGames, GameService, IStage } from "@services/game/game.service";
+import { GameService, IStage } from "@services/game/game.service";
+import { EAvailableGames } from "@shared/constants/game.constants";
 import { Subject, take, takeUntil } from "rxjs";
 import { GameContainerComponent } from "../game-section/game-container/game-container.component";
 import { ProgressBarComponent } from "@shared/components/progress-bar/progress-bar.component";

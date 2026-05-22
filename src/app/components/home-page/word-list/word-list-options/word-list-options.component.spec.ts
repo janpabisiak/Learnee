@@ -2,7 +2,8 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { provideHttpClient } from "@angular/common/http";
 import { provideTranslateService } from "@ngx-translate/core";
-import { EModalType, ModalService } from "@services/modal/modal.service";
+import { ModalService } from "@services/modal/modal.service";
+import { EModalType } from "@shared/constants/modal.constants";
 import { createMockModalService, IMockModalService } from "@services/modal/modal.service.mock";
 import { WordsService } from "@services/words/words.service";
 import {

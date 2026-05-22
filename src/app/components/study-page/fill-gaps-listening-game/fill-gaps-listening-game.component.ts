@@ -1,5 +1,6 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, Input, OnDestroy, OnInit } from "@angular/core";
-import { EAvailableGames, GameService, IStage } from "@services/game/game.service";
+import { GameService, IStage } from "@services/game/game.service";
+import { EAvailableGames } from "@shared/constants/game.constants";
 import { combineLatest, skip, Subject, takeUntil } from "rxjs";
 import { ButtonComponent } from "@shared/components/button/button.component";
 import { SentenceCasePipe } from "@pipes/sentence-case.pipe";

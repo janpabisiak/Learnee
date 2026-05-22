@@ -3,6 +3,7 @@ import { IQuestion } from "../../../types/question.interface";
 import { QuestionAnswerComponent } from "./question-answer/question-answer.component";
 import { combineLatest, Subject, takeUntil } from "rxjs";
 import { GameService, IStage } from "@services/game/game.service";
+import { EAvailableGames } from "@shared/constants/game.constants";
 import { NgClass } from "@angular/common";
 
 @Component({

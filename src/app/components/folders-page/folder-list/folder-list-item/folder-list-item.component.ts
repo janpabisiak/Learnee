@@ -3,7 +3,8 @@ import { IFolder } from "../../../../types/folder.interface";
 import { Subject, takeUntil } from "rxjs";
 import { FoldersFormService } from "@services/folders-form/folders-form.service";
 import { FoldersService } from "@services/folder/folders.service";
-import { EModalType, ModalService } from "@services/modal/modal.service";
+import { ModalService } from "@services/modal/modal.service";
+import { EModalType } from "@shared/constants/modal.constants";
 import { SentenceCasePipe } from "../../../../pipes/sentence-case.pipe";
 import { TranslatePipe } from "@ngx-translate/core";
 

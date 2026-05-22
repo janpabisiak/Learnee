@@ -5,6 +5,7 @@ import { PaginationButtonsComponent } from "@shared/components/pagination-button
 import { ResultsCounterComponent } from "@shared/components/results-counter/results-counter.component";
 import { IResultRange } from "../../../../types/resultRange.interface";
 import { combineLatest, Subject, takeUntil } from "rxjs";
+import { ITEMS_PER_PAGE_OPTIONS } from "@shared/constants/pagination.constants";
 
 @Component({
 	selector: "app-word-pagination-container",
@@ -18,7 +19,7 @@ export class WordPaginationContainerComponent implements OnInit, OnDestroy {
 	maxPage = 0;
 	pages: number[] = [];
 	wordsPerPage = 0;
-	wordsPerPageOptions = [10, 20, 30, 50];
+	wordsPerPageOptions = ITEMS_PER_PAGE_OPTIONS;
 	private destroy$ = new Subject<void>();
 
 	constructor(private wordsService: WordsService) {}

@@ -8,7 +8,8 @@ import { AddEditWordModalComponent } from "@components/home-page/add-edit-word-m
 import { SpinnerComponent } from "@shared/components/spinner/spinner.component";
 import { ToasterContainerComponent } from "@shared/components/toaster-container/toaster-container.component";
 import { provideTranslateService } from "@ngx-translate/core";
-import { EModalType, ModalService } from "@services/modal/modal.service";
+import { ModalService } from "@services/modal/modal.service";
+import { EModalType } from "@shared/constants/modal.constants";
 import { createMockModalService, IMockModalService } from "@services/modal/modal.service.mock";
 import { ToasterService } from "@services/toaster/toaster.service";
 import {

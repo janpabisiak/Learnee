@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { ModalComponent } from "@shared/components/modal/modal.component";
 import { TranslatePipe } from "@ngx-translate/core";
-import { EModalType, ModalService } from "@services/modal/modal.service";
+import { ModalService } from "@services/modal/modal.service";
+import { EModalType } from "@shared/constants/modal.constants";
 import { WordsService } from "@services/words/words.service";
 import { combineLatest, Subject, takeUntil } from "rxjs";
 

@@ -1,7 +1,8 @@
 import { Component } from "@angular/core";
 import { FoldersService } from "@services/folder/folders.service";
 import { EFolderSortTypes } from "@services/folders-options/folders-options.service";
-import { EModalType, ModalService } from "@services/modal/modal.service";
+import { ModalService } from "@services/modal/modal.service";
+import { EModalType } from "@shared/constants/modal.constants";
 import { ItemsPurgerComponent } from "@shared/components/items-purger/items-purger.component";
 import { ItemsSelectionControlButtonsComponent } from "@shared/components/items-selection-control-buttons/items-selection-control-buttons.component";
 import { ItemsSortComponent } from "@shared/components/items-sort/items-sort.component";

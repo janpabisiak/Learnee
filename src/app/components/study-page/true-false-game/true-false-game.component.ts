@@ -1,6 +1,7 @@
 import { NgClass } from "@angular/common";
 import { Component, Input, OnDestroy, OnInit } from "@angular/core";
 import { GameService, IStage } from "@services/game/game.service";
+import { EAvailableGames } from "@shared/constants/game.constants";
 import { combineLatest, Subject, takeUntil } from "rxjs";
 import { TrueFalseAnswerComponent } from "./true-false-answer/true-false-answer.component";
 

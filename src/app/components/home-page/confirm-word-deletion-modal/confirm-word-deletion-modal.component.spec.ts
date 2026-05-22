@@ -4,8 +4,9 @@ import { ConfirmWordDeletionModalComponent } from "./confirm-word-deletion-modal
 import { provideHttpClient } from "@angular/common/http";
 import { ModalComponent } from "@shared/components/modal/modal.component";
 import { createMockModalService, IMockModalService } from "@services/modal/modal.service.mock";
-import { createMockWordsService, IMockWordsService } from "@services/words/words.service.mock";
-import { EModalType, ModalService } from "@services/modal/modal.service";
+import { ModalService } from "@services/modal/modal.service";
+import { EModalType } from "@shared/constants/modal.constants";
+
 import { WordsService } from "@services/words/words.service";
 import { provideTranslateService } from "@ngx-translate/core";
 

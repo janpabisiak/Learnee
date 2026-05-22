@@ -6,6 +6,7 @@ import { catchError, map, Observable, of, switchMap, take } from "rxjs";
 import { environment } from "../../../environment/environment";
 import { IWord } from "../../types/word.interface";
 import { WordsStore } from "../../stores/words.store";
+import { ELocalStorageKeys } from "@shared/constants/local-storage.constants";
 
 @Injectable({
 	providedIn: "root",
@@ -25,7 +26,7 @@ export class WordsResourceService {
 	}
 
 	saveData(wordList: IWord[]) {
-		this.localStorageService.saveData("word-list", wordList);
+		this.localStorageService.saveData(ELocalStorageKeys.WordList, wordList);
 	}
 
 	fetchDefinition$(word: string): Observable<string> {
@@ -48,7 +49,7 @@ export class WordsResourceService {
 	}
 
 	private load() {
-		const wordList = this.localStorageService.loadData("word-list");
+		const wordList = this.localStorageService.loadData(ELocalStorageKeys.WordList);
 		if (wordList) {
 			this.wordsStore.setWordList(wordList);
 		}
@@ -63,10 +64,10 @@ export class WordsResourceService {
 		date.setUTCHours(0, 0, 0, 0);
 
 		if (
-			this.localStorageService.loadData("wotd-fetched-date") ===
+			this.localStorageService.loadData(ELocalStorageKeys.WotdFetchedDate) ===
 			date.toISOString().split("T")[0]
 		) {
-			const words = this.localStorageService.loadData("wotd-words") as IWord[];
+			const words = this.localStorageService.loadData(ELocalStorageKeys.WotdWords) as IWord[];
 
 			this.wordsStore.setWordsOfTheDay(words);
 		}
@@ -100,9 +101,9 @@ export class WordsResourceService {
 						.filter((word): word is IWord => word !== undefined);
 
 					this.wordsStore.setWordsOfTheDay(words);
-					this.localStorageService.saveData("wotd-words", words);
+					this.localStorageService.saveData(ELocalStorageKeys.WotdWords, words);
 					this.localStorageService.saveData(
-						"wotd-fetched-date",
+						ELocalStorageKeys.WotdFetchedDate,
 						date.toISOString().split("T")[0],
 					);
 				}),

@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
+import { EModalType } from "@shared/constants/modal.constants";
 
 @Injectable({
 	providedIn: "root",
@@ -43,13 +44,4 @@ export class ModalService {
 				break;
 		}
 	}
-}
-
-export enum EModalType {
-	WordAdding,
-	WordDeletion,
-	FolderAdding,
-	FolderDeletion,
-	ImportConfirmation,
-	MobileNavbar,
 }

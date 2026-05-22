@@ -9,6 +9,7 @@ import {
 	mockStages,
 } from "@services/game/game.service.mock";
 import { GameService } from "@services/game/game.service";
+import { EAvailableGames } from "@shared/constants/game.constants";
 
 describe("TrueFalseGameComponent", () => {
 	let component: TrueFalseGameComponent;

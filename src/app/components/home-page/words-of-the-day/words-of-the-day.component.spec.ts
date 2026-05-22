@@ -15,7 +15,8 @@ import {
 } from "@services/words/words.service.mock";
 import { createMockWordsFormService, IMockWordsFormService } from "@services/words-form/words-form.service.mock";
 import { WordsService } from "@services/words/words.service";
-import { EModalType, ModalService } from "@services/modal/modal.service";
+import { ModalService } from "@services/modal/modal.service";
+import { EModalType } from "@shared/constants/modal.constants";
 import { WordsFormService } from "@services/words-form/words-form.service";
 import { provideTranslateService } from "@ngx-translate/core";
 

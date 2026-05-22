@@ -5,6 +5,7 @@ import { PaginationButtonsComponent } from "@shared/components/pagination-button
 import { ResultsCounterComponent } from "@shared/components/results-counter/results-counter.component";
 import { IResultRange } from "../../../../types/resultRange.interface";
 import { combineLatest, Subject, takeUntil } from "rxjs";
+import { ITEMS_PER_PAGE_OPTIONS } from "@shared/constants/pagination.constants";
 
 @Component({
 	selector: "app-folder-pagination-container",
@@ -19,7 +20,7 @@ export class FolderPaginationContainerComponent {
 	maxPage = 0;
 	pages: number[] = [];
 	foldersPerPage = 0;
-	foldersPerPageOptions = [10, 20, 30, 50];
+	foldersPerPageOptions = ITEMS_PER_PAGE_OPTIONS;
 	private destroy$ = new Subject<void>();
 
 	constructor(private foldersService: FoldersService) {}

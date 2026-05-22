@@ -2,7 +2,8 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { HamburgerComponent } from "./hamburger.component";
 import { createMockModalService, IMockModalService } from "@services/modal/modal.service.mock";
-import { EModalType, ModalService } from "@services/modal/modal.service";
+import { ModalService } from "@services/modal/modal.service";
+import { EModalType } from "@shared/constants/modal.constants";
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 
 describe("HamburgerComponent", () => {

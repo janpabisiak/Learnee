@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { provideHttpClient } from "@angular/common/http";
 import { SectionTitleComponent } from "@shared/components/section-title/section-title.component";
 import { GameService } from "@services/game/game.service";
+import { EAvailableGames } from "@shared/constants/game.constants";
 import { createMockGameService, IMockGameService, mockStages } from "@services/game/game.service.mock";
 import { GameContainerComponent } from "../game-section/game-container/game-container.component";
 import { GameResultsComponent } from "./game-results.component";

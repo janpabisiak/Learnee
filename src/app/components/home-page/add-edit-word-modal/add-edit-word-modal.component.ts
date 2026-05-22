@@ -4,9 +4,11 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { ModalComponent } from "@shared/components/modal/modal.component";
 import { TranslatePipe, TranslateService } from "@ngx-translate/core";
 import { WordsFormService } from "@services/words-form/words-form.service";
-import { EModalType, ModalService } from "@services/modal/modal.service";
+import { ModalService } from "@services/modal/modal.service";
+import { EModalType } from "@shared/constants/modal.constants";
 import { WordsService } from "@services/words/words.service";
 import { Subscription, take } from "rxjs";
+import { DEFINITION_MAX_LENGTH, WORD_MAX_LENGTH } from "@shared/constants/validation.constants";
 
 @Component({
 	selector: "app-add-edit-word-modal",
@@ -22,6 +24,8 @@ export class AddEditWordModalComponent implements OnInit, OnDestroy {
 	isSubmitDisabled = false;
 	isDefinitionFetched = false;
 	translations: Record<string, string> | null = null;
+	wordMaxLength = WORD_MAX_LENGTH;
+	definitionMaxLength = DEFINITION_MAX_LENGTH;
 
 	constructor(
 		private modalService: ModalService,

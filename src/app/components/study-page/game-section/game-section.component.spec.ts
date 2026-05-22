@@ -7,6 +7,7 @@ import { StudyProgressBarComponent } from "../study-progress-bar/study-progress-
 import { createMockGameService, IMockGameService, mockStages } from "@services/game/game.service.mock";
 import { provideHttpClient } from "@angular/common/http";
 import { GameService } from "@services/game/game.service";
+import { EAvailableGames } from "@shared/constants/game.constants";
 
 describe("GameSectionComponent", () => {
 	let component: GameSectionComponent;

@@ -9,7 +9,8 @@ import {
 	mockAvailableGames,
 	mockSelectedGames,
 } from "@services/game/game.service.mock";
-import { EAvailableGames, GameService } from "@services/game/game.service";
+import { GameService } from "@services/game/game.service";
+import { EAvailableGames } from "@shared/constants/game.constants";
 import { SectionTitleComponent } from "@shared/components/section-title/section-title.component";
 import { provideTranslateService } from "@ngx-translate/core";
 

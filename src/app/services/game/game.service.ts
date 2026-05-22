@@ -13,6 +13,13 @@ import {
 } from "@services/fill-gaps-listening-game/fill-gaps-listening-game.service";
 import { LevelService } from "@services/level/level.service";
 import { StatisticsService } from "@services/statistics/statistics.service";
+import {
+	availableGames,
+	DEFAULT_NUMBER_OF_STAGES,
+	EAvailableGames,
+	STAGE_TRANSITION_DELAY,
+	XP_PENALTY_ON_LOSS,
+} from "@shared/constants/game.constants";
 
 @Injectable({
 	providedIn: "root",
@@ -30,7 +37,7 @@ export class GameService {
 	stages$ = this.stages.asObservable();
 	selectedGames$ = this.selectedGames.asObservable();
 	currentStageId$ = this.currentStageId.asObservable();
-	numberOfStages = 15;
+	numberOfStages = DEFAULT_NUMBER_OF_STAGES;
 
 	constructor(
 		private matchingGameService: MatchingGameService,
@@ -191,7 +198,7 @@ export class GameService {
 			if (currentStageId < this.stages.value.length) {
 				this.currentStageId.next(currentStageId + 1);
 			}
-		}, 2000);
+		}, STAGE_TRANSITION_DELAY);
 	}
 
 	updateSelectedGames(selectedGames: EAvailableGames[]) {
@@ -215,7 +222,9 @@ export class GameService {
 	private updateUserXp(type: EAvailableGames, isCorrect: boolean) {
 		const expOnWin = availableGames.find((game) => game.title === type)!.expIfWin;
 
-		isCorrect ? this.levelService.addXpPoints(expOnWin) : this.levelService.removeXpPoints(5);
+		isCorrect
+			? this.levelService.addXpPoints(expOnWin)
+			: this.levelService.removeXpPoints(XP_PENALTY_ON_LOSS);
 	}
 
 	cancelGame() {
@@ -231,57 +240,3 @@ export interface IStage {
 	answered: boolean;
 	answeredCorrect: boolean;
 }
-
-export enum EAvailableGames {
-	Quiz = "Quiz",
-	MatchingGame = "Matching",
-	TrueOrFalse = "True or false",
-	FillGaps = "Fill gaps",
-	Listening = "Listening",
-}
-
-export interface IGame {
-	id: number;
-	title: EAvailableGames;
-	description: string;
-	icon: string;
-	expIfWin: number;
-}
-
-export const availableGames: IGame[] = [
-	{
-		id: 0,
-		title: EAvailableGames.Quiz,
-		description: "Select correct definition for given word",
-		icon: "library-outline",
-		expIfWin: 4,
-	},
-	{
-		id: 1,
-		title: EAvailableGames.MatchingGame,
-		description: "Match word with its definition",
-		icon: "shuffle-outline",
-		expIfWin: 6,
-	},
-	{
-		id: 2,
-		title: EAvailableGames.TrueOrFalse,
-		description: "Check whether word has correct definition",
-		icon: "help-outline",
-		expIfWin: 2,
-	},
-	{
-		id: 3,
-		title: EAvailableGames.FillGaps,
-		description: "Check whether word has correct definition",
-		icon: "text-outline",
-		expIfWin: 4,
-	},
-	{
-		id: 4,
-		title: EAvailableGames.Listening,
-		description: "Select correct word from read definition",
-		icon: "volume-medium-outline",
-		expIfWin: 4, // must be the same as for FillGaps game cause of the same answer reveal method
-	},
-];

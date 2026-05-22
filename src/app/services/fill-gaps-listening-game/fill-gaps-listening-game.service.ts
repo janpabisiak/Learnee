@@ -7,13 +7,13 @@ import { WordsService } from "@services/words/words.service";
 export class FillGapsListeningGameService {
 	constructor(private wordsService: WordsService) {}
 
-	generateFillGapsListeningGame() {
+	generateFillGapsListeningGame(): IFillGapsListeningGameData {
 		const randomWord = this.wordsService.getRandomLearningWord();
 
 		return {
 			word: randomWord.name,
 			definition: randomWord.definition,
-		} as IFillGapsListeningGameData;
+		};
 	}
 }
 
