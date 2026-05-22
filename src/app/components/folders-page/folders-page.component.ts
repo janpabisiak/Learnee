@@ -3,6 +3,8 @@ import { SectionTitleComponent } from "@shared/components/section-title/section-
 import { FolderListComponent } from "./folder-list/folder-list.component";
 import { TranslatePipe } from "@ngx-translate/core";
 import { FoldersService } from "@services/folder/folders.service";
+import { ModalService } from "@services/modal/modal.service";
+import { EModalType } from "@shared/constants/modal.constants";
 import { Subscription } from "rxjs";
 
 @Component({
@@ -14,12 +16,16 @@ export class FoldersPageComponent {
 	private subscription = new Subscription();
 	numberOfFolders = 0;
 
-	constructor(private foldersService: FoldersService) {}
+	constructor(private foldersService: FoldersService, private modalService: ModalService) {}
 
 	ngOnInit() {
 		this.subscription = this.foldersService.numberOfFolders$.subscribe((numberOfFolders) => {
 			this.numberOfFolders = numberOfFolders;
 		});
+	}
+
+	toggleIsAddFolderModalOpen(state: boolean) {
+		this.modalService.toggleModal(EModalType.FolderAdding, state);
 	}
 
 	ngOnDestroy() {

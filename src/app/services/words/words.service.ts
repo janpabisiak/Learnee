@@ -4,7 +4,7 @@ import { TranslateService } from "@ngx-translate/core";
 import { ToasterService } from "@services/toaster/toaster.service";
 import { IWord } from "../../types/word.interface";
 import { WordsResourceService } from "@services/words-resource/words-resource.service";
-import { WordsStore } from "../../stores/words.store";
+import { WordsStore } from "../../stores/words/words.store";
 import { EWordSortTypes } from "@services/words-options/words-options.service";
 import { map, take } from "rxjs";
 

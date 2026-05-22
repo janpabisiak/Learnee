@@ -5,6 +5,7 @@ import {
 	EFolderSortTypes,
 	FoldersOptionsService,
 } from "../../services/folders-options/folders-options.service";
+import { DEFAULT_ITEMS_PER_PAGE } from "@shared/constants/pagination.constants";
 
 @Injectable({
 	providedIn: "root",
@@ -19,7 +20,7 @@ export class FoldersStore {
 	private sortType = new BehaviorSubject<EFolderSortTypes>(EFolderSortTypes.IdDESC);
 	private searchQuery = new BehaviorSubject<string>("");
 	private page = new BehaviorSubject<number>(1);
-	private foldersPerPage = new BehaviorSubject<number>(10);
+	private foldersPerPage = new BehaviorSubject<number>(DEFAULT_ITEMS_PER_PAGE);
 	private maxPage = new BehaviorSubject<number>(1);
 
 	folders$ = this.folders.asObservable();
@@ -47,7 +48,11 @@ export class FoldersStore {
 		}),
 	);
 
-	resultRange$ = combineLatest([this.page$, this.foldersPerPage$, this.numberOfFilteredFolders$]).pipe(
+	resultRange$ = combineLatest([
+		this.page$,
+		this.foldersPerPage$,
+		this.numberOfFilteredFolders$,
+	]).pipe(
 		map(([page, foldersPerPage, count]) => ({
 			start: (page - 1) * foldersPerPage,
 			end: Math.min((page - 1) * foldersPerPage + foldersPerPage, count),
@@ -65,7 +70,11 @@ export class FoldersStore {
 		}),
 	);
 
-	visibleFolders$ = combineLatest([this.filteredFolders$, this.resultRange$, this.maxPageCalculated$]).pipe(
+	visibleFolders$ = combineLatest([
+		this.filteredFolders$,
+		this.resultRange$,
+		this.maxPageCalculated$,
+	]).pipe(
 		map(([filteredFolders, resultRange]) => {
 			return this.foldersOptionsService.paginate(filteredFolders, resultRange);
 		}),

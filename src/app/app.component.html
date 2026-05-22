@@ -1,28 +1,31 @@
 @if (isWordAddingModalOpen) {
-<app-add-edit-word-modal></app-add-edit-word-modal>
+<app-add-edit-word-modal />
+}
+
+@if (isFolderAddingModalOpen) {
+<app-add-edit-folder-modal />
 }
 
 @if (isWordDeletingModalOpen) {
-<app-confirm-word-deletion-modal></app-confirm-word-deletion-modal>
+<app-confirm-word-deletion-modal />
 }
 
 @if (isImportConfirmationModalOpen) {
-<app-confirm-import-modal></app-confirm-import-modal>
+<app-confirm-import-modal />
 }
 
 @if (isLoading) {
-<app-spinner></app-spinner>
+<app-spinner />
 }
 
 @if (isMobileNavbarOpen) {
-<app-mobile-menu></app-mobile-menu>
+<app-mobile-menu />
 }
 
-<app-toaster-container [toasters]="toasters"></app-toaster-container>
+<app-toaster-container [toasters]="toasters" />
 
-
-<app-header></app-header>
+<app-header />
 <main class="p-8 flex-1">
-    <router-outlet></router-outlet>
+    <router-outlet />
 </main>
-<app-footer></app-footer>
+<app-footer />

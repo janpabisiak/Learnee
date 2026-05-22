@@ -3,6 +3,8 @@ import { BehaviorSubject } from "rxjs";
 export const createMockModalService = () => ({
 	isWordAddingModalOpen$: new BehaviorSubject<boolean>(false),
 	isWordDeletionModalOpen$: new BehaviorSubject<boolean>(false),
+	isFolderAddingModalOpen$: new BehaviorSubject<boolean>(false),
+	isFolderDeletionModalOpen$: new BehaviorSubject<boolean>(false),
 	isImportConfirmationModalOpen$: new BehaviorSubject<boolean>(false),
 	isMobileNavbarOpen$: new BehaviorSubject<boolean>(false),
 	toggleModal: jasmine.createSpy("toggleShowWordAddingModal"),

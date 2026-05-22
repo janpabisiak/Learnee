@@ -3,6 +3,10 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { BehaviorSubject, Subscription } from "rxjs";
 import { FoldersService } from "@services/folder/folders.service";
 import { IFolder } from "../../types/folder.interface";
+import {
+	FOLDER_NAME_MAX_LENGTH,
+	FOLDER_DESCRIPTION_MAX_LENGTH,
+} from "@shared/constants/validation.constants";
 
 @Injectable({
 	providedIn: "root",
@@ -19,10 +23,13 @@ export class FoldersFormService {
 
 	constructor(private foldersService: FoldersService) {
 		this.form = new FormGroup({
-			name: new FormControl<string>("", [Validators.required, Validators.maxLength(100)]),
+			name: new FormControl<string>("", [
+				Validators.required,
+				Validators.maxLength(FOLDER_NAME_MAX_LENGTH),
+			]),
 			description: new FormControl<string>("", [
 				Validators.required,
-				Validators.maxLength(10_000),
+				Validators.maxLength(FOLDER_DESCRIPTION_MAX_LENGTH),
 			]),
 		});
 

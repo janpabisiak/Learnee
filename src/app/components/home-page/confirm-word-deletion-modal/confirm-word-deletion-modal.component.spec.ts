@@ -8,6 +8,7 @@ import { ModalService } from "@services/modal/modal.service";
 import { EModalType } from "@shared/constants/modal.constants";
 
 import { WordsService } from "@services/words/words.service";
+import { createMockWordsService, IMockWordsService } from "@services/words/words.service.mock";
 import { provideTranslateService } from "@ngx-translate/core";
 
 describe("ConfirmWordDeletionModalComponent", () => {

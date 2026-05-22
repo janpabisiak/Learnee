@@ -61,15 +61,23 @@
 	"level.title": "Level progress",
 	"level.label": "Level {{level}}",
 
-	"modal.add.title": "Add new word",
-	"modal.add.word": "Word",
-	"modal.add.word.enter": "Enter word",
-	"modal.add.word.required": "Word is required.",
-	"modal.add.definition": "Definition",
-	"modal.add.definition.required": "Definition is required.",
 	"modal.add.too.many.chars": "Too many chars (max. {{length}}).",
 
-	"modal.edit.title": "Edit word",
+	"modal.add.word.title": "Add new word",
+	"modal.add.word.name": "Word",
+	"modal.add.word.name.enter": "Enter word",
+	"modal.add.word.name.required": "Word is required.",
+	"modal.add.word.definition": "Definition",
+	"modal.add.word.definition.required": "Definition is required.",
+	"modal.edit.word.title": "Edit word",
+
+	"modal.add.folder.title": "Add new folder",
+	"modal.add.folder.name": "Folder name",
+	"modal.add.folder.name.enter": "Enter folder name",
+	"modal.add.folder.name.required": "Folder name is required.",
+	"modal.add.folder.description": "Description",
+	"modal.add.folder.description.required": "Description is required.",
+	"modal.edit.folder.title": "Edit folder",
 
 	"modal.delete.title": "Confirm deletion",
 	"modal.delete.confirm.delete": "Are you sure that you want to delete?",
@@ -78,6 +86,7 @@
 	"modal.import.description": "Importing this file will completely replace your current data. This action cannot be undone.",
 
 	"modal.label.add": "Add word",
+	"modal.label.addFolder": "Add folder",
 	"modal.label.save": "Save",
 	"modal.label.confirm": "Confirm",
 	"modal.label.cancel": "Cancel",

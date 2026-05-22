@@ -1,4 +1,5 @@
-import { EModalType, ModalService } from "./modal.service";
+import { ModalService } from "./modal.service";
+import { EModalType } from "@shared/constants/modal.constants";
 
 describe("ModalService", () => {
 	let service: ModalService;

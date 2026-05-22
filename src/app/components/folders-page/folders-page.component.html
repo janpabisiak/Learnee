@@ -1,5 +1,5 @@
 <section class="flex flex-col max-w-7xl mx-auto">
-    <app-section-title [title]="'folderlist.title' | translate" [tagContent]="'folderlist.count' | translate: {'count': numberOfFolders}" [buttonType]="'no-background'" [buttonIcon]="'add-circle-outline'" [buttonContent]="'folderlist.addNew' | translate" />
+    <app-section-title [title]="'folderlist.title' | translate" [tagContent]="'folderlist.count' | translate: {'count': numberOfFolders}" [buttonType]="'no-background'" [buttonIcon]="'add-circle-outline'" [buttonContent]="'folderlist.addNew' | translate" (buttonClicked)="toggleIsAddFolderModalOpen(true)" />
     <div class="mt-6">
         <app-folder-list />
     </div>

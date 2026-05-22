@@ -5,7 +5,7 @@ import { SettingsService } from "@services/settings/settings.service";
 import { catchError, map, Observable, of, switchMap, take } from "rxjs";
 import { environment } from "../../../environment/environment";
 import { IWord } from "../../types/word.interface";
-import { WordsStore } from "../../stores/words.store";
+import { WordsStore } from "../../stores/words/words.store";
 import { ELocalStorageKeys } from "@shared/constants/local-storage.constants";
 
 @Injectable({

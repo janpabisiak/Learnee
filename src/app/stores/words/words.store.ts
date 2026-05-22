@@ -1,7 +1,8 @@
 import { inject, Injectable } from "@angular/core";
 import { BehaviorSubject, combineLatest, map } from "rxjs";
-import { IWord } from "../types/word.interface";
+import { IWord } from "../../types/word.interface";
 import { EWordSortTypes, WordsOptionsService } from "@services/words-options/words-options.service";
+import { DEFAULT_ITEMS_PER_PAGE } from "@shared/constants/pagination.constants";
 
 @Injectable({
 	providedIn: "root",
@@ -17,7 +18,7 @@ export class WordsStore {
 	private sortType = new BehaviorSubject<EWordSortTypes>(EWordSortTypes.IdDESC);
 	private searchQuery = new BehaviorSubject<string>("");
 	private page = new BehaviorSubject<number>(1);
-	private wordsPerPage = new BehaviorSubject<number>(10);
+	private wordsPerPage = new BehaviorSubject<number>(DEFAULT_ITEMS_PER_PAGE);
 	private maxPage = new BehaviorSubject<number>(1);
 
 	wordList$ = this.wordList.asObservable();
@@ -45,7 +46,11 @@ export class WordsStore {
 		}),
 	);
 
-	resultRange$ = combineLatest([this.page$, this.wordsPerPage$, this.numberOfFilteredWords$]).pipe(
+	resultRange$ = combineLatest([
+		this.page$,
+		this.wordsPerPage$,
+		this.numberOfFilteredWords$,
+	]).pipe(
 		map(([page, wordsPerPage, count]) => ({
 			start: (page - 1) * wordsPerPage,
 			end: Math.min((page - 1) * wordsPerPage + wordsPerPage, count),
@@ -63,7 +68,11 @@ export class WordsStore {
 		}),
 	);
 
-	visibleWords$ = combineLatest([this.filteredWords$, this.resultRange$, this.maxPageCalculated$]).pipe(
+	visibleWords$ = combineLatest([
+		this.filteredWords$,
+		this.resultRange$,
+		this.maxPageCalculated$,
+	]).pipe(
 		map(([filteredWords, resultRange]) => {
 			return this.wordsOptionsService.paginate(filteredWords, resultRange);
 		}),

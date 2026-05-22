@@ -5,6 +5,7 @@ import { FooterComponent } from "@components/footer/footer.component";
 import { HeaderComponent } from "@components/header/header.component";
 import { MobileMenuComponent } from "@components/header/mobile-menu/mobile-menu.component";
 import { AddEditWordModalComponent } from "@components/home-page/add-edit-word-modal/add-edit-word-modal.component";
+import { AddEditFolderModalComponent } from "@components/folders-page/add-edit-folder-modal/add-edit-folder-modal.component";
 import { SpinnerComponent } from "@shared/components/spinner/spinner.component";
 import { ToasterContainerComponent } from "@shared/components/toaster-container/toaster-container.component";
 import { provideTranslateService } from "@ngx-translate/core";
@@ -43,6 +44,7 @@ describe("AppComponent", () => {
 				AppComponent,
 				HeaderComponent,
 				AddEditWordModalComponent,
+				AddEditFolderModalComponent,
 				ToasterContainerComponent,
 				SpinnerComponent,
 				MobileMenuComponent,
@@ -72,6 +74,7 @@ describe("AppComponent", () => {
 	it("should initialize default values on init", () => {
 		expect(app.isWordAddingModalOpen).toBeFalse();
 		expect(app.isWordDeletingModalOpen).toBeFalse();
+		expect(app.isFolderAddingModalOpen).toBeFalse();
 		expect(app.isMobileNavbarOpen).toBeFalse();
 		expect(app.isLoading).toBeTrue();
 		expect(app.toasters).toEqual([]);
@@ -92,6 +95,7 @@ describe("AppComponent", () => {
 	it("should set fields values depending on subscriptions", () => {
 		mockModalService.isWordAddingModalOpen$.next(true);
 		mockModalService.isWordDeletionModalOpen$.next(true);
+		mockModalService.isFolderAddingModalOpen$.next(true);
 		mockModalService.isMobileNavbarOpen$.next(true);
 		mockWordsService.wordsOfTheDay$.next(mockWords);
 		mockToasterService.toasters$.next(mockToasters);
@@ -100,6 +104,7 @@ describe("AppComponent", () => {
 
 		expect(app.isWordAddingModalOpen).toBeTrue();
 		expect(app.isWordDeletingModalOpen).toBeTrue();
+		expect(app.isFolderAddingModalOpen).toBeTrue();
 		expect(app.isMobileNavbarOpen).toBeTrue();
 		expect(app.isLoading).toBeFalse();
 		expect(app.toasters).toEqual(mockToasters);

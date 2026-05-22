@@ -1,0 +1,16 @@
+<app-modal [title]="(isEditing ? 'modal.edit.folder.title' : 'modal.add.folder.title') | translate" (closeButtonClicked)="toggleIsAddFolderModalOpen(false)" [primaryButtonText]="(isEditing ? 'modal.label.save' : 'modal.label.addFolder') | translate" [secondaryButtonText]="'modal.label.cancel' | translate" [primaryButtonDisabled]="isSubmitDisabled" (primaryButtonClicked)="submitForm()" (secondaryButtonClicked)="toggleIsAddFolderModalOpen(false)">
+    <form class="flex flex-col gap-4" [formGroup]="form">
+        <div class="flex flex-col gap-1">
+            <label class="text-gray-500" for="name">{{'modal.add.folder.name' | translate}} <span class="text-red-700">*</span></label>
+            <input class="p-3 bg-gray-100 rounded-md border-1 border-gray-200 placeholder-gray-500 outline-0 dark:bg-zinc-800 dark:border-zinc-700" type="text" name="name" [placeholder]="'modal.add.folder.name.enter' | translate" formControlName="name" [ngClass]="{'show-validation': isSubmitAttempted}">
+            <span class="text-sm text-red-700" *ngIf="isSubmitAttempted && name?.invalid && name?.hasError('required')">{{'modal.add.folder.name.required' | translate}}</span>
+            <span class="text-sm text-red-700" *ngIf="isSubmitAttempted && name?.invalid && name?.hasError('maxlength')">{{'modal.add.too.many.chars' | translate : {length: folderNameMaxLength} }}</span>
+        </div>
+        <div class="flex flex-col gap-1">
+            <label class="text-gray-500" for="description">{{'modal.add.folder.description' | translate}} <span class="text-red-700">*</span></label>
+            <textarea class="p-2 bg-gray-100 rounded-md border-1 border-gray-200 outline-0 placeholder-gray-400 overflow-hidden dark:bg-zinc-800 dark:border-zinc-700" name="description" formControlName="description" [ngClass]="{'show-validation': isSubmitAttempted}" #folderDescription></textarea>
+            <span class="text-sm text-red-700" *ngIf="isSubmitAttempted && description?.touched && description?.invalid && description?.hasError('required')">{{'modal.add.folder.description.required' | translate}}</span>
+            <span class="text-sm text-red-700" *ngIf="isSubmitAttempted && description?.touched && description?.invalid && description?.hasError('maxlength')">{{'modal.add.too.many.chars' | translate : {length: folderDescriptionMaxLength} }}</span>
+        </div>
+    </form>
+</app-modal>
