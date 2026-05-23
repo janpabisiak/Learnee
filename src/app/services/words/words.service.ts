@@ -97,7 +97,7 @@ export class WordsService {
 		return learningWords[randomIndex];
 	}
 
-	remove(wordId: number) {
+	delete(wordId: number) {
 		const updatedWordList = this.wordsStore.wordListValue.filter((w) => w.id !== wordId);
 		this.updateWordList(updatedWordList);
 
@@ -110,7 +110,7 @@ export class WordsService {
 		this.wordsStore.setWordToDeleteId(null);
 	}
 
-	removeMany() {
+	deleteMany() {
 		const selectedIds = this.wordsStore.selectedIdsValue;
 
 		if (selectedIds.length > 0) {

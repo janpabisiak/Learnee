@@ -1,0 +1,3 @@
+<app-modal [title]="'modal.delete.title' | translate" [isDanger]="true" [showCloseIcon]="false" (closeButtonClicked)="closeModal()" [primaryButtonText]="'modal.label.confirm' | translate" [secondaryButtonText]="'modal.label.cancel' | translate" (primaryButtonClicked)="confirmDeletion()" (secondaryButtonClicked)="closeModal()">
+    <p>{{'modal.delete.confirm.delete' | translate }}</p>
+</app-modal>

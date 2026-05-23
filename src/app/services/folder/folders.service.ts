@@ -85,7 +85,7 @@ export class FoldersService {
 		});
 	}
 
-	remove(folderId: number) {
+	delete(folderId: number) {
 		const updatedFolders = this.foldersStore.foldersValue.filter((f) => f.id !== folderId);
 		this.updateFolders(updatedFolders);
 
@@ -98,7 +98,7 @@ export class FoldersService {
 		this.foldersStore.setFolderToDeleteId(null);
 	}
 
-	removeMany() {
+	deleteMany() {
 		const selectedIds = this.foldersStore.selectedIdsValue;
 
 		if (selectedIds.length > 0) {

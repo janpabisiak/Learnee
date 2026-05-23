@@ -5,6 +5,7 @@ import { MobileMenuComponent } from "@components/header/mobile-menu/mobile-menu.
 import { AddEditWordModalComponent } from "@components/home-page/add-edit-word-modal/add-edit-word-modal.component";
 import { AddEditFolderModalComponent } from "@components/folders-page/add-edit-folder-modal/add-edit-folder-modal.component";
 import { ConfirmWordDeletionModalComponent } from "@components/home-page/confirm-word-deletion-modal/confirm-word-deletion-modal.component";
+import { ConfirmFolderDeletionModalComponent } from "@components/folders-page/confirm-folder-deletion-modal/confirm-folder-deletion-modal.component";
 import { SpinnerComponent } from "@shared/components/spinner/spinner.component";
 import { ToasterContainerComponent } from "@shared/components/toaster-container/toaster-container.component";
 import { EToasterPositions } from "@shared/constants/toaster.constants";
@@ -26,6 +27,7 @@ import { ConfirmImportModalComponent } from "@components/settings-page/confirm-i
 		AddEditWordModalComponent,
 		AddEditFolderModalComponent,
 		ConfirmWordDeletionModalComponent,
+		ConfirmFolderDeletionModalComponent,
 		ConfirmImportModalComponent,
 		ToasterContainerComponent,
 		SpinnerComponent,
@@ -43,6 +45,7 @@ export class AppComponent implements OnInit, OnDestroy {
 	isWordAddingModalOpen = false;
 	isWordDeletingModalOpen = false;
 	isFolderAddingModalOpen = false;
+	isFolderDeletingModalOpen = false;
 	isImportConfirmationModalOpen = false;
 	isMobileNavbarOpen = false;
 	isLoading = false;
@@ -74,6 +77,12 @@ export class AppComponent implements OnInit, OnDestroy {
 		this.subscriptions.add(
 			this.modalService.isFolderAddingModalOpen$.subscribe((isOpen) => {
 				this.isFolderAddingModalOpen = isOpen;
+			}),
+		);
+
+		this.subscriptions.add(
+			this.modalService.isFolderDeletionModalOpen$.subscribe((isOpen) => {
+				this.isFolderDeletingModalOpen = isOpen;
 			}),
 		);
 

@@ -10,6 +10,10 @@
 <app-confirm-word-deletion-modal />
 }
 
+@if (isFolderDeletingModalOpen) {
+<app-confirm-folder-deletion-modal />
+}
+
 @if (isImportConfirmationModalOpen) {
 <app-confirm-import-modal />
 }
