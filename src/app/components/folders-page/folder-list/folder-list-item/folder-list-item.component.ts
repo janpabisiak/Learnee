@@ -7,10 +7,11 @@ import { EModalType } from "@shared/constants/modal.constants";
 import { Subject, takeUntil } from "rxjs";
 import { SentenceCasePipe } from "../../../../pipes/sentence-case.pipe";
 import { IFolder } from "../../../../types/folder.interface";
+import { AutoCloseDirective } from "app/directives/auto-close.directive";
 
 @Component({
 	selector: "app-folder-list-item",
-	imports: [SentenceCasePipe, TranslatePipe],
+	imports: [SentenceCasePipe, TranslatePipe, AutoCloseDirective],
 	templateUrl: "./folder-list-item.component.html",
 	standalone: true,
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],

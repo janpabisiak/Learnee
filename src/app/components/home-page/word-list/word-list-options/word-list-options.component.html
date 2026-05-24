@@ -3,8 +3,8 @@
     <app-items-sort [sortOptions]="sortOptions" [currentSortOption]="currentSortOption" (changed)="changeSortType($event)" />
     <app-items-purger [hasSelectedItems]="hasSelectedWords" (clicked)="openDeletionModal()" />
     <app-items-selection-control-buttons class="col-span-full" [hasSelectedItems]="hasSelectedWords" (selectAllClicked)="selectAllVisible()" (unselectAllClicked)="unselectAll()">
-        <div class="relative z-10">
-            <app-button [type]="'primary'" [icon]="'hammer-outline'" (click)="toggleDropdown()">{{'wordlist.editSelected' | translate}}</app-button>
+        <div class="relative z-10" (close)="isDropdownOpen = false" appAutoClose>
+            <app-button [type]="'primary'" [icon]="'hammer-outline'" (click)="toggleDropdown(); $event.stopPropagation()">{{'wordlist.editSelected' | translate}}</app-button>
             @if (isDropdownOpen) {
             <div class="w-full p-4 absolute top-full bg-gray-50 border-2 border-gray-200 rounded-b-md dark:bg-zinc-800 dark:border-zinc-700" id="dropdown">
                 <ul class="flex flex-col gap-2">

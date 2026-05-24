@@ -8,10 +8,11 @@ import {
 } from "@angular/core";
 import { ModalHeaderComponent } from "./modal-header/modal-header.component";
 import { ModalFooterComponent } from "./modal-footer/modal-footer.component";
+import { AutoCloseDirective } from "app/directives/auto-close.directive";
 
 @Component({
 	selector: "app-modal",
-	imports: [ModalHeaderComponent, ModalFooterComponent],
+	imports: [ModalHeaderComponent, ModalFooterComponent, AutoCloseDirective],
 	templateUrl: "./modal.component.html",
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

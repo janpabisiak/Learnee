@@ -9,11 +9,12 @@ import { Subject, takeUntil } from "rxjs";
 import { SentenceCasePipe } from "../../../../pipes/sentence-case.pipe";
 import { WebSpeechService } from "../../../../services/web-speech/web-speech.service";
 import { IWord } from "../../../../types/word.interface";
+import { AutoCloseDirective } from "app/directives/auto-close.directive";
 
 @Component({
 	selector: "app-word-list-item",
 	templateUrl: "./word-list-item.component.html",
-	imports: [SentenceCasePipe, NgClass, TranslatePipe],
+	imports: [SentenceCasePipe, NgClass, TranslatePipe, AutoCloseDirective],
 	standalone: true,
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

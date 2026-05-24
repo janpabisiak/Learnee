@@ -11,6 +11,7 @@ import { ItemsSortComponent } from "@shared/components/items-sort/items-sort.com
 import { SearchBarComponent } from "@shared/components/search-bar/search-bar.component";
 import { commonSortOptionsTranslationKeys } from "@shared/constants/sorting.constants";
 import { Subject, takeUntil } from "rxjs";
+import { AutoCloseDirective } from "app/directives/auto-close.directive";
 
 const sortOptionsTranslationKeys: Record<EWordSortTypes, string> = {
 	...commonSortOptionsTranslationKeys,
@@ -29,6 +30,7 @@ const sortOptionsTranslationKeys: Record<EWordSortTypes, string> = {
 		ItemsSelectionControlButtonsComponent,
 		TranslatePipe,
 		ButtonComponent,
+		AutoCloseDirective,
 	],
 	templateUrl: "./word-list-options.component.html",
 })
@@ -58,7 +60,10 @@ export class WordListOptionsComponent {
 
 		this.wordsService.wordList$.pipe(takeUntil(this.destroy$)).subscribe((wordList) => {
 			const hasNotLearningWords = wordList.some((w) => !w.isLearning);
-			const isLearningSortTypes = [EWordSortTypes.IsLearningASC, EWordSortTypes.IsLearningDESC];
+			const isLearningSortTypes = [
+				EWordSortTypes.IsLearningASC,
+				EWordSortTypes.IsLearningDESC,
+			];
 
 			this.hasNotLearningWords = hasNotLearningWords;
 			this.sortOptions = Object.entries(sortOptionsTranslationKeys)
@@ -68,7 +73,8 @@ export class WordListOptionsComponent {
 				}))
 				.filter(
 					(st) =>
-						hasNotLearningWords || !isLearningSortTypes.includes(st.type as EWordSortTypes),
+						hasNotLearningWords ||
+						!isLearningSortTypes.includes(st.type as EWordSortTypes),
 				);
 		});
 	}
