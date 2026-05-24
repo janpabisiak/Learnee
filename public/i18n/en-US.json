@@ -38,6 +38,7 @@
 	"folderlist.adjustSearchQuery": "Try to adjust your search query.",
 	"folderlist.edit": "Edit folder",
 	"folderlist.delete": "Delete folder",
+	"folderlist.selectWords": "Select words",
 
 	"itemlist.deleteAll": "Delete all",
 	"itemlist.deleteSelected": "Delete selected",
@@ -78,6 +79,8 @@
 	"modal.add.folder.description": "Description",
 	"modal.add.folder.description.required": "Description is required.",
 	"modal.edit.folder.title": "Edit folder",
+
+	"modal.addToFolder.title": "Select words for folder",
 
 	"modal.delete.title": "Confirm deletion",
 	"modal.delete.confirm.delete": "Are you sure that you want to delete?",

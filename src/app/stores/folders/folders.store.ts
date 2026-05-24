@@ -16,7 +16,7 @@ export class FoldersStore {
 	private folders = new BehaviorSubject<IFolder[]>([]);
 	private numberOfFilteredFolders = new BehaviorSubject<number>(0);
 	private selectedIds = new BehaviorSubject<number[]>([]);
-	private folderToDeleteId = new BehaviorSubject<number | null>(null);
+	private singleFolderIdToOperateOn = new BehaviorSubject<number | null>(null);
 	private sortType = new BehaviorSubject<EFolderSortTypes>(EFolderSortTypes.IdDESC);
 	private searchQuery = new BehaviorSubject<string>("");
 	private page = new BehaviorSubject<number>(1);
@@ -28,7 +28,7 @@ export class FoldersStore {
 	numberOfFilteredFolders$ = this.numberOfFilteredFolders.asObservable();
 	selectedIds$ = this.selectedIds.asObservable();
 	hasSelectedIds$ = this.selectedIds.pipe(map((ids) => ids.length > 0));
-	folderToDeleteId$ = this.folderToDeleteId.asObservable();
+	singleFolderIdToOperateOn$ = this.singleFolderIdToOperateOn.asObservable();
 	sortType$ = this.sortType.asObservable();
 	searchQuery$ = this.searchQuery.asObservable();
 	page$ = this.page.asObservable();
@@ -96,12 +96,12 @@ export class FoldersStore {
 		this.selectedIds.next(value);
 	}
 
-	get folderToDeleteIdValue() {
-		return this.folderToDeleteId.value;
+	get singleFolderIdToOperateOnValue() {
+		return this.singleFolderIdToOperateOn.value;
 	}
 
-	setFolderToDeleteId(value: number | null) {
-		this.folderToDeleteId.next(value);
+	setSingleFolderIdToOperateOn(value: number | null) {
+		this.singleFolderIdToOperateOn.next(value);
 	}
 
 	setSortType(value: EFolderSortTypes) {

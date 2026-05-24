@@ -3,6 +3,7 @@ export enum EModalType {
 	WordDeletion,
 	FolderAdding,
 	FolderDeletion,
+	AddToFolder,
 	ImportConfirmation,
 	MobileNavbar,
 }

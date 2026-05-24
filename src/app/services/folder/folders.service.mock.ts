@@ -29,7 +29,7 @@ export const createMockFoldersService = () => ({
 	numberOfFilteredFolders$: new BehaviorSubject<number>(0),
 	selectedIds$: new BehaviorSubject<number[]>([]),
 	hasSelectedIds$: new BehaviorSubject<boolean>(false),
-	folderToDeleteId$: new BehaviorSubject<number | null>(null),
+	singleFolderIdToOperateOn$: new BehaviorSubject<number | null>(null),
 	sortType$: new BehaviorSubject<EFolderSortTypes>(EFolderSortTypes.IdDESC),
 	searchQuery$: new BehaviorSubject<string>(""),
 	visibleFolders$: new BehaviorSubject<IFolder[]>([]),
@@ -42,13 +42,14 @@ export const createMockFoldersService = () => ({
 	setPage: jasmine.createSpy("setPage"),
 	setFoldersPerPage: jasmine.createSpy("setFoldersPerPage"),
 	add: jasmine.createSpy("add"),
-	remove: jasmine.createSpy("remove"),
-	removeMany: jasmine.createSpy("removeMany"),
+	delete: jasmine.createSpy("delete"),
+	deleteMany: jasmine.createSpy("deleteMany"),
 	edit: jasmine.createSpy("edit"),
-	updateFolderToDeleteId: jasmine.createSpy("updateFolderToDeleteId"),
+	updateSingleFolderIdToOperateOn: jasmine.createSpy("updateSingleFolderIdToOperateOn"),
 	toggleSelection: jasmine.createSpy("toggleSelection"),
 	selectAllVisible: jasmine.createSpy("selectAllVisible"),
 	unselectAll: jasmine.createSpy("unselectAll"),
+	modifyFolderWordIds: jasmine.createSpy("modifyFolderWordIds"),
 });
 
 export type IMockFoldersService = ReturnType<typeof createMockFoldersService>;

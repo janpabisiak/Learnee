@@ -86,10 +86,17 @@ export class AddEditWordModalComponent implements OnInit, OnDestroy {
 		this.wordsService
 			.fetchDefinition$(this.word.value)
 			.pipe(take(1))
-			.subscribe((definition: string) => {
-				this.definition.setValue(definition);
-				this.wordDefinitionEl.nativeElement.placeholder = "";
-				this.wordDefinitionEl.nativeElement.disabled = false;
+			.subscribe({
+				next: (definition: string) => {
+					this.definition.setValue(definition);
+					this.wordDefinitionEl.nativeElement.placeholder = "";
+					this.wordDefinitionEl.nativeElement.disabled = false;
+				},
+				error: (err) => {
+					console.error("Failed to auto-fetch definition:", err);
+					this.wordDefinitionEl.nativeElement.placeholder = "Failed to fetch definition automatically.";
+					this.wordDefinitionEl.nativeElement.disabled = false;
+				}
 			});
 		this.isDefinitionFetched = true;
 	}

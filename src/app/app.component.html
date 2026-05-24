@@ -14,6 +14,10 @@
 <app-confirm-folder-deletion-modal />
 }
 
+@if (isAddToFolderModalOpen) {
+<app-add-to-folder-modal />
+}
+
 @if (isImportConfirmationModalOpen) {
 <app-confirm-import-modal />
 }

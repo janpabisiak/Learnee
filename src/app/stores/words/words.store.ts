@@ -15,6 +15,7 @@ export class WordsStore {
 	private selectedIds = new BehaviorSubject<number[]>([]);
 	private wordToDeleteId = new BehaviorSubject<number | null>(null);
 	private wordsOfTheDay = new BehaviorSubject<IWord[]>([]);
+	private isWotdLoading = new BehaviorSubject<boolean>(true);
 	private sortType = new BehaviorSubject<EWordSortTypes>(EWordSortTypes.IdDESC);
 	private searchQuery = new BehaviorSubject<string>("");
 	private page = new BehaviorSubject<number>(1);
@@ -28,6 +29,7 @@ export class WordsStore {
 	hasSelectedIds$ = this.selectedIds.pipe(map((ids) => ids.length > 0));
 	wordToDeleteId$ = this.wordToDeleteId.asObservable();
 	wordsOfTheDay$ = this.wordsOfTheDay.asObservable();
+	isWotdLoading$ = this.isWotdLoading.asObservable();
 	sortType$ = this.sortType.asObservable();
 	searchQuery$ = this.searchQuery.asObservable();
 	page$ = this.page.asObservable();
@@ -104,6 +106,10 @@ export class WordsStore {
 
 	setWordsOfTheDay(value: IWord[]) {
 		this.wordsOfTheDay.next(value);
+	}
+
+	setWotdLoading(value: boolean) {
+		this.isWotdLoading.next(value);
 	}
 
 	setSortType(value: EWordSortTypes) {

@@ -9,6 +9,7 @@ export const createMockWordsFormService = () => ({
 	submitForm: jasmine.createSpy("submitForm"),
 	reset: jasmine.createSpy("reset"),
 	getIsEditing: jasmine.createSpy("getIsEditing"),
+	isEditing: false,
 	form: {
 		markAllAsTouched: jasmine.createSpy("markAllAsTouched"),
 	},

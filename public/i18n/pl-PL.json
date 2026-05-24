@@ -38,6 +38,7 @@
 	"folderlist.adjustSearchQuery": "Zmień kryteria wyszukiwania.",
 	"folderlist.edit": "Edytuj",
 	"folderlist.delete": "Usuń",
+	"folderlist.selectWords": "Dodaj słowa",
 
 	"itemlist.deleteAll": "Usuń wszystkie",
 	"itemlist.deleteSelected": "Usuń zaznaczone",
@@ -78,6 +79,8 @@
 	"modal.add.folder.description": "Opis",
 	"modal.add.folder.description.required": "Opis jest wymagany.",
 	"modal.edit.folder.title": "Edytuj folder",
+
+	"modal.addToFolder.title": "Dodaj słowa do folderu",
 
 	"modal.delete.title": "Potwierdź usunięcie",
 	"modal.delete.confirm.delete": "Czy na pewno chcesz to usunąć?",

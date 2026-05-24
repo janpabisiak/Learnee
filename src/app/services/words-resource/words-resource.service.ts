@@ -70,6 +70,7 @@ export class WordsResourceService {
 			const words = this.localStorageService.loadData(ELocalStorageKeys.WotdWords) as IWord[];
 
 			this.wordsStore.setWordsOfTheDay(words);
+			this.wordsStore.setWotdLoading(false);
 		}
 
 		this.http
@@ -101,6 +102,7 @@ export class WordsResourceService {
 						.filter((word): word is IWord => word !== undefined);
 
 					this.wordsStore.setWordsOfTheDay(words);
+					this.wordsStore.setWotdLoading(false);
 					this.localStorageService.saveData(ELocalStorageKeys.WotdWords, words);
 					this.localStorageService.saveData(
 						ELocalStorageKeys.WotdFetchedDate,
@@ -109,6 +111,7 @@ export class WordsResourceService {
 				}),
 				catchError((error: HttpErrorResponse) => {
 					console.error(error);
+					this.wordsStore.setWotdLoading(false);
 					return of([]);
 				}),
 			)

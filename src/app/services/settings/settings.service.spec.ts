@@ -29,6 +29,9 @@ describe("SettingsService", () => {
 			mockLocalStorageService as any,
 			mockTranslation
 		);
+
+		(service["renderer"].addClass as jasmine.Spy).calls.reset();
+		(service["renderer"].removeClass as jasmine.Spy).calls.reset();
 	});
 
 	describe("setIsDarkMode()", () => {

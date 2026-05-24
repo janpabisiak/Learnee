@@ -1,12 +1,12 @@
 import { inject, Injectable } from "@angular/core";
-import { IFolder } from "../../types/folder.interface";
-import { FoldersStore } from "app/stores/folders/folders.store";
-import { FoldersResourceService } from "@services/folders-resource/folders-resource.service";
-import { EFolderSortTypes } from "@services/folders-options/folders-options.service";
-import { map, take } from "rxjs";
-import { DEFAULT_TOASTER_DURATION, EToasterTypes } from "@shared/constants/toaster.constants";
-import { ToasterService } from "@services/toaster/toaster.service";
 import { TranslateService } from "@ngx-translate/core";
+import { EFolderSortTypes } from "@services/folders-options/folders-options.service";
+import { FoldersResourceService } from "@services/folders-resource/folders-resource.service";
+import { ToasterService } from "@services/toaster/toaster.service";
+import { DEFAULT_TOASTER_DURATION, EToasterTypes } from "@shared/constants/toaster.constants";
+import { FoldersStore } from "app/stores/folders/folders.store";
+import { map, take } from "rxjs";
+import { IFolder } from "../../types/folder.interface";
 
 @Injectable({
 	providedIn: "root",
@@ -22,7 +22,7 @@ export class FoldersService {
 	numberOfFilteredFolders$ = this.foldersStore.numberOfFilteredFolders$;
 	selectedIds$ = this.foldersStore.selectedIds$;
 	hasSelectedIds$ = this.foldersStore.hasSelectedIds$;
-	folderToDeleteId$ = this.foldersStore.folderToDeleteId$;
+	singleFolderIdToOperateOn$ = this.foldersStore.singleFolderIdToOperateOn$;
 	sortType$ = this.foldersStore.sortType$;
 	searchQuery$ = this.foldersStore.searchQuery$;
 	visibleFolders$ = this.foldersStore.visibleFolders$;
@@ -95,7 +95,7 @@ export class FoldersService {
 			duration: DEFAULT_TOASTER_DURATION,
 		});
 
-		this.foldersStore.setFolderToDeleteId(null);
+		this.foldersStore.setSingleFolderIdToOperateOn(null);
 	}
 
 	deleteMany() {
@@ -134,8 +134,8 @@ export class FoldersService {
 		});
 	}
 
-	updateFolderToDeleteId(folderId: number | null) {
-		this.foldersStore.setFolderToDeleteId(folderId);
+	updateSingleFolderIdToOperateOn(folderId: number | null) {
+		this.foldersStore.setSingleFolderIdToOperateOn(folderId);
 	}
 
 	toggleSelection(folderId: number) {
@@ -166,6 +166,18 @@ export class FoldersService {
 			.subscribe((updatedSelectedIds) => {
 				this.foldersStore.setSelectedIds(updatedSelectedIds);
 			});
+	}
+
+	modifyFolderWordIds(wordIds: number[]) {
+		const folderId = this.foldersStore.singleFolderIdToOperateOnValue;
+		const folders = this.foldersStore.foldersValue;
+
+		const updatedFolders = folders.map((folder) =>
+			folder.id === folderId ? { ...folder, wordIds } : folder,
+		);
+
+		this.updateFolders(updatedFolders);
+		this.foldersStore.setSingleFolderIdToOperateOn(null);
 	}
 
 	unselectAll() {

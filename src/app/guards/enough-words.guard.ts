@@ -19,7 +19,7 @@ export class EnoughWordsGuard implements CanActivate {
 		private translateService: TranslateService,
 	) {
 		this.wordsService.wordList$.subscribe((wordList) => {
-			this.enoughWords = wordList.filter((w) => w.isLearning).length > MIN_WORDS_TO_PLAY;
+			this.enoughWords = wordList.filter((w) => w.isLearning).length >= MIN_WORDS_TO_PLAY;
 		});
 	}
 

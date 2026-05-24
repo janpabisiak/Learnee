@@ -18,6 +18,7 @@ import { IToaster } from "../app/types/toaster.interface";
 import { FooterComponent } from "@components/footer/footer.component";
 import { SettingsService } from "@services/settings/settings.service";
 import { ConfirmImportModalComponent } from "@components/settings-page/confirm-import-modal/confirm-import-modal.component";
+import { AddToFolderModalComponent } from "@components/folders-page/add-to-folder-modal/add-to-folder-modal.component";
 
 @Component({
 	selector: "app-root",
@@ -33,6 +34,7 @@ import { ConfirmImportModalComponent } from "@components/settings-page/confirm-i
 		SpinnerComponent,
 		MobileMenuComponent,
 		FooterComponent,
+		AddToFolderModalComponent,
 	],
 	templateUrl: "./app.component.html",
 	standalone: true,
@@ -46,6 +48,7 @@ export class AppComponent implements OnInit, OnDestroy {
 	isWordDeletingModalOpen = false;
 	isFolderAddingModalOpen = false;
 	isFolderDeletingModalOpen = false;
+	isAddToFolderModalOpen = false;
 	isImportConfirmationModalOpen = false;
 	isMobileNavbarOpen = false;
 	isLoading = false;
@@ -87,6 +90,12 @@ export class AppComponent implements OnInit, OnDestroy {
 		);
 
 		this.subscriptions.add(
+			this.modalService.isAddToFolderModalOpen$.subscribe((isOpen) => {
+				this.isAddToFolderModalOpen = isOpen;
+			}),
+		);
+
+		this.subscriptions.add(
 			this.modalService.isImportConfirmationModalOpen$.subscribe((isOpen) => {
 				this.isImportConfirmationModalOpen = isOpen;
 			}),
@@ -99,8 +108,8 @@ export class AppComponent implements OnInit, OnDestroy {
 		);
 
 		this.subscriptions.add(
-			this.wordsService.wordsOfTheDay$.subscribe((wordsOfTheDay) => {
-				this.isLoading = !wordsOfTheDay.length;
+			this.wordsService.isWotdLoading$.subscribe((loading) => {
+				this.isLoading = loading;
 			}),
 		);
 

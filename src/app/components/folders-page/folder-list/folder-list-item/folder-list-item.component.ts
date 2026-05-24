@@ -1,12 +1,12 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, Input, OnDestroy, OnInit } from "@angular/core";
-import { IFolder } from "../../../../types/folder.interface";
-import { Subject, takeUntil } from "rxjs";
-import { FoldersFormService } from "@services/folders-form/folders-form.service";
+import { TranslatePipe } from "@ngx-translate/core";
 import { FoldersService } from "@services/folder/folders.service";
+import { FoldersFormService } from "@services/folders-form/folders-form.service";
 import { ModalService } from "@services/modal/modal.service";
 import { EModalType } from "@shared/constants/modal.constants";
+import { Subject, takeUntil } from "rxjs";
 import { SentenceCasePipe } from "../../../../pipes/sentence-case.pipe";
-import { TranslatePipe } from "@ngx-translate/core";
+import { IFolder } from "../../../../types/folder.interface";
 
 @Component({
 	selector: "app-folder-list-item",
@@ -48,9 +48,15 @@ export class FolderListItemComponent implements OnInit, OnDestroy {
 	}
 
 	deleteFolder() {
-		this.foldersService.updateFolderToDeleteId(this.folder.id);
+		this.foldersService.updateSingleFolderIdToOperateOn(this.folder.id);
 		this.toggleDropdownMenu();
 		this.modalService.toggleModal(EModalType.FolderDeletion, true);
+	}
+
+	modifyWordList() {
+		this.foldersService.updateSingleFolderIdToOperateOn(this.folder.id);
+		this.toggleDropdownMenu();
+		this.modalService.toggleModal(EModalType.AddToFolder, true);
 	}
 
 	ngOnDestroy() {

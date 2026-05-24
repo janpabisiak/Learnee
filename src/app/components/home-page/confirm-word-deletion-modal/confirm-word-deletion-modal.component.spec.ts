@@ -55,13 +55,13 @@ describe("ConfirmWordDeletionModalComponent", () => {
 		component.wordId = 1;
 		component.confirmDeletion();
 
-		expect(mockWordsService.remove).toHaveBeenCalledOnceWith(1);
+		expect(mockWordsService.delete).toHaveBeenCalledOnceWith(1);
 	});
 
 	it("should call wordsService.removeMany on confirmDeletion call when wordId is not set", () => {
 		component.wordId = null;
 		component.confirmDeletion();
 
-		expect(mockWordsService.removeMany).toHaveBeenCalledTimes(1);
+		expect(mockWordsService.deleteMany).toHaveBeenCalledTimes(1);
 	});
 });

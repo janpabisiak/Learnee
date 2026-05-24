@@ -21,6 +21,8 @@ export const mockToasters: IToaster[] = [
 
 export const createMockToasterService = () => ({
 	toasters$: new BehaviorSubject<IToaster[]>([]),
+	addToaster: jasmine.createSpy("addToaster"),
+	removeToaster: jasmine.createSpy("removeToaster"),
 	startAutoRemoving: jasmine.createSpy("startAutoRemoving"),
 });
 

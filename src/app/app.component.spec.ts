@@ -98,6 +98,7 @@ describe("AppComponent", () => {
 		mockModalService.isFolderAddingModalOpen$.next(true);
 		mockModalService.isMobileNavbarOpen$.next(true);
 		mockWordsService.wordsOfTheDay$.next(mockWords);
+		mockWordsService.isWotdLoading$.next(false);
 		mockToasterService.toasters$.next(mockToasters);
 
 		app.ngOnInit();

@@ -24,6 +24,7 @@ export class WordsService {
 	hasSelectedIds$ = this.wordsStore.hasSelectedIds$;
 	wordToDeleteId$ = this.wordsStore.wordToDeleteId$;
 	wordsOfTheDay$ = this.wordsStore.wordsOfTheDay$;
+	isWotdLoading$ = this.wordsStore.isWotdLoading$;
 	sortType$ = this.wordsStore.sortType$;
 	searchQuery$ = this.wordsStore.searchQuery$;
 	visibleWords$ = this.wordsStore.visibleWords$;

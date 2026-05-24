@@ -5,9 +5,10 @@ export const createMockModalService = () => ({
 	isWordDeletionModalOpen$: new BehaviorSubject<boolean>(false),
 	isFolderAddingModalOpen$: new BehaviorSubject<boolean>(false),
 	isFolderDeletionModalOpen$: new BehaviorSubject<boolean>(false),
+	isAddToFolderModalOpen$: new BehaviorSubject<boolean>(false),
 	isImportConfirmationModalOpen$: new BehaviorSubject<boolean>(false),
 	isMobileNavbarOpen$: new BehaviorSubject<boolean>(false),
-	toggleModal: jasmine.createSpy("toggleShowWordAddingModal"),
+	toggleModal: jasmine.createSpy("toggleModal"),
 });
 
 export type IMockModalService = ReturnType<typeof createMockModalService>;

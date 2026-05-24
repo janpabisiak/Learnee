@@ -23,7 +23,10 @@ export class ConfirmFolderDeletionModalComponent implements OnInit {
 	) {}
 
 	ngOnInit() {
-		combineLatest([this.foldersService.hasSelectedIds$, this.foldersService.folderToDeleteId$])
+		combineLatest([
+			this.foldersService.hasSelectedIds$,
+			this.foldersService.singleFolderIdToOperateOn$,
+		])
 			.pipe(takeUntil(this.destroy$))
 			.subscribe(([hasSelectedIds, folderToDeleteId]) => {
 				this.hasSelectedFolders = hasSelectedIds;
@@ -33,7 +36,7 @@ export class ConfirmFolderDeletionModalComponent implements OnInit {
 
 	closeModal() {
 		this.modalService.toggleModal(EModalType.FolderDeletion, false);
-		this.foldersService.updateFolderToDeleteId(null);
+		this.foldersService.updateSingleFolderIdToOperateOn(null);
 	}
 
 	confirmDeletion() {

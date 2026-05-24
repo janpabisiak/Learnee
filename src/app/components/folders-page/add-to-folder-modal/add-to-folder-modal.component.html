@@ -1,0 +1,10 @@
+<app-modal [title]="'modal.addToFolder.title' | translate" (closeButtonClicked)="closeModal()" [primaryButtonText]="'modal.label.save' | translate" [secondaryButtonText]="'modal.label.cancel' | translate" (primaryButtonClicked)="selectWordsForFolder()" (secondaryButtonClicked)="closeModal()">
+    <div class="flex flex-col gap-3">
+        @for (word of wordList; track word.id) {
+        <div class="flex justify-between items-center w-full">
+            <label [for]="word.name">{{ word.name }}</label>
+            <input class="h-6 w-6" type="checkbox" [name]="word.name" [checked]="isWordSelected(word.id)" (click)="toggleSelection(word.id)" />
+        </div>
+        }
+    </div>
+</app-modal>

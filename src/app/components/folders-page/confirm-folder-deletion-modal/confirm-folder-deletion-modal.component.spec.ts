@@ -42,27 +42,27 @@ describe("ConfirmFolderDeletionModalComponent", () => {
 		expect(component).toBeTruthy();
 	});
 
-	it("should hide folder deletion modal and reset folderToDeleteId on closeModal call", () => {
+	it("should hide folder deletion modal and reset singleFolderIdToOperateOn on closeModal call", () => {
 		component.closeModal();
 
 		expect(mockModalService.toggleModal).toHaveBeenCalledOnceWith(
 			EModalType.FolderDeletion,
 			false,
 		);
-		expect(mockFoldersService.updateFolderToDeleteId).toHaveBeenCalledOnceWith(null);
+		expect(mockFoldersService.updateSingleFolderIdToOperateOn).toHaveBeenCalledOnceWith(null);
 	});
 
-	it("should call foldersService.remove on confirmDeletion call when folderId is set", () => {
+	it("should call foldersService.delete on confirmDeletion call when folderId is set", () => {
 		component.folderId = 1;
 		component.confirmDeletion();
 
-		expect(mockFoldersService.remove).toHaveBeenCalledOnceWith(1);
+		expect(mockFoldersService.delete).toHaveBeenCalledOnceWith(1);
 	});
 
-	it("should call foldersService.removeMany on confirmDeletion call when folderId is not set", () => {
+	it("should call foldersService.deleteMany on confirmDeletion call when folderId is not set", () => {
 		component.folderId = null;
 		component.confirmDeletion();
 
-		expect(mockFoldersService.removeMany).toHaveBeenCalledTimes(1);
+		expect(mockFoldersService.deleteMany).toHaveBeenCalledTimes(1);
 	});
 });

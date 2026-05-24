@@ -55,4 +55,4 @@ export const availableGames: IGame[] = [
 export const STAGE_TRANSITION_DELAY = 2000;
 export const XP_PENALTY_ON_LOSS = 5;
 export const DEFAULT_NUMBER_OF_STAGES = 15;
-export const MIN_WORDS_TO_PLAY = 4;
+export const MIN_WORDS_TO_PLAY = 5;

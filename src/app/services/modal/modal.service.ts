@@ -10,6 +10,7 @@ export class ModalService {
 	private isWordDeletionModalOpen = new BehaviorSubject<boolean>(false);
 	private isFolderAddingModalOpen = new BehaviorSubject<boolean>(false);
 	private isFolderDeletionModalOpen = new BehaviorSubject<boolean>(false);
+	private isAddToFolderModalOpen = new BehaviorSubject<boolean>(false);
 	private isImportConfirmationModalOpen = new BehaviorSubject<boolean>(false);
 	private isMobileNavbarOpen = new BehaviorSubject<boolean>(false);
 
@@ -17,6 +18,7 @@ export class ModalService {
 	isWordDeletionModalOpen$ = this.isWordDeletionModalOpen.asObservable();
 	isFolderAddingModalOpen$ = this.isFolderAddingModalOpen.asObservable();
 	isFolderDeletionModalOpen$ = this.isFolderDeletionModalOpen.asObservable();
+	isAddToFolderModalOpen$ = this.isAddToFolderModalOpen.asObservable();
 	isImportConfirmationModalOpen$ = this.isImportConfirmationModalOpen.asObservable();
 	isMobileNavbarOpen$ = this.isMobileNavbarOpen.asObservable();
 
@@ -33,6 +35,9 @@ export class ModalService {
 				break;
 			case EModalType.FolderDeletion:
 				this.isFolderDeletionModalOpen.next(state);
+				break;
+			case EModalType.AddToFolder:
+				this.isAddToFolderModalOpen.next(state);
 				break;
 			case EModalType.ImportConfirmation:
 				this.isImportConfirmationModalOpen.next(state);
