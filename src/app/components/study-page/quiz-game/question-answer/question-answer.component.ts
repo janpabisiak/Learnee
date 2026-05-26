@@ -1,8 +1,7 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { IAnswer } from "../../../../types/answer.interface";
 import { CommonModule } from "@angular/common";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { GameService } from "@services/game/game.service";
-import { EAvailableGames } from "@shared/constants/game.constants";
+import { IAnswer } from "../../../../types/answer.interface";
 
 @Component({
 	selector: "app-question-answer",
@@ -17,7 +16,7 @@ export class QuestionAnswerComponent {
 	constructor(private gameService: GameService) {}
 
 	answerQuestion(answerId: number) {
-		this.gameService.answerQuizQuestion(answerId);
+		this.gameService.submitAnswer(answerId);
 
 		this.gameService.goToNextStage();
 		this.answered.emit();

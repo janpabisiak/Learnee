@@ -1,17 +1,8 @@
-import { Injectable } from "@angular/core";
-import { IMatch, MatchingGameService } from "@services/matching-game/matching-game.service";
-import { QuizService } from "@services/quiz/quiz.service";
-import { BehaviorSubject } from "rxjs";
-import {
-	ITrueFalseGameData,
-	TrueFalseGameService,
-} from "../true-false-game/true-false-game.service";
-import { IQuestion } from "../../types/question.interface";
-import {
-	FillGapsListeningGameService,
-	IFillGapsListeningGameData,
-} from "@services/fill-gaps-listening-game/fill-gaps-listening-game.service";
+import { inject, Injectable } from "@angular/core";
+import { FillGapsListeningGameService } from "@services/fill-gaps-listening-game/fill-gaps-listening-game.service";
 import { LevelService } from "@services/level/level.service";
+import { MatchingGameService } from "@services/matching-game/matching-game.service";
+import { QuizService } from "@services/quiz/quiz.service";
 import { StatisticsService } from "@services/statistics/statistics.service";
 import {
 	availableGames,
@@ -20,118 +11,68 @@ import {
 	STAGE_TRANSITION_DELAY,
 	XP_PENALTY_ON_LOSS,
 } from "@shared/constants/game.constants";
+import { GameStore } from "app/stores/game/game.store";
+import { TrueFalseGameService } from "../true-false-game/true-false-game.service";
+import { IGameStrategy } from "../../types/game-strategy.interface";
 
 @Injectable({
 	providedIn: "root",
 })
 export class GameService {
-	private stages = new BehaviorSubject<IStage[]>([]);
-	private selectedGames = new BehaviorSubject<EAvailableGames[]>([
-		EAvailableGames.Quiz,
-		EAvailableGames.MatchingGame,
-		EAvailableGames.TrueOrFalse,
-		EAvailableGames.FillGaps,
-		EAvailableGames.Listening,
-	]);
-	private currentStageId = new BehaviorSubject<number>(0);
-	stages$ = this.stages.asObservable();
-	selectedGames$ = this.selectedGames.asObservable();
-	currentStageId$ = this.currentStageId.asObservable();
-	numberOfStages = DEFAULT_NUMBER_OF_STAGES;
+	private gameStore = inject(GameStore);
+	private levelService = inject(LevelService);
+	private statisticsService = inject(StatisticsService);
 
-	constructor(
-		private matchingGameService: MatchingGameService,
-		private quizService: QuizService,
-		private trueFalseGameService: TrueFalseGameService,
-		private fillGapsListeningGameService: FillGapsListeningGameService,
-		private levelService: LevelService,
-		private statisticsService: StatisticsService
-	) {}
+	private quizService = inject(QuizService);
+	private matchingGameService = inject(MatchingGameService);
+	private trueFalseGameService = inject(TrueFalseGameService);
+	private fillGapsListeningGameService = inject(FillGapsListeningGameService);
+
+	private gameStrategies: Record<EAvailableGames, IGameStrategy> = {
+		[EAvailableGames.Quiz]: this.quizService,
+		[EAvailableGames.MatchingGame]: this.matchingGameService,
+		[EAvailableGames.TrueOrFalse]: this.trueFalseGameService,
+		[EAvailableGames.FillGaps]: this.fillGapsListeningGameService,
+		[EAvailableGames.Listening]: this.fillGapsListeningGameService,
+	};
+
+	stages$ = this.gameStore.stages$;
+	selectedGames$ = this.gameStore.selectedGames$;
+	currentStageId$ = this.gameStore.currentStageId$;
+	selectedFolderIds$ = this.gameStore.selectedFolderIds$;
 
 	generateStages() {
-		const selectedGames = this.selectedGames.value;
-		const randomGames = [];
+		const selectedGames = this.gameStore.selectedGamesValue;
+		const stages = Array.from({ length: DEFAULT_NUMBER_OF_STAGES }, (_, i) => {
+			const gameIndex = Math.floor(Math.random() * selectedGames.length);
+			const type = selectedGames[gameIndex];
+			const data = this.gameStrategies[type].generateGameData();
 
-		for (let i = 0; i < this.numberOfStages; i++) {
-			randomGames.push(Math.floor(Math.random() * selectedGames.length));
-		}
-
-		const stages = randomGames.map((gameIndex, i) => {
-			switch (selectedGames[gameIndex]) {
-				case EAvailableGames.MatchingGame:
-					return this.setStageData(
-						i,
-						EAvailableGames.MatchingGame,
-						this.matchingGameService.generateMatchingGame()
-					);
-				case EAvailableGames.TrueOrFalse:
-					return this.setStageData(
-						i,
-						EAvailableGames.TrueOrFalse,
-						this.trueFalseGameService.generateTrueFalseGame()
-					);
-				case EAvailableGames.FillGaps:
-					return this.setStageData(
-						i,
-						EAvailableGames.FillGaps,
-						this.fillGapsListeningGameService.generateFillGapsListeningGame()
-					);
-				case EAvailableGames.Listening:
-					return this.setStageData(
-						i,
-						EAvailableGames.Listening,
-						this.fillGapsListeningGameService.generateFillGapsListeningGame()
-					);
-				default:
-					return this.setStageData(
-						i,
-						EAvailableGames.Quiz,
-						this.quizService.generateQuestion()
-					);
-			}
+			return {
+				id: i,
+				type,
+				data,
+				answered: false,
+				answeredCorrect: false,
+			};
 		});
 
-		this.stages.next(stages);
+		this.gameStore.setStages(stages);
 		this.statisticsService.registerGame();
 	}
 
-	setNumberOfStages(amount: number) {
-		this.numberOfStages = amount;
-	}
-
-	answerQuizQuestion(answerId: number) {
-		const currentStageId = this.currentStageId.value;
-		const stages = this.stages.value;
+	submitAnswer<TAnswer, TResult>(answer: TAnswer): TResult | undefined {
+		const currentStageId = this.gameStore.currentStageIdValue;
+		const stages = this.gameStore.stagesValue;
 		const currentStage = stages[currentStageId];
 
-		const question = this.quizService.answerQuestion(currentStage.data, answerId);
-		const updatedStages = stages.map((stage) =>
-			stage.id === currentStageId
-				? {
-						...stages[currentStageId],
-						answered: true,
-						answeredCorrect: question.answeredCorrect,
-						data: question,
-				  }
-				: stage
-		);
+		const strategy = this.gameStrategies[currentStage.type];
+		if (!strategy) return;
 
-		this.stages.next(updatedStages);
-		this.updateUserXp(EAvailableGames.Quiz, question.answeredCorrect);
-	}
-
-	answerMatchingGameQuestion(terms: string[], definitions: string[]) {
-		const currentStageId = this.currentStageId.value;
-		const stages = this.stages.value;
-		const currentStage = stages[currentStageId];
-
-		const results = this.matchingGameService.checkAnswers(
+		const { isCorrect, updatedData, returnVal } = strategy.validateAnswer(
 			currentStage.data,
-			terms,
-			definitions
+			answer,
 		);
-
-		const isCorrect = results.every((r) => r);
 
 		const updatedStages = stages.map((stage) =>
 			stage.id === currentStageId
@@ -139,84 +80,34 @@ export class GameService {
 						...stage,
 						answered: true,
 						answeredCorrect: isCorrect,
-				  }
-				: stage
+						data: updatedData ?? stage.data,
+					}
+				: stage,
 		);
 
-		this.stages.next(updatedStages);
-		this.updateUserXp(EAvailableGames.MatchingGame, isCorrect);
+		this.gameStore.setStages(updatedStages);
+		this.updateUserXp(currentStage.type, isCorrect);
 
-		return results;
-	}
-
-	answerTrueFalseGameQuestion(isTrue: boolean) {
-		const currentStageId = this.currentStageId.value;
-		const stages = this.stages.value;
-		const currentStage = stages[currentStageId];
-
-		const isCorrect = currentStage.data.isCorrect === isTrue;
-
-		const updatedStages = stages.map((stage) =>
-			stage.id === currentStageId
-				? {
-						...stage,
-						answered: true,
-						answeredCorrect: isCorrect,
-				  }
-				: stage
-		);
-
-		this.stages.next(updatedStages);
-		this.updateUserXp(EAvailableGames.TrueOrFalse, isCorrect);
-	}
-
-	answerFillGapsListeningGameQuestion(answer: string) {
-		const currentStageId = this.currentStageId.value;
-		const stages = this.stages.value;
-		const currentStage = stages[currentStageId];
-
-		const isCorrect = currentStage.data.word.trim().toLowerCase() === answer.toLowerCase();
-
-		const updatedStages = stages.map((stage) =>
-			stage.id === currentStageId
-				? {
-						...stage,
-						answered: true,
-						answeredCorrect: isCorrect,
-				  }
-				: stage
-		);
-
-		this.stages.next(updatedStages);
-		this.updateUserXp(EAvailableGames.FillGaps, isCorrect);
+		return returnVal;
 	}
 
 	goToNextStage() {
-		const currentStageId = this.currentStageId.value;
+		const currentStageId = this.gameStore.currentStageIdValue;
+		const stages = this.gameStore.stagesValue;
 
 		setTimeout(() => {
-			if (currentStageId < this.stages.value.length) {
-				this.currentStageId.next(currentStageId + 1);
+			if (currentStageId < stages.length) {
+				this.gameStore.setCurrentStageId(currentStageId + 1);
 			}
 		}, STAGE_TRANSITION_DELAY);
 	}
 
 	updateSelectedGames(selectedGames: EAvailableGames[]) {
-		this.selectedGames.next(selectedGames);
+		this.gameStore.setSelectedGames(selectedGames);
 	}
 
-	private setStageData(
-		id: number,
-		type: EAvailableGames,
-		gameData: IQuestion | IMatch[] | ITrueFalseGameData | IFillGapsListeningGameData
-	): IStage {
-		return {
-			id,
-			type,
-			data: gameData,
-			answered: false,
-			answeredCorrect: false,
-		};
+	updateSelectedFolders(folderIds: number[]) {
+		this.gameStore.setSelectedFolderIds(folderIds);
 	}
 
 	private updateUserXp(type: EAvailableGames, isCorrect: boolean) {
@@ -228,15 +119,7 @@ export class GameService {
 	}
 
 	cancelGame() {
-		this.stages.next([]);
-		this.currentStageId.next(0);
+		this.gameStore.setStages([]);
+		this.gameStore.setCurrentStageId(0);
 	}
-}
-
-export interface IStage {
-	id: number;
-	type: EAvailableGames;
-	data: any;
-	answered: boolean;
-	answeredCorrect: boolean;
 }

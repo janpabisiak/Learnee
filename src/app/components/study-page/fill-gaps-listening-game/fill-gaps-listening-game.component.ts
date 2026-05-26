@@ -1,5 +1,5 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, Input, OnDestroy, OnInit } from "@angular/core";
-import { GameService, IStage } from "@services/game/game.service";
+import { GameService } from "@services/game/game.service";
 import { EAvailableGames } from "@shared/constants/game.constants";
 import { combineLatest, skip, Subject, takeUntil } from "rxjs";
 import { ButtonComponent } from "@shared/components/button/button.component";
@@ -8,6 +8,7 @@ import { NgClass, NgIf } from "@angular/common";
 import { InputGuessComponent } from "@components/study-page/fill-gaps-listening-game/input-guess/input-guess.component";
 import { WebSpeechService } from "@services/web-speech/web-speech.service";
 import { TranslatePipe } from "@ngx-translate/core";
+import { IStage } from "../../../types/stage.interface";
 
 @Component({
 	selector: "app-fill-gaps-listening-game",
@@ -29,7 +30,10 @@ export class FillGapsGameComponent implements OnInit, OnDestroy {
 		this.answerQuestion();
 	};
 
-	constructor(private gameService: GameService, private webSpeechService: WebSpeechService) {}
+	constructor(
+		private gameService: GameService,
+		private webSpeechService: WebSpeechService,
+	) {}
 
 	ngOnInit() {
 		if (this.stage) {
@@ -71,7 +75,7 @@ export class FillGapsGameComponent implements OnInit, OnDestroy {
 		if (this.data?.answered) return;
 
 		this.isVisible = false;
-		this.gameService.answerFillGapsListeningGameQuestion(this.inputValue.trim());
+		this.gameService.submitAnswer(this.inputValue.trim());
 		this.inputValue = this.data?.data.word.trim();
 
 		this.gameService.goToNextStage();

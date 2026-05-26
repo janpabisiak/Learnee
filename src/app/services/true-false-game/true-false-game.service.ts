@@ -1,13 +1,14 @@
 import { Injectable } from "@angular/core";
 import { WordsService } from "@services/words/words.service";
+import { IGameStrategy } from "../../types/game-strategy.interface";
 
 @Injectable({
 	providedIn: "root",
 })
-export class TrueFalseGameService {
+export class TrueFalseGameService implements IGameStrategy<any, boolean, void> {
 	constructor(private wordsService: WordsService) {}
 
-	generateTrueFalseGame(): ITrueFalseGameData {
+	generateGameData(): ITrueFalseGameData {
 		const selectedWord = this.wordsService.getRandomLearningWord();
 		const shouldGetDifferentDef = Math.random() > 0.5;
 
@@ -29,6 +30,12 @@ export class TrueFalseGameService {
 			definition: anotherWord.definition,
 			isCorrect: false,
 		};
+	}
+
+	validateAnswer(gameData: any, isTrue: boolean) {
+		const isCorrect = gameData.isCorrect === isTrue;
+
+		return { isCorrect };
 	}
 }
 

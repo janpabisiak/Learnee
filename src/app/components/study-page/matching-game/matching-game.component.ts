@@ -1,13 +1,13 @@
 import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
 import { NgClass, NgIf } from "@angular/common";
 import { Component, CUSTOM_ELEMENTS_SCHEMA, Input, OnDestroy, OnInit } from "@angular/core";
-import { ButtonComponent } from "@shared/components/button/button.component";
-import { GameService, IStage } from "@services/game/game.service";
-import { EAvailableGames } from "@shared/constants/game.constants";
+import { TranslatePipe } from "@ngx-translate/core";
+import { GameService } from "@services/game/game.service";
 import { IMatch } from "@services/matching-game/matching-game.service";
+import { ButtonComponent } from "@shared/components/button/button.component";
 import { combineLatest, Subject, takeUntil } from "rxjs";
 import { DraggableItemsListComponent } from "./draggable-items-list/draggable-items-list.component";
-import { TranslatePipe } from "@ngx-translate/core";
+import { IStage } from "../../../types/stage.interface";
 
 @Component({
 	selector: "app-matching-game",
@@ -73,7 +73,12 @@ export class MatchingGameComponent implements OnInit, OnDestroy {
 	}
 
 	checkAnswers() {
-		this.results = this.gameService.answerMatchingGameQuestion(this.terms, this.definitions);
+		this.results =
+			this.gameService.submitAnswer<{ terms: string[]; definitions: string[] }, boolean[]>({
+				terms: this.terms,
+				definitions: this.definitions,
+			}) ?? [];
+
 		this.isVisible = false;
 		this.gameService.goToNextStage();
 	}
