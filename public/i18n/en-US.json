@@ -97,6 +97,8 @@
 
 	"study.prepare.title": "Prepare game",
 	"study.prepare.button": "Start a game",
+	"study.prepare.selectFolders": "Select folders",
+	"study.prepare.numberOfStages": "Number of stages",
 
 	"study.games.cancel.label": "Cancel game",
 	"study.games.checkAnswer.label": "Check answer",
@@ -164,5 +166,7 @@
 	"toaster.success.folder.manyDeleted": "Folders successfully deleted",
 	"toaster.success.folder.edited": "Folder successfully edited",
 
-	"error.notFound": "Error 404 - Not found"
+	"error.notFound": "Error 404 - Not found",
+
+	"multiselect.noResults": "No results found for {{searchQuery}}"
 }

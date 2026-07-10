@@ -1,5 +1,5 @@
 import { BehaviorSubject } from "rxjs";
-import { IStage } from "./game.service";
+import { IStage } from "../../types/stage.interface";
 import { EAvailableGames } from "@shared/constants/game.constants";
 
 export const mockStages: IStage[] = [
@@ -30,14 +30,19 @@ export const createMockGameService = () => ({
 	stages$: new BehaviorSubject<IStage[]>([]),
 	currentStageId$: new BehaviorSubject<number>(0),
 	selectedGames$: new BehaviorSubject<EAvailableGames[]>([]),
+	numberOfStages$: new BehaviorSubject<number>(0),
+	selectedFolderIds$: new BehaviorSubject<number[]>([]),
+	submitAnswer: jasmine.createSpy("submitAnswer"),
 	answerTrueFalseGameQuestion: jasmine.createSpy("answerTrueFalseGameQuestion"),
 	answerQuizQuestion: jasmine.createSpy("answerQuizQuestion"),
 	answerMatchingGameQuestion: jasmine.createSpy("answerMatchingGameQuestion"),
 	answerFillGapsListeningGameQuestion: jasmine.createSpy("answerFillGapsListeningGameQuestion"),
 	goToNextStage: jasmine.createSpy("goToNextStage"),
 	generateStages: jasmine.createSpy("generateStages"),
-	setNumberOfStages: jasmine.createSpy("setNumberOfStages"),
+	updateNumberOfStages: jasmine.createSpy("updateNumberOfStages"),
 	updateSelectedGames: jasmine.createSpy("updateSelectedGames"),
+	updateSelectedFolders: jasmine.createSpy("updateSelectedFolders"),
+	updateUserXp: jasmine.createSpy("updateUserXp"),
 	cancelGame: jasmine.createSpy("cancelGame"),
 });
 

@@ -90,7 +90,7 @@ describe("FillGapsGameComponent", () => {
 		component.answerQuestion();
 
 		expect(component.isVisible).toBeFalse();
-		expect(mockGameService.answerFillGapsListeningGameQuestion).toHaveBeenCalledOnceWith("");
+		expect(mockGameService.submitAnswer).toHaveBeenCalledOnceWith("");
 		expect(component.inputValue).toBe("test2");
 		expect(mockGameService.goToNextStage).toHaveBeenCalledTimes(1);
 	});

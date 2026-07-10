@@ -35,7 +35,7 @@ export class AddToFolderModalComponent {
 			.subscribe((folderId) => {
 				this.folderId = folderId;
 
-				if (this.folderId) {
+				if (typeof this.folderId !== null) {
 					this.initializeSelectedWordIds();
 				}
 			});

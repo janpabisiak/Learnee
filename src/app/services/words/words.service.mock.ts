@@ -43,6 +43,7 @@ export const createMockWordsService = () => ({
 	setSearchQuery: jasmine.createSpy("setSearchQuery"),
 	setPage: jasmine.createSpy("setPage"),
 	setWordsPerPage: jasmine.createSpy("setWordsPerPage"),
+	setWordToDeleteId: jasmine.createSpy("setWordToDeleteId"),
 	fetchDefinition$: jasmine.createSpy("fetchDefinition$"),
 	add: jasmine.createSpy("add"),
 	getRandomLearningWord: jasmine.createSpy("getRandomLearningWord"),
@@ -55,6 +56,7 @@ export const createMockWordsService = () => ({
 	toggleSelection: jasmine.createSpy("toggleSelection"),
 	selectAllVisible: jasmine.createSpy("selectAllVisible"),
 	unselectAll: jasmine.createSpy("unselectAll"),
+	getLearningWordFilters: jasmine.createSpy("getLearningWordFilters"),
 });
 
 export type IMockWordsService = ReturnType<typeof createMockWordsService>;

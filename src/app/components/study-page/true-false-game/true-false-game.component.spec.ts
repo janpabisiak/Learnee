@@ -54,7 +54,7 @@ describe("TrueFalseGameComponent", () => {
 	it("should call gameService methods on answerQuestion call", () => {
 		component.answerQuestion(true);
 
-		expect(mockGameService.answerTrueFalseGameQuestion).toHaveBeenCalledOnceWith(true);
+		expect(mockGameService.submitAnswer).toHaveBeenCalledOnceWith(true);
 		expect(mockGameService.goToNextStage).toHaveBeenCalledTimes(1);
 		expect(component.showAnswer).toBeTrue();
 		expect(component.isVisible).toBeFalse();

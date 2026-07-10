@@ -55,7 +55,7 @@ describe("AutoCloseDirective", () => {
 	});
 
 	it("should emit close when pressing Escape", () => {
-		window.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape" }));
+		document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape" }));
 		fixture.detectChanges();
 		expect(component.closed).toBeTrue();
 	});

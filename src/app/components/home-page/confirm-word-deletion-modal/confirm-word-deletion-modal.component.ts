@@ -32,10 +32,11 @@ export class ConfirmWordDeletionModalComponent implements OnInit {
 
 	closeModal() {
 		this.modalService.toggleModal(EModalType.WordDeletion, false);
+		this.wordsService.setWordToDeleteId(null);
 	}
 
 	confirmDeletion() {
-		if (this.wordId) {
+		if (this.wordId !== null) {
 			this.wordsService.delete(this.wordId);
 		} else {
 			this.wordsService.deleteMany();

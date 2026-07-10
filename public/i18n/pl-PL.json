@@ -98,6 +98,8 @@
 
 	"study.prepare.title": "Przygotuj grę",
 	"study.prepare.button": "Start",
+	"study.prepare.selectFolders": "Wybierz foldery",
+	"study.prepare.numberOfStages": "Liczba etapów",
 
 	"study.games.cancel.label": "Przerwij grę",
 	"study.games.checkAnswer.label": "Sprawdź",
@@ -165,5 +167,7 @@
 	"toaster.success.folder.manyDeleted": "Foldery zostały usunięte",
 	"toaster.success.folder.edited": "Folder został edytowany",
 
-	"error.notFound": "Błąd 404 – Strona nie istnieje"
+	"error.notFound": "Błąd 404 – Strona nie istnieje",
+
+	"multiselect.noResults": "Nie znaleziono wyników dla {{searchQuery}}"
 }

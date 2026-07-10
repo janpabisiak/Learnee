@@ -141,15 +141,11 @@ export class FoldersService {
 	toggleSelection(folderId: number) {
 		const selectedIds = this.foldersStore.selectedIdsValue;
 		const hasFolderSelected = selectedIds.includes(folderId);
-		let updatedSelection: number[] = [];
 
-		if (hasFolderSelected) {
-			updatedSelection = selectedIds.filter((id) => id !== folderId);
-		} else {
-			updatedSelection = [...selectedIds, folderId];
-		}
-
-		this.foldersStore.setSelectedIds(updatedSelection);
+		const updatedSelectedIds = hasFolderSelected
+			? selectedIds.filter((id) => id !== folderId)
+			: [...selectedIds, folderId];
+		this.foldersStore.setSelectedIds(updatedSelectedIds);
 	}
 
 	selectAllVisible() {

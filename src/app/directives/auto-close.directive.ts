@@ -9,7 +9,7 @@ export class AutoCloseDirective {
 
 	constructor(private elementRef: ElementRef) {}
 
-	@HostListener("window:click", ["$event.target"])
+	@HostListener("document:click", ["$event.target"])
 	onClick(target: EventTarget | null) {
 		if (!target) return;
 
@@ -20,7 +20,7 @@ export class AutoCloseDirective {
 		}
 	}
 
-	@HostListener("window:keydown.escape")
+	@HostListener("document:keydown.escape")
 	onEscape() {
 		this.close.emit();
 	}

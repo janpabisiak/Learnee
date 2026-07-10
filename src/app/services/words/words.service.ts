@@ -7,6 +7,8 @@ import { WordsResourceService } from "@services/words-resource/words-resource.se
 import { WordsStore } from "../../stores/words/words.store";
 import { EWordSortTypes } from "@services/words-options/words-options.service";
 import { map, take } from "rxjs";
+import { FoldersStore } from "app/stores/folders/folders.store";
+import { GameStore } from "app/stores/game/game.store";
 
 @Injectable({
 	providedIn: "root",
@@ -15,6 +17,8 @@ export class WordsService {
 	private toasterService = inject(ToasterService);
 	private translateService = inject(TranslateService);
 	private wordsStore = inject(WordsStore);
+	private foldersStore = inject(FoldersStore);
+	private gameStore = inject(GameStore);
 	private wordsResourceService = inject(WordsResourceService);
 
 	wordList$ = this.wordsStore.wordList$;
@@ -58,6 +62,10 @@ export class WordsService {
 		this.wordsStore.setWordsPerPage(amount);
 	}
 
+	setWordToDeleteId(wordId: number | null) {
+		this.wordsStore.setWordToDeleteId(wordId);
+	}
+
 	fetchDefinition$(word: string) {
 		return this.wordsResourceService.fetchDefinition$(word);
 	}
@@ -92,7 +100,11 @@ export class WordsService {
 	}
 
 	getRandomLearningWord() {
-		const learningWords = this.wordsStore.wordListValue.filter((w) => w.isLearning);
+		const filters = this.getLearningWordFilters();
+
+		const learningWords = this.wordsStore.wordListValue.filter((word) =>
+			filters.every((filterFn) => filterFn(word)),
+		);
 
 		const randomIndex = Math.floor(Math.random() * learningWords.length);
 		return learningWords[randomIndex];
@@ -166,15 +178,11 @@ export class WordsService {
 	toggleSelection(wordId: number) {
 		const selectedIds = this.wordsStore.selectedIdsValue;
 		const hasWordSelected = selectedIds.includes(wordId);
-		let updatedSelection: number[] = [];
 
-		if (hasWordSelected) {
-			updatedSelection = selectedIds.filter((id) => id !== wordId);
-		} else {
-			updatedSelection = [...selectedIds, wordId];
-		}
-
-		this.wordsStore.setSelectedIds(updatedSelection);
+		const updatedSelectedIds = hasWordSelected
+			? selectedIds.filter((id) => id !== wordId)
+			: [...selectedIds, wordId];
+		this.wordsStore.setSelectedIds(updatedSelectedIds);
 	}
 
 	selectAllVisible() {
@@ -205,5 +213,22 @@ export class WordsService {
 
 	unselectAll() {
 		this.wordsStore.setSelectedIds([]);
+	}
+
+	private getLearningWordFilters(): ((word: IWord) => boolean)[] {
+		const filters: ((word: IWord) => boolean)[] = [(word: IWord) => word.isLearning];
+
+		const selectedFolderIds = this.gameStore.selectedFolderIdsValue;
+		if (selectedFolderIds.length) {
+			const allowedWordIds = this.foldersStore.foldersValue
+				.filter((folder) => selectedFolderIds.includes(folder.id))
+				.flatMap((folder) => folder.wordIds);
+
+			const allowedWordIdsSet = new Set(allowedWordIds);
+
+			filters.push((word: IWord) => allowedWordIdsSet.has(word.id));
+		}
+
+		return filters;
 	}
 }

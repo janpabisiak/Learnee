@@ -36,7 +36,7 @@ describe("QuestionAnswerComponent", () => {
 		const emitSpy = spyOn(component.answered, "emit");
 		component.answerQuestion(1);
 
-		expect(mockGameService.answerQuizQuestion).toHaveBeenCalledOnceWith(1);
+		expect(mockGameService.submitAnswer).toHaveBeenCalledOnceWith(1);
 		expect(mockGameService.goToNextStage).toHaveBeenCalledTimes(1);
 		expect(emitSpy).toHaveBeenCalledTimes(1);
 	});

@@ -36,14 +36,17 @@ export class GameService {
 		[EAvailableGames.Listening]: this.fillGapsListeningGameService,
 	};
 
+	private timeoutId: number | null = null;
+
 	stages$ = this.gameStore.stages$;
+	numberOfStages$ = this.gameStore.numberOfStages$;
 	selectedGames$ = this.gameStore.selectedGames$;
 	currentStageId$ = this.gameStore.currentStageId$;
 	selectedFolderIds$ = this.gameStore.selectedFolderIds$;
 
 	generateStages() {
 		const selectedGames = this.gameStore.selectedGamesValue;
-		const stages = Array.from({ length: DEFAULT_NUMBER_OF_STAGES }, (_, i) => {
+		const stages = Array.from({ length: this.gameStore.numberOfStagesValue }, (_, i) => {
 			const gameIndex = Math.floor(Math.random() * selectedGames.length);
 			const type = selectedGames[gameIndex];
 			const data = this.gameStrategies[type].generateGameData();
@@ -95,11 +98,15 @@ export class GameService {
 		const currentStageId = this.gameStore.currentStageIdValue;
 		const stages = this.gameStore.stagesValue;
 
-		setTimeout(() => {
+		this.timeoutId = setTimeout(() => {
 			if (currentStageId < stages.length) {
 				this.gameStore.setCurrentStageId(currentStageId + 1);
 			}
 		}, STAGE_TRANSITION_DELAY);
+	}
+
+	updateNumberOfStages(numberOfStages: number) {
+		this.gameStore.setNumberOfStages(numberOfStages);
 	}
 
 	updateSelectedGames(selectedGames: EAvailableGames[]) {
@@ -119,6 +126,11 @@ export class GameService {
 	}
 
 	cancelGame() {
+		if (this.timeoutId !== null) {
+			clearTimeout(this.timeoutId);
+			this.timeoutId = null;
+		}
+
 		this.gameStore.setStages([]);
 		this.gameStore.setCurrentStageId(0);
 	}

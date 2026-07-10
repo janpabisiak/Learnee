@@ -10,7 +10,7 @@ import { ELocalStorageKeys } from "@shared/constants/local-storage.constants";
 })
 export class SettingsService {
 	private isDarkMode = new BehaviorSubject<boolean>(false);
-	private isFetchWordDefinitionEnabled = new BehaviorSubject<boolean>(true);
+	private isFetchWordDefinitionEnabled = new BehaviorSubject<boolean>(false);
 	private currentLanguage = new BehaviorSubject<EAvailableLanguages>(EAvailableLanguages.English);
 	private renderer: Renderer2;
 
