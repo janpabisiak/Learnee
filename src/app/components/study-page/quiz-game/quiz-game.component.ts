@@ -1,9 +1,10 @@
+import { NgClass } from "@angular/common";
 import { Component, Input, OnDestroy, OnInit } from "@angular/core";
+import { GameService } from "@services/game/game.service";
+import { combineLatest, Subject, takeUntil } from "rxjs";
 import { IQuestion } from "../../../types/question.interface";
 import { QuestionAnswerComponent } from "./question-answer/question-answer.component";
-import { combineLatest, Subject, takeUntil } from "rxjs";
-import { GameService, IStage } from "@services/game/game.service";
-import { NgClass } from "@angular/common";
+import { IStage } from "../../../types/stage.interface";
 
 @Component({
 	selector: "app-quiz-game",

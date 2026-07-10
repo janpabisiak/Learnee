@@ -1,7 +1,8 @@
 import { Component, inject, OnInit } from "@angular/core";
-import { ModalComponent } from "@shared/modal/modal.component";
+import { ModalComponent } from "@shared/components/modal/modal.component";
 import { LocalStorageService } from "@services/local-storage/local-storage.service";
-import { EModalType, ModalService } from "@services/modal/modal.service";
+import { ModalService } from "@services/modal/modal.service";
+import { EModalType } from "@shared/constants/modal.constants";
 import { TranslateService } from "@ngx-translate/core";
 import { NgIf } from "@angular/common";
 import { take } from "rxjs";

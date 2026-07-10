@@ -1,6 +1,8 @@
 import { Injectable } from "@angular/core";
 import { LocalStorageService } from "@services/local-storage/local-storage.service";
 import { BehaviorSubject } from "rxjs";
+import { ELocalStorageKeys } from "@shared/constants/local-storage.constants";
+import { INITIAL_REQUIRED_XP, XP_INCREMENT_PER_LEVEL } from "@shared/constants/level.constants";
 
 @Injectable({
 	providedIn: "root",
@@ -12,7 +14,7 @@ export class LevelService {
 	level$ = this.level.asObservable();
 
 	constructor(private localStorageService: LocalStorageService) {
-		const xpPoints = this.localStorageService.loadData("xp-points");
+		const xpPoints = this.localStorageService.loadData(ELocalStorageKeys.XpPoints);
 
 		if (xpPoints) {
 			this.xpPoints.next(xpPoints);
@@ -40,12 +42,12 @@ export class LevelService {
 	private calcLevel() {
 		let xp = this.xpPoints.value;
 		let level = 0;
-		let requiredXp = 50;
+		let requiredXp = INITIAL_REQUIRED_XP;
 
 		while (xp > requiredXp) {
 			level++;
 			xp -= requiredXp;
-			requiredXp += 50;
+			requiredXp += XP_INCREMENT_PER_LEVEL;
 		}
 
 		this.level.next(level);
@@ -54,11 +56,11 @@ export class LevelService {
 	calcNeededXp(level: number, xp: number = 0): number {
 		if (level === 0) return xp;
 
-		return this.calcNeededXp(level - 1, xp + level * 50);
+		return this.calcNeededXp(level - 1, xp + level * XP_INCREMENT_PER_LEVEL);
 	}
 
 	private updateXpPoints() {
 		this.calcLevel();
-		this.localStorageService.saveData("xp-points", this.xpPoints.value);
+		this.localStorageService.saveData(ELocalStorageKeys.XpPoints, this.xpPoints.value);
 	}
 }

@@ -1,24 +1,19 @@
 {
 	"nav.home": "Home",
+	"nav.folders": "Folders",
 	"nav.study": "Study",
 	"nav.settings": "Settings",
 
 	"wordlist.title": "Wordlist",
 	"wordlist.count": "{{count}} words",
 	"wordlist.addNew": "Add new word",
-	"wordlist.searchPlaceholder": "Search for word by name or definition",
-	"wordlist.sort.nameAsc": "Sort by name ASC",
-	"wordlist.sort.nameDesc": "Sort by name DESC",
+	"wordlist.search": "Search for word by name or definition",
+
 	"wordlist.sort.definitionAsc": "Sort by definition ASC",
 	"wordlist.sort.definitionDesc": "Sort by definition DESC",
 	"wordlist.sort.learningAsc": "Sort by learning ASC",
 	"wordlist.sort.learningDesc": "Sort by learning DESC",
-	"wordlist.sort.idAsc": "Sort by ID ASC",
-	"wordlist.sort.idDesc": "Sort by ID DESC",
-	"wordlist.deleteAll": "Delete all words",
-	"wordlist.deleteSelected": "Delete selected words",
-	"wordlist.selectAllVisible": "Select all visible",
-	"wordlist.unselectAll": "Unselect all",
+
 	"wordlist.editSelected": "Edit selected",
 	"wordlist.markAsToLearn": "Mark as to learn",
 	"wordlist.markAsNotLearning": "Mark as not learning",
@@ -29,6 +24,31 @@
 	"wordlist.adjustSearchQuery": "Try to adjust your search query.",
 	"wordlist.edit": "Edit word",
 	"wordlist.delete": "Delete word",
+
+	"folderlist.title": "Folders",
+	"folderlist.count": "{{count}} folders",
+	"folderlist.addNew": "Add new folder",
+	"folderlist.search": "Search for folder by name or description",
+
+	"folderlist.sort.descriptionAsc": "Sort by description ASC",
+	"folderlist.sort.descriptionDesc": "Sort by description DESC",
+
+	"folderlist.noFolders": "No folders found.",
+	"folderlist.addNewFolder": "Add new folder by clicking button on right side of this webpage.",
+	"folderlist.adjustSearchQuery": "Try to adjust your search query.",
+	"folderlist.edit": "Edit folder",
+	"folderlist.delete": "Delete folder",
+	"folderlist.selectWords": "Select words",
+
+	"itemlist.deleteAll": "Delete all",
+	"itemlist.deleteSelected": "Delete selected",
+	"itemlist.selectAllVisible": "Select all visible",
+	"itemlist.unselectAll": "Unselect all",
+
+	"itemlist.sort.idAsc": "Sort by ID ASC",
+	"itemlist.sort.idDesc": "Sort by ID DESC",
+	"itemlist.sort.nameAsc": "Sort by name ASC",
+	"itemlist.sort.nameDesc": "Sort by name DESC",
 
 	"pagination.showing": "Showing {{from}}-{{to}} from {{total}}",
 	"pagination.rowsPerPage": "Rows per page:",
@@ -42,23 +62,34 @@
 	"level.title": "Level progress",
 	"level.label": "Level {{level}}",
 
-	"modal.add.title": "Add new word",
-	"modal.add.word": "Word",
-	"modal.add.word.enter": "Enter word",
-	"modal.add.word.required": "Word is required.",
-	"modal.add.definition": "Definition",
-	"modal.add.definition.required": "Definition is required.",
 	"modal.add.too.many.chars": "Too many chars (max. {{length}}).",
 
-	"modal.edit.title": "Edit word",
+	"modal.add.word.title": "Add new word",
+	"modal.add.word.name": "Word",
+	"modal.add.word.name.enter": "Enter word",
+	"modal.add.word.name.required": "Word is required.",
+	"modal.add.word.definition": "Definition",
+	"modal.add.word.definition.required": "Definition is required.",
+	"modal.edit.word.title": "Edit word",
+
+	"modal.add.folder.title": "Add new folder",
+	"modal.add.folder.name": "Folder name",
+	"modal.add.folder.name.enter": "Enter folder name",
+	"modal.add.folder.name.required": "Folder name is required.",
+	"modal.add.folder.description": "Description",
+	"modal.add.folder.description.required": "Description is required.",
+	"modal.edit.folder.title": "Edit folder",
+
+	"modal.addToFolder.title": "Select words for folder",
 
 	"modal.delete.title": "Confirm deletion",
 	"modal.delete.confirm.delete": "Are you sure that you want to delete?",
 
 	"modal.import.title": "Confirm Import",
-	"modal.import.description": "Importing this file will completely replace your current wordlist and statistics. This action cannot be undone.",
+	"modal.import.description": "Importing this file will completely replace your current data. This action cannot be undone.",
 
 	"modal.label.add": "Add word",
+	"modal.label.addFolder": "Add folder",
 	"modal.label.save": "Save",
 	"modal.label.confirm": "Confirm",
 	"modal.label.cancel": "Cancel",
@@ -66,6 +97,8 @@
 
 	"study.prepare.title": "Prepare game",
 	"study.prepare.button": "Start a game",
+	"study.prepare.selectFolders": "Select folders",
+	"study.prepare.numberOfStages": "Number of stages",
 
 	"study.games.cancel.label": "Cancel game",
 	"study.games.checkAnswer.label": "Check answer",
@@ -127,6 +160,13 @@
 	"toaster.success.word.deleted": "Word successfully deleted",
 	"toaster.success.word.manyDeleted": "Words successfully deleted",
 	"toaster.success.word.edited": "Word successfully edited",
+	"toaster.error.folder.alreadyExists": "This folder is already on your list",
+	"toaster.success.folder.added": "Folder successfully added",
+	"toaster.success.folder.deleted": "Folder successfully deleted",
+	"toaster.success.folder.manyDeleted": "Folders successfully deleted",
+	"toaster.success.folder.edited": "Folder successfully edited",
 
-	"error.notFound": "Error 404 - Not found"
+	"error.notFound": "Error 404 - Not found",
+
+	"multiselect.noResults": "No results found for {{searchQuery}}"
 }

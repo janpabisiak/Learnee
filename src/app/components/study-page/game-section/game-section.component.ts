@@ -1,10 +1,11 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { GameContainerComponent } from "./game-container/game-container.component";
-import { ButtonComponent } from "@shared/button/button.component";
+import { ButtonComponent } from "@shared/components/button/button.component";
 import { StudyProgressBarComponent } from "../study-progress-bar/study-progress-bar.component";
-import { GameService, IStage } from "@services/game/game.service";
+import { GameService } from "@services/game/game.service";
 import { combineLatest, Subject, takeUntil } from "rxjs";
 import { TranslatePipe } from "@ngx-translate/core";
+import { IStage } from "../../../types/stage.interface";
 
 @Component({
 	selector: "app-game-section",

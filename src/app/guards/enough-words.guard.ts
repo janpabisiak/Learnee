@@ -1,9 +1,10 @@
 import { Injectable } from "@angular/core";
 import { CanActivate, Router } from "@angular/router";
-import { EToasterTypes } from "@shared/toaster-container/toaster/toaster.component";
+import { DEFAULT_TOASTER_DURATION, EToasterTypes } from "@shared/constants/toaster.constants";
 import { ToasterService } from "@services/toaster/toaster.service";
 import { WordsService } from "@services/words/words.service";
 import { TranslateService } from "@ngx-translate/core";
+import { MIN_WORDS_TO_PLAY } from "@shared/constants/game.constants";
 
 @Injectable({
 	providedIn: "root",
@@ -18,7 +19,7 @@ export class EnoughWordsGuard implements CanActivate {
 		private translateService: TranslateService,
 	) {
 		this.wordsService.wordList$.subscribe((wordList) => {
-			this.enoughWords = wordList.filter((w) => w.isLearning).length > 4;
+			this.enoughWords = wordList.filter((w) => w.isLearning).length >= MIN_WORDS_TO_PLAY;
 		});
 	}
 
@@ -28,7 +29,7 @@ export class EnoughWordsGuard implements CanActivate {
 		this.toasterService.addToaster({
 			type: EToasterTypes.Error,
 			content: this.translateService.instant("toaster.error.word.notEnoughWords"),
-			duration: 5,
+			duration: DEFAULT_TOASTER_DURATION,
 		});
 
 		this.router.navigate(["/"]);

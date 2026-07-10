@@ -1,0 +1,1 @@
+export const STATISTICS_DAYS_LIMIT = 30;

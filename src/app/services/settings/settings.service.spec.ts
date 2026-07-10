@@ -2,7 +2,9 @@ import {
 	createMockLocalStorageService,
 	IMockLocalStorageService,
 } from "@services/local-storage/local-storage.service.mock";
-import { EAvailableLanguages, SettingsService } from "./settings.service";
+import { SettingsService } from "./settings.service";
+import { EAvailableLanguages } from "@shared/constants/settings.constants";
+import { ELocalStorageKeys } from "@shared/constants/local-storage.constants";
 
 describe("SettingsService", () => {
 	let service: SettingsService;
@@ -27,6 +29,9 @@ describe("SettingsService", () => {
 			mockLocalStorageService as any,
 			mockTranslation
 		);
+
+		(service["renderer"].addClass as jasmine.Spy).calls.reset();
+		(service["renderer"].removeClass as jasmine.Spy).calls.reset();
 	});
 
 	describe("setIsDarkMode()", () => {
@@ -40,7 +45,7 @@ describe("SettingsService", () => {
 			service.setIsDarkMode(true);
 
 			expect(service["localStorageService"].saveData).toHaveBeenCalledOnceWith(
-				"dark-mode",
+				ELocalStorageKeys.DarkMode,
 				true
 			);
 		});
@@ -64,7 +69,7 @@ describe("SettingsService", () => {
 			service.setCurrentLanguage(EAvailableLanguages.Polish);
 
 			expect(service["localStorageService"].saveData).toHaveBeenCalledWith(
-				"language",
+				ELocalStorageKeys.Language,
 				EAvailableLanguages.Polish
 			);
 		});
@@ -84,8 +89,8 @@ describe("SettingsService", () => {
 			expect(service["renderer"].addClass).toHaveBeenCalledOnceWith(document.body, "dark");
 		});
 
-		it("should NOT add dark class to body element if isDarkMode is false", () => {
-			service["isDarkMode"].next(true);
+		it("should remove dark class from body element if isDarkMode is false", () => {
+			service["isDarkMode"].next(false);
 			service.toggleDarkClass();
 
 			expect(service["renderer"].removeClass).toHaveBeenCalledOnceWith(document.body, "dark");

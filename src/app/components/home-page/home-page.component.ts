@@ -1,7 +1,8 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, OnDestroy, OnInit } from "@angular/core";
-import { SectionTitleComponent } from "@shared/section-title/section-title.component";
+import { SectionTitleComponent } from "@shared/components/section-title/section-title.component";
 import { TranslatePipe } from "@ngx-translate/core";
-import { EModalType, ModalService } from "@services/modal/modal.service";
+import { ModalService } from "@services/modal/modal.service";
+import { EModalType } from "@shared/constants/modal.constants";
 import { Subscription } from "rxjs";
 import { WordsService } from "../../services/words/words.service";
 import { UserStatisticsComponent } from "./user-statistics/user-statistics.component";
@@ -25,7 +26,6 @@ export class HomePageComponent implements OnInit, OnDestroy {
 	private subscription = new Subscription();
 	modalService = inject(ModalService);
 	numOfWords = 0;
-	translations: Record<string, string> | null = null;
 
 	constructor(private wordsService: WordsService) {}
 

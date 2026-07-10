@@ -1,11 +1,13 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { SectionTitleComponent } from "@shared/section-title/section-title.component";
-import { EAvailableGames, GameService, IStage } from "@services/game/game.service";
+import { SectionTitleComponent } from "@shared/components/section-title/section-title.component";
+import { GameService } from "@services/game/game.service";
+import { EAvailableGames } from "@shared/constants/game.constants";
 import { Subject, take, takeUntil } from "rxjs";
 import { GameContainerComponent } from "../game-section/game-container/game-container.component";
-import { ProgressBarComponent } from "@shared/progress-bar/progress-bar.component";
+import { ProgressBarComponent } from "@shared/components/progress-bar/progress-bar.component";
 import { TranslateService } from "@ngx-translate/core";
 import { NgIf } from "@angular/common";
+import { IStage } from "../../../types/stage.interface";
 
 @Component({
 	selector: "app-game-results",
@@ -20,14 +22,17 @@ export class GameResultsComponent implements OnInit, OnDestroy {
 	translations: Record<string, string> | null = null;
 	private destroy$ = new Subject<void>();
 
-	constructor(private gameService: GameService, private translation: TranslateService) {}
+	constructor(
+		private gameService: GameService,
+		private translation: TranslateService,
+	) {}
 
 	ngOnInit() {
 		this.gameService.stages$.pipe(takeUntil(this.destroy$)).subscribe((stages) => {
 			this.stages = stages;
 			this.correctAnswerAmount = stages.reduce(
 				(acc, stage) => acc + +(stage.answeredCorrect === true),
-				0
+				0,
 			);
 			this.correctAnswerPercentage = stages.length
 				? Math.round((this.correctAnswerAmount / stages.length) * 100)

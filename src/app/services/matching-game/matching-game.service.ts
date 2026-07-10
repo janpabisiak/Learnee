@@ -1,16 +1,22 @@
 import { Injectable } from "@angular/core";
 import { WordsService } from "@services/words/words.service";
+import { IGameStrategy } from "../../types/game-strategy.interface";
+
+interface IMatchingAnswer {
+	terms: string[];
+	definitions: string[];
+}
 
 @Injectable({
 	providedIn: "root",
 })
-export class MatchingGameService {
+export class MatchingGameService implements IGameStrategy<any, IMatchingAnswer, boolean[]> {
 	constructor(private wordsService: WordsService) {}
 
-	generateMatchingGame(amount: number = 5): IMatch[] {
+	generateGameData(pairs = 5): IMatch[] {
 		const matches: IMatch[] = [];
 
-		while (matches.length < amount) {
+		while (matches.length < pairs) {
 			const randomWord = this.wordsService.getRandomLearningWord();
 
 			if (matches.some((t) => t.id === randomWord.id)) continue;
@@ -32,6 +38,16 @@ export class MatchingGameService {
 
 			return match?.definition === selectedDefinition;
 		});
+	}
+
+	validateAnswer(gameData: any, answer: IMatchingAnswer) {
+		const results = this.checkAnswers(gameData, answer.terms, answer.definitions);
+		const isCorrect = results.every((r) => r);
+
+		return {
+			isCorrect,
+			returnVal: results,
+		};
 	}
 }
 

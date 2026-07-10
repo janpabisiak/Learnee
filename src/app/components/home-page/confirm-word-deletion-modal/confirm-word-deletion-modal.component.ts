@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { ModalComponent } from "@shared/modal/modal.component";
+import { ModalComponent } from "@shared/components/modal/modal.component";
 import { TranslatePipe } from "@ngx-translate/core";
-import { EModalType, ModalService } from "@services/modal/modal.service";
+import { ModalService } from "@services/modal/modal.service";
+import { EModalType } from "@shared/constants/modal.constants";
 import { WordsService } from "@services/words/words.service";
 import { combineLatest, Subject, takeUntil } from "rxjs";
 
@@ -31,13 +32,14 @@ export class ConfirmWordDeletionModalComponent implements OnInit {
 
 	closeModal() {
 		this.modalService.toggleModal(EModalType.WordDeletion, false);
+		this.wordsService.setWordToDeleteId(null);
 	}
 
 	confirmDeletion() {
-		if (this.wordId) {
-			this.wordsService.remove(this.wordId);
+		if (this.wordId !== null) {
+			this.wordsService.delete(this.wordId);
 		} else {
-			this.wordsService.removeMany();
+			this.wordsService.deleteMany();
 		}
 
 		this.closeModal();

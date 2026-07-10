@@ -4,7 +4,7 @@ import { FillGapsGameComponent } from "./fill-gaps-listening-game.component";
 import { provideHttpClient } from "@angular/common/http";
 import { SentenceCasePipe } from "@pipes/sentence-case.pipe";
 import { InputGuessComponent } from "./input-guess/input-guess.component";
-import { ButtonComponent } from "@shared/button/button.component";
+import { ButtonComponent } from "@shared/components/button/button.component";
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { createMockGameService, IMockGameService, mockStages } from "@services/game/game.service.mock";
 import {
@@ -13,6 +13,7 @@ import {
 } from "@services/web-speech/web-speech.service.mock";
 import { WebSpeechService } from "@services/web-speech/web-speech.service";
 import { GameService } from "@services/game/game.service";
+import { EAvailableGames } from "@shared/constants/game.constants";
 import { provideTranslateService } from "@ngx-translate/core";
 
 describe("FillGapsGameComponent", () => {
@@ -89,7 +90,7 @@ describe("FillGapsGameComponent", () => {
 		component.answerQuestion();
 
 		expect(component.isVisible).toBeFalse();
-		expect(mockGameService.answerFillGapsListeningGameQuestion).toHaveBeenCalledOnceWith("");
+		expect(mockGameService.submitAnswer).toHaveBeenCalledOnceWith("");
 		expect(component.inputValue).toBe("test2");
 		expect(mockGameService.goToNextStage).toHaveBeenCalledTimes(1);
 	});

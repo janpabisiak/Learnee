@@ -8,7 +8,7 @@ import {
 	Output,
 } from "@angular/core";
 import { TranslatePipe, TranslateService } from "@ngx-translate/core";
-import { EAvailableGames, IGame } from "@services/game/game.service";
+import { EAvailableGames, IGame } from "@shared/constants/game.constants";
 import { take } from "rxjs";
 
 @Component({

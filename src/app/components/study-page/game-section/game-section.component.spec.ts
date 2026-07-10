@@ -2,11 +2,12 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { GameSectionComponent } from "./game-section.component";
 import { GameContainerComponent } from "./game-container/game-container.component";
-import { ButtonComponent } from "@shared/button/button.component";
+import { ButtonComponent } from "@shared/components/button/button.component";
 import { StudyProgressBarComponent } from "../study-progress-bar/study-progress-bar.component";
 import { createMockGameService, IMockGameService, mockStages } from "@services/game/game.service.mock";
 import { provideHttpClient } from "@angular/common/http";
 import { GameService } from "@services/game/game.service";
+import { EAvailableGames } from "@shared/constants/game.constants";
 
 describe("GameSectionComponent", () => {
 	let component: GameSectionComponent;

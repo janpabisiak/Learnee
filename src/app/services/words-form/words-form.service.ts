@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { BehaviorSubject, Subscription } from "rxjs";
 import { WordsService } from "@services/words/words.service";
 import { IWord } from "../../types/word.interface";
+import { DEFINITION_MAX_LENGTH, WORD_MAX_LENGTH } from "@shared/constants/validation.constants";
 
 @Injectable({
 	providedIn: "root",
@@ -19,10 +20,13 @@ export class WordsFormService {
 
 	constructor(private wordsService: WordsService) {
 		this.form = new FormGroup({
-			word: new FormControl<string>("", [Validators.required, Validators.maxLength(100)]),
+			word: new FormControl<string>("", [
+				Validators.required,
+				Validators.maxLength(WORD_MAX_LENGTH),
+			]),
 			definition: new FormControl<string>("", [
 				Validators.required,
-				Validators.maxLength(10_000),
+				Validators.maxLength(DEFINITION_MAX_LENGTH),
 			]),
 		});
 

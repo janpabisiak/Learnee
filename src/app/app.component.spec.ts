@@ -5,17 +5,13 @@ import { FooterComponent } from "@components/footer/footer.component";
 import { HeaderComponent } from "@components/header/header.component";
 import { MobileMenuComponent } from "@components/header/mobile-menu/mobile-menu.component";
 import { AddEditWordModalComponent } from "@components/home-page/add-edit-word-modal/add-edit-word-modal.component";
-import { SpinnerComponent } from "@shared/spinner/spinner.component";
-import {
-	EToasterPositions,
-	ToasterContainerComponent,
-} from "@shared/toaster-container/toaster-container.component";
+import { AddEditFolderModalComponent } from "@components/folders-page/add-edit-folder-modal/add-edit-folder-modal.component";
+import { SpinnerComponent } from "@shared/components/spinner/spinner.component";
+import { ToasterContainerComponent } from "@shared/components/toaster-container/toaster-container.component";
 import { provideTranslateService } from "@ngx-translate/core";
-import { EModalType, ModalService } from "@services/modal/modal.service";
-import {
-	createMockModalService,
-	IMockModalService,
-} from "@services/modal/modal.service.mock";
+import { ModalService } from "@services/modal/modal.service";
+import { EModalType } from "@shared/constants/modal.constants";
+import { createMockModalService, IMockModalService } from "@services/modal/modal.service.mock";
 import { ToasterService } from "@services/toaster/toaster.service";
 import {
 	createMockToasterService,
@@ -29,6 +25,7 @@ import {
 	mockWords,
 } from "@services/words/words.service.mock";
 import { AppComponent } from "./app.component";
+import { EToasterPositions } from "@shared/constants/toaster.constants";
 
 describe("AppComponent", () => {
 	let fixture: ComponentFixture<AppComponent>;
@@ -47,6 +44,7 @@ describe("AppComponent", () => {
 				AppComponent,
 				HeaderComponent,
 				AddEditWordModalComponent,
+				AddEditFolderModalComponent,
 				ToasterContainerComponent,
 				SpinnerComponent,
 				MobileMenuComponent,
@@ -76,6 +74,7 @@ describe("AppComponent", () => {
 	it("should initialize default values on init", () => {
 		expect(app.isWordAddingModalOpen).toBeFalse();
 		expect(app.isWordDeletingModalOpen).toBeFalse();
+		expect(app.isFolderAddingModalOpen).toBeFalse();
 		expect(app.isMobileNavbarOpen).toBeFalse();
 		expect(app.isLoading).toBeTrue();
 		expect(app.toasters).toEqual([]);
@@ -96,14 +95,17 @@ describe("AppComponent", () => {
 	it("should set fields values depending on subscriptions", () => {
 		mockModalService.isWordAddingModalOpen$.next(true);
 		mockModalService.isWordDeletionModalOpen$.next(true);
+		mockModalService.isFolderAddingModalOpen$.next(true);
 		mockModalService.isMobileNavbarOpen$.next(true);
 		mockWordsService.wordsOfTheDay$.next(mockWords);
+		mockWordsService.isWotdLoading$.next(false);
 		mockToasterService.toasters$.next(mockToasters);
 
 		app.ngOnInit();
 
 		expect(app.isWordAddingModalOpen).toBeTrue();
 		expect(app.isWordDeletingModalOpen).toBeTrue();
+		expect(app.isFolderAddingModalOpen).toBeTrue();
 		expect(app.isMobileNavbarOpen).toBeTrue();
 		expect(app.isLoading).toBeFalse();
 		expect(app.toasters).toEqual(mockToasters);

@@ -1,0 +1,4 @@
+export const WORD_MAX_LENGTH = 100;
+export const DEFINITION_MAX_LENGTH = 1_000;
+export const FOLDER_NAME_MAX_LENGTH = 100;
+export const FOLDER_DESCRIPTION_MAX_LENGTH = 1_000;

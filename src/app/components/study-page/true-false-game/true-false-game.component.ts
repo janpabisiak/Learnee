@@ -1,8 +1,9 @@
 import { NgClass } from "@angular/common";
 import { Component, Input, OnDestroy, OnInit } from "@angular/core";
-import { GameService, IStage } from "@services/game/game.service";
+import { GameService } from "@services/game/game.service";
 import { combineLatest, Subject, takeUntil } from "rxjs";
 import { TrueFalseAnswerComponent } from "./true-false-answer/true-false-answer.component";
+import { IStage } from "../../../types/stage.interface";
 
 @Component({
 	selector: "app-true-false-game",
@@ -41,7 +42,7 @@ export class TrueFalseGameComponent implements OnInit, OnDestroy {
 	}
 
 	answerQuestion(isTrue: boolean) {
-		this.gameService.answerTrueFalseGameQuestion(isTrue);
+		this.gameService.submitAnswer(isTrue);
 		this.showAnswer = true;
 
 		this.gameService.goToNextStage();

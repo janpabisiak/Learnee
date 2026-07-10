@@ -1,4 +1,4 @@
-import { EToasterTypes } from "@shared/toaster-container/toaster/toaster.component";
+import { EToasterTypes } from "@shared/constants/toaster.constants";
 import { IToaster } from "../../types/toaster.interface";
 import { BehaviorSubject } from "rxjs";
 
@@ -21,6 +21,8 @@ export const mockToasters: IToaster[] = [
 
 export const createMockToasterService = () => ({
 	toasters$: new BehaviorSubject<IToaster[]>([]),
+	addToaster: jasmine.createSpy("addToaster"),
+	removeToaster: jasmine.createSpy("removeToaster"),
 	startAutoRemoving: jasmine.createSpy("startAutoRemoving"),
 });
 

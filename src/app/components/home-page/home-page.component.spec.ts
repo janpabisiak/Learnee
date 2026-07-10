@@ -5,14 +5,15 @@ import { HomePageComponent } from "./home-page.component";
 import { WordListComponent } from "./word-list/word-list.component";
 import { WordsOfTheDayComponent } from "./words-of-the-day/words-of-the-day.component";
 import { UserStatisticsComponent } from "./user-statistics/user-statistics.component";
-import { ButtonComponent } from "@shared/button/button.component";
+import { ButtonComponent } from "@shared/components/button/button.component";
 import { createMockModalService, IMockModalService } from "@services/modal/modal.service.mock";
 import {
 	createMockWordsService,
 	IMockWordsService,
 	mockWords,
 } from "@services/words/words.service.mock";
-import { EModalType, ModalService } from "@services/modal/modal.service";
+import { ModalService } from "@services/modal/modal.service";
+import { EModalType } from "@shared/constants/modal.constants";
 import { WordsService } from "@services/words/words.service";
 import { provideTranslateService } from "@ngx-translate/core";
 

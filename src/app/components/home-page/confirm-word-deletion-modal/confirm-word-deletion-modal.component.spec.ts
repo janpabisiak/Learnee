@@ -2,11 +2,13 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { ConfirmWordDeletionModalComponent } from "./confirm-word-deletion-modal.component";
 import { provideHttpClient } from "@angular/common/http";
-import { ModalComponent } from "@shared/modal/modal.component";
+import { ModalComponent } from "@shared/components/modal/modal.component";
 import { createMockModalService, IMockModalService } from "@services/modal/modal.service.mock";
-import { createMockWordsService, IMockWordsService } from "@services/words/words.service.mock";
-import { EModalType, ModalService } from "@services/modal/modal.service";
+import { ModalService } from "@services/modal/modal.service";
+import { EModalType } from "@shared/constants/modal.constants";
+
 import { WordsService } from "@services/words/words.service";
+import { createMockWordsService, IMockWordsService } from "@services/words/words.service.mock";
 import { provideTranslateService } from "@ngx-translate/core";
 
 describe("ConfirmWordDeletionModalComponent", () => {
@@ -53,13 +55,13 @@ describe("ConfirmWordDeletionModalComponent", () => {
 		component.wordId = 1;
 		component.confirmDeletion();
 
-		expect(mockWordsService.remove).toHaveBeenCalledOnceWith(1);
+		expect(mockWordsService.delete).toHaveBeenCalledOnceWith(1);
 	});
 
 	it("should call wordsService.removeMany on confirmDeletion call when wordId is not set", () => {
 		component.wordId = null;
 		component.confirmDeletion();
 
-		expect(mockWordsService.removeMany).toHaveBeenCalledTimes(1);
+		expect(mockWordsService.deleteMany).toHaveBeenCalledTimes(1);
 	});
 });

@@ -2,14 +2,15 @@ import { Injectable } from "@angular/core";
 import { WordsService } from "@services/words/words.service";
 import { IAnswer } from "../../types/answer.interface";
 import { IQuestion } from "../../types/question.interface";
+import { IGameStrategy } from "../../types/game-strategy.interface";
 
 @Injectable({
 	providedIn: "root",
 })
-export class QuizService {
+export class QuizService implements IGameStrategy<any, number, any> {
 	constructor(private wordsService: WordsService) {}
 
-	generateQuestion(): IQuestion {
+	generateGameData(): IQuestion {
 		const question: IQuestion = {
 			content: "",
 			possibleAnswers: [],
@@ -59,6 +60,15 @@ export class QuizService {
 			answered: true,
 			answeredCorrect:
 				question.possibleAnswers.find((a) => a.id === answerId)?.isCorrect || false,
+		};
+	}
+
+	validateAnswer(gameData: any, answerId: number) {
+		const updatedQuestion = this.answerQuestion(gameData, answerId);
+
+		return {
+			isCorrect: updatedQuestion.answeredCorrect,
+			updatedData: updatedQuestion,
 		};
 	}
 }

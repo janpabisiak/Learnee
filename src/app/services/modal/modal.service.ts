@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
+import { EModalType } from "@shared/constants/modal.constants";
 
 @Injectable({
 	providedIn: "root",
@@ -7,11 +8,17 @@ import { BehaviorSubject } from "rxjs";
 export class ModalService {
 	private isWordAddingModalOpen = new BehaviorSubject<boolean>(false);
 	private isWordDeletionModalOpen = new BehaviorSubject<boolean>(false);
+	private isFolderAddingModalOpen = new BehaviorSubject<boolean>(false);
+	private isFolderDeletionModalOpen = new BehaviorSubject<boolean>(false);
+	private isAddToFolderModalOpen = new BehaviorSubject<boolean>(false);
 	private isImportConfirmationModalOpen = new BehaviorSubject<boolean>(false);
 	private isMobileNavbarOpen = new BehaviorSubject<boolean>(false);
 
 	isWordAddingModalOpen$ = this.isWordAddingModalOpen.asObservable();
 	isWordDeletionModalOpen$ = this.isWordDeletionModalOpen.asObservable();
+	isFolderAddingModalOpen$ = this.isFolderAddingModalOpen.asObservable();
+	isFolderDeletionModalOpen$ = this.isFolderDeletionModalOpen.asObservable();
+	isAddToFolderModalOpen$ = this.isAddToFolderModalOpen.asObservable();
 	isImportConfirmationModalOpen$ = this.isImportConfirmationModalOpen.asObservable();
 	isMobileNavbarOpen$ = this.isMobileNavbarOpen.asObservable();
 
@@ -23,6 +30,15 @@ export class ModalService {
 			case EModalType.WordDeletion:
 				this.isWordDeletionModalOpen.next(state);
 				break;
+			case EModalType.FolderAdding:
+				this.isFolderAddingModalOpen.next(state);
+				break;
+			case EModalType.FolderDeletion:
+				this.isFolderDeletionModalOpen.next(state);
+				break;
+			case EModalType.AddToFolder:
+				this.isAddToFolderModalOpen.next(state);
+				break;
 			case EModalType.ImportConfirmation:
 				this.isImportConfirmationModalOpen.next(state);
 				break;
@@ -33,11 +49,4 @@ export class ModalService {
 				break;
 		}
 	}
-}
-
-export enum EModalType {
-	WordAdding,
-	WordDeletion,
-	ImportConfirmation,
-	MobileNavbar,
 }

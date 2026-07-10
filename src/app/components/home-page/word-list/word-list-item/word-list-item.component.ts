@@ -2,17 +2,19 @@ import { NgClass } from "@angular/common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, OnDestroy, OnInit } from "@angular/core";
 import { TranslatePipe } from "@ngx-translate/core";
 import { WordsFormService } from "@services/words-form/words-form.service";
-import { EModalType, ModalService } from "@services/modal/modal.service";
+import { ModalService } from "@services/modal/modal.service";
+import { EModalType } from "@shared/constants/modal.constants";
 import { WordsService } from "@services/words/words.service";
 import { Subject, takeUntil } from "rxjs";
 import { SentenceCasePipe } from "../../../../pipes/sentence-case.pipe";
 import { WebSpeechService } from "../../../../services/web-speech/web-speech.service";
 import { IWord } from "../../../../types/word.interface";
+import { AutoCloseDirective } from "app/directives/auto-close.directive";
 
 @Component({
 	selector: "app-word-list-item",
 	templateUrl: "./word-list-item.component.html",
-	imports: [SentenceCasePipe, NgClass, TranslatePipe],
+	imports: [SentenceCasePipe, NgClass, TranslatePipe, AutoCloseDirective],
 	standalone: true,
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

@@ -1,12 +1,14 @@
 import { inject, Injectable } from "@angular/core";
-import { EToasterTypes } from "@shared/toaster-container/toaster/toaster.component";
+import { DEFAULT_TOASTER_DURATION, EToasterTypes } from "@shared/constants/toaster.constants";
 import { TranslateService } from "@ngx-translate/core";
 import { ToasterService } from "@services/toaster/toaster.service";
 import { IWord } from "../../types/word.interface";
 import { WordsResourceService } from "@services/words-resource/words-resource.service";
-import { WordsStore } from "../../stores/words.store";
-import { ESortTypes } from "@services/words-options/words-options.service";
-import { combineLatest, map, take } from "rxjs";
+import { WordsStore } from "../../stores/words/words.store";
+import { EWordSortTypes } from "@services/words-options/words-options.service";
+import { map, take } from "rxjs";
+import { FoldersStore } from "app/stores/folders/folders.store";
+import { GameStore } from "app/stores/game/game.store";
 
 @Injectable({
 	providedIn: "root",
@@ -15,6 +17,8 @@ export class WordsService {
 	private toasterService = inject(ToasterService);
 	private translateService = inject(TranslateService);
 	private wordsStore = inject(WordsStore);
+	private foldersStore = inject(FoldersStore);
+	private gameStore = inject(GameStore);
 	private wordsResourceService = inject(WordsResourceService);
 
 	wordList$ = this.wordsStore.wordList$;
@@ -24,6 +28,7 @@ export class WordsService {
 	hasSelectedIds$ = this.wordsStore.hasSelectedIds$;
 	wordToDeleteId$ = this.wordsStore.wordToDeleteId$;
 	wordsOfTheDay$ = this.wordsStore.wordsOfTheDay$;
+	isWotdLoading$ = this.wordsStore.isWotdLoading$;
 	sortType$ = this.wordsStore.sortType$;
 	searchQuery$ = this.wordsStore.searchQuery$;
 	visibleWords$ = this.wordsStore.visibleWords$;
@@ -41,7 +46,7 @@ export class WordsService {
 		this.saveData(updatedWordList);
 	}
 
-	setSortType(value: ESortTypes) {
+	setSortType(value: EWordSortTypes) {
 		this.wordsStore.setSortType(value);
 	}
 
@@ -57,6 +62,10 @@ export class WordsService {
 		this.wordsStore.setWordsPerPage(amount);
 	}
 
+	setWordToDeleteId(wordId: number | null) {
+		this.wordsStore.setWordToDeleteId(wordId);
+	}
+
 	fetchDefinition$(word: string) {
 		return this.wordsResourceService.fetchDefinition$(word);
 	}
@@ -67,14 +76,14 @@ export class WordsService {
 			this.toasterService.addToaster({
 				type: EToasterTypes.Error,
 				content: this.translateService.instant("toaster.error.word.alreadyExists"),
-				duration: 5,
+				duration: DEFAULT_TOASTER_DURATION,
 			});
 
 			return;
 		}
 
 		const newWord: IWord = {
-			id: wordList.length,
+			id: wordList.length > 0 ? Math.max(...wordList.map((f) => f.id)) + 1 : 0,
 			name: word,
 			definition,
 			isLearning: true,
@@ -86,31 +95,35 @@ export class WordsService {
 		this.toasterService.addToaster({
 			type: EToasterTypes.Success,
 			content: this.translateService.instant("toaster.success.word.added"),
-			duration: 5,
+			duration: DEFAULT_TOASTER_DURATION,
 		});
 	}
 
 	getRandomLearningWord() {
-		const learningWords = this.wordsStore.wordListValue.filter((w) => w.isLearning);
+		const filters = this.getLearningWordFilters();
+
+		const learningWords = this.wordsStore.wordListValue.filter((word) =>
+			filters.every((filterFn) => filterFn(word)),
+		);
 
 		const randomIndex = Math.floor(Math.random() * learningWords.length);
 		return learningWords[randomIndex];
 	}
 
-	remove(wordId: number) {
+	delete(wordId: number) {
 		const updatedWordList = this.wordsStore.wordListValue.filter((w) => w.id !== wordId);
 		this.updateWordList(updatedWordList);
 
 		this.toasterService.addToaster({
 			type: EToasterTypes.Success,
 			content: this.translateService.instant("toaster.success.word.deleted"),
-			duration: 5,
+			duration: DEFAULT_TOASTER_DURATION,
 		});
 
 		this.wordsStore.setWordToDeleteId(null);
 	}
 
-	removeMany() {
+	deleteMany() {
 		const selectedIds = this.wordsStore.selectedIdsValue;
 
 		if (selectedIds.length > 0) {
@@ -126,7 +139,7 @@ export class WordsService {
 		this.toasterService.addToaster({
 			type: EToasterTypes.Success,
 			content: this.translateService.instant("toaster.success.word.manyDeleted"),
-			duration: 5,
+			duration: DEFAULT_TOASTER_DURATION,
 		});
 
 		this.unselectAll();
@@ -142,7 +155,7 @@ export class WordsService {
 		this.toasterService.addToaster({
 			type: EToasterTypes.Success,
 			content: this.translateService.instant("toaster.success.word.edited"),
-			duration: 5,
+			duration: DEFAULT_TOASTER_DURATION,
 		});
 	}
 
@@ -165,15 +178,11 @@ export class WordsService {
 	toggleSelection(wordId: number) {
 		const selectedIds = this.wordsStore.selectedIdsValue;
 		const hasWordSelected = selectedIds.includes(wordId);
-		let updatedSelection: number[] = [];
 
-		if (hasWordSelected) {
-			updatedSelection = selectedIds.filter((id) => id !== wordId);
-		} else {
-			updatedSelection = [...selectedIds, wordId];
-		}
-
-		this.wordsStore.setSelectedIds(updatedSelection);
+		const updatedSelectedIds = hasWordSelected
+			? selectedIds.filter((id) => id !== wordId)
+			: [...selectedIds, wordId];
+		this.wordsStore.setSelectedIds(updatedSelectedIds);
 	}
 
 	selectAllVisible() {
@@ -204,5 +213,22 @@ export class WordsService {
 
 	unselectAll() {
 		this.wordsStore.setSelectedIds([]);
+	}
+
+	private getLearningWordFilters(): ((word: IWord) => boolean)[] {
+		const filters: ((word: IWord) => boolean)[] = [(word: IWord) => word.isLearning];
+
+		const selectedFolderIds = this.gameStore.selectedFolderIdsValue;
+		if (selectedFolderIds.length) {
+			const allowedWordIds = this.foldersStore.foldersValue
+				.filter((folder) => selectedFolderIds.includes(folder.id))
+				.flatMap((folder) => folder.wordIds);
+
+			const allowedWordIdsSet = new Set(allowedWordIds);
+
+			filters.push((word: IWord) => allowedWordIdsSet.has(word.id));
+		}
+
+		return filters;
 	}
 }

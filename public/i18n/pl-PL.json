@@ -1,24 +1,19 @@
 {
 	"nav.home": "Start",
+	"nav.folders": "Foldery",
 	"nav.study": "Nauka",
 	"nav.settings": "Ustawienia",
 
 	"wordlist.title": "Lista słów",
 	"wordlist.count": "{{count}} słowa",
 	"wordlist.addNew": "Nowe słowo",
-	"wordlist.searchPlaceholder": "Szukaj po słowie lub definicji",
-	"wordlist.sort.nameAsc": "Sortuj rosnąco wg. słowa",
-	"wordlist.sort.nameDesc": "Sortuj malejąco wg. słowa",
+	"wordlist.search": "Szukaj po słowie lub definicji",
+
 	"wordlist.sort.definitionAsc": "Sortuj rosnąco wg. definicji",
 	"wordlist.sort.definitionDesc": "Sortuj malejąco wg. definicji",
 	"wordlist.sort.learningAsc": "Sortuj rosnąco wg. stanu",
 	"wordlist.sort.learningDesc": "Sortuj malejąco wg stanu",
-	"wordlist.sort.idAsc": "Sortuj rosnąco wg. ID",
-	"wordlist.sort.idDesc": "Sortuj malejąco wg. ID",
-	"wordlist.deleteAll": "Wyczyść listę",
-	"wordlist.deleteSelected": "Usuń zaznaczone",
-	"wordlist.selectAllVisible": "Zaznacz widoczne",
-	"wordlist.unselectAll": "Cofnij zaznaczenie",
+
 	"wordlist.editSelected": "Edytuj zaznaczone",
 	"wordlist.markAsToLearn": "Oznacz jako do nauki",
 	"wordlist.markAsNotLearning": "Oznacz jako nauczone",
@@ -29,6 +24,31 @@
 	"wordlist.adjustSearchQuery": "Zmień kryteria wyszukiwania.",
 	"wordlist.edit": "Edytuj",
 	"wordlist.delete": "Usuń",
+
+	"folderlist.title": "Foldery",
+	"folderlist.count": "{{count}} folderów",
+	"folderlist.addNew": "Utwórz folder",
+	"folderlist.search": "Szukaj po nazwie lub opisie",
+
+	"folderlist.sort.descriptionAsc": "Sortuj rosnąco wg. opisu",
+	"folderlist.sort.descriptionDesc": "Sortuj malejąco wg. opisu",
+
+	"folderlist.noFolders": "Brak folderów.",
+	"folderlist.addNewFolder": "Utwórz nowy folder przyciskiej po prawej stronie.",
+	"folderlist.adjustSearchQuery": "Zmień kryteria wyszukiwania.",
+	"folderlist.edit": "Edytuj",
+	"folderlist.delete": "Usuń",
+	"folderlist.selectWords": "Dodaj słowa",
+
+	"itemlist.deleteAll": "Usuń wszystkie",
+	"itemlist.deleteSelected": "Usuń zaznaczone",
+	"itemlist.selectAllVisible": "Zaznacz widoczne",
+	"itemlist.unselectAll": "Odznacz wszystko",
+
+	"itemlist.sort.idAsc": "Sortuj rosnąco wg. ID",
+	"itemlist.sort.idDesc": "Sortuj malejąco wg. ID",
+	"itemlist.sort.nameAsc": "Sortuj rosnąco wg. nazwy",
+	"itemlist.sort.nameDesc": "Sortuj malejąco wg. nazwy",
 
 	"pagination.showing": "Wyświetlono {{from}}–{{to}} z {{total}}",
 	"pagination.rowsPerPage": "Na stronę:",
@@ -42,30 +62,44 @@
 	"level.title": "Postęp poziomu",
 	"level.label": "Poziom {{level}}",
 
-	"modal.add.title": "Nowe słowo",
-	"modal.add.word": "Słowo",
-	"modal.add.word.enter": "Wpisz słowo",
-	"modal.add.word.required": "Pole wymagane.",
-	"modal.add.definition": "Definicja",
-	"modal.add.definition.required": "Pole wymagane.",
-	"modal.add.too.many.chars": "Za dużo znaków (maks. {{length}}).",
+	"modal.add.too.many.chars": "Zbyt dużo znaków (maks. {{length}}).",
 
-	"modal.edit.title": "Edytuj słowo",
+	"modal.add.word.title": "Dodaj nowe słowo",
+	"modal.add.word.name": "Słowo",
+	"modal.add.word.name.enter": "Wpisz słowo",
+	"modal.add.word.name.required": "Słowo jest wymagane.",
+	"modal.add.word.definition": "Definicja",
+	"modal.add.word.definition.required": "Definicja jest wymagana.",
+	"modal.edit.word.title": "Edytuj słowo",
+
+	"modal.add.folder.title": "Dodaj nowy folder",
+	"modal.add.folder.name": "Nazwa folderu",
+	"modal.add.folder.name.enter": "Wpisz nazwę folderu",
+	"modal.add.folder.name.required": "Nazwa folderu jest wymagana.",
+	"modal.add.folder.description": "Opis",
+	"modal.add.folder.description.required": "Opis jest wymagany.",
+	"modal.edit.folder.title": "Edytuj folder",
+
+	"modal.addToFolder.title": "Dodaj słowa do folderu",
 
 	"modal.delete.title": "Potwierdź usunięcie",
-	"modal.delete.confirm.delete": "Czy na pewno chcesz to usunąć z listy słów?",
+	"modal.delete.confirm.delete": "Czy na pewno chcesz to usunąć?",
 
-	"modal.import.title": "Potwierdź import",
-	"modal.import.description": "Zaimportowanie tego pliku całkowicie zastąpi aktualną listę słów i Twoje statystyki. Tej operacji nie można cofnąć.",
+	"modal.import.title": "Potwierdź Import",
+	"modal.import.description": "Zaimportowanie tego pliku całkowicie zastąpi Twoje obecne dane. Te działania nie można cofnąć.",
 
-	"modal.label.add": "Dodaj",
+	"modal.label.add": "Dodaj słowo",
+	"modal.label.addFolder": "Dodaj folder",
 	"modal.label.save": "Zapisz",
+
 	"modal.label.confirm": "OK",
 	"modal.label.cancel": "Anuluj",
 	"modal.label.everything": "wszystko",
 
 	"study.prepare.title": "Przygotuj grę",
 	"study.prepare.button": "Start",
+	"study.prepare.selectFolders": "Wybierz foldery",
+	"study.prepare.numberOfStages": "Liczba etapów",
 
 	"study.games.cancel.label": "Przerwij grę",
 	"study.games.checkAnswer.label": "Sprawdź",
@@ -127,6 +161,13 @@
 	"toaster.success.word.deleted": "Słowo zostało usunięte",
 	"toaster.success.word.manyDeleted": "Słowa zostały usunięte",
 	"toaster.success.word.edited": "Słowo zostało edytowane",
+	"toaster.error.folder.alreadyExists": "Ten folder jest już na Twojej liście",
+	"toaster.success.folder.added": "Folder został dodany",
+	"toaster.success.folder.deleted": "Folder został usunięty",
+	"toaster.success.folder.manyDeleted": "Foldery zostały usunięte",
+	"toaster.success.folder.edited": "Folder został edytowany",
 
-	"error.notFound": "Błąd 404 – Strona nie istnieje"
+	"error.notFound": "Błąd 404 – Strona nie istnieje",
+
+	"multiselect.noResults": "Nie znaleziono wyników dla {{searchQuery}}"
 }

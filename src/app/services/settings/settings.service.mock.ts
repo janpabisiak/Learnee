@@ -1,5 +1,5 @@
 import { BehaviorSubject } from "rxjs";
-import { EAvailableLanguages } from "./settings.service";
+import { EAvailableLanguages } from "@shared/constants/settings.constants";
 
 export const createMockSettingsService = () => ({
 	isDarkMode$: new BehaviorSubject<boolean>(false),

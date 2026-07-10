@@ -1,6 +1,7 @@
 import { NgClass } from "@angular/common";
 import { Component, CUSTOM_ELEMENTS_SCHEMA, OnDestroy, OnInit } from "@angular/core";
-import { EModalType, ModalService } from "@services/modal/modal.service";
+import { ModalService } from "@services/modal/modal.service";
+import { EModalType } from "@shared/constants/modal.constants";
 import { Subject, takeUntil } from "rxjs";
 
 @Component({

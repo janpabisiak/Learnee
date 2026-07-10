@@ -2,7 +2,8 @@ import { DatePipe, NgClass } from "@angular/common";
 import { Component, Input, OnDestroy, OnInit } from "@angular/core";
 import { TranslatePipe } from "@ngx-translate/core";
 import { IStatistics } from "@services/statistics/statistics.service";
-import { EAvailableLanguages, SettingsService } from "@services/settings/settings.service";
+import { SettingsService } from "@services/settings/settings.service";
+import { EAvailableLanguages } from "@shared/constants/settings.constants";
 import { Subject, takeUntil } from "rxjs";
 
 @Component({

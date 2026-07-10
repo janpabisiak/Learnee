@@ -2,13 +2,15 @@ import { Injectable, Renderer2, RendererFactory2 } from "@angular/core";
 import { LocalStorageService } from "@services/local-storage/local-storage.service";
 import { BehaviorSubject } from "rxjs";
 import { TranslateService } from "@ngx-translate/core";
+import { EAvailableLanguages } from "@shared/constants/settings.constants";
+import { ELocalStorageKeys } from "@shared/constants/local-storage.constants";
 
 @Injectable({
 	providedIn: "root",
 })
 export class SettingsService {
 	private isDarkMode = new BehaviorSubject<boolean>(false);
-	private isFetchWordDefinitionEnabled = new BehaviorSubject<boolean>(true);
+	private isFetchWordDefinitionEnabled = new BehaviorSubject<boolean>(false);
 	private currentLanguage = new BehaviorSubject<EAvailableLanguages>(EAvailableLanguages.English);
 	private renderer: Renderer2;
 
@@ -23,33 +25,36 @@ export class SettingsService {
 	) {
 		this.renderer = rendererFactory.createRenderer(null, null);
 
-		this.isDarkMode.next(this.localStorageService.loadData("dark-mode") ?? false);
+		this.isDarkMode.next(
+			this.localStorageService.loadData(ELocalStorageKeys.DarkMode) ?? false,
+		);
 		this.toggleDarkClass();
 
 		this.isFetchWordDefinitionEnabled.next(
-			this.localStorageService.loadData("fetch-word-definition") ?? true,
+			this.localStorageService.loadData(ELocalStorageKeys.FetchWordDefinition) ?? true,
 		);
 
 		this.currentLanguage.next(
-			this.localStorageService.loadData("language") || EAvailableLanguages.English,
+			this.localStorageService.loadData(ELocalStorageKeys.Language) ||
+				EAvailableLanguages.English,
 		);
 		this.translation.use(this.currentLanguage.value);
 	}
 
 	setIsDarkMode(value: boolean) {
 		this.isDarkMode.next(value);
-		this.localStorageService.saveData("dark-mode", value);
+		this.localStorageService.saveData(ELocalStorageKeys.DarkMode, value);
 		this.toggleDarkClass();
 	}
 
 	setIsFetchWordDefinitionEnabled(value: boolean) {
 		this.isFetchWordDefinitionEnabled.next(value);
-		this.localStorageService.saveData("fetch-word-definition", value);
+		this.localStorageService.saveData(ELocalStorageKeys.FetchWordDefinition, value);
 	}
 
 	setCurrentLanguage(value: EAvailableLanguages) {
 		this.currentLanguage.next(value);
-		this.localStorageService.saveData("language", value);
+		this.localStorageService.saveData(ELocalStorageKeys.Language, value);
 		this.translation.use(this.currentLanguage.value);
 	}
 
@@ -58,9 +63,4 @@ export class SettingsService {
 			? this.renderer.addClass(document.body, "dark")
 			: this.renderer.removeClass(document.body, "dark");
 	}
-}
-
-export enum EAvailableLanguages {
-	English = "en-US",
-	Polish = "pl-PL",
 }

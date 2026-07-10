@@ -3,13 +3,14 @@ import { RouterModule } from "@angular/router";
 import { HeaderComponent } from "@components/header/header.component";
 import { MobileMenuComponent } from "@components/header/mobile-menu/mobile-menu.component";
 import { AddEditWordModalComponent } from "@components/home-page/add-edit-word-modal/add-edit-word-modal.component";
+import { AddEditFolderModalComponent } from "@components/folders-page/add-edit-folder-modal/add-edit-folder-modal.component";
 import { ConfirmWordDeletionModalComponent } from "@components/home-page/confirm-word-deletion-modal/confirm-word-deletion-modal.component";
-import { SpinnerComponent } from "@shared/spinner/spinner.component";
-import {
-	EToasterPositions,
-	ToasterContainerComponent,
-} from "@shared/toaster-container/toaster-container.component";
-import { EModalType, ModalService } from "@services/modal/modal.service";
+import { ConfirmFolderDeletionModalComponent } from "@components/folders-page/confirm-folder-deletion-modal/confirm-folder-deletion-modal.component";
+import { SpinnerComponent } from "@shared/components/spinner/spinner.component";
+import { ToasterContainerComponent } from "@shared/components/toaster-container/toaster-container.component";
+import { EToasterPositions } from "@shared/constants/toaster.constants";
+import { ModalService } from "@services/modal/modal.service";
+import { EModalType } from "@shared/constants/modal.constants";
 import { ToasterService } from "@services/toaster/toaster.service";
 import { WordsService } from "@services/words/words.service";
 import { Subscription } from "rxjs";
@@ -17,6 +18,7 @@ import { IToaster } from "../app/types/toaster.interface";
 import { FooterComponent } from "@components/footer/footer.component";
 import { SettingsService } from "@services/settings/settings.service";
 import { ConfirmImportModalComponent } from "@components/settings-page/confirm-import-modal/confirm-import-modal.component";
+import { AddToFolderModalComponent } from "@components/folders-page/add-to-folder-modal/add-to-folder-modal.component";
 
 @Component({
 	selector: "app-root",
@@ -24,12 +26,15 @@ import { ConfirmImportModalComponent } from "@components/settings-page/confirm-i
 		RouterModule,
 		HeaderComponent,
 		AddEditWordModalComponent,
+		AddEditFolderModalComponent,
 		ConfirmWordDeletionModalComponent,
+		ConfirmFolderDeletionModalComponent,
 		ConfirmImportModalComponent,
 		ToasterContainerComponent,
 		SpinnerComponent,
 		MobileMenuComponent,
 		FooterComponent,
+		AddToFolderModalComponent,
 	],
 	templateUrl: "./app.component.html",
 	standalone: true,
@@ -41,6 +46,9 @@ export class AppComponent implements OnInit, OnDestroy {
 	private settingsService = inject(SettingsService);
 	isWordAddingModalOpen = false;
 	isWordDeletingModalOpen = false;
+	isFolderAddingModalOpen = false;
+	isFolderDeletingModalOpen = false;
+	isAddToFolderModalOpen = false;
 	isImportConfirmationModalOpen = false;
 	isMobileNavbarOpen = false;
 	isLoading = false;
@@ -70,6 +78,24 @@ export class AppComponent implements OnInit, OnDestroy {
 		);
 
 		this.subscriptions.add(
+			this.modalService.isFolderAddingModalOpen$.subscribe((isOpen) => {
+				this.isFolderAddingModalOpen = isOpen;
+			}),
+		);
+
+		this.subscriptions.add(
+			this.modalService.isFolderDeletionModalOpen$.subscribe((isOpen) => {
+				this.isFolderDeletingModalOpen = isOpen;
+			}),
+		);
+
+		this.subscriptions.add(
+			this.modalService.isAddToFolderModalOpen$.subscribe((isOpen) => {
+				this.isAddToFolderModalOpen = isOpen;
+			}),
+		);
+
+		this.subscriptions.add(
 			this.modalService.isImportConfirmationModalOpen$.subscribe((isOpen) => {
 				this.isImportConfirmationModalOpen = isOpen;
 			}),
@@ -82,8 +108,8 @@ export class AppComponent implements OnInit, OnDestroy {
 		);
 
 		this.subscriptions.add(
-			this.wordsService.wordsOfTheDay$.subscribe((wordsOfTheDay) => {
-				this.isLoading = !wordsOfTheDay.length;
+			this.wordsService.isWotdLoading$.subscribe((loading) => {
+				this.isLoading = loading;
 			}),
 		);
 

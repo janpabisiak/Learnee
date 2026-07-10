@@ -1,10 +1,12 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { EAvailableGames, GameService, IStage } from "@services/game/game.service";
+import { GameService } from "@services/game/game.service";
+import { EAvailableGames } from "@shared/constants/game.constants";
 import { combineLatest, Subject, takeUntil } from "rxjs";
 import { GameSelectorComponent } from "./game-selector/game-selector.component";
 import { GameResultsComponent } from "./game-results/game-results.component";
 import { NgIf } from "@angular/common";
 import { GameSectionComponent } from "./game-section/game-section.component";
+import { IStage } from "../../types/stage.interface";
 
 @Component({
 	selector: "app-study-page",

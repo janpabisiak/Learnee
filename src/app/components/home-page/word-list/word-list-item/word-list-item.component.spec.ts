@@ -15,7 +15,8 @@ import { createMockWordsFormService, IMockWordsFormService } from "@services/wor
 import { WordsFormService } from "@services/words-form/words-form.service";
 import { WebSpeechService } from "@services/web-speech/web-speech.service";
 import { WordsService } from "@services/words/words.service";
-import { EModalType, ModalService } from "@services/modal/modal.service";
+import { ModalService } from "@services/modal/modal.service";
+import { EModalType } from "@shared/constants/modal.constants";
 import { provideTranslateService } from "@ngx-translate/core";
 
 describe("WordListItemComponent", () => {

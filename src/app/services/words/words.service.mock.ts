@@ -1,6 +1,7 @@
 import { BehaviorSubject } from "rxjs";
 import { IWord } from "../../types/word.interface";
-import { ESortTypes, IResultRange } from "@services/words-options/words-options.service";
+import { EWordSortTypes } from "@services/words-options/words-options.service";
+import { IResultRange } from "../../types/resultRange.interface";
 
 export const mockWords: IWord[] = [
 	{
@@ -30,7 +31,8 @@ export const createMockWordsService = () => ({
 	hasSelectedIds$: new BehaviorSubject<boolean>(false),
 	wordToDeleteId$: new BehaviorSubject<number | null>(null),
 	wordsOfTheDay$: new BehaviorSubject<IWord[]>([]),
-	sortType$: new BehaviorSubject<ESortTypes>(ESortTypes.IdDESC),
+	isWotdLoading$: new BehaviorSubject<boolean>(true),
+	sortType$: new BehaviorSubject<EWordSortTypes>(EWordSortTypes.IdDESC),
 	searchQuery$: new BehaviorSubject<string>(""),
 	visibleWords$: new BehaviorSubject<IWord[]>([]),
 	page$: new BehaviorSubject<number>(1),
@@ -41,16 +43,20 @@ export const createMockWordsService = () => ({
 	setSearchQuery: jasmine.createSpy("setSearchQuery"),
 	setPage: jasmine.createSpy("setPage"),
 	setWordsPerPage: jasmine.createSpy("setWordsPerPage"),
+	setWordToDeleteId: jasmine.createSpy("setWordToDeleteId"),
 	fetchDefinition$: jasmine.createSpy("fetchDefinition$"),
 	add: jasmine.createSpy("add"),
 	getRandomLearningWord: jasmine.createSpy("getRandomLearningWord"),
-	remove: jasmine.createSpy("remove"),
-	removeMany: jasmine.createSpy("removeMany"),
+	delete: jasmine.createSpy("delete"),
+	deleteMany: jasmine.createSpy("deleteMany"),
 	edit: jasmine.createSpy("edit"),
 	updateWordToDeleteId: jasmine.createSpy("updateWordToDeleteId"),
 	toggleIsLearning: jasmine.createSpy("toggleIsLearning"),
+	setIsLearningForSelected: jasmine.createSpy("setIsLearningForSelected"),
 	toggleSelection: jasmine.createSpy("toggleSelection"),
+	selectAllVisible: jasmine.createSpy("selectAllVisible"),
 	unselectAll: jasmine.createSpy("unselectAll"),
+	getLearningWordFilters: jasmine.createSpy("getLearningWordFilters"),
 });
 
 export type IMockWordsService = ReturnType<typeof createMockWordsService>;

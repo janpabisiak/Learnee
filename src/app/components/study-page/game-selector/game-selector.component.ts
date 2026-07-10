@@ -1,28 +1,37 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { availableGames, EAvailableGames, GameService } from "@services/game/game.service";
+import { TranslatePipe } from "@ngx-translate/core";
+import { GameService } from "@services/game/game.service";
+import { SectionTitleComponent } from "@shared/components/section-title/section-title.component";
+import {
+	availableGames,
+	EAvailableGames,
+	MAX_STAGES_TO_PLAY,
+	MIN_STAGES_TO_PLAY,
+} from "@shared/constants/game.constants";
+import { Subject, takeUntil } from "rxjs";
+import { GameOptionsComponent } from "./game-options/game-options.component";
 import { GameSelectorItemComponent } from "./game-selector-item/game-selector-item.component";
-import { Subject, take, takeUntil } from "rxjs";
-import { SectionTitleComponent } from "@shared/section-title/section-title.component";
-import { TranslateService } from "@ngx-translate/core";
-import { NgIf } from "@angular/common";
 
 @Component({
 	selector: "app-game-selector",
-	imports: [GameSelectorItemComponent, SectionTitleComponent, NgIf],
+	imports: [
+		GameSelectorItemComponent,
+		SectionTitleComponent,
+		TranslatePipe,
+		GameOptionsComponent,
+	],
 	templateUrl: "./game-selector.component.html",
 })
 export class GameSelectorComponent implements OnInit, OnDestroy {
 	availableGames = availableGames;
 	selectedGames: EAvailableGames[] = [];
 	allGamesSelected = false;
-	hasSelectedGames = true;
+	hasSelectedGames = false;
+	hasValidNumberOfStages = false;
 	translations: Record<string, string> | null = null;
 	private destroy$ = new Subject<void>();
 
-	constructor(
-		private gameService: GameService,
-		private translation: TranslateService,
-	) {}
+	constructor(private gameService: GameService) {}
 
 	ngOnInit() {
 		this.gameService.selectedGames$
@@ -33,11 +42,13 @@ export class GameSelectorComponent implements OnInit, OnDestroy {
 				this.allGamesSelected = selectedGames.length === availableGames.length;
 			});
 
-		this.translation
-			.get(["study.prepare.title", "study.prepare.button"])
-			.pipe(take(1))
-			.subscribe((translations) => {
-				this.translations = translations;
+		this.gameService.numberOfStages$
+			.pipe(takeUntil(this.destroy$))
+			.subscribe((numberOfStages) => {
+				this.hasValidNumberOfStages =
+					!isNaN(numberOfStages) &&
+					numberOfStages >= MIN_STAGES_TO_PLAY &&
+					numberOfStages <= MAX_STAGES_TO_PLAY;
 			});
 	}
 
