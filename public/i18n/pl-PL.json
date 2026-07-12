@@ -6,6 +6,7 @@
 
 	"wordlist.title": "Lista słów",
 	"wordlist.count": "{{count}} słowa",
+	"wordlist.learningCount": "{{count}} uczonych",
 	"wordlist.addNew": "Nowe słowo",
 	"wordlist.search": "Szukaj po słowie lub definicji",
 
@@ -14,7 +15,7 @@
 	"wordlist.sort.learningAsc": "Sortuj rosnąco wg. stanu",
 	"wordlist.sort.learningDesc": "Sortuj malejąco wg stanu",
 
-	"wordlist.editSelected": "Edytuj zaznaczone",
+	"wordlist.editSelected": "Edytuj zaznaczone ({{count}})",
 	"wordlist.markAsToLearn": "Oznacz jako do nauki",
 	"wordlist.markAsNotLearning": "Oznacz jako nauczone",
 	"wordlist.notLearning": "Nauczone",
@@ -41,9 +42,10 @@
 	"folderlist.selectWords": "Dodaj słowa",
 
 	"itemlist.deleteAll": "Usuń wszystkie",
-	"itemlist.deleteSelected": "Usuń zaznaczone",
+	"itemlist.deleteSelected": "Usuń zaznaczone ({{count}})",
+	"itemlist.selectAll": "Zaznacz wszystkie",
 	"itemlist.selectAllVisible": "Zaznacz widoczne",
-	"itemlist.unselectAll": "Odznacz wszystko",
+	"itemlist.unselectAll": "Cofnij zaznaczenie",
 
 	"itemlist.sort.idAsc": "Sortuj rosnąco wg. ID",
 	"itemlist.sort.idDesc": "Sortuj malejąco wg. ID",

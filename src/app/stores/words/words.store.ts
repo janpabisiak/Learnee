@@ -24,6 +24,9 @@ export class WordsStore {
 
 	wordList$ = this.wordList.asObservable();
 	numberOfWords$ = this.wordList.pipe(map((wordList) => wordList.length));
+	numberOfLearningWords$ = this.wordList.pipe(
+		map((wordList) => wordList.filter((word) => word.isLearning).length),
+	);
 	numberOfFilteredWords$ = this.numberOfFilteredWords.asObservable();
 	selectedIds$ = this.selectedIds.asObservable();
 	hasSelectedIds$ = this.selectedIds.pipe(map((ids) => ids.length > 0));
@@ -77,6 +80,12 @@ export class WordsStore {
 	]).pipe(
 		map(([filteredWords, resultRange]) => {
 			return this.wordsOptionsService.paginate(filteredWords, resultRange);
+		}),
+	);
+
+	hasAllVisibleSelected$ = combineLatest([this.visibleWords$, this.selectedIds$]).pipe(
+		map(([visibleWords, selectedIds]) => {
+			return !visibleWords.some((word) => !selectedIds.includes(word.id));
 		}),
 	);
 

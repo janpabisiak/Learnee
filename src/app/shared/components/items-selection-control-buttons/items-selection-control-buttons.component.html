@@ -1,5 +1,6 @@
+@let displaySelectAll = hasAllVisibleSelected || !hasMultiplePages;
 <div class="flex justify-between w-full">
-    <app-button [type]="'secondary'" [icon]="'checkmark-circle-outline'" (click)="selectAllVisible()">{{'itemlist.selectAllVisible' | translate}}</app-button>
+    <app-button [type]="'secondary'" [icon]="'checkmark-circle-outline'" (click)="selectAllVisible()">{{(displaySelectAll ? "itemlist.selectAll" : 'itemlist.selectAllVisible') | translate}}</app-button>
     @if (hasSelectedItems) {
     <div class="flex gap-3">
         <app-button [type]="'secondary'" [icon]="'close-outline'" (click)="unselectAll()">{{'itemlist.unselectAll' | translate}}</app-button>

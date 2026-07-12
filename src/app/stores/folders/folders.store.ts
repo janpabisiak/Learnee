@@ -80,6 +80,12 @@ export class FoldersStore {
 		}),
 	);
 
+	hasAllVisibleSelected$ = combineLatest([this.visibleFolders$, this.selectedIds$]).pipe(
+		map(([visibleFolders, selectedIds]) => {
+			return !visibleFolders.some((folder) => !selectedIds.includes(folder.id));
+		}),
+	);
+
 	get foldersValue() {
 		return this.folders.value;
 	}

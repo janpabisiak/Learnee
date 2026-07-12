@@ -1,10 +1,10 @@
 <div class="grid xl:grid-cols-[1.5fr_1fr_1fr] md:grid-cols-2 gap-3 mb-5">
     <app-search-bar class="md:col-span-2 xl:col-span-1" [translationKey]="'wordlist.search'" (searched)="search($event)" />
     <app-items-sort [sortOptions]="sortOptions" [currentSortOption]="currentSortOption" (changed)="changeSortType($event)" />
-    <app-items-purger [hasSelectedItems]="hasSelectedWords" (clicked)="openDeletionModal()" />
-    <app-items-selection-control-buttons class="col-span-full" [hasSelectedItems]="hasSelectedWords" (selectAllClicked)="selectAllVisible()" (unselectAllClicked)="unselectAll()">
+    <app-items-purger [hasSelectedItems]="hasSelectedWords" [numberOfItems]="numberOfSelectedWords" (clicked)="openDeletionModal()" />
+    <app-items-selection-control-buttons class="col-span-full" [hasSelectedItems]="hasSelectedWords" [hasAllVisibleSelected]="hasAllVisibleSelected" [hasMultiplePages]="hasMultiplePages" (selectAllClicked)="selectAllVisible()" (unselectAllClicked)="unselectAll()">
         <div class="relative z-10" (close)="isDropdownOpen = false" appAutoClose>
-            <app-button [type]="'primary'" [icon]="'hammer-outline'" (click)="toggleDropdown(); $event.stopPropagation()">{{'wordlist.editSelected' | translate}}</app-button>
+            <app-button [type]="'primary'" [icon]="'hammer-outline'" (click)="toggleDropdown(); $event.stopPropagation()">{{'wordlist.editSelected' | translate : {count: numberOfSelectedWords} }}</app-button>
             @if (isDropdownOpen) {
             <div class="w-full p-4 absolute top-full bg-gray-50 border-2 border-gray-200 rounded-b-md dark:bg-zinc-800 dark:border-zinc-700" id="dropdown">
                 <ul class="flex flex-col gap-2">

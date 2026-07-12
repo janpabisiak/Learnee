@@ -11,12 +11,14 @@ import { TranslatePipe } from "@ngx-translate/core";
 		[icon]="'flame-outline'"
 		(buttonClicked)="openModal()"
 		>{{
-			(hasSelectedItems ? "itemlist.deleteSelected" : "itemlist.deleteAll") | translate
+			(hasSelectedItems ? "itemlist.deleteSelected" : "itemlist.deleteAll")
+				| translate: { count: numberOfItems }
 		}}</app-button
 	>`,
 })
 export class ItemsPurgerComponent {
 	@Input() hasSelectedItems = false;
+	@Input() numberOfItems = 0;
 	@Output() clicked = new EventEmitter();
 
 	openModal() {

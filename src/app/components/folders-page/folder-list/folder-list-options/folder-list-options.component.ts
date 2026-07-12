@@ -28,6 +28,9 @@ const sortOptionsTranslationKeys: Record<EFolderSortTypes, string> = {
 })
 export class FolderListOptionsComponent {
 	hasSelectedFolders = false;
+	numberOfSelectedFolders = 0;
+	hasAllVisibleSelected = false;
+	hasMultiplePages = false;
 	sortOptions: { type: string; translationKey: string }[] = [];
 	currentSortOption: EFolderSortTypes = EFolderSortTypes.IdDESC;
 	private destroy$ = new Subject<void>();
@@ -38,11 +41,10 @@ export class FolderListOptionsComponent {
 	) {}
 
 	ngOnInit() {
-		this.foldersService.hasSelectedIds$
-			.pipe(takeUntil(this.destroy$))
-			.subscribe((hasSelectedIds) => {
-				this.hasSelectedFolders = hasSelectedIds;
-			});
+		this.foldersService.selectedIds$.pipe(takeUntil(this.destroy$)).subscribe((selectedIds) => {
+			this.hasSelectedFolders = selectedIds.length > 0;
+			this.numberOfSelectedFolders = selectedIds.length;
+		});
 
 		this.foldersService.sortType$.pipe(takeUntil(this.destroy$)).subscribe((sortType) => {
 			this.currentSortOption = sortType;
@@ -54,6 +56,16 @@ export class FolderListOptionsComponent {
 				translationKey,
 			}),
 		);
+
+		this.foldersService.hasAllVisibleSelected$
+			.pipe(takeUntil(this.destroy$))
+			.subscribe((hasAllVisibleSelected) => {
+				this.hasAllVisibleSelected = hasAllVisibleSelected;
+			});
+
+		this.foldersService.maxPage$.pipe(takeUntil(this.destroy$)).subscribe((maxPage) => {
+			this.hasMultiplePages = maxPage > 1;
+		});
 	}
 
 	search(value: string) {

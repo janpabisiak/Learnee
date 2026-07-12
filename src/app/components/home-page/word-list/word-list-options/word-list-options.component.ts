@@ -1,7 +1,6 @@
 import { Component } from "@angular/core";
 import { TranslatePipe } from "@ngx-translate/core";
 import { ModalService } from "@services/modal/modal.service";
-import { EModalType } from "@shared/constants/modal.constants";
 import { EWordSortTypes } from "@services/words-options/words-options.service";
 import { WordsService } from "@services/words/words.service";
 import { ButtonComponent } from "@shared/components/button/button.component";
@@ -9,9 +8,10 @@ import { ItemsPurgerComponent } from "@shared/components/items-purger/items-purg
 import { ItemsSelectionControlButtonsComponent } from "@shared/components/items-selection-control-buttons/items-selection-control-buttons.component";
 import { ItemsSortComponent } from "@shared/components/items-sort/items-sort.component";
 import { SearchBarComponent } from "@shared/components/search-bar/search-bar.component";
+import { EModalType } from "@shared/constants/modal.constants";
 import { commonSortOptionsTranslationKeys } from "@shared/constants/sorting.constants";
-import { Subject, takeUntil } from "rxjs";
 import { AutoCloseDirective } from "app/directives/auto-close.directive";
+import { Subject, takeUntil } from "rxjs";
 
 const sortOptionsTranslationKeys: Record<EWordSortTypes, string> = {
 	...commonSortOptionsTranslationKeys,
@@ -36,6 +36,9 @@ const sortOptionsTranslationKeys: Record<EWordSortTypes, string> = {
 })
 export class WordListOptionsComponent {
 	hasSelectedWords = false;
+	numberOfSelectedWords = 0;
+	hasAllVisibleSelected = false;
+	hasMultiplePages = false;
 	isDropdownOpen = false;
 	hasNotLearningWords = false;
 	sortOptions: { type: string; translationKey: string }[] = [];
@@ -48,11 +51,10 @@ export class WordListOptionsComponent {
 	) {}
 
 	ngOnInit() {
-		this.wordsService.hasSelectedIds$
-			.pipe(takeUntil(this.destroy$))
-			.subscribe((hasSelectedIds) => {
-				this.hasSelectedWords = hasSelectedIds;
-			});
+		this.wordsService.selectedIds$.pipe(takeUntil(this.destroy$)).subscribe((selectedIds) => {
+			this.hasSelectedWords = selectedIds.length > 0;
+			this.numberOfSelectedWords = selectedIds.length;
+		});
 
 		this.wordsService.sortType$.pipe(takeUntil(this.destroy$)).subscribe((sortType) => {
 			this.currentSortOption = sortType;
@@ -77,6 +79,16 @@ export class WordListOptionsComponent {
 						!isLearningSortTypes.includes(st.type as EWordSortTypes),
 				);
 		});
+
+		this.wordsService.hasAllVisibleSelected$
+			.pipe(takeUntil(this.destroy$))
+			.subscribe((hasAllVisibleSelected) => {
+				this.hasAllVisibleSelected = hasAllVisibleSelected;
+			});
+
+		this.wordsService.maxPage$.pipe(takeUntil(this.destroy$)).subscribe((maxPage) => {
+			this.hasMultiplePages = maxPage > 1;
+		});
 	}
 
 	openDeletionModal() {
@@ -88,7 +100,11 @@ export class WordListOptionsComponent {
 	}
 
 	selectAllVisible() {
-		this.wordsService.selectAllVisible();
+		if (!this.hasAllVisibleSelected) {
+			this.wordsService.selectAllVisible();
+		} else {
+			this.wordsService.selectAll();
+		}
 	}
 
 	unselectAll() {

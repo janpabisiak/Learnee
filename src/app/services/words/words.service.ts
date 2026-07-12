@@ -23,9 +23,11 @@ export class WordsService {
 
 	wordList$ = this.wordsStore.wordList$;
 	numberOfWords$ = this.wordsStore.numberOfWords$;
+	numberOfLearningWords$ = this.wordsStore.numberOfLearningWords$;
 	numberOfFilteredWords$ = this.wordsStore.numberOfFilteredWords$;
 	selectedIds$ = this.wordsStore.selectedIds$;
 	hasSelectedIds$ = this.wordsStore.hasSelectedIds$;
+	hasAllVisibleSelected$ = this.wordsStore.hasAllVisibleSelected$;
 	wordToDeleteId$ = this.wordsStore.wordToDeleteId$;
 	wordsOfTheDay$ = this.wordsStore.wordsOfTheDay$;
 	isWotdLoading$ = this.wordsStore.isWotdLoading$;
@@ -199,6 +201,10 @@ export class WordsService {
 			.subscribe((updatedSelectedIds) => {
 				this.wordsStore.setSelectedIds(updatedSelectedIds);
 			});
+	}
+
+	selectAll() {
+		this.wordsStore.setSelectedIds(this.wordsStore.wordListValue.map((word) => word.id));
 	}
 
 	setIsLearningForSelected(isLearning: boolean) {

@@ -6,6 +6,7 @@
 
 	"wordlist.title": "Wordlist",
 	"wordlist.count": "{{count}} words",
+	"wordlist.learningCount": "{{count}} learning now",
 	"wordlist.addNew": "Add new word",
 	"wordlist.search": "Search for word by name or definition",
 
@@ -14,7 +15,7 @@
 	"wordlist.sort.learningAsc": "Sort by learning ASC",
 	"wordlist.sort.learningDesc": "Sort by learning DESC",
 
-	"wordlist.editSelected": "Edit selected",
+	"wordlist.editSelected": "Edit selected ({{count}})",
 	"wordlist.markAsToLearn": "Mark as to learn",
 	"wordlist.markAsNotLearning": "Mark as not learning",
 	"wordlist.notLearning": "Not learning",
@@ -41,7 +42,8 @@
 	"folderlist.selectWords": "Select words",
 
 	"itemlist.deleteAll": "Delete all",
-	"itemlist.deleteSelected": "Delete selected",
+	"itemlist.deleteSelected": "Delete selected ({{count}})",
+	"itemlist.selectAll": "Select all",
 	"itemlist.selectAllVisible": "Select all visible",
 	"itemlist.unselectAll": "Unselect all",
 

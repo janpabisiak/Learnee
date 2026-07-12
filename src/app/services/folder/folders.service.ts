@@ -22,6 +22,7 @@ export class FoldersService {
 	numberOfFilteredFolders$ = this.foldersStore.numberOfFilteredFolders$;
 	selectedIds$ = this.foldersStore.selectedIds$;
 	hasSelectedIds$ = this.foldersStore.hasSelectedIds$;
+	hasAllVisibleSelected$ = this.foldersStore.hasAllVisibleSelected$;
 	singleFolderIdToOperateOn$ = this.foldersStore.singleFolderIdToOperateOn$;
 	sortType$ = this.foldersStore.sortType$;
 	searchQuery$ = this.foldersStore.searchQuery$;
@@ -146,6 +147,10 @@ export class FoldersService {
 			? selectedIds.filter((id) => id !== folderId)
 			: [...selectedIds, folderId];
 		this.foldersStore.setSelectedIds(updatedSelectedIds);
+	}
+
+	selectAll() {
+		this.foldersStore.setSelectedIds(this.foldersStore.foldersValue.map((folder) => folder.id));
 	}
 
 	selectAllVisible() {

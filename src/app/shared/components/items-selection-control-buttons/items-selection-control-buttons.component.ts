@@ -9,6 +9,8 @@ import { TranslatePipe } from "@ngx-translate/core";
 })
 export class ItemsSelectionControlButtonsComponent {
 	@Input() hasSelectedItems = false;
+	@Input() hasAllVisibleSelected = false;
+	@Input() hasMultiplePages = false;
 	@Output() selectAllClicked = new EventEmitter();
 	@Output() unselectAllClicked = new EventEmitter();
 
