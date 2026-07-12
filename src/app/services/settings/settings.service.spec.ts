@@ -27,7 +27,7 @@ describe("SettingsService", () => {
 		service = new SettingsService(
 			mockRendererFactory,
 			mockLocalStorageService as any,
-			mockTranslation
+			mockTranslation,
 		);
 
 		(service["renderer"].addClass as jasmine.Spy).calls.reset();
@@ -46,7 +46,7 @@ describe("SettingsService", () => {
 
 			expect(service["localStorageService"].saveData).toHaveBeenCalledOnceWith(
 				ELocalStorageKeys.DarkMode,
-				true
+				true,
 			);
 		});
 
@@ -58,24 +58,24 @@ describe("SettingsService", () => {
 		});
 	});
 
-	describe("setCurrentLanguage()", () => {
-		it("should update currentLanguage value", () => {
-			service.setCurrentLanguage(EAvailableLanguages.Polish);
+	describe("setLanguage()", () => {
+		it("should update language value", () => {
+			service.setLanguage(EAvailableLanguages.Polish);
 
-			expect(service["currentLanguage"].value).toBe(EAvailableLanguages.Polish);
+			expect(service["language"].value).toBe(EAvailableLanguages.Polish);
 		});
 
 		it("should save chosen language in localStorage", () => {
-			service.setCurrentLanguage(EAvailableLanguages.Polish);
+			service.setLanguage(EAvailableLanguages.Polish);
 
 			expect(service["localStorageService"].saveData).toHaveBeenCalledWith(
 				ELocalStorageKeys.Language,
-				EAvailableLanguages.Polish
+				EAvailableLanguages.Polish,
 			);
 		});
 
 		it("should update translation service's language", () => {
-			service.setCurrentLanguage(EAvailableLanguages.Polish);
+			service.setLanguage(EAvailableLanguages.Polish);
 
 			expect(service["translation"].use).toHaveBeenCalledWith(EAvailableLanguages.Polish);
 		});

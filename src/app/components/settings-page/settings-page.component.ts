@@ -20,7 +20,7 @@ export class SettingsPageComponent implements OnInit {
 	isDarkMode = false;
 	isFetchWordDefinitionEnabled = true;
 	hasKeys = false;
-	currentLanguage = EAvailableLanguages.English;
+	language = EAvailableLanguages.English;
 	translations: Record<string, string> | null = null;
 	EAvailableLanguages = EAvailableLanguages;
 	EModalType = EModalType;
@@ -38,12 +38,12 @@ export class SettingsPageComponent implements OnInit {
 			this.settingsService.isDarkMode$,
 			this.settingsService.isFetchWordDefinitionEnabled$,
 			this.localStorage.hasKeys$,
-			this.settingsService.currentLanguage$,
-		]).subscribe(([isDarkMode, isFetchWordDefinitionEnabled, hasKeys, currentLanguage]) => {
+			this.settingsService.language$,
+		]).subscribe(([isDarkMode, isFetchWordDefinitionEnabled, hasKeys, language]) => {
 			this.isDarkMode = isDarkMode;
 			this.isFetchWordDefinitionEnabled = isFetchWordDefinitionEnabled;
 			this.hasKeys = hasKeys;
-			this.currentLanguage = currentLanguage;
+			this.language = language;
 		});
 
 		this.translation
@@ -62,8 +62,8 @@ export class SettingsPageComponent implements OnInit {
 		this.settingsService.setIsFetchWordDefinitionEnabled(this.isFetchWordDefinitionEnabled);
 	}
 
-	setCurrentLanguage(e: any) {
-		this.settingsService.setCurrentLanguage(e.target.value as EAvailableLanguages);
+	setLanguage(e: any) {
+		this.settingsService.setLanguage(e.target.value as EAvailableLanguages);
 	}
 
 	onFileSelected(event: any) {
