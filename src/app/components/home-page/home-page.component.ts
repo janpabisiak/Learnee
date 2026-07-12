@@ -8,6 +8,7 @@ import { WordsService } from "../../services/words/words.service";
 import { UserStatisticsComponent } from "./user-statistics/user-statistics.component";
 import { WordListComponent } from "./word-list/word-list.component";
 import { WordsOfTheDayComponent } from "./words-of-the-day/words-of-the-day.component";
+import { TagComponent } from "@shared/components/tag/tag.component";
 
 @Component({
 	selector: "app-home-page",
@@ -19,13 +20,15 @@ import { WordsOfTheDayComponent } from "./words-of-the-day/words-of-the-day.comp
 		UserStatisticsComponent,
 		SectionTitleComponent,
 		TranslatePipe,
+		TagComponent,
 	],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HomePageComponent implements OnInit, OnDestroy {
 	private subscription = new Subscription();
-	modalService = inject(ModalService);
+	private modalService = inject(ModalService);
 	numOfWords = 0;
+	numOfLearningWords = 0;
 
 	constructor(private wordsService: WordsService) {}
 
@@ -33,6 +36,12 @@ export class HomePageComponent implements OnInit, OnDestroy {
 		this.subscription = this.wordsService.numberOfWords$.subscribe((numberOfWords) => {
 			this.numOfWords = numberOfWords;
 		});
+
+		this.subscription = this.wordsService.numberOfLearningWords$.subscribe(
+			(numberOfLearningWords) => {
+				this.numOfLearningWords = numberOfLearningWords;
+			},
+		);
 	}
 
 	toggleIsAddWordModalOpen(state: boolean) {
