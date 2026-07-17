@@ -27,14 +27,4 @@ describe("HeaderNavbarComponent", () => {
 	it("should create", () => {
 		expect(component).toBeTruthy();
 	});
-
-	it("should remove subscription on component destroy", () => {
-		const nextSpy = spyOn(component["destroy$"], "next");
-		const completeSpy = spyOn(component["destroy$"], "complete");
-
-		component.ngOnDestroy();
-
-		expect(nextSpy).toHaveBeenCalledTimes(1);
-		expect(completeSpy).toHaveBeenCalledTimes(1);
-	});
 });

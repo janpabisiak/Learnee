@@ -19,7 +19,10 @@ export class SettingsService {
 
 	isDarkMode$ = this.settingsStore.isDarkMode$;
 	isFetchWordDefinitionEnabled$ = this.settingsStore.isFetchWordDefinitionEnabled$;
+	isFetchWotdEnabled$ = this.settingsStore.isFetchWotdEnabled$;
+	isStatisticsEnabled$ = this.settingsStore.isStatisticsEnabled$;
 	language$ = this.settingsStore.language$;
+	hasAnyWidgetVisible$ = this.settingsStore.hasAnyWidgetVisible$;
 
 	constructor() {
 		this.renderer = this.rendererFactory.createRenderer(null, null);
@@ -38,6 +41,16 @@ export class SettingsService {
 	setIsFetchWordDefinitionEnabled(value: boolean): void {
 		this.settingsStore.setIsFetchWordDefinitionEnabled(value);
 		this.settingsResourceService.save({ key: ELocalStorageKeys.FetchWordDefinition, value });
+	}
+
+	setIsFetchWotdEnabled(value: boolean): void {
+		this.settingsStore.setIsFetchWotdEnabled(value);
+		this.settingsResourceService.save({ key: ELocalStorageKeys.FetchWotd, value });
+	}
+
+	setIsStatisticsEnabled(value: boolean): void {
+		this.settingsStore.setIsStatisticsEnabled(value);
+		this.settingsResourceService.save({ key: ELocalStorageKeys.StatisticsEnabled, value });
 	}
 
 	setLanguage(value: EAvailableLanguages): void {

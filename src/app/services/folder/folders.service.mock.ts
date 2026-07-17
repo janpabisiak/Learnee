@@ -29,6 +29,7 @@ export const createMockFoldersService = () => ({
 	numberOfFilteredFolders$: new BehaviorSubject<number>(0),
 	selectedIds$: new BehaviorSubject<number[]>([]),
 	hasSelectedIds$: new BehaviorSubject<boolean>(false),
+	hasAllVisibleSelected$: new BehaviorSubject<boolean>(false),
 	singleFolderIdToOperateOn$: new BehaviorSubject<number | null>(null),
 	sortType$: new BehaviorSubject<EFolderSortTypes>(EFolderSortTypes.IdDESC),
 	searchQuery$: new BehaviorSubject<string>(""),
