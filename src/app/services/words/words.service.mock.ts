@@ -26,9 +26,11 @@ export const mockResultRange: IResultRange = {
 export const createMockWordsService = () => ({
 	wordList$: new BehaviorSubject<IWord[]>([]),
 	numberOfWords$: new BehaviorSubject<number>(0),
+	numberOfLearningWords$: new BehaviorSubject<number>(0),
 	numberOfFilteredWords$: new BehaviorSubject<number>(0),
 	selectedIds$: new BehaviorSubject<number[]>([]),
 	hasSelectedIds$: new BehaviorSubject<boolean>(false),
+	hasAllVisibleSelected$: new BehaviorSubject<boolean>(false),
 	wordToDeleteId$: new BehaviorSubject<number | null>(null),
 	wordsOfTheDay$: new BehaviorSubject<IWord[]>([]),
 	isWotdLoading$: new BehaviorSubject<boolean>(true),

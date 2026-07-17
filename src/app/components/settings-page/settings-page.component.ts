@@ -1,69 +1,50 @@
-import { NgIf } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
+import { AsyncPipe } from "@angular/common";
+import { Component, inject } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { ButtonComponent } from "@shared/components/button/button.component";
-import { SectionTitleComponent } from "@shared/components/section-title/section-title.component";
-import { TranslatePipe, TranslateService } from "@ngx-translate/core";
+import { TranslatePipe } from "@ngx-translate/core";
 import { LocalStorageService } from "@services/local-storage/local-storage.service";
 import { ModalService } from "@services/modal/modal.service";
 import { SettingsService } from "@services/settings/settings.service";
-import { EAvailableLanguages } from "@shared/constants/settings.constants";
+import { ButtonComponent } from "@shared/components/button/button.component";
+import { SectionTitleComponent } from "@shared/components/section-title/section-title.component";
 import { EModalType } from "@shared/constants/modal.constants";
-import { combineLatest, Subscription, take } from "rxjs";
+import { EAvailableLanguages } from "@shared/constants/settings.constants";
 
 @Component({
 	selector: "app-settings-page",
-	imports: [SectionTitleComponent, ButtonComponent, FormsModule, TranslatePipe, NgIf],
+	imports: [SectionTitleComponent, ButtonComponent, FormsModule, TranslatePipe, AsyncPipe],
 	templateUrl: "./settings-page.component.html",
 })
-export class SettingsPageComponent implements OnInit {
-	isDarkMode = false;
-	isFetchWordDefinitionEnabled = true;
-	hasKeys = false;
-	currentLanguage = EAvailableLanguages.English;
-	translations: Record<string, string> | null = null;
-	EAvailableLanguages = EAvailableLanguages;
-	EModalType = EModalType;
-	private subscription = new Subscription();
+export class SettingsPageComponent {
+	private settingsService = inject(SettingsService);
+	private localStorage = inject(LocalStorageService);
+	private modalService = inject(ModalService);
 
-	constructor(
-		private settingsService: SettingsService,
-		private localStorage: LocalStorageService,
-		private translation: TranslateService,
-		private modalService: ModalService,
-	) {}
+	isDarkMode$ = this.settingsService.isDarkMode$;
+	isFetchWordDefinitionEnabled$ = this.settingsService.isFetchWordDefinitionEnabled$;
+	isFetchWotdEnabled$ = this.settingsService.isFetchWotdEnabled$;
+	isStatisticsEnabled$ = this.settingsService.isStatisticsEnabled$;
+	language$ = this.settingsService.language$;
+	hasKeys$ = this.localStorage.hasKeys$;
 
-	ngOnInit() {
-		this.subscription = combineLatest([
-			this.settingsService.isDarkMode$,
-			this.settingsService.isFetchWordDefinitionEnabled$,
-			this.localStorage.hasKeys$,
-			this.settingsService.currentLanguage$,
-		]).subscribe(([isDarkMode, isFetchWordDefinitionEnabled, hasKeys, currentLanguage]) => {
-			this.isDarkMode = isDarkMode;
-			this.isFetchWordDefinitionEnabled = isFetchWordDefinitionEnabled;
-			this.hasKeys = hasKeys;
-			this.currentLanguage = currentLanguage;
-		});
-
-		this.translation
-			.get("settings.title")
-			.pipe(take(1))
-			.subscribe((translations) => {
-				this.translations = translations;
-			});
+	toggleDarkMode(value: boolean) {
+		this.settingsService.setIsDarkMode(value);
 	}
 
-	toggleDarkMode() {
-		this.settingsService.setIsDarkMode(this.isDarkMode);
+	toggleIsFetchWordDefinitionEnabled(value: boolean) {
+		this.settingsService.setIsFetchWordDefinitionEnabled(value);
 	}
 
-	toggleFetchWordDefinition() {
-		this.settingsService.setIsFetchWordDefinitionEnabled(this.isFetchWordDefinitionEnabled);
+	toggleIsFetchWotdEnabled(value: boolean) {
+		this.settingsService.setIsFetchWotdEnabled(value);
 	}
 
-	setCurrentLanguage(e: any) {
-		this.settingsService.setCurrentLanguage(e.target.value as EAvailableLanguages);
+	toggleIsStatisticsEnabled(value: boolean) {
+		this.settingsService.setIsStatisticsEnabled(value);
+	}
+
+	setLanguage(value: string) {
+		this.settingsService.setLanguage(value as EAvailableLanguages);
 	}
 
 	onFileSelected(event: any) {
@@ -94,9 +75,5 @@ export class SettingsPageComponent implements OnInit {
 
 	deleteData() {
 		this.localStorage.deleteData();
-	}
-
-	ngOnDestroy() {
-		this.subscription.unsubscribe();
 	}
 }

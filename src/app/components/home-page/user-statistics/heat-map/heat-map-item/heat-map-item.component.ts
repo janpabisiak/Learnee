@@ -15,14 +15,14 @@ export class HeatMapItemComponent implements OnInit, OnDestroy {
 	@Input({ required: true }) day!: IStatistics;
 	@Input({ required: true }) maxPlays!: number;
 	percentOfMax = 0;
-	currentLanguage: EAvailableLanguages = EAvailableLanguages.English;
+	language: EAvailableLanguages = EAvailableLanguages.English;
 	private destroy$ = new Subject<void>();
 
 	constructor(private settingsService: SettingsService) {}
 
 	ngOnInit() {
-		this.settingsService.currentLanguage$.pipe(takeUntil(this.destroy$)).subscribe((lang) => {
-			this.currentLanguage = lang;
+		this.settingsService.language$.pipe(takeUntil(this.destroy$)).subscribe((lang) => {
+			this.language = lang;
 		});
 
 		this.percentOfMax = isNaN(this.day.numberOfPlays / this.maxPlays)

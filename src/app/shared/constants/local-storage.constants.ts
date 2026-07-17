@@ -3,6 +3,8 @@ export enum ELocalStorageKeys {
 	XpPoints = "xp-points",
 	DarkMode = "dark-mode",
 	FetchWordDefinition = "fetch-word-definition",
+	FetchWotd = "fetch-wotd",
+	StatisticsEnabled = "statistics-enabled",
 	Language = "language",
 	Statistics = "statistics",
 	WordList = "word-list",

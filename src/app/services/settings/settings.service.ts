@@ -1,65 +1,67 @@
-import { Injectable, Renderer2, RendererFactory2 } from "@angular/core";
-import { LocalStorageService } from "@services/local-storage/local-storage.service";
-import { BehaviorSubject } from "rxjs";
+import { inject, Injectable, Renderer2, RendererFactory2 } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
-import { EAvailableLanguages } from "@shared/constants/settings.constants";
+import { LocalStorageService } from "@services/local-storage/local-storage.service";
+import { SettingsResourceService } from "@services/settings-resource/settings-resource.service";
 import { ELocalStorageKeys } from "@shared/constants/local-storage.constants";
+import { EAvailableLanguages } from "@shared/constants/settings.constants";
+import { SettingsStore } from "app/stores/settings/settings.store";
 
 @Injectable({
 	providedIn: "root",
 })
 export class SettingsService {
-	private isDarkMode = new BehaviorSubject<boolean>(false);
-	private isFetchWordDefinitionEnabled = new BehaviorSubject<boolean>(false);
-	private currentLanguage = new BehaviorSubject<EAvailableLanguages>(EAvailableLanguages.English);
+	private settingsStore = inject(SettingsStore);
+	private rendererFactory = inject(RendererFactory2);
+	private localStorageService = inject(LocalStorageService);
+	private translateService = inject(TranslateService);
+	private settingsResourceService = inject(SettingsResourceService);
 	private renderer: Renderer2;
 
-	isDarkMode$ = this.isDarkMode.asObservable();
-	isFetchWordDefinitionEnabled$ = this.isFetchWordDefinitionEnabled.asObservable();
-	currentLanguage$ = this.currentLanguage.asObservable();
+	isDarkMode$ = this.settingsStore.isDarkMode$;
+	isFetchWordDefinitionEnabled$ = this.settingsStore.isFetchWordDefinitionEnabled$;
+	isFetchWotdEnabled$ = this.settingsStore.isFetchWotdEnabled$;
+	isStatisticsEnabled$ = this.settingsStore.isStatisticsEnabled$;
+	language$ = this.settingsStore.language$;
+	hasAnyWidgetVisible$ = this.settingsStore.hasAnyWidgetVisible$;
 
-	constructor(
-		rendererFactory: RendererFactory2,
-		private localStorageService: LocalStorageService,
-		private translation: TranslateService,
-	) {
-		this.renderer = rendererFactory.createRenderer(null, null);
+	constructor() {
+		this.renderer = this.rendererFactory.createRenderer(null, null);
 
-		this.isDarkMode.next(
-			this.localStorageService.loadData(ELocalStorageKeys.DarkMode) ?? false,
-		);
-		this.toggleDarkClass();
-
-		this.isFetchWordDefinitionEnabled.next(
-			this.localStorageService.loadData(ELocalStorageKeys.FetchWordDefinition) ?? true,
-		);
-
-		this.currentLanguage.next(
-			this.localStorageService.loadData(ELocalStorageKeys.Language) ||
-				EAvailableLanguages.English,
-		);
-		this.translation.use(this.currentLanguage.value);
+		this.settingsResourceService.load();
+		this.translateService.use(this.settingsStore.languageValue);
 	}
 
-	setIsDarkMode(value: boolean) {
-		this.isDarkMode.next(value);
-		this.localStorageService.saveData(ELocalStorageKeys.DarkMode, value);
+	setIsDarkMode(value: boolean): void {
+		this.settingsStore.setIsDarkMode(value);
+		this.settingsResourceService.save({ key: ELocalStorageKeys.DarkMode, value });
+
 		this.toggleDarkClass();
 	}
 
-	setIsFetchWordDefinitionEnabled(value: boolean) {
-		this.isFetchWordDefinitionEnabled.next(value);
-		this.localStorageService.saveData(ELocalStorageKeys.FetchWordDefinition, value);
+	setIsFetchWordDefinitionEnabled(value: boolean): void {
+		this.settingsStore.setIsFetchWordDefinitionEnabled(value);
+		this.settingsResourceService.save({ key: ELocalStorageKeys.FetchWordDefinition, value });
 	}
 
-	setCurrentLanguage(value: EAvailableLanguages) {
-		this.currentLanguage.next(value);
+	setIsFetchWotdEnabled(value: boolean): void {
+		this.settingsStore.setIsFetchWotdEnabled(value);
+		this.settingsResourceService.save({ key: ELocalStorageKeys.FetchWotd, value });
+	}
+
+	setIsStatisticsEnabled(value: boolean): void {
+		this.settingsStore.setIsStatisticsEnabled(value);
+		this.settingsResourceService.save({ key: ELocalStorageKeys.StatisticsEnabled, value });
+	}
+
+	setLanguage(value: EAvailableLanguages): void {
+		this.settingsStore.setLanguage(value);
 		this.localStorageService.saveData(ELocalStorageKeys.Language, value);
-		this.translation.use(this.currentLanguage.value);
+
+		this.translateService.use(this.settingsStore.languageValue);
 	}
 
-	toggleDarkClass() {
-		this.isDarkMode.value
+	toggleDarkClass(): void {
+		this.settingsStore.isDarkModeValue
 			? this.renderer.addClass(document.body, "dark")
 			: this.renderer.removeClass(document.body, "dark");
 	}
