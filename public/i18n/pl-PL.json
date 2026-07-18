@@ -138,6 +138,12 @@
 	"settings.fetchDefinition.title": "Pobieranie definicji",
 	"settings.fetchDefinition.description": "Automatycznie pobieraj definicję słowa z zewnętrznego API",
 
+	"settings.fetchWotd.title": "Wyświetlaj słowo dnia",
+	"settings.fetchWotd.description": "Zmień widoczność widżetu słowa dnia",
+
+	"settings.displayStatistics.title": "Wyświetlaj statystyki",
+	"settings.displayStatistics.description": "Zmień widoczność widżetu ze statystykami z gier",
+
 	"settings.language.title": "Język",
 	"settings.language.description": "Zmień język aplikacji",
 	"settings.language.english": "Angielski",
