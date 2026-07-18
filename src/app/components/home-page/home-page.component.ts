@@ -38,6 +38,6 @@ export class HomePageComponent {
 	numberOfLearningWords$ = this.wordsService.numberOfLearningWords$;
 
 	toggleIsAddWordModalOpen(isOpen: boolean) {
-		this.modalService.toggleModal(EModalType.WordAdding, isOpen);
+		this.modalService.toggleModal(EModalType.WordEdition, isOpen);
 	}
 }

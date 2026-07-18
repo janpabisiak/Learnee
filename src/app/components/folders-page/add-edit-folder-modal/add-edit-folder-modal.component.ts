@@ -66,7 +66,7 @@ export class AddEditFolderModalComponent implements OnInit, OnDestroy {
 	}
 
 	toggleIsAddFolderModalOpen(state: boolean) {
-		this.modalService.toggleModal(EModalType.FolderAdding, state);
+		this.modalService.toggleModal(EModalType.FolderEdition, state);
 	}
 
 	submitForm() {
@@ -74,7 +74,7 @@ export class AddEditFolderModalComponent implements OnInit, OnDestroy {
 
 		if (isFormValid) {
 			this.foldersFormService.submitForm();
-			this.modalService.toggleModal(EModalType.FolderAdding, false);
+			this.modalService.toggleModal(EModalType.FolderEdition, false);
 		} else {
 			this.form.markAllAsTouched();
 		}

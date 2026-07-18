@@ -46,7 +46,7 @@ export class WordListItemComponent implements OnInit, OnDestroy {
 	}
 
 	editWord() {
-		this.modalService.toggleModal(EModalType.WordAdding, true);
+		this.modalService.toggleModal(EModalType.WordEdition, true);
 		this.wordsFormService.setupForEditing(this.word);
 		this.toggleDropdownMenu();
 	}

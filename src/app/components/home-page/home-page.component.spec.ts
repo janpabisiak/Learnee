@@ -11,7 +11,10 @@ import {
 	IMockWordsService,
 	mockWords,
 } from "@services/words/words.service.mock";
-import { createMockSettingsService, IMockSettingsService } from "@services/settings/settings.service.mock";
+import {
+	createMockSettingsService,
+	IMockSettingsService,
+} from "@services/settings/settings.service.mock";
 import { ModalService } from "@services/modal/modal.service";
 import { WordsService } from "@services/words/words.service";
 import { SettingsService } from "@services/settings/settings.service";
@@ -96,9 +99,6 @@ describe("HomePageComponent", () => {
 		component.toggleIsAddWordModalOpen(true);
 
 		const modalService = TestBed.inject(ModalService);
-		expect(modalService.toggleModal).toHaveBeenCalledWith(
-			EModalType.WordAdding,
-			true
-		);
+		expect(modalService.toggleModal).toHaveBeenCalledWith(EModalType.WordEdition, true);
 	});
 });

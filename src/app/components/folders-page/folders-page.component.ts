@@ -16,7 +16,10 @@ export class FoldersPageComponent {
 	private subscription = new Subscription();
 	numberOfFolders = 0;
 
-	constructor(private foldersService: FoldersService, private modalService: ModalService) {}
+	constructor(
+		private foldersService: FoldersService,
+		private modalService: ModalService,
+	) {}
 
 	ngOnInit() {
 		this.subscription = this.foldersService.numberOfFolders$.subscribe((numberOfFolders) => {
@@ -25,7 +28,7 @@ export class FoldersPageComponent {
 	}
 
 	toggleIsAddFolderModalOpen(state: boolean) {
-		this.modalService.toggleModal(EModalType.FolderAdding, state);
+		this.modalService.toggleModal(EModalType.FolderEdition, state);
 	}
 
 	ngOnDestroy() {

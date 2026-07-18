@@ -64,7 +64,7 @@ export class AddEditWordModalComponent implements OnInit, OnDestroy {
 	}
 
 	toggleIsAddWordModalOpen(state: boolean) {
-		this.modalService.toggleModal(EModalType.WordAdding, state);
+		this.modalService.toggleModal(EModalType.WordEdition, state);
 	}
 
 	submitForm() {
@@ -72,7 +72,7 @@ export class AddEditWordModalComponent implements OnInit, OnDestroy {
 
 		if (isFormValid) {
 			this.wordsFormService.submitForm();
-			this.modalService.toggleModal(EModalType.WordAdding, false);
+			this.modalService.toggleModal(EModalType.WordEdition, false);
 		} else {
 			this.form.markAllAsTouched();
 		}
@@ -94,9 +94,10 @@ export class AddEditWordModalComponent implements OnInit, OnDestroy {
 				},
 				error: (err) => {
 					console.error("Failed to auto-fetch definition:", err);
-					this.wordDefinitionEl.nativeElement.placeholder = "Failed to fetch definition automatically.";
+					this.wordDefinitionEl.nativeElement.placeholder =
+						"Failed to fetch definition automatically.";
 					this.wordDefinitionEl.nativeElement.disabled = false;
-				}
+				},
 			});
 		this.isDefinitionFetched = true;
 	}

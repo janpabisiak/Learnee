@@ -8,24 +8,23 @@ import { ModalStore } from "app/stores/modal/modal.store";
 export class ModalService {
 	private modalStore = inject(ModalStore);
 	private storeUpdaters: Record<EModalType, (isOpen: boolean) => void> = {
-		[EModalType.WordAdding]: (isOpen) => this.modalStore.setIsWordAddingModalOpen(isOpen),
-		[EModalType.WordDeletion]: (isOpen) => this.modalStore.setIsWordDeletionModalOpen(isOpen),
-		[EModalType.FolderAdding]: (isOpen) => this.modalStore.setIsFolderAddingModalOpen(isOpen),
-		[EModalType.FolderDeletion]: (isOpen) =>
-			this.modalStore.setIsFolderDeletionModalOpen(isOpen),
-		[EModalType.AddToFolder]: (isOpen) => this.modalStore.setIsAddToFolderModalOpen(isOpen),
+		[EModalType.WordEdition]: (isOpen) => this.modalStore.setWordEditionModalOpen(isOpen),
+		[EModalType.WordDeletion]: (isOpen) => this.modalStore.setWordDeletionModalOpen(isOpen),
+		[EModalType.FolderEdition]: (isOpen) => this.modalStore.setFolderEditionModalOpen(isOpen),
+		[EModalType.FolderDeletion]: (isOpen) => this.modalStore.setFolderDeletionModalOpen(isOpen),
+		[EModalType.AddToFolder]: (isOpen) => this.modalStore.setAddToFolderModalOpen(isOpen),
 		[EModalType.ImportConfirmation]: (isOpen) =>
-			this.modalStore.setIsImportConfirmationModalOpen(isOpen),
-		[EModalType.MobileNavbar]: (isOpen) => this.modalStore.setIsMobileNavbarOpen(isOpen),
+			this.modalStore.setImportConfirmationModalOpen(isOpen),
+		[EModalType.MobileNavbar]: (isOpen) => this.modalStore.setMobileNavbarOpen(isOpen),
 	};
 
-	isWordAddingModalOpen$ = this.modalStore.isWordAddingModalOpen$;
-	isWordDeletionModalOpen$ = this.modalStore.isWordDeletionModalOpen$;
-	isFolderAddingModalOpen$ = this.modalStore.isFolderAddingModalOpen$;
-	isFolderDeletionModalOpen$ = this.modalStore.isFolderDeletionModalOpen$;
-	isAddToFolderModalOpen$ = this.modalStore.isAddToFolderModalOpen$;
-	isImportConfirmationModalOpen$ = this.modalStore.isImportConfirmationModalOpen$;
-	isMobileNavbarOpen$ = this.modalStore.isMobileNavbarOpen$;
+	wordEditionModalOpen$ = this.modalStore.wordEditionModalOpen$;
+	wordDeletionModalOpen$ = this.modalStore.wordDeletionModalOpen$;
+	folderEditionModalOpen$ = this.modalStore.folderEditionModalOpen$;
+	folderDeletionModalOpen$ = this.modalStore.folderDeletionModalOpen$;
+	addToFolderModalOpen$ = this.modalStore.addToFolderModalOpen$;
+	importConfirmationModalOpen$ = this.modalStore.importConfirmationModalOpen$;
+	mobileNavbarOpen$ = this.modalStore.mobileNavbarOpen$;
 
 	toggleModal(modalType: EModalType, state: boolean) {
 		if (state) {

@@ -22,7 +22,7 @@ export class WordsOfTheDayComponent implements OnInit, OnDestroy {
 	constructor(
 		private wordsService: WordsService,
 		private modalService: ModalService,
-		private wordsFormService: WordsFormService
+		private wordsFormService: WordsFormService,
 	) {}
 
 	ngOnInit() {
@@ -42,7 +42,7 @@ export class WordsOfTheDayComponent implements OnInit, OnDestroy {
 	}
 
 	addWord() {
-		this.modalService.toggleModal(EModalType.WordAdding, true);
+		this.modalService.toggleModal(EModalType.WordEdition, true);
 		this.wordsFormService.setupForEditing({
 			...this.wordsOfTheDay[this.currentWordId],
 			id: 0,

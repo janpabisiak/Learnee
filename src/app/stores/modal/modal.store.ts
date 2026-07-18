@@ -5,57 +5,57 @@ import { BehaviorSubject } from "rxjs";
 	providedIn: "root",
 })
 export class ModalStore {
-	private isWordAddingModalOpen = new BehaviorSubject<boolean>(false);
-	private isWordDeletionModalOpen = new BehaviorSubject<boolean>(false);
-	private isFolderAddingModalOpen = new BehaviorSubject<boolean>(false);
-	private isFolderDeletionModalOpen = new BehaviorSubject<boolean>(false);
-	private isAddToFolderModalOpen = new BehaviorSubject<boolean>(false);
-	private isImportConfirmationModalOpen = new BehaviorSubject<boolean>(false);
-	private isMobileNavbarOpen = new BehaviorSubject<boolean>(false);
+	private wordEditionModalOpen = new BehaviorSubject<boolean>(false);
+	private wordDeletionModalOpen = new BehaviorSubject<boolean>(false);
+	private folderEditionModalOpen = new BehaviorSubject<boolean>(false);
+	private folderDeletionModalOpen = new BehaviorSubject<boolean>(false);
+	private addToFolderModalOpen = new BehaviorSubject<boolean>(false);
+	private importConfirmationModalOpen = new BehaviorSubject<boolean>(false);
+	private mobileNavbarOpen = new BehaviorSubject<boolean>(false);
 
-	isWordAddingModalOpen$ = this.isWordAddingModalOpen.asObservable();
-	isWordDeletionModalOpen$ = this.isWordDeletionModalOpen.asObservable();
-	isFolderAddingModalOpen$ = this.isFolderAddingModalOpen.asObservable();
-	isFolderDeletionModalOpen$ = this.isFolderDeletionModalOpen.asObservable();
-	isAddToFolderModalOpen$ = this.isAddToFolderModalOpen.asObservable();
-	isImportConfirmationModalOpen$ = this.isImportConfirmationModalOpen.asObservable();
-	isMobileNavbarOpen$ = this.isMobileNavbarOpen.asObservable();
+	wordEditionModalOpen$ = this.wordEditionModalOpen.asObservable();
+	wordDeletionModalOpen$ = this.wordDeletionModalOpen.asObservable();
+	folderEditionModalOpen$ = this.folderEditionModalOpen.asObservable();
+	folderDeletionModalOpen$ = this.folderDeletionModalOpen.asObservable();
+	addToFolderModalOpen$ = this.addToFolderModalOpen.asObservable();
+	importConfirmationModalOpen$ = this.importConfirmationModalOpen.asObservable();
+	mobileNavbarOpen$ = this.mobileNavbarOpen.asObservable();
 
-	setIsWordAddingModalOpen(value: boolean): void {
-		this.isWordAddingModalOpen.next(value);
+	setWordEditionModalOpen(value: boolean): void {
+		this.wordEditionModalOpen.next(value);
 	}
 
-	setIsWordDeletionModalOpen(value: boolean): void {
-		this.isWordDeletionModalOpen.next(value);
+	setWordDeletionModalOpen(value: boolean): void {
+		this.wordDeletionModalOpen.next(value);
 	}
 
-	setIsFolderAddingModalOpen(value: boolean): void {
-		this.isFolderAddingModalOpen.next(value);
+	setFolderEditionModalOpen(value: boolean): void {
+		this.folderEditionModalOpen.next(value);
 	}
 
-	setIsFolderDeletionModalOpen(value: boolean): void {
-		this.isFolderDeletionModalOpen.next(value);
+	setFolderDeletionModalOpen(value: boolean): void {
+		this.folderDeletionModalOpen.next(value);
 	}
 
-	setIsAddToFolderModalOpen(value: boolean): void {
-		this.isAddToFolderModalOpen.next(value);
+	setAddToFolderModalOpen(value: boolean): void {
+		this.addToFolderModalOpen.next(value);
 	}
 
-	setIsImportConfirmationModalOpen(value: boolean): void {
-		this.isImportConfirmationModalOpen.next(value);
+	setImportConfirmationModalOpen(value: boolean): void {
+		this.importConfirmationModalOpen.next(value);
 	}
 
-	setIsMobileNavbarOpen(value: boolean): void {
-		this.isMobileNavbarOpen.next(value);
+	setMobileNavbarOpen(value: boolean): void {
+		this.mobileNavbarOpen.next(value);
 	}
 
 	reset(): void {
-		this.isWordAddingModalOpen.next(false);
-		this.isWordDeletionModalOpen.next(false);
-		this.isFolderAddingModalOpen.next(false);
-		this.isFolderDeletionModalOpen.next(false);
-		this.isAddToFolderModalOpen.next(false);
-		this.isImportConfirmationModalOpen.next(false);
-		this.isMobileNavbarOpen.next(false);
+		this.wordEditionModalOpen.next(false);
+		this.wordDeletionModalOpen.next(false);
+		this.folderEditionModalOpen.next(false);
+		this.folderDeletionModalOpen.next(false);
+		this.addToFolderModalOpen.next(false);
+		this.importConfirmationModalOpen.next(false);
+		this.mobileNavbarOpen.next(false);
 	}
 }

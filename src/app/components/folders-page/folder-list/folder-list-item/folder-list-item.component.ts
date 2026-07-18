@@ -35,7 +35,7 @@ export class FolderListItemComponent implements OnInit, OnDestroy {
 	}
 
 	editFolder() {
-		this.modalService.toggleModal(EModalType.FolderAdding, true);
+		this.modalService.toggleModal(EModalType.FolderEdition, true);
 		this.foldersFormService.setupForEditing(this.folder);
 		this.toggleDropdownMenu();
 	}
