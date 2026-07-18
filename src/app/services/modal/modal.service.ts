@@ -1,52 +1,37 @@
-import { Injectable } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
+import { inject, Injectable } from "@angular/core";
 import { EModalType } from "@shared/constants/modal.constants";
+import { ModalStore } from "app/stores/modal/modal.store";
 
 @Injectable({
 	providedIn: "root",
 })
 export class ModalService {
-	private isWordAddingModalOpen = new BehaviorSubject<boolean>(false);
-	private isWordDeletionModalOpen = new BehaviorSubject<boolean>(false);
-	private isFolderAddingModalOpen = new BehaviorSubject<boolean>(false);
-	private isFolderDeletionModalOpen = new BehaviorSubject<boolean>(false);
-	private isAddToFolderModalOpen = new BehaviorSubject<boolean>(false);
-	private isImportConfirmationModalOpen = new BehaviorSubject<boolean>(false);
-	private isMobileNavbarOpen = new BehaviorSubject<boolean>(false);
+	private modalStore = inject(ModalStore);
+	private storeUpdaters: Record<EModalType, (isOpen: boolean) => void> = {
+		[EModalType.WordAdding]: (isOpen) => this.modalStore.setIsWordAddingModalOpen(isOpen),
+		[EModalType.WordDeletion]: (isOpen) => this.modalStore.setIsWordDeletionModalOpen(isOpen),
+		[EModalType.FolderAdding]: (isOpen) => this.modalStore.setIsFolderAddingModalOpen(isOpen),
+		[EModalType.FolderDeletion]: (isOpen) =>
+			this.modalStore.setIsFolderDeletionModalOpen(isOpen),
+		[EModalType.AddToFolder]: (isOpen) => this.modalStore.setIsAddToFolderModalOpen(isOpen),
+		[EModalType.ImportConfirmation]: (isOpen) =>
+			this.modalStore.setIsImportConfirmationModalOpen(isOpen),
+		[EModalType.MobileNavbar]: (isOpen) => this.modalStore.setIsMobileNavbarOpen(isOpen),
+	};
 
-	isWordAddingModalOpen$ = this.isWordAddingModalOpen.asObservable();
-	isWordDeletionModalOpen$ = this.isWordDeletionModalOpen.asObservable();
-	isFolderAddingModalOpen$ = this.isFolderAddingModalOpen.asObservable();
-	isFolderDeletionModalOpen$ = this.isFolderDeletionModalOpen.asObservable();
-	isAddToFolderModalOpen$ = this.isAddToFolderModalOpen.asObservable();
-	isImportConfirmationModalOpen$ = this.isImportConfirmationModalOpen.asObservable();
-	isMobileNavbarOpen$ = this.isMobileNavbarOpen.asObservable();
+	isWordAddingModalOpen$ = this.modalStore.isWordAddingModalOpen$;
+	isWordDeletionModalOpen$ = this.modalStore.isWordDeletionModalOpen$;
+	isFolderAddingModalOpen$ = this.modalStore.isFolderAddingModalOpen$;
+	isFolderDeletionModalOpen$ = this.modalStore.isFolderDeletionModalOpen$;
+	isAddToFolderModalOpen$ = this.modalStore.isAddToFolderModalOpen$;
+	isImportConfirmationModalOpen$ = this.modalStore.isImportConfirmationModalOpen$;
+	isMobileNavbarOpen$ = this.modalStore.isMobileNavbarOpen$;
 
 	toggleModal(modalType: EModalType, state: boolean) {
-		switch (modalType) {
-			case EModalType.WordAdding:
-				this.isWordAddingModalOpen.next(state);
-				break;
-			case EModalType.WordDeletion:
-				this.isWordDeletionModalOpen.next(state);
-				break;
-			case EModalType.FolderAdding:
-				this.isFolderAddingModalOpen.next(state);
-				break;
-			case EModalType.FolderDeletion:
-				this.isFolderDeletionModalOpen.next(state);
-				break;
-			case EModalType.AddToFolder:
-				this.isAddToFolderModalOpen.next(state);
-				break;
-			case EModalType.ImportConfirmation:
-				this.isImportConfirmationModalOpen.next(state);
-				break;
-			case EModalType.MobileNavbar:
-				this.isMobileNavbarOpen.next(state);
-				break;
-			default:
-				break;
+		if (state) {
+			this.modalStore.reset();
 		}
+
+		this.storeUpdaters[modalType](state);
 	}
 }
