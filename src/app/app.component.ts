@@ -44,13 +44,13 @@ export class AppComponent implements OnInit, OnDestroy {
 	private toasterService = inject(ToasterService);
 	private wordsService = inject(WordsService);
 	private settingsService = inject(SettingsService);
-	isWordAddingModalOpen = false;
+	wordEditionModalOpen = false;
 	isWordDeletingModalOpen = false;
-	isFolderAddingModalOpen = false;
+	folderEditionModalOpen = false;
 	isFolderDeletingModalOpen = false;
-	isAddToFolderModalOpen = false;
-	isImportConfirmationModalOpen = false;
-	isMobileNavbarOpen = false;
+	addToFolderModalOpen = false;
+	importConfirmationModalOpen = false;
+	mobileNavbarOpen = false;
 	isLoading = false;
 	toasters: IToaster[] = [];
 	EToasterPositions = EToasterPositions;
@@ -66,44 +66,44 @@ export class AppComponent implements OnInit, OnDestroy {
 		this.toasterService.startAutoRemoving();
 
 		this.subscriptions.add(
-			this.modalService.isWordAddingModalOpen$.subscribe((isOpen) => {
-				this.isWordAddingModalOpen = isOpen;
+			this.modalService.wordEditionModalOpen$.subscribe((isOpen) => {
+				this.wordEditionModalOpen = isOpen;
 			}),
 		);
 
 		this.subscriptions.add(
-			this.modalService.isWordDeletionModalOpen$.subscribe((isOpen) => {
+			this.modalService.wordDeletionModalOpen$.subscribe((isOpen) => {
 				this.isWordDeletingModalOpen = isOpen;
 			}),
 		);
 
 		this.subscriptions.add(
-			this.modalService.isFolderAddingModalOpen$.subscribe((isOpen) => {
-				this.isFolderAddingModalOpen = isOpen;
+			this.modalService.folderEditionModalOpen$.subscribe((isOpen) => {
+				this.folderEditionModalOpen = isOpen;
 			}),
 		);
 
 		this.subscriptions.add(
-			this.modalService.isFolderDeletionModalOpen$.subscribe((isOpen) => {
+			this.modalService.folderDeletionModalOpen$.subscribe((isOpen) => {
 				this.isFolderDeletingModalOpen = isOpen;
 			}),
 		);
 
 		this.subscriptions.add(
-			this.modalService.isAddToFolderModalOpen$.subscribe((isOpen) => {
-				this.isAddToFolderModalOpen = isOpen;
+			this.modalService.addToFolderModalOpen$.subscribe((isOpen) => {
+				this.addToFolderModalOpen = isOpen;
 			}),
 		);
 
 		this.subscriptions.add(
-			this.modalService.isImportConfirmationModalOpen$.subscribe((isOpen) => {
-				this.isImportConfirmationModalOpen = isOpen;
+			this.modalService.importConfirmationModalOpen$.subscribe((isOpen) => {
+				this.importConfirmationModalOpen = isOpen;
 			}),
 		);
 
 		this.subscriptions.add(
-			this.modalService.isMobileNavbarOpen$.subscribe((isOpen) => {
-				this.isMobileNavbarOpen = isOpen;
+			this.modalService.mobileNavbarOpen$.subscribe((isOpen) => {
+				this.mobileNavbarOpen = isOpen;
 			}),
 		);
 

@@ -1,8 +1,8 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { inject, Injectable } from "@angular/core";
+import { DestroyRef, inject, Injectable } from "@angular/core";
 import { LocalStorageService } from "@services/local-storage/local-storage.service";
 import { SettingsService } from "@services/settings/settings.service";
-import { catchError, map, Observable, of, switchMap, take } from "rxjs";
+import { catchError, map, Observable, of, Subscription, switchMap, take, takeUntil } from "rxjs";
 import { environment } from "../../../environment/environment";
 import { IWord } from "../../types/word.interface";
 import { WordsStore } from "../../stores/words/words.store";
@@ -16,13 +16,22 @@ export class WordsResourceService {
 	private settingsService = inject(SettingsService);
 	private localStorageService = inject(LocalStorageService);
 	private wordsStore = inject(WordsStore);
+	private subscription = new Subscription();
+	private destroyRef = inject(DestroyRef);
 
 	private apiUrl = environment.apiUrl;
 	private rssUrl = environment.rssUrl;
 
 	constructor() {
-		this.getWordsOfTheDay();
+		this.subscription = this.settingsService.isFetchWotdEnabled$.subscribe(() =>
+			this.getWordsOfTheDay(),
+		);
+
 		this.load();
+
+		this.destroyRef.onDestroy(() => {
+			this.subscription.unsubscribe();
+		});
 	}
 
 	saveData(wordList: IWord[]) {
@@ -60,13 +69,19 @@ export class WordsResourceService {
 	}
 
 	private getWordsOfTheDay() {
+		if (!this.settingsService.isFetchWotdEnabledValue) {
+			this.wordsStore.setWordsOfTheDay([]);
+			this.wordsStore.setWotdLoading(false);
+			return;
+		}
+
 		const date = new Date();
 		date.setUTCHours(0, 0, 0, 0);
 
-		if (
-			this.localStorageService.loadData(ELocalStorageKeys.WotdFetchedDate) ===
-			date.toISOString().split("T")[0]
-		) {
+		const lastFetchDate = this.localStorageService.loadData(ELocalStorageKeys.WotdFetchedDate);
+		const currentDate = date.toISOString().split("T")[0];
+
+		if (lastFetchDate === currentDate) {
 			const words = this.localStorageService.loadData(ELocalStorageKeys.WotdWords) as IWord[];
 
 			this.wordsStore.setWordsOfTheDay(words);

@@ -5,13 +5,19 @@ import { provideHttpClient } from "@angular/common/http";
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { SentenceCasePipe } from "@pipes/sentence-case.pipe";
 import { createMockModalService, IMockModalService } from "@services/modal/modal.service.mock";
-import { createMockWebSpeechService, IMockWebSpeechService } from "@services/web-speech/web-speech.service.mock";
+import {
+	createMockWebSpeechService,
+	IMockWebSpeechService,
+} from "@services/web-speech/web-speech.service.mock";
 import {
 	createMockWordsService,
 	IMockWordsService,
 	mockWords,
 } from "@services/words/words.service.mock";
-import { createMockWordsFormService, IMockWordsFormService } from "@services/words-form/words-form.service.mock";
+import {
+	createMockWordsFormService,
+	IMockWordsFormService,
+} from "@services/words-form/words-form.service.mock";
 import { WordsFormService } from "@services/words-form/words-form.service";
 import { WebSpeechService } from "@services/web-speech/web-speech.service";
 import { WordsService } from "@services/words/words.service";
@@ -74,7 +80,7 @@ describe("WordListItemComponent", () => {
 		const toggleDropdownMenuSpy = spyOn(component, "toggleDropdownMenu");
 		component.editWord();
 
-		expect(mockModalService.toggleModal).toHaveBeenCalledOnceWith(EModalType.WordAdding, true);
+		expect(mockModalService.toggleModal).toHaveBeenCalledOnceWith(EModalType.WordEdition, true);
 		expect(mockWordsFormService.setupForEditing).toHaveBeenCalledOnceWith(component.word);
 		expect(toggleDropdownMenuSpy).toHaveBeenCalledTimes(1);
 	});

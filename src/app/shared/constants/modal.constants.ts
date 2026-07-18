@@ -1,7 +1,7 @@
 export enum EModalType {
-	WordAdding,
+	WordEdition,
 	WordDeletion,
-	FolderAdding,
+	FolderEdition,
 	FolderDeletion,
 	AddToFolder,
 	ImportConfirmation,

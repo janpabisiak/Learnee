@@ -29,10 +29,10 @@ describe("HamburgerComponent", () => {
 		expect(component).toBeTruthy();
 	});
 
-	it("should update isMobileNavbarOpen property on subscription change", () => {
-		mockModalService.isMobileNavbarOpen$.next(true);
+	it("should update mobileNavbarOpen property on subscription change", () => {
+		mockModalService.mobileNavbarOpen$.next(true);
 
-		expect(component.isMobileNavbarOpen).toBeTrue();
+		expect(component.mobileNavbarOpen).toBeTrue();
 	});
 
 	it("should show mobile navbar on toggleNavbarMenu call", () => {
@@ -40,7 +40,7 @@ describe("HamburgerComponent", () => {
 
 		expect(mockModalService.toggleModal).toHaveBeenCalledOnceWith(
 			EModalType.MobileNavbar,
-			true
+			true,
 		);
 	});
 

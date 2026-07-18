@@ -11,21 +11,21 @@ import { Subject, takeUntil } from "rxjs";
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HamburgerComponent implements OnInit, OnDestroy {
-	isMobileNavbarOpen = false;
+	mobileNavbarOpen = false;
 	private destroy$ = new Subject<void>();
 
 	constructor(private modalService: ModalService) {}
 
 	ngOnInit() {
-		this.modalService.isMobileNavbarOpen$
+		this.modalService.mobileNavbarOpen$
 			.pipe(takeUntil(this.destroy$))
-			.subscribe((isMobileNavbarOpen) => {
-				this.isMobileNavbarOpen = isMobileNavbarOpen;
+			.subscribe((mobileNavbarOpen) => {
+				this.mobileNavbarOpen = mobileNavbarOpen;
 			});
 	}
 
 	toggleNavbarMenu() {
-		this.modalService.toggleModal(EModalType.MobileNavbar, !this.isMobileNavbarOpen);
+		this.modalService.toggleModal(EModalType.MobileNavbar, !this.mobileNavbarOpen);
 	}
 
 	ngOnDestroy() {

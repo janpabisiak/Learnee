@@ -37,6 +37,10 @@ export class SettingsStore {
 		this.isFetchWotdEnabled.next(value);
 	}
 
+	get isFetchWotdEnabledValue(): boolean {
+		return this.isFetchWotdEnabled.value;
+	}
+
 	setIsStatisticsEnabled(value: boolean): void {
 		this.isStatisticsEnabled.next(value);
 	}

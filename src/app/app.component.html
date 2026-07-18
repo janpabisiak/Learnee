@@ -1,8 +1,8 @@
-@if (isWordAddingModalOpen) {
+@if (wordEditionModalOpen) {
 <app-add-edit-word-modal />
 }
 
-@if (isFolderAddingModalOpen) {
+@if (folderEditionModalOpen) {
 <app-add-edit-folder-modal />
 }
 
@@ -14,11 +14,11 @@
 <app-confirm-folder-deletion-modal />
 }
 
-@if (isAddToFolderModalOpen) {
+@if (addToFolderModalOpen) {
 <app-add-to-folder-modal />
 }
 
-@if (isImportConfirmationModalOpen) {
+@if (importConfirmationModalOpen) {
 <app-confirm-import-modal />
 }
 
@@ -26,7 +26,7 @@
 <app-spinner />
 }
 
-@if (isMobileNavbarOpen) {
+@if (mobileNavbarOpen) {
 <app-mobile-menu />
 }
 

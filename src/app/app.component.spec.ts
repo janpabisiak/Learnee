@@ -72,10 +72,10 @@ describe("AppComponent", () => {
 	});
 
 	it("should initialize default values on init", () => {
-		expect(app.isWordAddingModalOpen).toBeFalse();
+		expect(app.wordEditionModalOpen).toBeFalse();
 		expect(app.isWordDeletingModalOpen).toBeFalse();
-		expect(app.isFolderAddingModalOpen).toBeFalse();
-		expect(app.isMobileNavbarOpen).toBeFalse();
+		expect(app.folderEditionModalOpen).toBeFalse();
+		expect(app.mobileNavbarOpen).toBeFalse();
 		expect(app.isLoading).toBeTrue();
 		expect(app.toasters).toEqual([]);
 		expect(app.EToasterPositions).toEqual(EToasterPositions);
@@ -93,20 +93,20 @@ describe("AppComponent", () => {
 	});
 
 	it("should set fields values depending on subscriptions", () => {
-		mockModalService.isWordAddingModalOpen$.next(true);
-		mockModalService.isWordDeletionModalOpen$.next(true);
-		mockModalService.isFolderAddingModalOpen$.next(true);
-		mockModalService.isMobileNavbarOpen$.next(true);
+		mockModalService.wordEditionModalOpen$.next(true);
+		mockModalService.wordDeletionModalOpen$.next(true);
+		mockModalService.folderEditionModalOpen$.next(true);
+		mockModalService.mobileNavbarOpen$.next(true);
 		mockWordsService.wordsOfTheDay$.next(mockWords);
 		mockWordsService.isWotdLoading$.next(false);
 		mockToasterService.toasters$.next(mockToasters);
 
 		app.ngOnInit();
 
-		expect(app.isWordAddingModalOpen).toBeTrue();
+		expect(app.wordEditionModalOpen).toBeTrue();
 		expect(app.isWordDeletingModalOpen).toBeTrue();
-		expect(app.isFolderAddingModalOpen).toBeTrue();
-		expect(app.isMobileNavbarOpen).toBeTrue();
+		expect(app.folderEditionModalOpen).toBeTrue();
+		expect(app.mobileNavbarOpen).toBeTrue();
 		expect(app.isLoading).toBeFalse();
 		expect(app.toasters).toEqual(mockToasters);
 	});

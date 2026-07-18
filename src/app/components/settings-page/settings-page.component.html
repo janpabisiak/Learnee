@@ -19,15 +19,15 @@
         </div>
         <div class="flex justify-between items-center">
             <div class="flex flex-col">
-                <h4 class="text-xl font-semibold">Display word of the day</h4>
-                <p class="text-gray-500">Fetch and display word of the day</p>
+                <h4 class="text-xl font-semibold">{{'settings.fetchWotd.title' | translate}}</h4>
+                <p class="text-gray-500">{{'settings.fetchWotd.description' | translate}}</p>
             </div>
             <input type="checkbox" class="w-6 h-6 accent-emerald-700" [checked]="isFetchWotdEnabled$ | async" (change)="toggleIsFetchWotdEnabled(fetchWotd.checked)" #fetchWotd>
         </div>
         <div class="flex justify-between items-center">
             <div class="flex flex-col">
-                <h4 class="text-xl font-semibold">Display statistics</h4>
-                <p class="text-gray-500">Show game statistics as a widget in the Home page</p>
+                <h4 class="text-xl font-semibold">{{'settings.displayStatistics.title' | translate}}</h4>
+                <p class="text-gray-500">{{'settings.displayStatistics.description' | translate}}</p>
             </div>
             <input type="checkbox" class="w-6 h-6 accent-emerald-700" [checked]="isStatisticsEnabled$ | async" (change)="toggleIsStatisticsEnabled(statistics.checked)" #statistics>
         </div>

@@ -137,6 +137,12 @@
 	"settings.fetchDefinition.title": "Fetch word definition",
 	"settings.fetchDefinition.description": "Automatically fetch word definition from external API",
 
+	"settings.fetchWotd.title": "Display word of the day",
+	"settings.fetchWotd.description": "Change visibility of word of the day widget",
+
+	"settings.displayStatistics.title": "Display game statistics",
+	"settings.displayStatistics.description": "Change visibility of game statistics widget",
+
 	"settings.language.title": "Language",
 	"settings.language.description": "Change display language",
 	"settings.language.english": "English",

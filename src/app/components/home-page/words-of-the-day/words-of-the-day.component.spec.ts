@@ -4,16 +4,16 @@ import { WordsOfTheDayComponent } from "./words-of-the-day.component";
 import { provideHttpClient } from "@angular/common/http";
 import { WotdItemComponent } from "./wotd-item/wotd-item.component";
 import { ButtonComponent } from "@shared/components/button/button.component";
-import {
-	createMockModalService,
-	IMockModalService,
-} from "@services/modal/modal.service.mock";
+import { createMockModalService, IMockModalService } from "@services/modal/modal.service.mock";
 import {
 	createMockWordsService,
 	IMockWordsService,
 	mockWords,
 } from "@services/words/words.service.mock";
-import { createMockWordsFormService, IMockWordsFormService } from "@services/words-form/words-form.service.mock";
+import {
+	createMockWordsFormService,
+	IMockWordsFormService,
+} from "@services/words-form/words-form.service.mock";
 import { WordsService } from "@services/words/words.service";
 import { ModalService } from "@services/modal/modal.service";
 import { EModalType } from "@shared/constants/modal.constants";
@@ -80,7 +80,7 @@ describe("WordsOfTheDayComponent", () => {
 		component.currentWordId = 1;
 		component.addWord();
 
-		expect(mockModalService.toggleModal).toHaveBeenCalledOnceWith(EModalType.WordAdding, true);
+		expect(mockModalService.toggleModal).toHaveBeenCalledOnceWith(EModalType.WordEdition, true);
 		expect(mockWordsFormService.setupForEditing).toHaveBeenCalledOnceWith({
 			...mockWords[1],
 			id: 0,
