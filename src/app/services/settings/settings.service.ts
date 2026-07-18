@@ -1,6 +1,5 @@
 import { inject, Injectable, Renderer2, RendererFactory2 } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
-import { LocalStorageService } from "@services/local-storage/local-storage.service";
 import { SettingsResourceService } from "@services/settings-resource/settings-resource.service";
 import { ELocalStorageKeys } from "@shared/constants/local-storage.constants";
 import { EAvailableLanguages } from "@shared/constants/settings.constants";
@@ -12,7 +11,6 @@ import { SettingsStore } from "app/stores/settings/settings.store";
 export class SettingsService {
 	private settingsStore = inject(SettingsStore);
 	private rendererFactory = inject(RendererFactory2);
-	private localStorageService = inject(LocalStorageService);
 	private translateService = inject(TranslateService);
 	private settingsResourceService = inject(SettingsResourceService);
 	private renderer: Renderer2;
@@ -55,7 +53,7 @@ export class SettingsService {
 
 	setLanguage(value: EAvailableLanguages): void {
 		this.settingsStore.setLanguage(value);
-		this.localStorageService.saveData(ELocalStorageKeys.Language, value);
+		this.settingsResourceService.save({ key: ELocalStorageKeys.Language, value });
 
 		this.translateService.use(this.settingsStore.languageValue);
 	}
@@ -64,5 +62,9 @@ export class SettingsService {
 		this.settingsStore.isDarkModeValue
 			? this.renderer.addClass(document.body, "dark")
 			: this.renderer.removeClass(document.body, "dark");
+	}
+
+	get isFetchWotdEnabledValue() {
+		return this.settingsStore.isFetchWotdEnabledValue;
 	}
 }
