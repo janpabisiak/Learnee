@@ -1,33 +1,39 @@
-import { Component } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { TranslatePipe } from "@ngx-translate/core";
 import { FoldersService } from "@services/folder/folders.service";
 import { ModalService } from "@services/modal/modal.service";
+import { WordsOptionsService } from "@services/words-options/words-options.service";
 import { WordsService } from "@services/words/words.service";
 import { ModalComponent } from "@shared/components/modal/modal.component";
+import { SearchBarComponent } from "@shared/components/search-bar/search-bar.component";
 import { EModalType } from "@shared/constants/modal.constants";
-import { IWord } from "../../../types/word.interface";
 import { Subject, take, takeUntil } from "rxjs";
+import { IWord } from "../../../types/word.interface";
 
 @Component({
 	selector: "app-add-to-folder-modal",
-	imports: [ModalComponent, TranslatePipe],
+	imports: [ModalComponent, TranslatePipe, SearchBarComponent],
 	templateUrl: "./add-to-folder-modal.component.html",
 })
-export class AddToFolderModalComponent {
+export class AddToFolderModalComponent implements OnInit, OnDestroy {
 	wordList: IWord[] = [];
+	filteredWords: IWord[] = [];
 	folderId: number | null = null;
 	selectedWordIds: number[] = [];
+	searchQuery = "";
 	private destroy$ = new Subject<void>();
 
 	constructor(
 		private modalService: ModalService,
 		private wordsService: WordsService,
 		private foldersService: FoldersService,
+		private wordsOptionsService: WordsOptionsService,
 	) {}
 
 	ngOnInit() {
 		this.wordsService.wordList$.pipe(takeUntil(this.destroy$)).subscribe((wordList) => {
 			this.wordList = wordList;
+			this.updateFilteredWords();
 		});
 
 		this.foldersService.singleFolderIdToOperateOn$
@@ -39,6 +45,11 @@ export class AddToFolderModalComponent {
 					this.initializeSelectedWordIds();
 				}
 			});
+	}
+
+	search(query: string) {
+		this.searchQuery = query;
+		this.updateFilteredWords();
 	}
 
 	initializeSelectedWordIds() {
@@ -69,6 +80,15 @@ export class AddToFolderModalComponent {
 	selectWordsForFolder() {
 		this.foldersService.modifyFolderWordIds(this.selectedWordIds);
 		this.closeModal();
+	}
+
+	private updateFilteredWords() {
+		if (!this.searchQuery) {
+			this.filteredWords = this.wordList;
+			return;
+		}
+
+		this.filteredWords = this.wordsOptionsService.filter(this.wordList, this.searchQuery);
 	}
 
 	ngOnDestroy() {
