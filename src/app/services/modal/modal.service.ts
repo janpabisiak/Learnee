@@ -31,6 +31,8 @@ export class ModalService {
 			this.modalStore.reset();
 		}
 
-		this.storeUpdaters[modalType](state);
+		if (this.storeUpdaters[modalType]) {
+			this.storeUpdaters[modalType](state);
+		}
 	}
 }

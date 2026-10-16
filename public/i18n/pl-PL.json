@@ -105,6 +105,8 @@
 
 	"study.games.cancel.label": "Przerwij grę",
 	"study.games.checkAnswer.label": "Sprawdź",
+	"study.games.next.label": "Dalej",
+	"study.games.finish.label": "Zakończ",
 	"study.games.all.title": "Wszystkie",
 	"study.games.all.description": "Wybierz wszystkie gry",
 

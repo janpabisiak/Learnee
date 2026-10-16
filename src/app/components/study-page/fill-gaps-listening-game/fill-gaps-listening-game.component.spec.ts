@@ -1,20 +1,23 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { FillGapsGameComponent } from "./fill-gaps-listening-game.component";
 import { provideHttpClient } from "@angular/common/http";
-import { SentenceCasePipe } from "@pipes/sentence-case.pipe";
-import { InputGuessComponent } from "./input-guess/input-guess.component";
-import { ButtonComponent } from "@shared/components/button/button.component";
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { createMockGameService, IMockGameService, mockStages } from "@services/game/game.service.mock";
+import { provideTranslateService } from "@ngx-translate/core";
+import { SentenceCasePipe } from "@pipes/sentence-case.pipe";
+import { GameService } from "@services/game/game.service";
+import {
+	createMockGameService,
+	IMockGameService,
+	mockStages,
+} from "@services/game/game.service.mock";
+import { WebSpeechService } from "@services/web-speech/web-speech.service";
 import {
 	createMockWebSpeechService,
 	IMockWebSpeechService,
 } from "@services/web-speech/web-speech.service.mock";
-import { WebSpeechService } from "@services/web-speech/web-speech.service";
-import { GameService } from "@services/game/game.service";
-import { EAvailableGames } from "@shared/constants/game.constants";
-import { provideTranslateService } from "@ngx-translate/core";
+import { ButtonComponent } from "@shared/components/button/button.component";
+import { FillGapsGameComponent } from "./fill-gaps-listening-game.component";
+import { InputGuessComponent } from "./input-guess/input-guess.component";
 
 describe("FillGapsGameComponent", () => {
 	let component: FillGapsGameComponent;
@@ -79,7 +82,7 @@ describe("FillGapsGameComponent", () => {
 		expect(mockWebSpeechService.readText).toHaveBeenCalledOnceWith("test");
 	});
 
-	it("should update properties and call gameService methods on answerQuestion call", () => {
+	it("should update properties and call gameService methods on answerQuestion call without advancing stage", () => {
 		component.data = {
 			...mockStages[1],
 			data: {
@@ -92,6 +95,14 @@ describe("FillGapsGameComponent", () => {
 		expect(component.isVisible).toBeFalse();
 		expect(mockGameService.submitAnswer).toHaveBeenCalledOnceWith("");
 		expect(component.inputValue).toBe("test2");
+		expect(mockGameService.goToNextStage).not.toHaveBeenCalled();
+	});
+
+	it("should call gameService.goToNextStage on nextStage call", () => {
+		component.isVisible = true;
+		component.nextStage();
+
+		expect(component.isVisible).toBeFalse();
 		expect(mockGameService.goToNextStage).toHaveBeenCalledTimes(1);
 	});
 
@@ -102,13 +113,24 @@ describe("FillGapsGameComponent", () => {
 		expect(result).toBeUndefined();
 	});
 
-	it("should call answerQuestion when Enter key is pressed", () => {
+	it("should call answerQuestion when Enter key is pressed and stage is not answered", () => {
+		component.data = { ...mockStages[1], answered: false };
 		spyOn(component, "answerQuestion");
 		const event = new KeyboardEvent("keydown", { key: "Enter" });
 
 		document.dispatchEvent(event);
 
 		expect(component.answerQuestion).toHaveBeenCalled();
+	});
+
+	it("should call nextStage when Enter key is pressed and stage is answered", () => {
+		component.data = { ...mockStages[0], answered: true };
+		spyOn(component, "nextStage");
+		const event = new KeyboardEvent("keydown", { key: "Enter" });
+
+		document.dispatchEvent(event);
+
+		expect(component.nextStage).toHaveBeenCalled();
 	});
 
 	it("should NOT call answerQuestion for keys other than Enter", () => {

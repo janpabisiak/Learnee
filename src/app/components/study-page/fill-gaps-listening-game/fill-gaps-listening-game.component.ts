@@ -1,13 +1,13 @@
+import { NgClass, NgIf } from "@angular/common";
 import { Component, CUSTOM_ELEMENTS_SCHEMA, Input, OnDestroy, OnInit } from "@angular/core";
+import { InputGuessComponent } from "@components/study-page/fill-gaps-listening-game/input-guess/input-guess.component";
+import { TranslatePipe } from "@ngx-translate/core";
+import { SentenceCasePipe } from "@pipes/sentence-case.pipe";
 import { GameService } from "@services/game/game.service";
+import { WebSpeechService } from "@services/web-speech/web-speech.service";
+import { ButtonComponent } from "@shared/components/button/button.component";
 import { EAvailableGames } from "@shared/constants/game.constants";
 import { combineLatest, skip, Subject, takeUntil } from "rxjs";
-import { ButtonComponent } from "@shared/components/button/button.component";
-import { SentenceCasePipe } from "@pipes/sentence-case.pipe";
-import { NgClass, NgIf } from "@angular/common";
-import { InputGuessComponent } from "@components/study-page/fill-gaps-listening-game/input-guess/input-guess.component";
-import { WebSpeechService } from "@services/web-speech/web-speech.service";
-import { TranslatePipe } from "@ngx-translate/core";
 import { IStage } from "../../../types/stage.interface";
 
 @Component({
@@ -23,11 +23,17 @@ export class FillGapsGameComponent implements OnInit, OnDestroy {
 	wordLength = 0;
 	isVisible = true;
 	inputValue = "";
+	isLastStage = false;
 	EAvailableGames = EAvailableGames;
 	private destroy$ = new Subject<void>();
 	private keyEventHandler = (e: KeyboardEvent) => {
 		if (e.key !== "Enter") return;
-		this.answerQuestion();
+
+		if (this.data?.answered) {
+			this.nextStage();
+		} else {
+			this.answerQuestion();
+		}
 	};
 
 	constructor(
@@ -53,6 +59,7 @@ export class FillGapsGameComponent implements OnInit, OnDestroy {
 				this.currentStageId = currentStageId;
 				this.data = stages[currentStageId];
 				this.wordLength = this.data.data.word.trim().length;
+				this.isLastStage = currentStageId === stages.length - 1;
 			});
 
 		this.gameService.currentStageId$.pipe(takeUntil(this.destroy$), skip(1)).subscribe(() => {
@@ -77,7 +84,10 @@ export class FillGapsGameComponent implements OnInit, OnDestroy {
 		this.isVisible = false;
 		this.gameService.submitAnswer(this.inputValue.trim());
 		this.inputValue = this.data?.data.word.trim();
+	}
 
+	nextStage() {
+		this.isVisible = false;
 		this.gameService.goToNextStage();
 	}
 

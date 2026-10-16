@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { QuestionAnswerComponent } from "./question-answer.component";
 import { provideHttpClient } from "@angular/common/http";
-import { createMockGameService, IMockGameService } from "@services/game/game.service.mock";
 import { GameService } from "@services/game/game.service";
+import { createMockGameService, IMockGameService } from "@services/game/game.service.mock";
+import { QuestionAnswerComponent } from "./question-answer.component";
 
 describe("QuestionAnswerComponent", () => {
 	let component: QuestionAnswerComponent;
@@ -32,12 +32,21 @@ describe("QuestionAnswerComponent", () => {
 		expect(component).toBeTruthy();
 	});
 
-	it("should call gameService methods on answerQuestion call", () => {
+	it("should call submitAnswer and emit answered on answerQuestion call", () => {
 		const emitSpy = spyOn(component.answered, "emit");
 		component.answerQuestion(1);
 
 		expect(mockGameService.submitAnswer).toHaveBeenCalledOnceWith(1);
-		expect(mockGameService.goToNextStage).toHaveBeenCalledTimes(1);
+		expect(mockGameService.goToNextStage).not.toHaveBeenCalled();
 		expect(emitSpy).toHaveBeenCalledTimes(1);
+	});
+
+	it("should not call submitAnswer on answerQuestion call when showAnswer is true", () => {
+		component.showAnswer = true;
+		const emitSpy = spyOn(component.answered, "emit");
+		component.answerQuestion(1);
+
+		expect(mockGameService.submitAnswer).not.toHaveBeenCalled();
+		expect(emitSpy).not.toHaveBeenCalled();
 	});
 });

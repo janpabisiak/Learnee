@@ -6,8 +6,8 @@ import { GameService } from "@services/game/game.service";
 import { IMatch } from "@services/matching-game/matching-game.service";
 import { ButtonComponent } from "@shared/components/button/button.component";
 import { combineLatest, Subject, takeUntil } from "rxjs";
-import { DraggableItemsListComponent } from "./draggable-items-list/draggable-items-list.component";
 import { IStage } from "../../../types/stage.interface";
+import { DraggableItemsListComponent } from "./draggable-items-list/draggable-items-list.component";
 
 @Component({
 	selector: "app-matching-game",
@@ -25,6 +25,7 @@ export class MatchingGameComponent implements OnInit, OnDestroy {
 	results: boolean[] = [];
 	isVisible = false;
 	answered = false;
+	isLastStage = false;
 
 	constructor(private gameService: GameService) {}
 
@@ -52,6 +53,7 @@ export class MatchingGameComponent implements OnInit, OnDestroy {
 				this.currentStageId = currentId;
 				this.matches = stages[currentId].data;
 				this.answered = stages[currentId].answered;
+				this.isLastStage = currentId === stages.length - 1;
 
 				if (!this.matches) return;
 
@@ -73,12 +75,19 @@ export class MatchingGameComponent implements OnInit, OnDestroy {
 	}
 
 	checkAnswers() {
+		if (this.answered) return;
+
 		this.results =
 			this.gameService.submitAnswer<{ terms: string[]; definitions: string[] }, boolean[]>({
 				terms: this.terms,
 				definitions: this.definitions,
 			}) ?? [];
 
+		this.answered = true;
+		this.isVisible = false;
+	}
+
+	nextStage() {
 		this.isVisible = false;
 		this.gameService.goToNextStage();
 	}

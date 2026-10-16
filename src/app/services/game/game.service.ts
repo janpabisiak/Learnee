@@ -6,14 +6,12 @@ import { QuizService } from "@services/quiz/quiz.service";
 import { StatisticsService } from "@services/statistics/statistics.service";
 import {
 	availableGames,
-	DEFAULT_NUMBER_OF_STAGES,
 	EAvailableGames,
-	STAGE_TRANSITION_DELAY,
 	XP_PENALTY_ON_LOSS,
 } from "@shared/constants/game.constants";
 import { GameStore } from "app/stores/game/game.store";
-import { TrueFalseGameService } from "../true-false-game/true-false-game.service";
 import { IGameStrategy } from "../../types/game-strategy.interface";
+import { TrueFalseGameService } from "../true-false-game/true-false-game.service";
 
 @Injectable({
 	providedIn: "root",
@@ -35,8 +33,6 @@ export class GameService {
 		[EAvailableGames.FillGaps]: this.fillGapsListeningGameService,
 		[EAvailableGames.Listening]: this.fillGapsListeningGameService,
 	};
-
-	private timeoutId: number | null = null;
 
 	stages$ = this.gameStore.stages$;
 	numberOfStages$ = this.gameStore.numberOfStages$;
@@ -98,11 +94,9 @@ export class GameService {
 		const currentStageId = this.gameStore.currentStageIdValue;
 		const stages = this.gameStore.stagesValue;
 
-		this.timeoutId = setTimeout(() => {
-			if (currentStageId < stages.length) {
-				this.gameStore.setCurrentStageId(currentStageId + 1);
-			}
-		}, STAGE_TRANSITION_DELAY);
+		if (currentStageId < stages.length) {
+			this.gameStore.setCurrentStageId(currentStageId + 1);
+		}
 	}
 
 	updateNumberOfStages(numberOfStages: number) {
@@ -126,11 +120,6 @@ export class GameService {
 	}
 
 	cancelGame() {
-		if (this.timeoutId !== null) {
-			clearTimeout(this.timeoutId);
-			this.timeoutId = null;
-		}
-
 		this.gameStore.setStages([]);
 		this.gameStore.setCurrentStageId(0);
 	}

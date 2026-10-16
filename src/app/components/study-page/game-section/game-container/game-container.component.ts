@@ -18,5 +18,6 @@ import { IStage } from "../../../../types/stage.interface";
 })
 export class GameContainerComponent {
 	@Input() stage: IStage | null = null;
+	@Input() isResult = false;
 	EAvailableGames = EAvailableGames;
 }

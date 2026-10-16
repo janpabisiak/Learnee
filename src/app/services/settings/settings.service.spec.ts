@@ -1,16 +1,16 @@
-import { TestBed } from "@angular/core/testing";
 import { RendererFactory2 } from "@angular/core";
+import { TestBed } from "@angular/core/testing";
 import { TranslateService } from "@ngx-translate/core";
 import { LocalStorageService } from "@services/local-storage/local-storage.service";
-import { SettingsResourceService } from "@services/settings-resource/settings-resource.service";
-import { SettingsStore } from "app/stores/settings/settings.store";
-import { SettingsService } from "./settings.service";
 import {
 	createMockLocalStorageService,
 	IMockLocalStorageService,
 } from "@services/local-storage/local-storage.service.mock";
+import { SettingsResourceService } from "@services/settings-resource/settings-resource.service";
 import { ELocalStorageKeys } from "@shared/constants/local-storage.constants";
 import { EAvailableLanguages } from "@shared/constants/settings.constants";
+import { SettingsStore } from "app/stores/settings/settings.store";
+import { SettingsService } from "./settings.service";
 
 describe("SettingsService", () => {
 	let service: SettingsService;
@@ -132,10 +132,10 @@ describe("SettingsService", () => {
 			service.setLanguage(EAvailableLanguages.Polish);
 
 			expect(store.languageValue).toBe(EAvailableLanguages.Polish);
-			expect(mockLocalStorageService.saveData).toHaveBeenCalledWith(
-				ELocalStorageKeys.Language,
-				EAvailableLanguages.Polish,
-			);
+			expect(mockSettingsResourceService.save).toHaveBeenCalledWith({
+				key: ELocalStorageKeys.Language,
+				value: EAvailableLanguages.Polish,
+			});
 			expect(mockTranslateService.use).toHaveBeenCalledWith(EAvailableLanguages.Polish);
 		});
 	});

@@ -28,4 +28,34 @@ describe("ButtonComponent", () => {
 
 		expect(emitSpy).toHaveBeenCalledTimes(1);
 	});
+
+	it("should emit enterClicked on enter keydown when not disabled", () => {
+		const emitSpy = spyOn(component.enterClicked, "emit");
+		component.handleKeydown(new KeyboardEvent("keydown", { key: "Enter" }));
+
+		expect(emitSpy).toHaveBeenCalledTimes(1);
+	});
+
+	it("should not emit enterClicked on enter keydown when disabled", () => {
+		component.disabled = true;
+		const emitSpy = spyOn(component.enterClicked, "emit");
+		component.handleKeydown(new KeyboardEvent("keydown", { key: "Enter" }));
+
+		expect(emitSpy).not.toHaveBeenCalled();
+	});
+
+	it("should emit escapeClicked on escape keydown when not disabled", () => {
+		const emitSpy = spyOn(component.escapeClicked, "emit");
+		component.handleKeydown(new KeyboardEvent("keydown", { key: "Escape" }));
+
+		expect(emitSpy).toHaveBeenCalledTimes(1);
+	});
+
+	it("should not emit escapeClicked on escape keydown when disabled", () => {
+		component.disabled = true;
+		const emitSpy = spyOn(component.escapeClicked, "emit");
+		component.handleKeydown(new KeyboardEvent("keydown", { key: "Escape" }));
+
+		expect(emitSpy).not.toHaveBeenCalled();
+	});
 });

@@ -24,6 +24,8 @@ export class ButtonComponent {
 	@Output() enterClicked = new EventEmitter();
 	EButtonTypes = EButtonTypes;
 	@HostListener("window:keydown", ["$event"]) handleKeydown(e: KeyboardEvent) {
+		if (this.disabled) return;
+
 		switch (e.key) {
 			case "Enter":
 				this.enterClicked.emit();

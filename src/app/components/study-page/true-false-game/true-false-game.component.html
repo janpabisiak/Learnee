@@ -3,8 +3,21 @@
     <h2 class="text-4xl font-semibold mb-5"><span class="font-bold">{{currentStageId + 1}}.</span> {{data.data.word}} - {{data.data.definition}}</h2>
     <ul class="flex flex-col gap-3">
         @for (type of [true, false]; track type) {
-        <app-true-false-answer [type]="type" [isAnswered]="data.answered" [isCorrect]="type === data.data.isCorrect" (answered)="answerQuestion($event)"></app-true-false-answer>
+        <app-true-false-answer [type]="type" [isAnswered]="data.answered" [isCorrect]="type === data.data.isCorrect" (answered)="answerQuestion($event)" />
         }
     </ul>
+    @if (!stage) {
+    <div class="mt-8 flex justify-end">
+        @if (!data.answered) {
+        <app-button class="[&>button]:w-48 [&>button]:justify-center" [type]="'primary'" (buttonClicked)="skipQuestion()">
+            {{ 'study.games.checkAnswer.label' | translate }}
+        </app-button>
+        } @else {
+        <app-button class="[&>button]:w-48 [&>button]:justify-center" [type]="'primary'" (buttonClicked)="nextStage()">
+            {{ (isLastStage ? 'study.games.finish.label' : 'study.games.next.label') | translate }}
+        </app-button>
+        }
+    </div>
+    }
 </div>
 }

@@ -16,9 +16,9 @@ export class QuestionAnswerComponent {
 	constructor(private gameService: GameService) {}
 
 	answerQuestion(answerId: number) {
-		this.gameService.submitAnswer(answerId);
+		if (this.showAnswer) return;
 
-		this.gameService.goToNextStage();
+		this.gameService.submitAnswer(answerId);
 		this.answered.emit();
 	}
 }

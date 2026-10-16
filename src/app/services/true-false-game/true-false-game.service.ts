@@ -5,7 +5,7 @@ import { IGameStrategy } from "../../types/game-strategy.interface";
 @Injectable({
 	providedIn: "root",
 })
-export class TrueFalseGameService implements IGameStrategy<any, boolean, void> {
+export class TrueFalseGameService implements IGameStrategy<any, boolean | null, void> {
 	constructor(private wordsService: WordsService) {}
 
 	generateGameData(): ITrueFalseGameData {
@@ -32,8 +32,8 @@ export class TrueFalseGameService implements IGameStrategy<any, boolean, void> {
 		};
 	}
 
-	validateAnswer(gameData: any, isTrue: boolean) {
-		const isCorrect = gameData.isCorrect === isTrue;
+	validateAnswer(gameData: any, isTrue: boolean | null) {
+		const isCorrect = isTrue !== null && gameData.isCorrect === isTrue;
 
 		return { isCorrect };
 	}

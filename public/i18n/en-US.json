@@ -104,6 +104,8 @@
 
 	"study.games.cancel.label": "Cancel game",
 	"study.games.checkAnswer.label": "Check answer",
+	"study.games.next.label": "Next",
+	"study.games.finish.label": "Finish",
 	"study.games.all.title": "All",
 	"study.games.all.description": "Select all games",
 
